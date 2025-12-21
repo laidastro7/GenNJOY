@@ -1,0 +1,17 @@
+# --- CLI Interface & Utilities ---
+colorama
+
+# --- Data Download & Web Scraping ---
+requests
+beautifulsoup4
+
+# --- Scientific Computing & Data Processing ---
+# Required for data manipulation and OpenMC integration
+numpy
+pandas
+scipy
+
+# --- File Formats (HDF5 & XML) ---
+# Essential for converting ACE files to HDF5 and exporting XML
+h5py
+lxml
