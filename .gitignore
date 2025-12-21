@@ -1,0 +1,49 @@
+# --- Python ---
+# Ignore compiled python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- System Files ---
+# Ignore OS specific generated files
+.DS_Store
+Thumbs.db
+
+# --- NJOY Binaries & Executables ---
+# Ignore the specific NJOY executables as they are system-dependent
+njoy_bin/njoy
+njoy_bin/libnjoy.so
+*.so
+*.exe
+*.dll
+
+# --- Large Data Files ---
+# Ignore content of data directories but keep the directory structure
+# You can add a .gitkeep file inside these folders if they are empty
+data/neutron_eval/*
+data/thermal_eval/*
+data/ace_neutrons/*
+data/ace_tsl/*
+data/hdf5/*
+data/njoy_inputs/*
+
+# --- Output Files ---
+# Ignore all generated outputs
+outputs/*
+
+# --- OpenMC & Heavy Data Formats ---
+# Ignore large binary data formats found in source or data folders
+*.h5
+*.DAT
+*.ace
+src/openmc/data/*.h5
+src/openmc/data/*.DAT
+
+# --- IDE & Environment ---
+# Ignore virtual environment folders and IDE configurations
+.env
+.venv/
+venv/
+.idea/
+.vscode/
