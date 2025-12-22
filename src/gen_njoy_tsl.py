@@ -41,48 +41,43 @@ except FileNotFoundError:
     sys.exit()
 
 # -----------------------------------------------------------------------------
-# njoy executable
+# njoy executable (System Based)
 # -----------------------------------------------------------------------------
-# Relative path to the njoy_bin directory
-relative_njoy_bin_dir = "njoy_bin"
 
-# Convert the relative path to an absolute path
-absolute_njoy_bin_dir = os.path.abspath(relative_njoy_bin_dir)
+# Try to detect njoy in the system PATH
+system_njoy_path = shutil.which("njoy")
+default_njoy_exec_path = system_njoy_path if system_njoy_path else "njoy"
 
-# Update LD_LIBRARY_PATH to include the njoy_bin directory
-os.environ["LD_LIBRARY_PATH"] = (
-    absolute_njoy_bin_dir + ":" + os.environ.get("LD_LIBRARY_PATH", "")
-)
-
-# Set default path for the njoy executable
-default_njoy_exec_path = os.path.join(relative_njoy_bin_dir, "njoy")
-
-# Prompt user for the path to the njoy executable or use default
 try:
-    prompt_message = "Enter the PATH to the njoy executable (Default: {}): ".format(
+    print("-" * 50)
+    prompt_message = "Enter the command/path for NJOY executable (Default: {}): ".format(
         default_njoy_exec_path
     )
-
-    if os.path.isabs(default_njoy_exec_path):
-        pass
-    else:
-        default_njoy_exec_path = os.path.abspath(default_njoy_exec_path)
-
+    
     njoy_exec_path = input(prompt_message).strip() or default_njoy_exec_path
 
     print("-" * 50)
 
-    # Check if the njoy executable exists at the specified path
-    if not os.path.exists(njoy_exec_path) and not shutil.which("njoy"):
+    # Validate: Check if njoy exists as a file OR is in the system PATH
+    is_in_path = shutil.which(njoy_exec_path) is not None
+    is_file_exists = os.path.exists(njoy_exec_path)
+
+    if not is_in_path and not is_file_exists:
         print(
-            Fore.RED + "\nError:\n        njoy executable not found at "
-            "'{}' nor in system PATH.\n".format(njoy_exec_path) + Style.RESET_ALL
+            Fore.RED + "\n[Critical Error]:\n        The NJOY executable '{}' was not found.\n"
+            "        Please install NJOY2016 or provide the correct path.".format(njoy_exec_path) 
+            + Style.RESET_ALL
         )
         sys.exit()
+
+    # If it's a command in PATH, use the full path to be safe
+    if is_in_path and not is_file_exists:
+        njoy_exec_path = shutil.which(njoy_exec_path)
+
 except Exception as e:
     print(
         Fore.RED
-        + "\nError:\n        Unexpected error: {}\n".format(e)
+        + "\nError:\n        Unexpected error during NJOY detection: {}\n".format(e)
         + Style.RESET_ALL
     )
     sys.exit()
@@ -174,13 +169,18 @@ text = (
     + str(cpuCount)
     + "): "
 )
-cpu = input(text) or cpuCount
+cpu_input = input(text)
+cpu = int(cpu_input) if cpu_input else cpuCount
+
 # -------- Processed tsl nuclear data directory --------------
 print("-".center(50, "-"))
 rep_data = "data/ace_tsl"
 if os.path.isdir(rep_data) == True:
-    shutil.rmtree(rep_data)
-    os.mkdir(rep_data)
+    try:
+        shutil.rmtree(rep_data)
+        os.mkdir(rep_data)
+    except OSError as e:
+        print(Fore.YELLOW + f"Warning: Could not recreate directory {rep_data}: {e}")
 else:
     os.mkdir(rep_data)
 
@@ -199,8 +199,15 @@ readlines_t = []
 for line_num, line_content in matched_file_t:
     readlines_t.append(line_content)
 
-with open("src/dict_temperature.json", "r") as f:
-    dict_temperature = json.load(f)
+# Use absolute path or proper relative path for json files if needed, 
+# assuming src is in the same dir as this script logic usually, but here we run from root.
+# Using 'src/dict_temperature.json' as in original script.
+try:
+    with open("src/dict_temperature.json", "r") as f:
+        dict_temperature = json.load(f)
+except FileNotFoundError:
+    print(Fore.RED + "Error: src/dict_temperature.json not found." + Style.RESET_ALL)
+    sys.exit()
 
 
 # Define function to check if temperature is valid
@@ -220,6 +227,7 @@ def is_valid_temperature(temp, element_t):
             + Style.RESET_ALL
             + "\n The isotope {} does not exist in the dictionary".format(element_t)
         )
+        return False
 
 
 def run_multi_cpu(first, final, rep_data):
@@ -239,6 +247,7 @@ def run_multi_cpu(first, final, rep_data):
             ace_ascii = file_name
 
             input_njoy = file_name + ".njoy"
+            # Pass njoy_exec_path to DataGenerator
             njoy_tsl_output = data_generator.run_njoy_tsl(
                 dir,
                 element_n,
@@ -258,7 +267,8 @@ def run_multi_cpu(first, final, rep_data):
                 matched_ace_file = data_generator.search_string_in_file(
                     ace_file, suffix
                 )
-                line_numbers.append(str(matched_ace_file[0][0]))
+                if matched_ace_file:
+                    line_numbers.append(str(matched_ace_file[0][0]))
                 k += 1
 
         else:
@@ -299,7 +309,8 @@ def run_multi_cpu(first, final, rep_data):
                 matched_ace_file = data_generator.search_string_in_file(
                     ace_file, suffix
                 )
-                line_numbers.append(str(matched_ace_file[0][0]))
+                if matched_ace_file:
+                    line_numbers.append(str(matched_ace_file[0][0]))
                 k += 1
 
         data_generator.gen_xsdir(file_name, line_numbers, dir, rep_data, temperatures)
@@ -310,45 +321,53 @@ def run_multi_cpu(first, final, rep_data):
 try:
     # Check if the data directory exists
     if os.path.isdir(rep_data) == False:
-        raise ValueError("Data directory does not exist")
+        # Create it (logic already handled above, but double check)
+        if not os.path.exists(rep_data):
+             os.mkdir(rep_data)
+        
     # Create a process for each CPU and distribute the workload
     processes = []
     num_cpus = int(cpu)
     if num_cpus <= 0:
         raise ValueError("Invalid CPU value")
-    num_isotopes_per_cpu = len(readlines_n) // num_cpus
-    remainder = len(readlines_n) % num_cpus
-    if remainder == 0:
-        isotopes_per_process = num_isotopes_per_cpu
+        
+    if len(readlines_n) > 0:
+        num_isotopes_per_cpu = len(readlines_n) // num_cpus
+        remainder = len(readlines_n) % num_cpus
+        if remainder == 0:
+            isotopes_per_process = num_isotopes_per_cpu
+        else:
+            isotopes_per_process = num_isotopes_per_cpu + 1
+            
+        first_isotope_index = 0
+        final_isotope_index = isotopes_per_process
+        for i in range(num_cpus):
+            # Safe slicing
+            if first_isotope_index < len(readlines_n):
+                processes.append(
+                    Process(
+                        target=run_multi_cpu,
+                        args=(
+                            first_isotope_index,
+                            final_isotope_index,
+                            rep_data,
+                        ),
+                    )
+                )
+            first_isotope_index += isotopes_per_process
+            final_isotope_index += isotopes_per_process
+            
+        # Start the processes
+        for process in processes:
+            process.start()
+        # Wait for the processes to finish
+        for process in processes:
+            process.join()
     else:
-        isotopes_per_process = num_isotopes_per_cpu + 1
-    first_isotope_index = 0
-    final_isotope_index = isotopes_per_process
-    for i in range(num_cpus):
-        processes.append(
-            Process(
-                target=run_multi_cpu,
-                args=(
-                    first_isotope_index,
-                    final_isotope_index,
-                    rep_data,
-                ),
-            )
-        )
-        first_isotope_index += isotopes_per_process
-        final_isotope_index += isotopes_per_process
-    # Start the processes
-    for process in processes:
-        process.start()
-    # Wait for the processes to finish
-    for process in processes:
-        process.join()
+        print(Fore.YELLOW + "No isotopes found to process.")
+
     print("-".center(50, "-"))
-    '''print(
-        Fore.GREEN
-        + "\nNumber of successfully generated isotopes: {}".format(len(readlines_t))
-        + Style.RESET_ALL
-    )'''
+
 except ValueError as e:
     print(Fore.RED + "\nError: " + Style.RESET_ALL + "{}".format(e))
     sys.exit()

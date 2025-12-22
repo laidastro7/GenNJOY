@@ -1,5 +1,6 @@
 import sys
 import subprocess
+import shutil
 from pathlib import Path
 from typing import List, Optional
 from colorama import Fore, Style, init
@@ -12,13 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent
 SRC_DIR = BASE_DIR / "src"
 INPUTS_DIR = BASE_DIR / "inputs"
 
-# Ensure essential directories exist
-for directory in [SRC_DIR, INPUTS_DIR]:
-    if not directory.exists():
-        print(Fore.YELLOW + f"[Warning] System directory missing: {directory}")
-
 # --- Header & Branding ---
-# Centered ASCII Art relative to the 62-character separator
 GEN_NJOY_HEADER = """
          ____            _   _     _  ___ __   __
         / ___| ___ _ __ | \ | |   | |/ _ \\ \ / /
@@ -30,21 +25,41 @@ GEN_NJOY_HEADER = """
 def display_header():
     """Display the official banner and tool description."""
     print("\n" + Fore.CYAN + "="*62)
-    # The header is now centered within the ASCII string itself
     print(Fore.BLUE + Style.BRIGHT + GEN_NJOY_HEADER + Style.RESET_ALL)
     print(Fore.CYAN + "="*62)
     print(Style.BRIGHT + "   Automated Nuclear Data Processing Framework (NJOY + OpenMC)")
     print("   Author: Dr. Mohamed Laid YAHIAOUI et al.")
     print("-" * 62)
-    print("   This framework automates the retrieval of ENDF data, generates")
-    print("   NJOY input decks, and processes libraries into ACE/HDF5 formats.")
+    print("   System Mode: [Global PATH Execution]")
     print("-" * 62 + "\n")
+
+# --- System Validation Module ---
+
+def verify_system_njoy():
+    """
+    [CRITICAL] Check if NJOY is installed in the system PATH.
+    Refuses to start if 'njoy' command is not found.
+    """
+    njoy_path = shutil.which("njoy")
+    
+    if njoy_path:
+        print(Fore.GREEN + f"[System Check] NJOY detected at: {njoy_path}")
+        return True
+    else:
+        print(Fore.RED + "="*60)
+        print(Fore.RED + Style.BRIGHT + "[CRITICAL ERROR] NJOY executable not found!")
+        print(Fore.RED + "="*60)
+        print(Fore.YELLOW + "   The tool cannot find 'njoy' in your system PATH.")
+        print("   Please ensure NJOY2016 is installed and accessible globally.")
+        print("   Try running 'njoy' in your terminal to verify.")
+        print(Fore.RED + "="*60 + "\n")
+        return False
 
 # --- Helper Functions ---
 
 def run_script(script_name: str, args: Optional[List[str]] = None):
     """
-    Execute a module from the 'src' directory with status reporting.
+    Execute a module from the 'src' directory.
     """
     script_path = SRC_DIR / script_name
     
@@ -58,20 +73,16 @@ def run_script(script_name: str, args: Optional[List[str]] = None):
 
     print(Fore.CYAN + f"[*] Initializing module: {script_name}...")
     try:
-        # 'check=True' ensures we catch any errors from the subprocess
+        # Pass the system environment variables to the subprocess
         subprocess.run(command, check=True)
         print(Fore.GREEN + f"[Success] Module '{script_name}' completed successfully.")
     except subprocess.CalledProcessError as e:
-        # The called script should handle its own specific error printing,
-        # here we just report the exit code failure.
         print(Fore.RED + f"[Failed] Module '{script_name}' exited with error code: {e.returncode}.")
     except Exception as e:
         print(Fore.RED + f"[Error] Unexpected system error: {e}")
 
 def get_validated_input_file(prompt_text: str, default_filename: str) -> str:
-    """
-    Prompt the user for a file path with validation.
-    """
+    """Prompt the user for a file path with validation."""
     default_path = INPUTS_DIR / default_filename
     print(Fore.YELLOW + f"   > {prompt_text}")
     user_input = input(f"     (Press Enter for Default: {default_filename}): ").strip()
@@ -119,21 +130,25 @@ def process_choice(choice: str) -> bool:
     
     elif choice == "4":
         print("\n--- Executing NJOY (Neutron Processing) ---")
-        input_file = get_validated_input_file(
-            "Please specify the NJOY input file path:", 
-            "input_n.i"
-        )
-        if input_file:
-            run_script("gen_njoy_n.py", [input_file])
+        # Ensure NJOY is available before running
+        if verify_system_njoy():
+            input_file = get_validated_input_file(
+                "Please specify the NJOY input file path:", 
+                "input_n.i"
+            )
+            if input_file:
+                run_script("gen_njoy_n.py", [input_file])
     
     elif choice == "5":
         print("\n--- Executing NJOY (Thermal Scattering Processing) ---")
-        input_file = get_validated_input_file(
-            "Please specify the TSL input file path:", 
-            "input_tsl.i"
-        )
-        if input_file:
-            run_script("gen_njoy_tsl.py", [input_file])
+        # Ensure NJOY is available before running
+        if verify_system_njoy():
+            input_file = get_validated_input_file(
+                "Please specify the TSL input file path:", 
+                "input_tsl.i"
+            )
+            if input_file:
+                run_script("gen_njoy_tsl.py", [input_file])
     
     elif choice == "6":
         print("\n--- Converting ACE to HDF5 ---")
@@ -153,13 +168,17 @@ def process_choice(choice: str) -> bool:
 def main():
     try:
         display_header()
+        
+        # Optional: Verify NJOY at startup
+        # verify_system_njoy() 
+        
         running = True
         while running:
             display_menu()
             choice = input(Fore.YELLOW + "Select option [1-7]: " + Style.RESET_ALL).strip()
             running = process_choice(choice)
             if running:
-                print("\n" + "-"*42 + "\n") # Separator between operations
+                print("\n" + "-"*42 + "\n")
     except KeyboardInterrupt:
         print(Fore.RED + "\n\n[!] Session interrupted by user. Exiting...")
         sys.exit(0)

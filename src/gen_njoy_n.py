@@ -1,249 +1,278 @@
-import os
 import sys
 import shutil
 import time
-from multiprocessing import Process, cpu_count
+import os
+from pathlib import Path
+from multiprocessing import Process, cpu_count, Lock
+from typing import List
 import DataGenerator
 from colorama import Fore, Style, init
 
-# Initialize colorama for colored console output
+# Initialize colorama
 init(autoreset=True)
-current_dir = os.getcwd()
-start_time = time.time()
 
+# --- Configuration & Constants ---
+class Config:
+    # Use explicit absolute paths to avoid confusion
+    BASE_DIR = Path.cwd().resolve()
+    SRC_DIR = BASE_DIR / "src"
+    INPUTS_DIR = BASE_DIR / "inputs"
+    
+    # Output Directories
+    OUTPUT_BASE = BASE_DIR / "data"
+    OUTPUT_ACE = OUTPUT_BASE / "ace_neutrons"
+    
+    # Critical Files
+    XSDIR_TEMPLATE = SRC_DIR / "xsdir_mcnp5"
+    XSDIR_MASTER = OUTPUT_ACE / "xsdir"
 
-# -----------------------------------------------------------------------------
-# input file
-# -----------------------------------------------------------------------------
-def run_njoy(input_file):
-    try:
-        with open(input_file, "r"):
-            pass
-    except FileNotFoundError:
-        error_message = (
-            "\nError:\n        No file '{}' found in " "directory '{}'\n"
-        ).format(input_file, current_dir)
-        print(Fore.RED + error_message + Style.RESET_ALL)
-        sys.exit()
+# --- Logging Helper ---
+class Logger:
+    @staticmethod
+    def info(msg):
+        print(f"{Fore.GREEN}[INFO] {msg}{Style.RESET_ALL}")
+    
+    @staticmethod
+    def debug(msg):
+        print(f"{Fore.CYAN}[DEBUG] {msg}{Style.RESET_ALL}")
+    
+    @staticmethod
+    def warn(msg):
+        print(f"{Fore.YELLOW}[WARN] {msg}{Style.RESET_ALL}")
+    
+    @staticmethod
+    def error(msg):
+        print(f"{Fore.RED}[ERROR] {msg}{Style.RESET_ALL}")
+    
+    @staticmethod
+    def header(msg):
+        print(f"\n{Fore.MAGENTA}{'='*60}")
+        print(f"{Fore.BLUE}{Style.BRIGHT}{msg.center(60)}")
+        print(f"{Fore.MAGENTA}{'='*60}{Style.RESET_ALL}")
 
+# --- Core Processor Class ---
+class NeutronProcessor:
+    def __init__(self, input_file: Path, njoy_cmd: str, cpu_limit: int):
+        self.input_file = input_file
+        self.njoy_cmd = njoy_cmd
+        self.cpu_limit = cpu_limit
+        self.lock = Lock()
+        
+        # Validate Inputs
+        if not self.input_file.exists():
+            Logger.error(f"Input file not found at: {self.input_file}")
+            sys.exit(1)
+            
+        self._setup_directories()
 
-def get_input_file():
-    try:
-        return sys.argv[1]
-    except IndexError:
-        print(Fore.RED + "\nError:\n        No input file specified.")
-        sys.exit()
+    def _setup_directories(self):
+        """Prepare output directories and initialize xsdir."""
+        Logger.debug(f"Output Directory set to: {Config.OUTPUT_ACE}")
+        
+        # 1. Create Output Directory
+        if Config.OUTPUT_ACE.exists():
+            Logger.debug("Cleaning previous output directory...")
+            try:
+                shutil.rmtree(Config.OUTPUT_ACE)
+            except OSError as e:
+                Logger.warn(f"Could not clean directory: {e}")
+        
+        Config.OUTPUT_ACE.mkdir(parents=True, exist_ok=True)
+        
+        # 2. Initialize Master xsdir from Template
+        if Config.XSDIR_TEMPLATE.exists():
+            shutil.copy(Config.XSDIR_TEMPLATE, Config.XSDIR_MASTER)
+            Logger.debug(f"Initialized xsdir from template.")
+        else:
+            Logger.warn(f"Template xsdir not found at {Config.XSDIR_TEMPLATE}. Creating empty file.")
+            Config.XSDIR_MASTER.touch()
 
+    def _process_isotope(self, line_data: str):
+        """Process a single isotope."""
+        
+        # Initialize generator locally
+        gen = DataGenerator.ACEGenerator(str(self.input_file))
+        
+        # Parse Params
+        try:
+            params = gen.gen_parametre_njoy(line_data)
+            element = params[0]
+            name = params[1]
+            temperatures = params[2]
+            
+            # Simple validation
+            if not element or not name:
+                Logger.error(f"Invalid line format: {line_data.strip()}")
+                return
+                
+        except Exception as e:
+            Logger.error(f"Error parsing line: {line_data.strip()} | {e}")
+            return
 
-if __name__ == "__main__":
-    # Get input filename from command line arguments
-    input_file_name = get_input_file()
+        ace_ascii = name
+        input_njoy = f"{name}.njoy"
+        
+        # Use strings for DataGenerator compatibility
+        base_dir_str = str(Config.BASE_DIR)
+        # We pass the absolute path to output to avoid ambiguity
+        # DataGenerator now handles absolute paths in my updated version
+        output_abs_path = str(Config.OUTPUT_ACE)
 
-    # Run NJOY processing
-    run_njoy(input_file_name)
+        Logger.info(f"Processing Isotope: {name} (Element: {element})")
 
-# -----------------------------------------------------------------------------
-# njoy executable
-# -----------------------------------------------------------------------------
-# Relative path to the njoy_bin directory
-relative_njoy_bin_dir = "njoy_bin"
+        try:
+            # 1. Run NJOY
+            file_ace_path = gen.run_njoy(
+                base_dir_str,
+                element,
+                name,
+                temperatures,
+                ace_ascii,
+                input_njoy,
+                self.njoy_cmd,
+                output_abs_path # Passing absolute path now
+            )
+            
+            Logger.debug(f"NJOY finished for {name}. Checking ACE file...")
 
-# Convert the relative path to an absolute path
-absolute_njoy_bin_dir = os.path.abspath(relative_njoy_bin_dir)
+            # 2. Check and Merge XSDIR
+            if file_ace_path and Path(file_ace_path).exists():
+                # Find line numbers
+                num_lines = []
+                for i, _ in enumerate(temperatures, 1):
+                    suffix = f".{i:02}c"
+                    matches = gen.search_string_in_file(file_ace_path, suffix)
+                    if matches:
+                        num_lines.append(str(matches[0][0]))
+                    else:
+                        Logger.warn(f"Suffix {suffix} not found inside ACE file {ace_ascii}")
 
-# Update LD_LIBRARY_PATH to include the njoy_bin directory
-os.environ["LD_LIBRARY_PATH"] = (
-    absolute_njoy_bin_dir + ":" + os.environ.get("LD_LIBRARY_PATH", "")
-)
+                # Merge XSDIR
+                with self.lock:
+                    gen.gen_xsdir(
+                        name,
+                        num_lines,
+                        base_dir_str,
+                        output_abs_path,
+                        temperatures
+                    )
+                Logger.info(f"SUCCESS: {name} processed and merged.")
+            else:
+                Logger.error(f"ACE file missing for {name} at {file_ace_path}")
 
-# Set default path for the njoy executable
-default_njoy_exec_path = os.path.join(relative_njoy_bin_dir, "njoy")
+        except Exception as e:
+            Logger.error(f"FAILED to process {name}. Error: {e}")
+            Logger.warn(f"NOTE: Temporary folder '{name}' was preserved for debugging.")
+            # We do NOT delete the temp dir here so user can check logs inside it
 
-# Prompt user for the path to the njoy executable or use default
-try:
-    prompt_message = "Enter the PATH to the njoy executable (Default: {}): ".format(
-        default_njoy_exec_path
-    )
+    def _worker(self, lines: List[str]):
+        """Worker function."""
+        for line in lines:
+            self._process_isotope(line)
 
-    if os.path.isabs(default_njoy_exec_path):
-        pass
-    else:
-        default_njoy_exec_path = os.path.abspath(default_njoy_exec_path)
+    def execute(self):
+        """Main execution engine."""
+        Logger.header("STARTING NEUTRON DATA PROCESSING (DEBUG MODE)")
+        
+        gen = DataGenerator.ACEGenerator(str(self.input_file))
+        
+        # Read input file
+        Logger.debug(f"Reading input file: {self.input_file}")
+        try:
+            matches = gen.search_string_in_file(gen.filename, "element")
+            lines = [line for _, line in matches]
+        except Exception as e:
+            Logger.error(f"Failed to read input file: {e}")
+            return
+        
+        total_isotopes = len(lines)
+        if total_isotopes == 0:
+            Logger.error("No isotopes found in input file! Check if lines start with 'element'.")
+            return
 
-    njoy_exec_path = input(prompt_message).strip() or default_njoy_exec_path
+        Logger.info(f"Found {total_isotopes} isotopes to process.")
+        
+        # Single Process Mode for Debugging if cpu=1, else Multi
+        procs = []
+        effective_cpu = min(self.cpu_limit, total_isotopes)
+        effective_cpu = max(1, effective_cpu)
+        
+        chunk_size = total_isotopes // effective_cpu + (1 if total_isotopes % effective_cpu else 0)
+        
+        for i in range(effective_cpu):
+            start = i * chunk_size
+            end = start + chunk_size
+            chunk = lines[start:end]
+            if not chunk: continue
+            
+            p = Process(target=self._worker, args=(chunk,))
+            procs.append(p)
+            p.start()
+        
+        for p in procs:
+            p.join()
+            
+        Logger.header("PROCESSING FINISHED")
+        print(f"Check output at: {Config.OUTPUT_ACE}")
+        print(f"Check xsdir at:  {Config.XSDIR_MASTER}")
 
+# --- Helpers ---
+def get_njoy_cmd():
+    sys_path = shutil.which("njoy")
+    default = sys_path if sys_path else "njoy"
     print("-" * 50)
+    user_input = input(f"Enter NJOY command/path (Default: {default}): ").strip()
+    cmd = user_input if user_input else default
+    
+    if not shutil.which(cmd) and not Path(cmd).exists():
+        Logger.error(f"NJOY executable '{cmd}' not found! Execution will likely fail.")
+        # We allow proceeding but warn heavily
+    return cmd
 
-    # Check if the njoy executable exists at the specified path
-    if not os.path.exists(njoy_exec_path) and not shutil.which("njoy"):
-        print(
-            Fore.RED + "\nError:\n        njoy executable not found at "
-            "'{}' nor in system PATH.\n".format(njoy_exec_path) + Style.RESET_ALL
-        )
-        sys.exit()
-except Exception as e:
-    print(
-        Fore.RED
-        + "\nError:\n        Unexpected error: {}\n".format(e)
-        + Style.RESET_ALL
-    )
-    sys.exit()
+def get_cpu_count():
+    total = cpu_count()
+    print("-" * 50)
+    user_input = input(f"Enter CPUs to use (Default: {total}): ").strip()
+    try:
+        count = int(user_input) if user_input else total
+        return max(1, count)
+    except:
+        return 1
 
+# --- Entry Point ---
+if __name__ == "__main__":
+    start_time = time.time()
+    
+    if len(sys.argv) < 2:
+        Logger.error("Usage: python gen_njoy_n.py <input_file>")
+        sys.exit(1)
+        
+    input_file_path = Path(sys.argv[1]).resolve()
+    
+    njoy_cmd = get_njoy_cmd()
+    
+    default_nd = "data/neutron_eval"
+    print("-" * 50)
+    nd_input = input(f"Enter path to incident nuclear data (Default: {default_nd}): ").strip()
+    nd_path = nd_input if nd_input else default_nd
+    
+    # Resolve Data Path absolute
+    abs_nd_path = Path(nd_path).resolve()
+    if not abs_nd_path.exists():
+        # Fallback check relative to cwd
+        if (Config.BASE_DIR / nd_path).exists():
+            abs_nd_path = (Config.BASE_DIR / nd_path).resolve()
+        else:
+            Logger.error(f"Nuclear data path not found: {abs_nd_path}")
+            sys.exit(1)
+            
+    os.environ["OPENMC_ENDF_DATA"] = str(abs_nd_path)
+    Logger.debug(f"OPENMC_ENDF_DATA set to: {os.environ['OPENMC_ENDF_DATA']}")
 
-# -----------------------------------------------------------------------------
-# incident nuclear data evaluation
-# -----------------------------------------------------------------------------
-# Set path for nuclear data
-try:
-    default_neutron_data_path = "data/neutron_eval"
-    prompt_neutron_data = (
-        "Enter the path to the incident nuclear data (Default: {}): ".format(
-            default_neutron_data_path
-        )
-    )
-    neutron_data_path = input(prompt_neutron_data).strip()
-    neutron_data_path = neutron_data_path or default_neutron_data_path
-
-    # Check if the path is absolute or relative
-    if os.path.isabs(neutron_data_path):
-        os.environ["OPENMC_ENDF_DATA"] = neutron_data_path
-    else:
-        # Prefix the relative path with "../"
-        os.environ["OPENMC_ENDF_DATA"] = os.path.join("..", neutron_data_path)
-
-    # Validate the directory path
-    if not os.path.isdir(neutron_data_path):
-        print(
-            Fore.RED
-            + "\nError:\n        Invalid directory '{}'.\n".format(neutron_data_path)
-            + Style.RESET_ALL
-        )
-        sys.exit()
-except Exception as e:
-    print(
-        Fore.RED
-        + "\nError:\n        Unexpected error: {}\n".format(e)
-        + Style.RESET_ALL
-    )
-    sys.exit()
-
-
-# -----------------------------------------------------------------------------
-# njoy execution on parallel mode
-# -----------------------------------------------------------------------------
-# Get CPU count for parallel processing
-total_cpu_count = cpu_count()
-print("-" * 50)
-print("Number of CPUs in this system: {}".format(total_cpu_count))
-try:
-    user_cpu_input = (
-        input(
-            "Enter the number of CPUs to use for parallel "
-            "processing (Default = {}): ".format(total_cpu_count)
-        ).strip()
-        or total_cpu_count
-    )
-    used_cpu_count = int(user_cpu_input)
-except ValueError:
-    print(Fore.RED + "\nError:\n        Invalid CPU count input.\n" + Style.RESET_ALL)
-    sys.exit()
-print("-" * 50)
-
-# Prepare data directories
-data_dir = "data/ace_neutrons"
-if os.path.isdir(data_dir):
-    shutil.rmtree(data_dir)
-os.mkdir(data_dir)
-
-input_dir = "data/njoy_inputs"
-# Additional logic for input_dir if needed
-# Prepare data directories
-data_dir = "data/ace_neutrons"
-if os.path.isdir(data_dir):
-    shutil.rmtree(data_dir)
-os.mkdir(data_dir)
-
-# Initialize data generator with the input file
-data_generator = DataGenerator.ACEGenerator(sys.argv[1])
-
-# Search for "element" string in file and read lines
-matched_file_input = data_generator.search_string_in_file(
-    data_generator.filename, "element"
-)
-readlines = [line for _, line in matched_file_input]
-
-
-def run_multi_cpu(start_index, end_index, directory):
-    """
-    Process a subset of data in parallel from start_index to end_index.
-    """
-    for line in readlines[start_index:end_index]:
-        element, name, temperatures = data_generator.gen_parametre_njoy(line)
-        ace_ascii, input_njoy = name, name + ".njoy"
-        njoy_output = data_generator.run_njoy(
-            current_dir,
-            element,
-            name,
-            temperatures,
-            ace_ascii,
-            input_njoy,
-            njoy_exec_path,
-            directory,
-        )
-
-        # Process NJOY output
-        process_njoy_output(njoy_output, temperatures, name, directory)
-
-
-def process_njoy_output(file_ace, temperatures, name, directory):
-    num_line = []
-    for i, temperature in enumerate(temperatures, 1):
-        suffix = "." + "{:02}".format(i) + "c"
-        matched_file_ace = data_generator.search_string_in_file(file_ace, suffix)
-        num_line.append(str(matched_file_ace[0][0]))
-    data_generator.gen_xsdir(name, num_line, current_dir, directory, temperatures)
-
-
-# Run processing on multiple CPUs
-try:
-    processes = []
-    cpu = int(used_cpu_count)
-    if cpu <= 0:
-        raise ValueError("CPU count must be positive")
-
-    # Calculate the workload for each CPU
-    workload_per_cpu = len(readlines) // cpu + (len(readlines) % cpu > 0)
-    for i in range(cpu):
-        start, end = i * workload_per_cpu, min(
-            (i + 1) * workload_per_cpu, len(readlines)
-        )
-        processes.append(Process(target=run_multi_cpu, args=(start, end, data_dir)))
-
-    # Start and join the processes
-    for process in processes:
-        process.start()
-    for process in processes:
-        process.join()
-
-    print("-".center(50, "-"))
-    '''print(
-        Fore.GREEN
-        + "\nNumber of successfully generated isotopes: {}".format(len(readlines))
-        + Style.RESET_ALL
-    )'''
-except ValueError as e:
-    print(Fore.RED + "\nError:\n        {}\n".format(e) + Style.RESET_ALL)
-    sys.exit()
-
-# Print execution time and program completion message
-print("-".center(50, "-"))
-print(
-    time.strftime(
-        "Execution time: %Hh:%Mm:%Ss \n", time.gmtime(time.time() - start_time)
-    )
-)
-
-message = "Program finished"
-print(Fore.GREEN + "*" * 50 + Style.RESET_ALL)
-print(Fore.GREEN + message.center(50) + Style.RESET_ALL)
-print(Fore.GREEN + "*" * 50 + Style.RESET_ALL)
+    cpu_limit = get_cpu_count()
+    
+    processor = NeutronProcessor(input_file_path, njoy_cmd, cpu_limit)
+    processor.execute()
+    
+    elapsed = time.time() - start_time
+    print(f"\n{Fore.GREEN}Total Time: {time.strftime('%Hh:%Mm:%Ss', time.gmtime(elapsed))}")
