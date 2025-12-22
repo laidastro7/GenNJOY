@@ -17,7 +17,7 @@ class Config:
     SRC_DIR = BASE_DIR / "src"
     
     # Target Files
-    OUTPUT_FILE = INPUTS_DIR / "input_tsl_global.i"
+    OUTPUT_FILE = INPUTS_DIR / "tsl_inventory.i"
     OUTPUT_JSON = SRC_DIR / "dict_temperature.json"
 
 # --- 1. KNOWLEDGE BASE ---

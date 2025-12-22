@@ -134,7 +134,7 @@ def process_choice(choice: str) -> bool:
         if verify_system_njoy():
             input_file = get_validated_input_file(
                 "Please specify the NJOY input file path:", 
-                "input_n.i"
+                "neutron_process_batch.i"
             )
             if input_file:
                 run_script("gen_njoy_n.py", [input_file])
@@ -145,7 +145,7 @@ def process_choice(choice: str) -> bool:
         if verify_system_njoy():
             input_file = get_validated_input_file(
                 "Please specify the TSL input file path:", 
-                "input_tsl.i"
+                "tsl_process_batch.i"
             )
             if input_file:
                 run_script("gen_njoy_tsl.py", [input_file])

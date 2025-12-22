@@ -10,7 +10,7 @@ init(autoreset=True)
 class Config:
     BASE_DIR = Path.cwd().resolve()
     INPUTS_DIR = BASE_DIR / "inputs"
-    INPUT_FILE = INPUTS_DIR / "input_tsl_global.i"
+    INPUT_FILE = INPUTS_DIR / "tsl_inventory.i"
     OUTPUT_JSON = BASE_DIR / "src" / "dict_temperature.json"
 
 def generate_dictionary():
