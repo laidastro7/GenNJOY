@@ -14,14 +14,12 @@ class InputGenerator:
         self.element = element
 
     def index_majuscule(self, element):
-        """Find the index of the last uppercase letter."""
         for i, char in enumerate(reversed(element)):
             if char.isupper():
                 return len(element) - 1 - i
         return -1
 
     def gen_temperature_tsl(self, working_dir, element_t):
-        """Generate temperature for thermal scattering data."""
         endf_data_t = os.environ.get("OPENMC_ENDF_DATA_Thermal")
         if not endf_data_t:
             print(Fore.RED + "Error: OPENMC_ENDF_DATA_Thermal not set.")
@@ -39,7 +37,6 @@ class InputGenerator:
             print(lines[1].strip())
 
     def gen_name(self, element):
-        """Generate isotope name and atomic number from filename."""
         basename = Path(element).stem
         parts = basename.split("-")
         if len(parts) >= 3:
@@ -47,7 +44,6 @@ class InputGenerator:
         return basename, "000"
 
     def gen_input(self, working_dir, element, isotop, elem_num, temper, length):
-        """Append input line to input_n_global.i"""
         line = (
             f"element_n = {element.ljust(length)} "
             f"name = {isotop.ljust(len(isotop))}{elem_num.ljust(6 - len(isotop))} "
@@ -61,7 +57,6 @@ class InputGenerator:
             fic.write(line)
 
     def gen_input_tsl(self, working_dir, element_t, element_n, name_t, temper, length):
-        """Append input line to input_tsl_global.i"""
         line = (
             f"element_n = {element_n}\n"
             f"element_t = {element_t.ljust(length)} "
@@ -78,7 +73,7 @@ class InputGenerator:
 
 class ACEGenerator:
     """
-    Class responsible for running NJOY and managing files (Robust & Debug-Friendly).
+    Class responsible for running NJOY and managing files (Professional Edition).
     """
     def __init__(self, filename):
         self.filename = filename
@@ -131,7 +126,7 @@ class ACEGenerator:
 
     def run_njoy(self, base_dir, element, name, temperatures, ace_ascii, input_njoy, njoy_exec, output_path):
         """
-        Executes NJOY.
+        Executes NJOY using updated directory conventions.
         """
         original_cwd = Path.cwd()
         base_path = Path(base_dir)
@@ -146,7 +141,6 @@ class ACEGenerator:
             
         endf_file = Path(endf_data) / element
         if not endf_file.exists():
-            # Try finding it relative to base if absolute fail
             endf_file = (base_path / endf_data / element).resolve()
             if not endf_file.exists():
                 raise FileNotFoundError(f"ENDF file not found: {endf_file}")
@@ -184,7 +178,8 @@ class ACEGenerator:
             if src_xsdir.exists():
                 shutil.move(str(src_xsdir), str(dst_xsdir))
             
-            njoy_inputs_dir = base_path / "data" / "njoy_inputs"
+            # [UPDATED] Move Input Deck to 'njoy_input_decks'
+            njoy_inputs_dir = base_path / "data" / "njoy_input_decks"
             njoy_inputs_dir.mkdir(parents=True, exist_ok=True)
             src_input = temp_dir / input_njoy
             if src_input.exists():
@@ -197,7 +192,6 @@ class ACEGenerator:
             
         finally:
             os.chdir(original_cwd)
-            # Safe cleanup: Only if ACE file exists in destination (Success)
             if (dest_dir / ace_ascii).exists():
                  if temp_dir.exists(): shutil.rmtree(temp_dir)
             else:
@@ -246,7 +240,8 @@ class ACEGenerator:
             src_xsdir = temp_dir / "xsdir"
             if src_xsdir.exists(): shutil.move(str(src_xsdir), str(dest_dir / f"{name}.xsdir"))
 
-            njoy_inputs_dir = base_path / "data" / "njoy_inputs"
+            # [UPDATED] Move Input Deck to 'njoy_input_decks'
+            njoy_inputs_dir = base_path / "data" / "njoy_input_decks"
             njoy_inputs_dir.mkdir(parents=True, exist_ok=True)
             src_input = temp_dir / input_njoy
             if src_input.exists(): shutil.move(str(src_input), str(njoy_inputs_dir / input_njoy))
@@ -264,7 +259,6 @@ class ACEGenerator:
         master_xsdir = data_dir / "xsdir"
         local_xsdir = data_dir / f"{name}.xsdir"
         
-        # Ensure Master exists
         if not master_xsdir.exists():
              with open(master_xsdir, 'w') as f: f.write("directory\n")
 
@@ -295,7 +289,6 @@ class ACEGenerator:
             
             formatted_block.append(f"{w1}{w2}{w3}{w4}{w5}{w6}{w7}{w8}{w9}{w10}{w11}\n")
 
-        # --- FIX: Ensure we start on a new line (Newline Check) ---
         needs_newline = False
         if master_xsdir.exists() and master_xsdir.stat().st_size > 0:
             with open(master_xsdir, 'rb') as f:
@@ -309,5 +302,4 @@ class ACEGenerator:
                 f.write("\n")
             f.writelines(formatted_block)
             
-        # Clean local file after merge
         local_xsdir.unlink()

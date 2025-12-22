@@ -6,168 +6,194 @@ import warnings
 from pathlib import Path
 from colorama import Fore, Style, init
 
-# إسكات التنبيهات للعملية الحالية (XML generation)
+# Suppress warnings for the current process
 warnings.filterwarnings("ignore")
 
-# Try importing openmc
+# Verify OpenMC Python API availability
 try:
     import openmc.data
 except ImportError:
-    print(Fore.RED + "[CRITICAL] 'openmc' python package not found!")
+    print(Fore.RED + "[CRITICAL] The 'openmc' python package is required but not found.")
     sys.exit(1)
 
-# Initialize colorama
+# Initialize terminal styling
 init(autoreset=True)
 
-# --- Configuration ---
-class Config:
+# --- Application Configuration ---
+class AppConfig:
+    """Holds global application settings and paths."""
     BASE_DIR = Path.cwd().resolve()
-    CONVERTER_CMD = "openmc-ace-to-hdf5"
     
-    DEFAULT_NEUTRON_DIR = BASE_DIR / "data" / "ace_neutrons"
-    DEFAULT_TSL_DIR = BASE_DIR / "data" / "ace_tsl"
-    OUTPUT_HDF5_DIR = BASE_DIR / "data" / "hdf5_library"
+    # System binary for conversion
+    BINARY_TOOL_NAME = "openmc-ace-to-hdf5"
+    
+    # [UPDATED] Professional Naming Conventions for Data Directories
+    DEFAULT_NEUTRON_PATH = BASE_DIR / "data" / "incident_neutron_ace"
+    DEFAULT_THERMAL_PATH = BASE_DIR / "data" / "thermal_scattering_ace"
+    LIBRARY_OUTPUT_PATH  = BASE_DIR / "data" / "hdf5_library"
 
-# --- Logging Helper ---
-class Logger:
+# --- Logging Interface ---
+class Log:
+    """Standardized logging interface for the application."""
     @staticmethod
-    def info(msg):
-        print(f"{Fore.GREEN}[INFO] {msg}{Style.RESET_ALL}")
+    def info(message):
+        print(f"{Fore.GREEN}[INFO]{Style.RESET_ALL} {message}")
     
     @staticmethod
-    def error(msg):
-        print(f"{Fore.RED}[ERROR] {msg}{Style.RESET_ALL}")
+    def error(message):
+        print(f"{Fore.RED}[ERROR]{Style.RESET_ALL} {message}")
         
     @staticmethod
-    def warn(msg):
-        print(f"{Fore.YELLOW}[WARN] {msg}{Style.RESET_ALL}")
+    def warning(message):
+        print(f"{Fore.YELLOW}[WARN]{Style.RESET_ALL} {message}")
 
     @staticmethod
-    def header(msg):
-        print(f"\n{Fore.CYAN}{'='*60}")
-        print(f"{Fore.BLUE}{Style.BRIGHT}{msg.center(60)}")
-        print(f"{Fore.CYAN}{'='*60}{Style.RESET_ALL}")
+    def banner(title):
+        print(f"\n{Fore.CYAN}{'='*70}")
+        print(f"{Fore.BLUE}{Style.BRIGHT}{title.center(70)}")
+        print(f"{Fore.CYAN}{'='*70}{Style.RESET_ALL}")
 
-# --- Converter Class ---
-class ACEConverter:
+    @staticmethod
+    def section(title):
+        print(f"\n{Fore.MAGENTA}>>> {title}{Style.RESET_ALL}")
+
+# --- Core Logic ---
+class LibraryCompilationManager:
+    """
+    Orchestrates the conversion of ACE datasets into an HDF5-based 
+    OpenMC nuclear data library.
+    """
     def __init__(self):
-        self._check_system_installation()
-        self._setup_output_dir()
+        self._validate_environment()
+        self._initialize_workspace()
 
-    def _check_system_installation(self):
-        if not shutil.which(Config.CONVERTER_CMD):
-            Logger.error(f"System command '{Config.CONVERTER_CMD}' not found!")
+    def _validate_environment(self):
+        """Ensures all system dependencies are met."""
+        if not shutil.which(AppConfig.BINARY_TOOL_NAME):
+            Log.error(f"System binary '{AppConfig.BINARY_TOOL_NAME}' is missing from PATH.")
             sys.exit(1)
         else:
-            Logger.info(f"Using system tool: {shutil.which(Config.CONVERTER_CMD)}")
+            Log.info(f"System Tool Detected: {AppConfig.BINARY_TOOL_NAME}")
 
-    def _setup_output_dir(self):
-        if not Config.OUTPUT_HDF5_DIR.exists():
-            Config.OUTPUT_HDF5_DIR.mkdir(parents=True, exist_ok=True)
+    def _initialize_workspace(self):
+        """Prepares the output directory."""
+        if not AppConfig.LIBRARY_OUTPUT_PATH.exists():
+            AppConfig.LIBRARY_OUTPUT_PATH.mkdir(parents=True, exist_ok=True)
+            Log.info("Output workspace created.")
 
-    def convert_library(self, input_dir: Path, library_type: str):
+    def process_dataset(self, source_dir: Path, dataset_label: str):
         """
-        Convert ACE files to HDF5 using the binary tool, forcing silence on warnings.
+        Processes a specific ACE dataset (Neutron/Thermal) and converts it to HDF5.
         """
-        if not input_dir.exists():
-            Logger.warn(f"{library_type} directory not found: {input_dir}")
+        Log.section(f"Processing Dataset: {dataset_label}")
+
+        if not source_dir.exists():
+            Log.warning(f"Source directory not found: {source_dir}")
+            Log.warning(f"Please check if the folder name matches: '{source_dir.name}'")
             return
 
-        Logger.info(f"Scanning {library_type} in: {input_dir.name}...")
+        Log.info(f"Scanning directory: {source_dir.name}...")
         
-        # 1. Collect Valid ACE Files
+        # 1. Discovery Phase
         ace_files = []
         try:
-            for file_path in input_dir.iterdir():
+            for file_path in source_dir.iterdir():
+                # Filter out metadata files and hidden system files
                 if file_path.is_file() and file_path.name != "xsdir" and not file_path.name.startswith("."):
                     ace_files.append(str(file_path.resolve()))
         except Exception as e:
-            Logger.error(f"Error scanning directory: {e}")
+            Log.error(f"Filesystem error: {e}")
             return
 
         if not ace_files:
-            Logger.warn(f"No ACE files found in {input_dir}. Skipping.")
+            Log.warning("No valid ACE files identified in the source directory.")
             return
 
-        Logger.info(f"Found {len(ace_files)} files. Starting conversion...")
+        Log.info(f"Identified {len(ace_files)} ACE files. Initiating conversion...")
         
-        # 2. Construct Command
-        cmd = [Config.CONVERTER_CMD, "-d", str(Config.OUTPUT_HDF5_DIR)] + ace_files
+        # 2. Execution Phase
+        # Command Structure: openmc-ace-to-hdf5 -d <OUTPUT_DIR> <FILE_1> <FILE_2> ...
+        cmd = [AppConfig.BINARY_TOOL_NAME, "-d", str(AppConfig.LIBRARY_OUTPUT_PATH)] + ace_files
         
-        # [FIX] Prepare Environment to Suppress Subprocess Warnings
+        # Environment configuration to suppress subprocess warnings
         env = os.environ.copy()
         env["PYTHONWARNINGS"] = "ignore"
         
-        # 3. Execute
         try:
             subprocess.run(cmd, check=True, env=env)
-            Logger.info(f"Successfully converted {len(ace_files)} files from {library_type}.")
+            Log.info(f"Successfully compiled {len(ace_files)} files for {dataset_label}.")
             
         except subprocess.CalledProcessError as e:
-            Logger.error(f"Conversion failed for {library_type}. Exit Code: {e.returncode}")
+            Log.error(f"Compilation failed with exit code: {e.returncode}")
         except OSError as e:
             if e.errno == 7: 
-                 Logger.error("Too many files (Argument list too long). Try smaller batches.")
+                 Log.error("Argument list too long. Consider batch processing.")
             else:
-                 Logger.error(f"OS Error: {e}")
+                 Log.error(f"System error: {e}")
 
-    def generate_xml_library(self):
+    def finalize_library_indexing(self):
         """
-        Scans the output directory for .h5 files and generates cross_sections.xml
+        Generates the master 'cross_sections.xml' index for OpenMC.
         """
-        Logger.header("GENERATING CROSS_SECTIONS.XML")
+        Log.section("Finalizing Library Index")
         
-        h5_files = list(Config.OUTPUT_HDF5_DIR.glob("*.h5"))
-        if not h5_files:
-            Logger.warn("No HDF5 files found to generate XML library.")
+        h5_inventory = list(AppConfig.LIBRARY_OUTPUT_PATH.glob("*.h5"))
+        if not h5_inventory:
+            Log.warning("No HDF5 libraries found in workspace. Indexing skipped.")
             return
 
-        Logger.info(f"Found {len(h5_files)} HDF5 files. Indexing...")
+        Log.info(f"Indexing {len(h5_inventory)} HDF5 libraries...")
         
         try:
-            # Context manager (redundant but safe)
+            # Suppress API warnings during indexing
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 
-                lib = openmc.data.DataLibrary()
-                for h5_file in h5_files:
-                    lib.register_file(h5_file)
+                library = openmc.data.DataLibrary()
+                for h5_file in h5_inventory:
+                    library.register_file(h5_file)
                 
-                xml_path = Config.OUTPUT_HDF5_DIR / "cross_sections.xml"
-                lib.export_to_xml(xml_path)
+                xml_path = AppConfig.LIBRARY_OUTPUT_PATH / "cross_sections.xml"
+                library.export_to_xml(xml_path)
             
-            Logger.info(f"XML Library generated successfully at:")
-            print(f"       {Fore.CYAN}{xml_path}{Style.RESET_ALL}")
+            Log.info("Master Index Generated Successfully.")
+            print(f"       {Fore.CYAN}Location: {xml_path}{Style.RESET_ALL}")
             
         except Exception as e:
-            Logger.error(f"Failed to generate XML library: {e}")
+            Log.error(f"Indexing failed: {e}")
 
-# --- Entry Point ---
+# --- Main Execution Entry Point ---
 if __name__ == "__main__":
-    Logger.header("ACE TO HDF5 CONVERSION SYSTEM")
-    print(f"{Fore.CYAN}Mode: System Binary + Silent Execution{Style.RESET_ALL}")
+    Log.banner("OPENMC HDF5 LIBRARY COMPILER")
+    print(f"{Fore.CYAN}   System Status: Ready | Silent Mode: Active{Style.RESET_ALL}")
+    print("-" * 70)
     
-    # 1. Get Paths
-    print("-" * 50)
+    # 1. User Input Acquisition
     try:
-        def_n_disp = Config.DEFAULT_NEUTRON_DIR.relative_to(Config.BASE_DIR)
-        def_tsl_disp = Config.DEFAULT_TSL_DIR.relative_to(Config.BASE_DIR)
+        def_n_disp = AppConfig.DEFAULT_NEUTRON_PATH.relative_to(AppConfig.BASE_DIR)
+        def_t_disp = AppConfig.DEFAULT_THERMAL_PATH.relative_to(AppConfig.BASE_DIR)
     except ValueError:
-        def_n_disp = Config.DEFAULT_NEUTRON_DIR
-        def_tsl_disp = Config.DEFAULT_TSL_DIR
+        def_n_disp = AppConfig.DEFAULT_NEUTRON_PATH
+        def_t_disp = AppConfig.DEFAULT_THERMAL_PATH
 
-    n_in = input(f"Enter path for incident neutron data (default: '{def_n_disp}'): ").strip()
-    tsl_in = input(f"Enter path for thermal scattering data (default: '{def_tsl_disp}'): ").strip()
+    print(f"{Fore.YELLOW}Configuring Data Sources:{Style.RESET_ALL}")
     
-    path_n = (Config.BASE_DIR / n_in).resolve() if n_in else Config.DEFAULT_NEUTRON_DIR
-    path_tsl = (Config.BASE_DIR / tsl_in).resolve() if tsl_in else Config.DEFAULT_TSL_DIR
+    # Prompt with the NEW professional default names
+    neutron_source_input = input(f"   >> Incident Neutron Data Path [Default: '{def_n_disp}']: ").strip()
+    thermal_source_input = input(f"   >> Thermal Scattering Data Path [Default: '{def_t_disp}']: ").strip()
     
-    # 2. Initialize
-    converter = ACEConverter()
+    # Path Resolution
+    neutron_source_path = (AppConfig.BASE_DIR / neutron_source_input).resolve() if neutron_source_input else AppConfig.DEFAULT_NEUTRON_PATH
+    thermal_source_path = (AppConfig.BASE_DIR / thermal_source_input).resolve() if thermal_source_input else AppConfig.DEFAULT_THERMAL_PATH
     
-    # 3. Run
-    converter.convert_library(path_n, "Incident Neutron Data")
-    converter.convert_library(path_tsl, "Thermal Scattering Data")
-    converter.generate_xml_library()
+    # 2. Pipeline Initialization
+    manager = LibraryCompilationManager()
     
-    Logger.header("PROCESS COMPLETED")
+    # 3. Pipeline Execution
+    manager.process_dataset(neutron_source_path, "Incident Neutron Data")
+    manager.process_dataset(thermal_source_path, "Thermal Scattering Data")
+    
+    # 4. Finalization
+    manager.finalize_library_indexing()
+    
+    Log.banner("COMPILATION PIPELINE COMPLETED")
