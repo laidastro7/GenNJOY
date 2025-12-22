@@ -1,89 +1,168 @@
 import sys
 import subprocess
+from pathlib import Path
+from typing import List, Optional
 from colorama import Fore, Style, init
 
-# Initialize colorama
+# Initialize colorama for colored output
 init(autoreset=True)
 
-# Header for the NJOY data processing tool
-gen_njoy_header = """
-  ****    ***           *   *    ****   ****  *   *
- *       *   *   *      **  *      *   *    *  * *
- *  ***  *****   * * *  * * *      *   *    *   *
- *    *  *       *   *  *  **  *   *   *    *   *
-  ****    ***    *   *  *   *   ****    ****    *
+# --- Project Configuration ---
+BASE_DIR = Path(__file__).resolve().parent
+SRC_DIR = BASE_DIR / "src"
+INPUTS_DIR = BASE_DIR / "inputs"
+
+# Ensure essential directories exist
+for directory in [SRC_DIR, INPUTS_DIR]:
+    if not directory.exists():
+        print(Fore.YELLOW + f"[Warning] System directory missing: {directory}")
+
+# --- Header & Branding ---
+# Centered ASCII Art relative to the 62-character separator
+GEN_NJOY_HEADER = """
+         ____            _   _     _  ___ __   __
+        / ___| ___ _ __ | \ | |   | |/ _ \\ \ / /
+       | |  _ / _ \ '_ \|  \| |_  | | | | \ V / 
+       | |_| |  __/ | | | |\  | |_| | |_| || |  
+        \____|\___|_| |_|_| \_|\___/ \___/ |_|  
 """
 
-
 def display_header():
-    print("\n       NJOY Data Processing Tool")
-    print(Fore.BLUE + gen_njoy_header + Style.RESET_ALL)
-    print(
-        "This tool offers various options for generating input data \n"
-        "and executing NJOY for neutron data processing.\n"
-    )
+    """Display the official banner and tool description."""
+    print("\n" + Fore.CYAN + "="*62)
+    # The header is now centered within the ASCII string itself
+    print(Fore.BLUE + Style.BRIGHT + GEN_NJOY_HEADER + Style.RESET_ALL)
+    print(Fore.CYAN + "="*62)
+    print(Style.BRIGHT + "   Automated Nuclear Data Processing Framework (NJOY + OpenMC)")
+    print("   Author: Dr. Mohamed Laid YAHIAOUI et al.")
+    print("-" * 62)
+    print("   This framework automates the retrieval of ENDF data, generates")
+    print("   NJOY input decks, and processes libraries into ACE/HDF5 formats.")
+    print("-" * 62 + "\n")
 
+# --- Helper Functions ---
 
-def get_input_file(default="inputs/input_n.i"):
-    file_path = input(
-        f"Enter the path of the input file (Default: {default}): "
-    ).strip()
-    return file_path if file_path else default
+def run_script(script_name: str, args: Optional[List[str]] = None):
+    """
+    Execute a module from the 'src' directory with status reporting.
+    """
+    script_path = SRC_DIR / script_name
+    
+    if not script_path.exists():
+        print(Fore.RED + f"[Error] Module not found: {script_name}")
+        return
 
+    command = [sys.executable, str(script_path)]
+    if args:
+        command.extend(args)
 
-def get_input_file_tsl(default="inputs/input_tsl.i"):
-    file_path = input(
-        f"Enter the path of the input file for TSL (Default: {default}): "
-    ).strip()
-    return file_path if file_path else default
+    print(Fore.CYAN + f"[*] Initializing module: {script_name}...")
+    try:
+        # 'check=True' ensures we catch any errors from the subprocess
+        subprocess.run(command, check=True)
+        print(Fore.GREEN + f"[Success] Module '{script_name}' completed successfully.")
+    except subprocess.CalledProcessError as e:
+        # The called script should handle its own specific error printing,
+        # here we just report the exit code failure.
+        print(Fore.RED + f"[Failed] Module '{script_name}' exited with error code: {e.returncode}.")
+    except Exception as e:
+        print(Fore.RED + f"[Error] Unexpected system error: {e}")
 
+def get_validated_input_file(prompt_text: str, default_filename: str) -> str:
+    """
+    Prompt the user for a file path with validation.
+    """
+    default_path = INPUTS_DIR / default_filename
+    print(Fore.YELLOW + f"   > {prompt_text}")
+    user_input = input(f"     (Press Enter for Default: {default_filename}): ").strip()
+    
+    file_path_str = user_input if user_input else str(default_path)
+    file_path = Path(file_path_str)
+
+    if not file_path.exists():
+        print(Fore.RED + f"   [!] File not found: {file_path}")
+        retry = input("       Proceed anyway? (y/n): ").lower()
+        if retry != 'y':
+            return ""
+            
+    return str(file_path)
 
 def display_menu():
-    print("Please select the option you wish to execute:\n")
-    print("1 - Download Incident and Thermal Data (ENDF-B-VIII.0)")
-    print("2 - Generate Inputs for Incident Neutron Data")
-    print("3 - Generate Inputs for Thermal Neutron Scattering Data")
-    print("4 - Execute NJOY for Incident Neutron Data")
-    print("5 - Execute NJOY for Thermal Neutron Scattering Data")
-    print("6 - Convert ACE Library Files to HDF5 Format")
-    print("7 - Exit\n")
+    """Display the operation menu."""
+    print(Fore.WHITE + Style.BRIGHT + "MAIN MENU: Select an Operation")
+    print("." * 42)
+    print(f" {Fore.GREEN}1.{Style.RESET_ALL} Download Raw Data (ENDF/B-VIII.0)")
+    print(f" {Fore.GREEN}2.{Style.RESET_ALL} Generate NJOY Inputs (Incident Neutrons)")
+    print(f" {Fore.GREEN}3.{Style.RESET_ALL} Generate NJOY Inputs (Thermal Scattering)")
+    print(f" {Fore.GREEN}4.{Style.RESET_ALL} Run NJOY Processing (Incident Neutrons)")
+    print(f" {Fore.GREEN}5.{Style.RESET_ALL} Run NJOY Processing (Thermal Scattering)")
+    print(f" {Fore.GREEN}6.{Style.RESET_ALL} Convert ACE Libraries to HDF5 (OpenMC)")
+    print(f" {Fore.RED}7.{Style.RESET_ALL} Exit")
+    print("." * 42 + "\n")
 
+# --- Core Logic ---
 
-def process_choice(choice):
-    python_executable = sys.executable
-    try:
-        if choice == "1":
-            subprocess.run([python_executable, "src/download_data.py"])        
-        if choice == "2":
-            subprocess.run([python_executable, "src/gen_input_n.py"])
-        elif choice == "3":
-            subprocess.run([python_executable, "src/gen_input_tsl.py"])
-        elif choice == "4":
-            input_file = get_input_file()
-            subprocess.run([python_executable, "src/gen_njoy_n.py", input_file])
-        elif choice == "5":
-            input_file = get_input_file_tsl()
-            subprocess.run([python_executable, "src/gen_njoy_tsl.py",
-                            input_file])
-        elif choice == "6":
-            # Here's where we integrate the new conversion script
-            subprocess.run([python_executable, "src/conversion_ace_hdf5.py"])
-        elif choice == "7":
-            print("\nExiting the program. Goodbye!")
-            return False
-    except Exception as e:
-        print("\nError: " + str(e) + "\n")
+def process_choice(choice: str) -> bool:
+    """Process the user's menu selection."""
+    
+    if choice == "1":
+        print("\n--- Downloading ENDF/B-VIII.0 Library ---")
+        run_script("download_data.py")
+    
+    elif choice == "2":
+        print("\n--- Generating NJOY Input Decks (Neutron) ---")
+        run_script("gen_input_n.py")
+    
+    elif choice == "3":
+        print("\n--- Generating NJOY Input Decks (TSL) ---")
+        run_script("gen_input_tsl.py")
+    
+    elif choice == "4":
+        print("\n--- Executing NJOY (Neutron Processing) ---")
+        input_file = get_validated_input_file(
+            "Please specify the NJOY input file path:", 
+            "input_n.i"
+        )
+        if input_file:
+            run_script("gen_njoy_n.py", [input_file])
+    
+    elif choice == "5":
+        print("\n--- Executing NJOY (Thermal Scattering Processing) ---")
+        input_file = get_validated_input_file(
+            "Please specify the TSL input file path:", 
+            "input_tsl.i"
+        )
+        if input_file:
+            run_script("gen_njoy_tsl.py", [input_file])
+    
+    elif choice == "6":
+        print("\n--- Converting ACE to HDF5 ---")
+        run_script("conversion_ace_hdf5.py")
+    
+    elif choice == "7":
+        print(Fore.MAGENTA + "\n   Thank you for using GenNJOY. Goodbye!\n")
+        return False
+    
+    else:
+        print(Fore.RED + "\n[!] Invalid selection. Please enter a number between 1 and 7.")
+    
     return True
 
+# --- Entry Point ---
 
 def main():
-    running = True
-    display_header()
-    while running:
-        display_menu()
-        choice = input("Enter the option number (1-7): ")
-        running = process_choice(choice)
-
+    try:
+        display_header()
+        running = True
+        while running:
+            display_menu()
+            choice = input(Fore.YELLOW + "Select option [1-7]: " + Style.RESET_ALL).strip()
+            running = process_choice(choice)
+            if running:
+                print("\n" + "-"*42 + "\n") # Separator between operations
+    except KeyboardInterrupt:
+        print(Fore.RED + "\n\n[!] Session interrupted by user. Exiting...")
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
