@@ -1,557 +1,557 @@
-element_n = n_3437_34-Se-78.dat   name = Se78   temperatures = 296.0
-element_n = n_4443_44-Ru-102.dat  name = Ru102  temperatures = 296.0
-element_n = n_7825_78-Pt-190.dat  name = Pt190  temperatures = 296.0
-element_n = n_9911_99-Es-251.dat  name = Es251  temperatures = 296.0
-element_n = n_5228_52-Te-121.dat  name = Te121  temperatures = 296.0
-element_n = n_1931_19-K-41.dat    name = K41    temperatures = 296.0
-element_n = n_2325_23-V-50.dat    name = V50    temperatures = 296.0
-element_n = n_8431_84-Po-208.dat  name = Po208  temperatures = 296.0
-element_n = n_6522_65-Tb-158.dat  name = Tb158  temperatures = 296.0
-element_n = n_4837_48-Cd-110.dat  name = Cd110  temperatures = 296.0
-element_n = n_1231_12-Mg-26.dat   name = Mg26   temperatures = 296.0
-element_n = n_5837_58-Ce-140.dat  name = Ce140  temperatures = 296.0
-element_n = n_8831_88-Ra-225.dat  name = Ra225  temperatures = 296.0
-element_n = n_1834_18-Ar-39.dat   name = Ar39   temperatures = 296.0
-element_n = n_4249_42-Mo-100.dat  name = Mo100  temperatures = 296.0
-element_n = n_5928_59-Pr-142.dat  name = Pr142  temperatures = 296.0
-element_n = n_9455_94-Pu-245.dat  name = Pu245  temperatures = 296.0
-element_n = n_9549_95-Am-243.dat  name = Am243  temperatures = 296.0
-element_n = n_5834_58-Ce-139.dat  name = Ce139  temperatures = 296.0
-element_n = n_7529_75-Re-186M.dat name = Re186M temperatures = 296.0
-element_n = n_2828_28-Ni-59.dat   name = Ni59   temperatures = 296.0
-element_n = n_6449_64-Gd-160.dat  name = Gd160  temperatures = 296.0
-element_n = n_1928_19-K-40.dat    name = K40    temperatures = 296.0
-element_n = n_7925_79-Au-197.dat  name = Au197  temperatures = 296.0
-element_n = n_5255_52-Te-130.dat  name = Te130  temperatures = 296.0
-element_n = n_5046_50-Sn-119.dat  name = Sn119  temperatures = 296.0
-element_n = n_5640_56-Ba-135.dat  name = Ba135  temperatures = 296.0
-element_n = n_3243_32-Ge-76.dat   name = Ge76   temperatures = 296.0
-element_n = n_4646_46-Pd-109.dat  name = Pd109  temperatures = 296.0
-element_n = n_4531_45-Rh-105.dat  name = Rh105  temperatures = 296.0
-element_n = n_9349_93-Np-238.dat  name = Np238  temperatures = 296.0
-element_n = n_7625_76-Os-184.dat  name = Os184  temperatures = 296.0
-element_n = n_6252_62-Sm-153.dat  name = Sm153  temperatures = 296.0
-element_n = n_7049_70-Yb-176.dat  name = Yb176  temperatures = 296.0
-element_n = n_6343_63-Eu-157.dat  name = Eu157  temperatures = 296.0
-element_n = n_2637_26-Fe-58.dat   name = Fe58   temperatures = 296.0
-element_n = n_3237_32-Ge-74.dat   name = Ge74   temperatures = 296.0
-element_n = n_2628_26-Fe-55.dat   name = Fe55   temperatures = 296.0
-element_n = n_8437_84-Po-210.dat  name = Po210  temperatures = 296.0
-element_n = n_5037_50-Sn-116.dat  name = Sn116  temperatures = 296.0
-element_n = n_6729_67-Ho-166M.dat name = Ho166M temperatures = 296.0
-element_n = n_8928_89-Ac-226.dat  name = Ac226  temperatures = 296.0
-element_n = n_6646_66-Dy-163.dat  name = Dy163  temperatures = 296.0
-element_n = n_9237_92-U-238.dat   name = U238   temperatures = 296.0
-element_n = n_5328_53-I-128.dat   name = I128   temperatures = 296.0
-element_n = n_7040_70-Yb-173.dat  name = Yb173  temperatures = 296.0
-element_n = n_2525_25-Mn-55.dat   name = Mn55   temperatures = 296.0
-element_n = n_3234_32-Ge-73.dat   name = Ge73   temperatures = 296.0
-element_n = n_5043_50-Sn-118.dat  name = Sn118  temperatures = 296.0
-element_n = n_4743_47-Ag-113.dat  name = Ag113  temperatures = 296.0
-element_n = n_9637_96-Cm-244.dat  name = Cm244  temperatures = 296.0
-element_n = n_9631_96-Cm-242.dat  name = Cm242  temperatures = 296.0
-element_n = n_5428_54-Xe-125.dat  name = Xe125  temperatures = 296.0
-element_n = n_0128_1-H-2.dat      name = H2     temperatures = 296.0
-element_n = n_8049_80-Hg-204.dat  name = Hg204  temperatures = 296.0
-element_n = n_4028_40-Zr-91.dat   name = Zr91   temperatures = 296.0
-element_n = n_3325_33-As-75.dat   name = As75   temperatures = 296.0
-element_n = n_5425_54-Xe-124.dat  name = Xe124  temperatures = 296.0
-element_n = n_4731_47-Ag-109.dat  name = Ag109  temperatures = 296.0
-element_n = n_3828_38-Sr-85.dat   name = Sr85   temperatures = 296.0
-element_n = n_5040_50-Sn-117.dat  name = Sn117  temperatures = 296.0
-element_n = n_1323_13-Al-26M.dat  name = Al26M  temperatures = 296.0
-element_n = n_9452_94-Pu-244.dat  name = Pu244  temperatures = 296.0
-element_n = n_9134_91-Pa-232.dat  name = Pa232  temperatures = 296.0
-element_n = n_6325_63-Eu-151.dat  name = Eu151  temperatures = 296.0
-element_n = n_6025_60-Nd-142.dat  name = Nd142  temperatures = 296.0
-element_n = n_9037_90-Th-231.dat  name = Th231  temperatures = 296.0
-element_n = n_3428_34-Se-75.dat   name = Se75   temperatures = 296.0
-element_n = n_8034_80-Hg-199.dat  name = Hg199  temperatures = 296.0
-element_n = n_6340_63-Eu-156.dat  name = Eu156  temperatures = 296.0
-element_n = n_1628_16-S-33.dat    name = S33    temperatures = 296.0
-element_n = n_6246_62-Sm-151.dat  name = Sm151  temperatures = 296.0
-element_n = n_2234_22-Ti-49.dat   name = Ti49   temperatures = 296.0
-element_n = n_7840_78-Pt-195.dat  name = Pt195  temperatures = 296.0
-element_n = n_5249_52-Te-128.dat  name = Te128  temperatures = 296.0
-element_n = n_2431_24-Cr-52.dat   name = Cr52   temperatures = 296.0
-element_n = n_1525_15-P-31.dat    name = P31    temperatures = 296.0
-element_n = n_7437_74-W-184.dat   name = W184   temperatures = 296.0
-element_n = n_1434_14-Si-31.dat   name = Si31   temperatures = 296.0
-element_n = n_7434_74-W-183.dat   name = W183   temperatures = 296.0
-element_n = n_1122_11-Na-22.dat   name = Na22   temperatures = 296.0
-element_n = n_4828_48-Cd-107.dat  name = Cd107  temperatures = 296.0
-element_n = n_9340_93-Np-235.dat  name = Np235  temperatures = 296.0
-element_n = n_9034_90-Th-230.dat  name = Th230  temperatures = 296.0
-element_n = n_8237_82-Pb-208.dat  name = Pb208  temperatures = 296.0
-element_n = n_5025_50-Sn-112.dat  name = Sn112  temperatures = 296.0
-element_n = n_5331_53-I-129.dat   name = I129   temperatures = 296.0
-element_n = n_2723_27-Co-58M.dat  name = Co58M  temperatures = 296.0
-element_n = n_2725_27-Co-59.dat   name = Co59   temperatures = 296.0
-element_n = n_4125_41-Nb-93.dat   name = Nb93   temperatures = 296.0
-element_n = n_6843_68-Er-168.dat  name = Er168  temperatures = 296.0
-element_n = n_3225_32-Ge-70.dat   name = Ge70   temperatures = 296.0
-element_n = n_0225_2-He-3.dat     name = He3    temperatures = 296.0
-element_n = n_5125_51-Sb-121.dat  name = Sb121  temperatures = 296.0
-element_n = n_3431_34-Se-76.dat   name = Se76   temperatures = 296.0
-element_n = n_3834_38-Sr-87.dat   name = Sr87   temperatures = 296.0
-element_n = n_4237_42-Mo-96.dat   name = Mo96   temperatures = 296.0
-element_n = n_1631_16-S-34.dat    name = S34    temperatures = 296.0
-element_n = n_6028_60-Nd-143.dat  name = Nd143  temperatures = 296.0
-element_n = n_1431_14-Si-30.dat   name = Si30   temperatures = 296.0
-element_n = n_5443_54-Xe-130.dat  name = Xe130  temperatures = 296.0
-element_n = n_6431_64-Gd-154.dat  name = Gd154  temperatures = 296.0
-element_n = n_4322_43-Tc-98.dat   name = Tc98   temperatures = 296.0
-element_n = n_3125_31-Ga-69.dat   name = Ga69   temperatures = 296.0
-element_n = n_9025_90-Th-227.dat  name = Th227  temperatures = 296.0
-element_n = n_8043_80-Hg-202.dat  name = Hg202  temperatures = 296.0
-element_n = n_6640_66-Dy-161.dat  name = Dy161  temperatures = 296.0
-element_n = n_9912_99-Es-252.dat  name = Es252  temperatures = 296.0
-element_n = n_8029_80-Hg-197M.dat name = Hg197M temperatures = 296.0
-element_n = n_0831_8-O-18.dat     name = O18    temperatures = 296.0
-element_n = n_3731_37-Rb-87.dat   name = Rb87   temperatures = 296.0
-element_n = n_5537_55-Cs-137.dat  name = Cs137  temperatures = 296.0
-element_n = n_4840_48-Cd-111.dat  name = Cd111  temperatures = 296.0
-element_n = n_5261_52-Te-132.dat  name = Te132  temperatures = 296.0
-element_n = n_3443_34-Se-80.dat   name = Se80   temperatures = 296.0
-element_n = n_9936_100-Fm-255.dat name = Fm255  temperatures = 296.0
-element_n = n_3646_36-Kr-85.dat   name = Kr85   temperatures = 296.0
-element_n = n_4428_44-Ru-97.dat   name = Ru97   temperatures = 296.0
-element_n = n_4637_46-Pd-106.dat  name = Pd106  temperatures = 296.0
-element_n = n_6146_61-Pm-146.dat  name = Pm146  temperatures = 296.0
-element_n = n_7649_76-Os-192.dat  name = Os192  temperatures = 296.0
-element_n = n_6849_68-Er-170.dat  name = Er170  temperatures = 296.0
-element_n = n_3525_35-Br-79.dat   name = Br79   temperatures = 296.0
-element_n = n_5925_59-Pr-141.dat  name = Pr141  temperatures = 296.0
-element_n = n_7837_78-Pt-194.dat  name = Pt194  temperatures = 296.0
-element_n = n_0025_0-N-1.dat      name = N1     temperatures = 296.0
-element_n = n_4434_44-Ru-99.dat   name = Ru99   temperatures = 296.0
-element_n = n_2840_28-Ni-63.dat   name = Ni63   temperatures = 296.0
-element_n = n_7728_77-Ir-192.dat  name = Ir192  temperatures = 296.0
-element_n = n_6225_62-Sm-144.dat  name = Sm144  temperatures = 296.0
-element_n = n_4759_47-Ag-118M.dat name = Ag118M temperatures = 296.0
-element_n = n_4031_40-Zr-92.dat   name = Zr92   temperatures = 296.0
-element_n = n_6625_66-Dy-156.dat  name = Dy156  temperatures = 296.0
-element_n = n_6837_68-Er-166.dat  name = Er166  temperatures = 296.0
-element_n = n_5731_57-La-140.dat  name = La140  temperatures = 296.0
-element_n = n_2031_20-Ca-42.dat   name = Ca42   temperatures = 296.0
-element_n = n_4725_47-Ag-107.dat  name = Ag107  temperatures = 296.0
-element_n = n_6031_60-Nd-144.dat  name = Nd144  temperatures = 296.0
-element_n = n_6040_60-Nd-147.dat  name = Nd147  temperatures = 296.0
-element_n = n_4037_40-Zr-94.dat   name = Zr94   temperatures = 296.0
-element_n = n_2834_28-Ni-61.dat   name = Ni61   temperatures = 296.0
-element_n = n_2625_26-Fe-54.dat   name = Fe54   temperatures = 296.0
-element_n = n_4846_48-Cd-113.dat  name = Cd113  temperatures = 296.0
-element_n = n_9352_93-Np-239.dat  name = Np239  temperatures = 296.0
-element_n = n_6155_61-Pm-149.dat  name = Pm149  temperatures = 296.0
-element_n = n_9864_98-Cf-253.dat  name = Cf253  temperatures = 296.0
-element_n = n_9655_96-Cm-250.dat  name = Cm250  temperatures = 296.0
-element_n = n_3649_36-Kr-86.dat   name = Kr86   temperatures = 296.0
-element_n = n_6034_60-Nd-145.dat  name = Nd145  temperatures = 296.0
-element_n = n_3322_33-As-74.dat   name = As74   temperatures = 296.0
-element_n = n_4735_47-Ag-110M.dat name = Ag110M temperatures = 296.0
-element_n = n_2631_26-Fe-56.dat   name = Fe56   temperatures = 296.0
-element_n = n_6619_66-Dy-154.dat  name = Dy154  temperatures = 296.0
-element_n = n_7325_73-Ta-180.dat  name = Ta180  temperatures = 296.0
-element_n = n_5643_56-Ba-136.dat  name = Ba136  temperatures = 296.0
-element_n = n_9552_95-Am-244.dat  name = Am244  temperatures = 296.0
-element_n = n_9628_96-Cm-241.dat  name = Cm241  temperatures = 296.0
-element_n = n_9346_93-Np-237.dat  name = Np237  temperatures = 296.0
-element_n = n_6828_68-Er-163.dat  name = Er163  temperatures = 296.0
-element_n = n_3625_36-Kr-78.dat   name = Kr78   temperatures = 296.0
-element_n = n_3025_30-Zn-64.dat   name = Zn64   temperatures = 296.0
-element_n = n_3725_37-Rb-85.dat   name = Rb85   temperatures = 296.0
-element_n = n_1428_14-Si-29.dat   name = Si29   temperatures = 296.0
-element_n = n_5067_50-Sn-126.dat  name = Sn126  temperatures = 296.0
-element_n = n_1125_11-Na-23.dat   name = Na23   temperatures = 296.0
-element_n = n_5449_54-Xe-132.dat  name = Xe132  temperatures = 296.0
-element_n = n_7237_72-Hf-178.dat  name = Hf178  temperatures = 296.0
-element_n = n_9640_96-Cm-245.dat  name = Cm245  temperatures = 296.0
-element_n = n_0325_3-Li-6.dat     name = Li6    temperatures = 296.0
-element_n = n_1831_18-Ar-38.dat   name = Ar38   temperatures = 296.0
-element_n = n_5031_50-Sn-114.dat  name = Sn114  temperatures = 296.0
-element_n = n_7646_76-Os-191.dat  name = Os191  temperatures = 296.0
-element_n = n_2034_20-Ca-43.dat   name = Ca43   temperatures = 296.0
-element_n = n_9740_97-Bk-245.dat  name = Bk245  temperatures = 296.0
-element_n = n_6249_62-Sm-152.dat  name = Sm152  temperatures = 296.0
-element_n = n_9040_90-Th-232.dat  name = Th232  temperatures = 296.0
-element_n = n_5229_52-Te-121M.dat name = Te121M temperatures = 296.0
-element_n = n_0419_4-Be-7.dat     name = Be7    temperatures = 296.0
-element_n = n_6531_65-Tb-161.dat  name = Tb161  temperatures = 296.0
-element_n = n_5349_53-I-135.dat   name = I135   temperatures = 296.0
-element_n = n_5655_56-Ba-140.dat  name = Ba140  temperatures = 296.0
-element_n = n_4234_42-Mo-95.dat   name = Mo95   temperatures = 296.0
-element_n = n_7846_78-Pt-197.dat  name = Pt197  temperatures = 296.0
-element_n = n_3631_36-Kr-80.dat   name = Kr80   temperatures = 296.0
-element_n = n_6643_66-Dy-162.dat  name = Dy162  temperatures = 296.0
-element_n = n_1225_12-Mg-24.dat   name = Mg24   temperatures = 296.0
-element_n = n_5434_54-Xe-127.dat  name = Xe127  temperatures = 296.0
-element_n = n_7531_75-Re-187.dat  name = Re187  temperatures = 296.0
-element_n = n_9546_95-Am-242.dat  name = Am242  temperatures = 296.0
-element_n = n_2931_29-Cu-65.dat   name = Cu65   temperatures = 296.0
-element_n = n_5240_52-Te-125.dat  name = Te125  temperatures = 296.0
-element_n = n_6337_63-Eu-155.dat  name = Eu155  temperatures = 296.0
-element_n = n_9228_92-U-235.dat   name = U235   temperatures = 296.0
-element_n = n_3531_35-Br-81.dat   name = Br81   temperatures = 296.0
-element_n = n_5825_58-Ce-136.dat  name = Ce136  temperatures = 296.0
-element_n = n_6528_65-Tb-160.dat  name = Tb160  temperatures = 296.0
-element_n = n_8828_88-Ra-224.dat  name = Ra224  temperatures = 296.0
-element_n = n_3925_39-Y-89.dat    name = Y89    temperatures = 296.0
-element_n = n_7440_74-W-185.dat   name = W185   temperatures = 296.0
-element_n = n_1031_10-Ne-22.dat   name = Ne22   temperatures = 296.0
-element_n = n_7037_70-Yb-172.dat  name = Yb172  temperatures = 296.0
-element_n = n_1731_17-Cl-37.dat   name = Cl37   temperatures = 296.0
-element_n = n_4325_43-Tc-99.dat   name = Tc99   temperatures = 296.0
-element_n = n_1840_18-Ar-41.dat   name = Ar41   temperatures = 296.0
-element_n = n_2231_22-Ti-48.dat   name = Ti48   temperatures = 296.0
-element_n = n_3031_30-Zn-66.dat   name = Zn66   temperatures = 296.0
-element_n = n_4643_46-Pd-108.dat  name = Pd108  temperatures = 296.0
-element_n = n_5134_51-Sb-124.dat  name = Sb124  temperatures = 296.0
-element_n = n_5055_50-Sn-122.dat  name = Sn122  temperatures = 296.0
-element_n = n_5049_50-Sn-120.dat  name = Sn120  temperatures = 296.0
-element_n = n_0528_5-B-11.dat     name = B11    temperatures = 296.0
-element_n = n_4425_44-Ru-96.dat   name = Ru96   temperatures = 296.0
-element_n = n_5458_54-Xe-135.dat  name = Xe135  temperatures = 296.0
-element_n = n_6049_60-Nd-150.dat  name = Nd150  temperatures = 296.0
-element_n = n_5346_53-I-134.dat   name = I134   temperatures = 296.0
-element_n = n_4246_42-Mo-99.dat   name = Mo99   temperatures = 296.0
-element_n = n_5225_52-Te-120.dat  name = Te120  temperatures = 296.0
-element_n = n_3040_30-Zn-69.dat   name = Zn69   temperatures = 296.0
-element_n = n_6046_60-Nd-149.dat  name = Nd149  temperatures = 296.0
-element_n = n_4843_48-Cd-112.dat  name = Cd112  temperatures = 296.0
-element_n = n_4728_47-Ag-108.dat  name = Ag108  temperatures = 296.0
-element_n = n_0131_1-H-3.dat      name = H3     temperatures = 296.0
-element_n = n_9428_94-Pu-236.dat  name = Pu236  temperatures = 296.0
-element_n = n_6425_64-Gd-152.dat  name = Gd152  temperatures = 296.0
-element_n = n_9128_91-Pa-230.dat  name = Pa230  temperatures = 296.0
-element_n = n_6649_66-Dy-164.dat  name = Dy164  temperatures = 296.0
-element_n = n_9344_93-Np-236M.dat name = Np236M temperatures = 296.0
-element_n = n_2328_23-V-51.dat    name = V51    temperatures = 296.0
-element_n = n_4853_48-Cd-115M.dat name = Cd115M temperatures = 296.0
-element_n = n_3931_39-Y-91.dat    name = Y91    temperatures = 296.0
-element_n = n_9234_92-U-237.dat   name = U237   temperatures = 296.0
-element_n = n_4131_41-Nb-95.dat   name = Nb95   temperatures = 296.0
-element_n = n_5064_50-Sn-125.dat  name = Sn125  temperatures = 296.0
-element_n = n_4043_40-Zr-96.dat   name = Zr96   temperatures = 296.0
-element_n = n_2322_23-V-49.dat    name = V49    temperatures = 296.0
-element_n = n_6161_61-Pm-151.dat  name = Pm151  temperatures = 296.0
-element_n = n_6831_68-Er-164.dat  name = Er164  temperatures = 296.0
-element_n = n_9749_97-Bk-248.dat  name = Bk248  temperatures = 296.0
-element_n = n_9646_96-Cm-247.dat  name = Cm247  temperatures = 296.0
-element_n = n_6840_68-Er-167.dat  name = Er167  temperatures = 296.0
-element_n = n_8228_82-Pb-205.dat  name = Pb205  temperatures = 296.0
-element_n = n_6153_61-Pm-148M.dat name = Pm148M temperatures = 296.0
-element_n = n_0728_7-N-15.dat     name = N15    temperatures = 296.0
-element_n = n_8125_81-Tl-203.dat  name = Tl203  temperatures = 296.0
-element_n = n_5034_50-Sn-115.dat  name = Sn115  temperatures = 296.0
-element_n = n_0525_5-B-10.dat     name = B10    temperatures = 296.0
-element_n = n_4231_42-Mo-94.dat   name = Mo94   temperatures = 296.0
-element_n = n_6037_60-Nd-146.dat  name = Nd146  temperatures = 296.0
-element_n = n_7443_74-W-186.dat   name = W186   temperatures = 296.0
-element_n = n_9443_94-Pu-241.dat  name = Pu241  temperatures = 296.0
-element_n = n_9652_96-Cm-249.dat  name = Cm249  temperatures = 296.0
-element_n = n_4455_44-Ru-106.dat  name = Ru106  temperatures = 296.0
-element_n = n_4849_48-Cd-114.dat  name = Cd114  temperatures = 296.0
-element_n = n_8329_83-Bi-210M.dat name = Bi210M temperatures = 296.0
-element_n = n_5931_59-Pr-143.dat  name = Pr143  temperatures = 296.0
-element_n = n_4928_49-In-114.dat  name = In114  temperatures = 296.0
-element_n = n_4749_47-Ag-115.dat  name = Ag115  temperatures = 296.0
-element_n = n_4040_40-Zr-95.dat   name = Zr95   temperatures = 296.0
-element_n = n_3434_34-Se-77.dat   name = Se77   temperatures = 296.0
-element_n = n_2843_28-Ni-64.dat   name = Ni64   temperatures = 296.0
-element_n = n_3231_32-Ge-72.dat   name = Ge72   temperatures = 296.0
-element_n = n_5625_56-Ba-130.dat  name = Ba130  temperatures = 296.0
-element_n = n_1825_18-Ar-36.dat   name = Ar36   temperatures = 296.0
-element_n = n_7431_74-W-182.dat   name = W182   temperatures = 296.0
-element_n = n_7249_72-Hf-182.dat  name = Hf182  temperatures = 296.0
-element_n = n_0725_7-N-14.dat     name = N14    temperatures = 296.0
-element_n = n_6228_62-Sm-145.dat  name = Sm145  temperatures = 296.0
-element_n = n_6043_60-Nd-148.dat  name = Nd148  temperatures = 296.0
-element_n = n_1028_10-Ne-21.dat   name = Ne21   temperatures = 296.0
-element_n = n_5061_50-Sn-124.dat  name = Sn124  temperatures = 296.0
-element_n = n_8825_88-Ra-223.dat  name = Ra223  temperatures = 296.0
-element_n = n_6234_62-Sm-147.dat  name = Sm147  temperatures = 296.0
-element_n = n_0628_6-C-13.dat     name = C13    temperatures = 296.0
-element_n = n_6925_69-Tm-169.dat  name = Tm169  temperatures = 296.0
-element_n = n_5422_54-Xe-123.dat  name = Xe123  temperatures = 296.0
-element_n = n_4446_44-Ru-103.dat  name = Ru103  temperatures = 296.0
-element_n = n_5334_53-I-130.dat   name = I130   temperatures = 296.0
-element_n = n_7425_74-W-180.dat   name = W180   temperatures = 296.0
-element_n = n_3837_38-Sr-88.dat   name = Sr88   temperatures = 296.0
-element_n = n_7246_72-Hf-181.dat  name = Hf181  temperatures = 296.0
-element_n = n_9634_96-Cm-243.dat  name = Cm243  temperatures = 296.0
-element_n = n_3037_30-Zn-68.dat   name = Zn68   temperatures = 296.0
-element_n = n_0625_6-C-12.dat     name = C12    temperatures = 296.0
-element_n = n_9914_99-Es-254.dat  name = Es254  temperatures = 296.0
-element_n = n_5831_58-Ce-138.dat  name = Ce138  temperatures = 296.0
-element_n = n_1425_14-Si-28.dat   name = Si28   temperatures = 296.0
-element_n = n_5628_56-Ba-131.dat  name = Ba131  temperatures = 296.0
-element_n = n_3043_30-Zn-70.dat   name = Zn70   temperatures = 296.0
-element_n = n_8128_81-Tl-204.dat  name = Tl204  temperatures = 296.0
-element_n = n_2437_24-Cr-54.dat   name = Cr54   temperatures = 296.0
-element_n = n_9446_94-Pu-242.dat  name = Pu242  temperatures = 296.0
-element_n = n_4640_46-Pd-107.dat  name = Pd107  temperatures = 296.0
-element_n = n_1025_10-Ne-20.dat   name = Ne20   temperatures = 296.0
-element_n = n_1725_17-Cl-35.dat   name = Cl35   temperatures = 296.0
-element_n = n_9028_90-Th-228.dat  name = Th228  temperatures = 296.0
-element_n = n_9213_92-U-230.dat   name = U230   temperatures = 296.0
-element_n = n_2928_29-Cu-64.dat   name = Cu64   temperatures = 296.0
-element_n = n_2125_21-Sc-45.dat   name = Sc45   temperatures = 296.0
-element_n = n_3028_30-Zn-65.dat   name = Zn65   temperatures = 296.0
-element_n = n_2040_20-Ca-45.dat   name = Ca45   temperatures = 296.0
-element_n = n_6846_68-Er-169.dat  name = Er169  temperatures = 296.0
-element_n = n_2046_20-Ca-47.dat   name = Ca47   temperatures = 296.0
-element_n = n_7843_78-Pt-196.dat  name = Pt196  temperatures = 296.0
-element_n = n_2225_22-Ti-46.dat   name = Ti46   temperatures = 296.0
-element_n = n_6622_66-Dy-155.dat  name = Dy155  temperatures = 296.0
-element_n = n_6143_61-Pm-145.dat  name = Pm145  temperatures = 296.0
-element_n = n_5058_50-Sn-123.dat  name = Sn123  temperatures = 296.0
-element_n = n_9649_96-Cm-248.dat  name = Cm248  temperatures = 296.0
-element_n = n_9752_97-Bk-249.dat  name = Bk249  temperatures = 296.0
-element_n = n_7831_78-Pt-192.dat  name = Pt192  temperatures = 296.0
-element_n = n_3034_30-Zn-67.dat   name = Zn67   temperatures = 296.0
-element_n = n_1634_16-S-35.dat    name = S35    temperatures = 296.0
-element_n = n_5528_55-Cs-134.dat  name = Cs134  temperatures = 296.0
-element_n = n_7643_76-Os-190.dat  name = Os190  temperatures = 296.0
-element_n = n_5631_56-Ba-132.dat  name = Ba132  temperatures = 296.0
-element_n = n_2831_28-Ni-60.dat   name = Ni60   temperatures = 296.0
-element_n = n_1625_16-S-32.dat    name = S32    temperatures = 296.0
-element_n = n_0328_3-Li-7.dat     name = Li7    temperatures = 296.0
-element_n = n_5340_53-I-132.dat   name = I132   temperatures = 296.0
-element_n = n_4243_42-Mo-98.dat   name = Mo98   temperatures = 296.0
-element_n = n_4634_46-Pd-105.dat  name = Pd105  temperatures = 296.0
-element_n = n_5531_55-Cs-135.dat  name = Cs135  temperatures = 296.0
-element_n = n_5343_53-I-133.dat   name = I133   temperatures = 296.0
-element_n = n_7240_72-Hf-179.dat  name = Hf179  temperatures = 296.0
-element_n = n_4925_49-In-113.dat  name = In113  temperatures = 296.0
-element_n = n_8031_80-Hg-198.dat  name = Hg198  temperatures = 296.0
-element_n = n_9046_90-Th-234.dat  name = Th234  temperatures = 296.0
-element_n = n_4431_44-Ru-98.dat   name = Ru98   temperatures = 296.0
-element_n = n_4825_48-Cd-106.dat  name = Cd106  temperatures = 296.0
-element_n = n_6440_64-Gd-157.dat  name = Gd157  temperatures = 296.0
-element_n = n_9746_97-Bk-247.dat  name = Bk247  temperatures = 296.0
-element_n = n_6437_64-Gd-156.dat  name = Gd156  temperatures = 296.0
-element_n = n_8225_82-Pb-204.dat  name = Pb204  temperatures = 296.0
-element_n = n_4128_41-Nb-94.dat   name = Nb94   temperatures = 296.0
-element_n = n_9855_98-Cf-250.dat  name = Cf250  temperatures = 296.0
-element_n = n_8231_82-Pb-206.dat  name = Pb206  temperatures = 296.0
-element_n = n_7725_77-Ir-191.dat  name = Ir191  temperatures = 296.0
-element_n = n_4525_45-Rh-103.dat  name = Rh103  temperatures = 296.0
-element_n = n_5840_58-Ce-141.dat  name = Ce141  temperatures = 296.0
-element_n = n_5649_56-Ba-138.dat  name = Ba138  temperatures = 296.0
-element_n = n_7025_70-Yb-168.dat  name = Yb168  temperatures = 296.0
-element_n = n_5525_55-Cs-133.dat  name = Cs133  temperatures = 296.0
-element_n = n_4737_47-Ag-111.dat  name = Ag111  temperatures = 296.0
-element_n = n_6634_66-Dy-159.dat  name = Dy159  temperatures = 296.0
-element_n = n_7634_76-Os-187.dat  name = Os187  temperatures = 296.0
-element_n = n_4228_42-Mo-93.dat   name = Mo93   temperatures = 296.0
-element_n = n_5259_52-Te-131M.dat name = Te131M temperatures = 296.0
-element_n = n_4649_46-Pd-110.dat  name = Pd110  temperatures = 296.0
-element_n = n_9553_95-Am-244M.dat name = Am244M temperatures = 296.0
-element_n = n_8025_80-Hg-196.dat  name = Hg196  temperatures = 296.0
-element_n = n_7043_70-Yb-174.dat  name = Yb174  temperatures = 296.0
-element_n = n_6928_69-Tm-170.dat  name = Tm170  temperatures = 296.0
-element_n = n_9846_98-Cf-247.dat  name = Cf247  temperatures = 296.0
-element_n = n_5461_54-Xe-136.dat  name = Xe136  temperatures = 296.0
-element_n = n_9219_92-U-232.dat   name = U232   temperatures = 296.0
-element_n = n_9240_92-U-239.dat   name = U239   temperatures = 296.0
-element_n = n_7328_73-Ta-181.dat  name = Ta181  temperatures = 296.0
-element_n = n_0825_8-O-16.dat     name = O16    temperatures = 296.0
-element_n = n_4528_45-Rh-104.dat  name = Rh104  temperatures = 296.0
-element_n = n_4834_48-Cd-109.dat  name = Cd109  temperatures = 296.0
-element_n = n_2049_20-Ca-48.dat   name = Ca48   temperatures = 296.0
-element_n = n_4752_47-Ag-116.dat  name = Ag116  temperatures = 296.0
-element_n = n_9916_99-Es-255.dat  name = Es255  temperatures = 296.0
-element_n = n_5646_56-Ba-137.dat  name = Ba137  temperatures = 296.0
-element_n = n_2428_24-Cr-51.dat   name = Cr51   temperatures = 296.0
-element_n = n_7028_70-Yb-169.dat  name = Yb169  temperatures = 296.0
-element_n = n_8325_83-Bi-209.dat  name = Bi209  temperatures = 296.0
-element_n = n_0228_2-He-4.dat     name = He4    temperatures = 296.0
-element_n = n_2634_26-Fe-57.dat   name = Fe57   temperatures = 296.0
-element_n = n_9458_94-Pu-246.dat  name = Pu246  temperatures = 296.0
-element_n = n_7234_72-Hf-177.dat  name = Hf177  temperatures = 296.0
-element_n = n_9861_98-Cf-252.dat  name = Cf252  temperatures = 296.0
-element_n = n_9125_91-Pa-229.dat  name = Pa229  temperatures = 296.0
-element_n = n_5253_52-Te-129M.dat name = Te129M temperatures = 296.0
-element_n = n_9867_98-Cf-254.dat  name = Cf254  temperatures = 296.0
-element_n = n_3449_34-Se-82.dat   name = Se82   temperatures = 296.0
-element_n = n_4625_46-Pd-102.dat  name = Pd102  temperatures = 296.0
-element_n = n_5237_52-Te-124.dat  name = Te124  temperatures = 296.0
-element_n = n_5455_54-Xe-134.dat  name = Xe134  temperatures = 296.0
-element_n = n_1837_18-Ar-40.dat   name = Ar40   temperatures = 296.0
-element_n = n_6628_66-Dy-157.dat  name = Dy157  temperatures = 296.0
-element_n = n_9858_98-Cf-251.dat  name = Cf251  temperatures = 296.0
-element_n = n_4855_48-Cd-116.dat  name = Cd116  temperatures = 296.0
-element_n = n_7128_71-Lu-176.dat  name = Lu176  temperatures = 296.0
-element_n = n_5452_54-Xe-133.dat  name = Xe133  temperatures = 296.0
-element_n = n_8037_80-Hg-200.dat  name = Hg200  temperatures = 296.0
-element_n = n_5725_57-La-138.dat  name = La138  temperatures = 296.0
-element_n = n_6149_61-Pm-147.dat  name = Pm147  temperatures = 296.0
-element_n = n_6637_66-Dy-160.dat  name = Dy160  temperatures = 296.0
-element_n = n_0828_8-O-17.dat     name = O17    temperatures = 296.0
-element_n = n_5128_51-Sb-122.dat  name = Sb122  temperatures = 296.0
-element_n = n_6255_62-Sm-154.dat  name = Sm154  temperatures = 296.0
-element_n = n_7834_78-Pt-193.dat  name = Pt193  temperatures = 296.0
-element_n = n_5140_51-Sb-126.dat  name = Sb126  temperatures = 296.0
-element_n = n_5247_52-Te-127M.dat name = Te127M temperatures = 296.0
-element_n = n_6631_66-Dy-158.dat  name = Dy158  temperatures = 296.0
-element_n = n_5849_58-Ce-144.dat  name = Ce144  temperatures = 296.0
-element_n = n_9643_96-Cm-246.dat  name = Cm246  temperatures = 296.0
-element_n = n_5028_50-Sn-113.dat  name = Sn113  temperatures = 296.0
-element_n = n_3928_39-Y-90.dat    name = Y90    temperatures = 296.0
-element_n = n_2037_20-Ca-44.dat   name = Ca44   temperatures = 296.0
-element_n = n_2722_27-Co-58.dat   name = Co58   temperatures = 296.0
-element_n = n_8046_80-Hg-203.dat  name = Hg203  temperatures = 296.0
-element_n = n_4440_44-Ru-101.dat  name = Ru101  temperatures = 296.0
-element_n = n_3728_37-Rb-86.dat   name = Rb86   temperatures = 296.0
-element_n = n_6931_69-Tm-171.dat  name = Tm171  temperatures = 296.0
-element_n = n_3128_31-Ga-70.dat   name = Ga70   temperatures = 296.0
-element_n = n_7628_76-Os-185.dat  name = Os185  temperatures = 296.0
-element_n = n_6140_61-Pm-144.dat  name = Pm144  temperatures = 296.0
-element_n = n_3446_34-Se-81.dat   name = Se81   temperatures = 296.0
-element_n = n_9843_98-Cf-246.dat  name = Cf246  temperatures = 296.0
-element_n = n_7046_70-Yb-175.dat  name = Yb175  temperatures = 296.0
-element_n = n_5258_52-Te-131.dat  name = Te131  temperatures = 296.0
-element_n = n_3825_38-Sr-84.dat   name = Sr84   temperatures = 296.0
-element_n = n_7731_77-Ir-193.dat  name = Ir193  temperatures = 296.0
-element_n = n_9852_98-Cf-249.dat  name = Cf249  temperatures = 296.0
-element_n = n_7243_72-Hf-180.dat  name = Hf180  temperatures = 296.0
-element_n = n_7640_76-Os-189.dat  name = Os189  temperatures = 296.0
-element_n = n_6331_63-Eu-153.dat  name = Eu153  temperatures = 296.0
-element_n = n_9216_92-U-231.dat   name = U231   temperatures = 296.0
-element_n = n_5431_54-Xe-126.dat  name = Xe126  temperatures = 296.0
-element_n = n_8434_84-Po-209.dat  name = Po209  temperatures = 296.0
-element_n = n_9222_92-U-233.dat   name = U233   temperatures = 296.0
-element_n = n_5728_57-La-139.dat  name = La139  temperatures = 296.0
-element_n = n_9137_91-Pa-233.dat  name = Pa233  temperatures = 296.0
-element_n = n_7828_78-Pt-191.dat  name = Pt191  temperatures = 296.0
-element_n = n_7849_78-Pt-198.dat  name = Pt198  temperatures = 296.0
-element_n = n_8131_81-Tl-205.dat  name = Tl205  temperatures = 296.0
-element_n = n_6834_68-Er-165.dat  name = Er165  temperatures = 296.0
-element_n = n_6725_67-Ho-165.dat  name = Ho165  temperatures = 296.0
-element_n = n_3643_36-Kr-84.dat   name = Kr84   temperatures = 296.0
-element_n = n_9343_93-Np-236.dat  name = Np236  temperatures = 296.0
-element_n = n_3228_32-Ge-71.dat   name = Ge71   temperatures = 296.0
-element_n = n_9043_90-Th-233.dat  name = Th233  temperatures = 296.0
-element_n = n_8040_80-Hg-201.dat  name = Hg201  temperatures = 296.0
-element_n = n_9225_92-U-234.dat   name = U234   temperatures = 296.0
-element_n = n_0925_9-F-19.dat     name = F19    temperatures = 296.0
-element_n = n_3640_36-Kr-83.dat   name = Kr83   temperatures = 296.0
-element_n = n_4628_46-Pd-103.dat  name = Pd103  temperatures = 296.0
-element_n = n_6334_63-Eu-154.dat  name = Eu154  temperatures = 296.0
-element_n = n_7428_74-W-181.dat   name = W181   temperatures = 296.0
-element_n = n_3840_38-Sr-89.dat   name = Sr89   temperatures = 296.0
-element_n = n_4437_44-Ru-100.dat  name = Ru100  temperatures = 296.0
-element_n = n_4449_44-Ru-104.dat  name = Ru104  temperatures = 296.0
-element_n = n_9915_99-Es-254M.dat name = Es254M temperatures = 296.0
-element_n = n_5053_50-Sn-121M.dat name = Sn121M temperatures = 296.0
-element_n = n_4831_48-Cd-108.dat  name = Cd108  temperatures = 296.0
-element_n = n_8028_80-Hg-197.dat  name = Hg197  temperatures = 296.0
-element_n = n_3628_36-Kr-79.dat   name = Kr79   temperatures = 296.0
-element_n = n_1325_13-Al-27.dat   name = Al27   temperatures = 296.0
-element_n = n_9540_95-Am-240.dat  name = Am240  temperatures = 296.0
-element_n = n_9437_94-Pu-239.dat  name = Pu239  temperatures = 296.0
-element_n = n_2425_24-Cr-50.dat   name = Cr50   temperatures = 296.0
-element_n = n_4225_42-Mo-92.dat   name = Mo92   temperatures = 296.0
-element_n = n_5846_58-Ce-143.dat  name = Ce143  temperatures = 296.0
-element_n = n_3319_33-As-73.dat   name = As73   temperatures = 296.0
-element_n = n_4034_40-Zr-93.dat   name = Zr93   temperatures = 296.0
-element_n = n_1228_12-Mg-25.dat   name = Mg25   temperatures = 296.0
-element_n = n_8834_88-Ra-226.dat  name = Ra226  temperatures = 296.0
-element_n = n_9434_94-Pu-238.dat  name = Pu238  temperatures = 296.0
-element_n = n_5843_58-Ce-142.dat  name = Ce142  temperatures = 296.0
-element_n = n_8931_89-Ac-227.dat  name = Ac227  temperatures = 296.0
-element_n = n_5341_53-I-132M.dat  name = I132M  temperatures = 296.0
-element_n = n_2043_20-Ca-46.dat   name = Ca46   temperatures = 296.0
-element_n = n_3831_38-Sr-86.dat   name = Sr86   temperatures = 296.0
-element_n = n_2925_29-Cu-63.dat   name = Cu63   temperatures = 296.0
-element_n = n_2028_20-Ca-41.dat   name = Ca41   temperatures = 296.0
-element_n = n_9625_96-Cm-240.dat  name = Cm240  temperatures = 296.0
-element_n = n_6158_61-Pm-150.dat  name = Pm150  temperatures = 296.0
-element_n = n_9849_98-Cf-248.dat  name = Cf248  temperatures = 296.0
-element_n = n_9755_97-Bk-250.dat  name = Bk250  temperatures = 296.0
-element_n = n_2025_20-Ca-40.dat   name = Ca40   temperatures = 296.0
-element_n = n_0425_4-Be-9.dat     name = Be9    temperatures = 296.0
-element_n = n_6525_65-Tb-159.dat  name = Tb159  temperatures = 296.0
-element_n = n_9547_95-Am-242M.dat name = Am242M temperatures = 296.0
-element_n = n_6231_62-Sm-146.dat  name = Sm146  temperatures = 296.0
-element_n = n_3843_38-Sr-90.dat   name = Sr90   temperatures = 296.0
-element_n = n_9031_90-Th-229.dat  name = Th229  temperatures = 296.0
-element_n = n_5828_58-Ce-137.dat  name = Ce137  temperatures = 296.0
-element_n = n_6922_69-Tm-168.dat  name = Tm168  temperatures = 296.0
-element_n = n_5437_54-Xe-128.dat  name = Xe128  temperatures = 296.0
-element_n = n_6434_64-Gd-155.dat  name = Gd155  temperatures = 296.0
-element_n = n_9440_94-Pu-240.dat  name = Pu240  temperatures = 296.0
-element_n = n_2228_22-Ti-47.dat   name = Ti47   temperatures = 296.0
-element_n = n_9543_95-Am-241.dat  name = Am241  temperatures = 296.0
-element_n = n_1728_17-Cl-36.dat   name = Cl36   temperatures = 296.0
-element_n = n_2237_22-Ti-50.dat   name = Ti50   temperatures = 296.0
-element_n = n_5243_52-Te-126.dat  name = Te126  temperatures = 296.0
-element_n = n_3528_35-Br-80.dat   name = Br80   temperatures = 296.0
-element_n = n_7225_72-Hf-174.dat  name = Hf174  temperatures = 296.0
-element_n = n_1925_19-K-39.dat    name = K39    temperatures = 296.0
-element_n = n_4755_47-Ag-117.dat  name = Ag117  temperatures = 296.0
-element_n = n_9243_92-U-240.dat   name = U240   temperatures = 296.0
-element_n = n_9131_91-Pa-231.dat  name = Pa231  temperatures = 296.0
-element_n = n_2825_28-Ni-58.dat   name = Ni58   temperatures = 296.0
-element_n = n_3634_36-Kr-81.dat   name = Kr81   temperatures = 296.0
-element_n = n_7331_73-Ta-182.dat  name = Ta182  temperatures = 296.0
-element_n = n_7034_70-Yb-171.dat  name = Yb171  temperatures = 296.0
-element_n = n_6428_64-Gd-153.dat  name = Gd153  temperatures = 296.0
-element_n = n_5446_54-Xe-131.dat  name = Xe131  temperatures = 296.0
-element_n = n_5534_55-Cs-136.dat  name = Cs136  temperatures = 296.0
-element_n = n_6443_64-Gd-158.dat  name = Gd158  temperatures = 296.0
-element_n = n_7525_75-Re-185.dat  name = Re185  temperatures = 296.0
-element_n = n_2837_28-Ni-62.dat   name = Ni62   temperatures = 296.0
-element_n = n_5829_58-Ce-137M.dat name = Ce137M temperatures = 296.0
-element_n = n_7735_77-Ir-194M.dat name = Ir194M temperatures = 296.0
-element_n = n_9337_93-Np-234.dat  name = Np234  temperatures = 296.0
-element_n = n_5137_51-Sb-125.dat  name = Sb125  temperatures = 296.0
-element_n = n_8234_82-Pb-207.dat  name = Pb207  temperatures = 296.0
-element_n = n_4740_47-Ag-112.dat  name = Ag112  temperatures = 296.0
-element_n = n_5337_53-I-131.dat   name = I131   temperatures = 296.0
-element_n = n_6137_61-Pm-143.dat  name = Pm143  temperatures = 296.0
-element_n = n_3440_34-Se-79.dat   name = Se79   temperatures = 296.0
-element_n = n_7231_72-Hf-176.dat  name = Hf176  temperatures = 296.0
-element_n = n_5325_53-I-127.dat   name = I127   temperatures = 296.0
-element_n = n_6243_62-Sm-150.dat  name = Sm150  temperatures = 296.0
-element_n = n_9431_94-Pu-237.dat  name = Pu237  temperatures = 296.0
-element_n = n_4931_49-In-115.dat  name = In115  temperatures = 296.0
-element_n = n_5234_52-Te-123.dat  name = Te123  temperatures = 296.0
-element_n = n_6328_63-Eu-152.dat  name = Eu152  temperatures = 296.0
-element_n = n_7125_71-Lu-175.dat  name = Lu175  temperatures = 296.0
-element_n = n_5652_56-Ba-139.dat  name = Ba139  temperatures = 296.0
-element_n = n_1828_18-Ar-37.dat   name = Ar37   temperatures = 296.0
-element_n = n_1437_14-Si-32.dat   name = Si32   temperatures = 296.0
-element_n = n_2434_24-Cr-53.dat   name = Cr53   temperatures = 296.0
-element_n = n_6825_68-Er-162.dat  name = Er162  temperatures = 296.0
-element_n = n_5131_51-Sb-123.dat  name = Sb123  temperatures = 296.0
-element_n = n_9449_94-Pu-243.dat  name = Pu243  temperatures = 296.0
-element_n = n_3425_34-Se-74.dat   name = Se74   temperatures = 296.0
-element_n = n_7631_76-Os-186.dat  name = Os186  temperatures = 296.0
-element_n = n_6446_64-Gd-159.dat  name = Gd159  temperatures = 296.0
-element_n = n_3240_32-Ge-75.dat   name = Ge75   temperatures = 296.0
-element_n = n_9743_97-Bk-246.dat  name = Bk246  temperatures = 296.0
-element_n = n_1637_16-S-36.dat    name = S36    temperatures = 296.0
-element_n = n_7637_76-Os-188.dat  name = Os188  temperatures = 296.0
-element_n = n_3637_36-Kr-82.dat   name = Kr82   temperatures = 296.0
-element_n = n_4746_47-Ag-114.dat  name = Ag114  temperatures = 296.0
-element_n = n_5637_56-Ba-134.dat  name = Ba134  temperatures = 296.0
-element_n = n_4631_46-Pd-104.dat  name = Pd104  temperatures = 296.0
-element_n = n_4452_44-Ru-105.dat  name = Ru105  temperatures = 296.0
-element_n = n_4025_40-Zr-90.dat   name = Zr90   temperatures = 296.0
-element_n = n_7228_72-Hf-175.dat  name = Hf175  temperatures = 296.0
-element_n = n_6240_62-Sm-149.dat  name = Sm149  temperatures = 296.0
-element_n = n_9231_92-U-236.dat   name = U236   temperatures = 296.0
-element_n = n_9246_92-U-241.dat   name = U241   temperatures = 296.0
-element_n = n_9913_99-Es-253.dat  name = Es253  temperatures = 296.0
-element_n = n_8925_89-Ac-225.dat  name = Ac225  temperatures = 296.0
-element_n = n_5231_52-Te-122.dat  name = Te122  temperatures = 296.0
-element_n = n_6237_62-Sm-148.dat  name = Sm148  temperatures = 296.0
-element_n = n_5440_54-Xe-129.dat  name = Xe129  temperatures = 296.0
-element_n = n_4240_42-Mo-97.dat   name = Mo97   temperatures = 296.0
-element_n = n_6152_61-Pm-148.dat  name = Pm148  temperatures = 296.0
-element_n = n_2522_25-Mn-54.dat   name = Mn54   temperatures = 296.0
-element_n = n_5634_56-Ba-133.dat  name = Ba133  temperatures = 296.0
-element_n = n_7031_70-Yb-170.dat  name = Yb170  temperatures = 296.0
-element_n = n_0125_1-H-1.dat      name = H1     temperatures = 296.0
-element_n = n_3131_31-Ga-71.dat   name = Ga71   temperatures = 296.0
+element_n = n-000_n_001.endf          name = n1       temperatures = 293.6 600.0 900.0
+element_n = n-001_H_001.endf          name = H1       temperatures = 293.6 600.0 900.0
+element_n = n-001_H_002.endf          name = H2       temperatures = 293.6 600.0 900.0
+element_n = n-001_H_003.endf          name = H3       temperatures = 293.6 600.0 900.0
+element_n = n-002_He_003.endf         name = He3      temperatures = 293.6 600.0 900.0
+element_n = n-002_He_004.endf         name = He4      temperatures = 293.6 600.0 900.0
+element_n = n-003_Li_006.endf         name = Li6      temperatures = 293.6 600.0 900.0
+element_n = n-003_Li_007.endf         name = Li7      temperatures = 293.6 600.0 900.0
+element_n = n-004_Be_007.endf         name = Be7      temperatures = 293.6 600.0 900.0
+element_n = n-004_Be_009.endf         name = Be9      temperatures = 293.6 600.0 900.0
+element_n = n-005_B_010.endf          name = B10      temperatures = 293.6 600.0 900.0
+element_n = n-005_B_011.endf          name = B11      temperatures = 293.6 600.0 900.0
+element_n = n-006_C_012.endf          name = C12      temperatures = 293.6 600.0 900.0
+element_n = n-006_C_013.endf          name = C13      temperatures = 293.6 600.0 900.0
+element_n = n-007_N_014.endf          name = N14      temperatures = 293.6 600.0 900.0
+element_n = n-007_N_015.endf          name = N15      temperatures = 293.6 600.0 900.0
+element_n = n-008_O_016.endf          name = O16      temperatures = 293.6 600.0 900.0
+element_n = n-008_O_017.endf          name = O17      temperatures = 293.6 600.0 900.0
+element_n = n-008_O_018.endf          name = O18      temperatures = 293.6 600.0 900.0
+element_n = n-009_F_019.endf          name = F19      temperatures = 293.6 600.0 900.0
+element_n = n-010_Ne_020.endf         name = Ne20     temperatures = 293.6 600.0 900.0
+element_n = n-010_Ne_021.endf         name = Ne21     temperatures = 293.6 600.0 900.0
+element_n = n-010_Ne_022.endf         name = Ne22     temperatures = 293.6 600.0 900.0
+element_n = n-011_Na_022.endf         name = Na22     temperatures = 293.6 600.0 900.0
+element_n = n-011_Na_023.endf         name = Na23     temperatures = 293.6 600.0 900.0
+element_n = n-012_Mg_024.endf         name = Mg24     temperatures = 293.6 600.0 900.0
+element_n = n-012_Mg_025.endf         name = Mg25     temperatures = 293.6 600.0 900.0
+element_n = n-012_Mg_026.endf         name = Mg26     temperatures = 293.6 600.0 900.0
+element_n = n-013_Al_026m1.endf       name = Al026m1  temperatures = 293.6 600.0 900.0
+element_n = n-013_Al_027.endf         name = Al27     temperatures = 293.6 600.0 900.0
+element_n = n-014_Si_028.endf         name = Si28     temperatures = 293.6 600.0 900.0
+element_n = n-014_Si_029.endf         name = Si29     temperatures = 293.6 600.0 900.0
+element_n = n-014_Si_030.endf         name = Si30     temperatures = 293.6 600.0 900.0
+element_n = n-014_Si_031.endf         name = Si31     temperatures = 293.6 600.0 900.0
+element_n = n-014_Si_032.endf         name = Si32     temperatures = 293.6 600.0 900.0
+element_n = n-015_P_031.endf          name = P31      temperatures = 293.6 600.0 900.0
+element_n = n-016_S_032.endf          name = S32      temperatures = 293.6 600.0 900.0
+element_n = n-016_S_033.endf          name = S33      temperatures = 293.6 600.0 900.0
+element_n = n-016_S_034.endf          name = S34      temperatures = 293.6 600.0 900.0
+element_n = n-016_S_035.endf          name = S35      temperatures = 293.6 600.0 900.0
+element_n = n-016_S_036.endf          name = S36      temperatures = 293.6 600.0 900.0
+element_n = n-017_Cl_035.endf         name = Cl35     temperatures = 293.6 600.0 900.0
+element_n = n-017_Cl_036.endf         name = Cl36     temperatures = 293.6 600.0 900.0
+element_n = n-017_Cl_037.endf         name = Cl37     temperatures = 293.6 600.0 900.0
+element_n = n-018_Ar_036.endf         name = Ar36     temperatures = 293.6 600.0 900.0
+element_n = n-018_Ar_037.endf         name = Ar37     temperatures = 293.6 600.0 900.0
+element_n = n-018_Ar_038.endf         name = Ar38     temperatures = 293.6 600.0 900.0
+element_n = n-018_Ar_039.endf         name = Ar39     temperatures = 293.6 600.0 900.0
+element_n = n-018_Ar_040.endf         name = Ar40     temperatures = 293.6 600.0 900.0
+element_n = n-018_Ar_041.endf         name = Ar41     temperatures = 293.6 600.0 900.0
+element_n = n-019_K_039.endf          name = K39      temperatures = 293.6 600.0 900.0
+element_n = n-019_K_040.endf          name = K40      temperatures = 293.6 600.0 900.0
+element_n = n-019_K_041.endf          name = K41      temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_040.endf         name = Ca40     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_041.endf         name = Ca41     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_042.endf         name = Ca42     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_043.endf         name = Ca43     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_044.endf         name = Ca44     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_045.endf         name = Ca45     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_046.endf         name = Ca46     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_047.endf         name = Ca47     temperatures = 293.6 600.0 900.0
+element_n = n-020_Ca_048.endf         name = Ca48     temperatures = 293.6 600.0 900.0
+element_n = n-021_Sc_045.endf         name = Sc45     temperatures = 293.6 600.0 900.0
+element_n = n-022_Ti_046.endf         name = Ti46     temperatures = 293.6 600.0 900.0
+element_n = n-022_Ti_047.endf         name = Ti47     temperatures = 293.6 600.0 900.0
+element_n = n-022_Ti_048.endf         name = Ti48     temperatures = 293.6 600.0 900.0
+element_n = n-022_Ti_049.endf         name = Ti49     temperatures = 293.6 600.0 900.0
+element_n = n-022_Ti_050.endf         name = Ti50     temperatures = 293.6 600.0 900.0
+element_n = n-023_V_049.endf          name = V49      temperatures = 293.6 600.0 900.0
+element_n = n-023_V_050.endf          name = V50      temperatures = 293.6 600.0 900.0
+element_n = n-023_V_051.endf          name = V51      temperatures = 293.6 600.0 900.0
+element_n = n-024_Cr_050.endf         name = Cr50     temperatures = 293.6 600.0 900.0
+element_n = n-024_Cr_051.endf         name = Cr51     temperatures = 293.6 600.0 900.0
+element_n = n-024_Cr_052.endf         name = Cr52     temperatures = 293.6 600.0 900.0
+element_n = n-024_Cr_053.endf         name = Cr53     temperatures = 293.6 600.0 900.0
+element_n = n-024_Cr_054.endf         name = Cr54     temperatures = 293.6 600.0 900.0
+element_n = n-025_Mn_054.endf         name = Mn54     temperatures = 293.6 600.0 900.0
+element_n = n-025_Mn_055.endf         name = Mn55     temperatures = 293.6 600.0 900.0
+element_n = n-026_Fe_054.endf         name = Fe54     temperatures = 293.6 600.0 900.0
+element_n = n-026_Fe_055.endf         name = Fe55     temperatures = 293.6 600.0 900.0
+element_n = n-026_Fe_056.endf         name = Fe56     temperatures = 293.6 600.0 900.0
+element_n = n-026_Fe_057.endf         name = Fe57     temperatures = 293.6 600.0 900.0
+element_n = n-026_Fe_058.endf         name = Fe58     temperatures = 293.6 600.0 900.0
+element_n = n-027_Co_058.endf         name = Co58     temperatures = 293.6 600.0 900.0
+element_n = n-027_Co_058m1.endf       name = Co058m1  temperatures = 293.6 600.0 900.0
+element_n = n-027_Co_059.endf         name = Co59     temperatures = 293.6 600.0 900.0
+element_n = n-028_Ni_058.endf         name = Ni58     temperatures = 293.6 600.0 900.0
+element_n = n-028_Ni_059.endf         name = Ni59     temperatures = 293.6 600.0 900.0
+element_n = n-028_Ni_060.endf         name = Ni60     temperatures = 293.6 600.0 900.0
+element_n = n-028_Ni_061.endf         name = Ni61     temperatures = 293.6 600.0 900.0
+element_n = n-028_Ni_062.endf         name = Ni62     temperatures = 293.6 600.0 900.0
+element_n = n-028_Ni_063.endf         name = Ni63     temperatures = 293.6 600.0 900.0
+element_n = n-028_Ni_064.endf         name = Ni64     temperatures = 293.6 600.0 900.0
+element_n = n-029_Cu_063.endf         name = Cu63     temperatures = 293.6 600.0 900.0
+element_n = n-029_Cu_064.endf         name = Cu64     temperatures = 293.6 600.0 900.0
+element_n = n-029_Cu_065.endf         name = Cu65     temperatures = 293.6 600.0 900.0
+element_n = n-030_Zn_064.endf         name = Zn64     temperatures = 293.6 600.0 900.0
+element_n = n-030_Zn_065.endf         name = Zn65     temperatures = 293.6 600.0 900.0
+element_n = n-030_Zn_066.endf         name = Zn66     temperatures = 293.6 600.0 900.0
+element_n = n-030_Zn_067.endf         name = Zn67     temperatures = 293.6 600.0 900.0
+element_n = n-030_Zn_068.endf         name = Zn68     temperatures = 293.6 600.0 900.0
+element_n = n-030_Zn_069.endf         name = Zn69     temperatures = 293.6 600.0 900.0
+element_n = n-030_Zn_070.endf         name = Zn70     temperatures = 293.6 600.0 900.0
+element_n = n-031_Ga_069.endf         name = Ga69     temperatures = 293.6 600.0 900.0
+element_n = n-031_Ga_070.endf         name = Ga70     temperatures = 293.6 600.0 900.0
+element_n = n-031_Ga_071.endf         name = Ga71     temperatures = 293.6 600.0 900.0
+element_n = n-032_Ge_070.endf         name = Ge70     temperatures = 293.6 600.0 900.0
+element_n = n-032_Ge_071.endf         name = Ge71     temperatures = 293.6 600.0 900.0
+element_n = n-032_Ge_072.endf         name = Ge72     temperatures = 293.6 600.0 900.0
+element_n = n-032_Ge_073.endf         name = Ge73     temperatures = 293.6 600.0 900.0
+element_n = n-032_Ge_074.endf         name = Ge74     temperatures = 293.6 600.0 900.0
+element_n = n-032_Ge_075.endf         name = Ge75     temperatures = 293.6 600.0 900.0
+element_n = n-032_Ge_076.endf         name = Ge76     temperatures = 293.6 600.0 900.0
+element_n = n-033_As_073.endf         name = As73     temperatures = 293.6 600.0 900.0
+element_n = n-033_As_074.endf         name = As74     temperatures = 293.6 600.0 900.0
+element_n = n-033_As_075.endf         name = As75     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_074.endf         name = Se74     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_075.endf         name = Se75     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_076.endf         name = Se76     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_077.endf         name = Se77     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_078.endf         name = Se78     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_079.endf         name = Se79     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_080.endf         name = Se80     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_081.endf         name = Se81     temperatures = 293.6 600.0 900.0
+element_n = n-034_Se_082.endf         name = Se82     temperatures = 293.6 600.0 900.0
+element_n = n-035_Br_079.endf         name = Br79     temperatures = 293.6 600.0 900.0
+element_n = n-035_Br_080.endf         name = Br80     temperatures = 293.6 600.0 900.0
+element_n = n-035_Br_081.endf         name = Br81     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_078.endf         name = Kr78     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_079.endf         name = Kr79     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_080.endf         name = Kr80     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_081.endf         name = Kr81     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_082.endf         name = Kr82     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_083.endf         name = Kr83     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_084.endf         name = Kr84     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_085.endf         name = Kr85     temperatures = 293.6 600.0 900.0
+element_n = n-036_Kr_086.endf         name = Kr86     temperatures = 293.6 600.0 900.0
+element_n = n-037_Rb_085.endf         name = Rb85     temperatures = 293.6 600.0 900.0
+element_n = n-037_Rb_086.endf         name = Rb86     temperatures = 293.6 600.0 900.0
+element_n = n-037_Rb_087.endf         name = Rb87     temperatures = 293.6 600.0 900.0
+element_n = n-038_Sr_084.endf         name = Sr84     temperatures = 293.6 600.0 900.0
+element_n = n-038_Sr_085.endf         name = Sr85     temperatures = 293.6 600.0 900.0
+element_n = n-038_Sr_086.endf         name = Sr86     temperatures = 293.6 600.0 900.0
+element_n = n-038_Sr_087.endf         name = Sr87     temperatures = 293.6 600.0 900.0
+element_n = n-038_Sr_088.endf         name = Sr88     temperatures = 293.6 600.0 900.0
+element_n = n-038_Sr_089.endf         name = Sr89     temperatures = 293.6 600.0 900.0
+element_n = n-038_Sr_090.endf         name = Sr90     temperatures = 293.6 600.0 900.0
+element_n = n-039_Y_089.endf          name = Y89      temperatures = 293.6 600.0 900.0
+element_n = n-039_Y_090.endf          name = Y90      temperatures = 293.6 600.0 900.0
+element_n = n-039_Y_091.endf          name = Y91      temperatures = 293.6 600.0 900.0
+element_n = n-040_Zr_090.endf         name = Zr90     temperatures = 293.6 600.0 900.0
+element_n = n-040_Zr_091.endf         name = Zr91     temperatures = 293.6 600.0 900.0
+element_n = n-040_Zr_092.endf         name = Zr92     temperatures = 293.6 600.0 900.0
+element_n = n-040_Zr_093.endf         name = Zr93     temperatures = 293.6 600.0 900.0
+element_n = n-040_Zr_094.endf         name = Zr94     temperatures = 293.6 600.0 900.0
+element_n = n-040_Zr_095.endf         name = Zr95     temperatures = 293.6 600.0 900.0
+element_n = n-040_Zr_096.endf         name = Zr96     temperatures = 293.6 600.0 900.0
+element_n = n-041_Nb_093.endf         name = Nb93     temperatures = 293.6 600.0 900.0
+element_n = n-041_Nb_094.endf         name = Nb94     temperatures = 293.6 600.0 900.0
+element_n = n-041_Nb_095.endf         name = Nb95     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_092.endf         name = Mo92     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_093.endf         name = Mo93     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_094.endf         name = Mo94     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_095.endf         name = Mo95     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_096.endf         name = Mo96     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_097.endf         name = Mo97     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_098.endf         name = Mo98     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_099.endf         name = Mo99     temperatures = 293.6 600.0 900.0
+element_n = n-042_Mo_100.endf         name = Mo100    temperatures = 293.6 600.0 900.0
+element_n = n-043_Tc_098.endf         name = Tc98     temperatures = 293.6 600.0 900.0
+element_n = n-043_Tc_099.endf         name = Tc99     temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_096.endf         name = Ru96     temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_097.endf         name = Ru97     temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_098.endf         name = Ru98     temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_099.endf         name = Ru99     temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_100.endf         name = Ru100    temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_101.endf         name = Ru101    temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_102.endf         name = Ru102    temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_103.endf         name = Ru103    temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_104.endf         name = Ru104    temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_105.endf         name = Ru105    temperatures = 293.6 600.0 900.0
+element_n = n-044_Ru_106.endf         name = Ru106    temperatures = 293.6 600.0 900.0
+element_n = n-045_Rh_103.endf         name = Rh103    temperatures = 293.6 600.0 900.0
+element_n = n-045_Rh_104.endf         name = Rh104    temperatures = 293.6 600.0 900.0
+element_n = n-045_Rh_105.endf         name = Rh105    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_102.endf         name = Pd102    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_103.endf         name = Pd103    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_104.endf         name = Pd104    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_105.endf         name = Pd105    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_106.endf         name = Pd106    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_107.endf         name = Pd107    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_108.endf         name = Pd108    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_109.endf         name = Pd109    temperatures = 293.6 600.0 900.0
+element_n = n-046_Pd_110.endf         name = Pd110    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_107.endf         name = Ag107    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_108.endf         name = Ag108    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_109.endf         name = Ag109    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_110m1.endf       name = Ag110m1  temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_111.endf         name = Ag111    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_112.endf         name = Ag112    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_113.endf         name = Ag113    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_114.endf         name = Ag114    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_115.endf         name = Ag115    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_116.endf         name = Ag116    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_117.endf         name = Ag117    temperatures = 293.6 600.0 900.0
+element_n = n-047_Ag_118m1.endf       name = Ag118m1  temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_106.endf         name = Cd106    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_107.endf         name = Cd107    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_108.endf         name = Cd108    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_109.endf         name = Cd109    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_110.endf         name = Cd110    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_111.endf         name = Cd111    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_112.endf         name = Cd112    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_113.endf         name = Cd113    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_114.endf         name = Cd114    temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_115m1.endf       name = Cd115m1  temperatures = 293.6 600.0 900.0
+element_n = n-048_Cd_116.endf         name = Cd116    temperatures = 293.6 600.0 900.0
+element_n = n-049_In_113.endf         name = In113    temperatures = 293.6 600.0 900.0
+element_n = n-049_In_114.endf         name = In114    temperatures = 293.6 600.0 900.0
+element_n = n-049_In_115.endf         name = In115    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_112.endf         name = Sn112    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_113.endf         name = Sn113    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_114.endf         name = Sn114    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_115.endf         name = Sn115    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_116.endf         name = Sn116    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_117.endf         name = Sn117    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_118.endf         name = Sn118    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_119.endf         name = Sn119    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_120.endf         name = Sn120    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_121m1.endf       name = Sn121m1  temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_122.endf         name = Sn122    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_123.endf         name = Sn123    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_124.endf         name = Sn124    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_125.endf         name = Sn125    temperatures = 293.6 600.0 900.0
+element_n = n-050_Sn_126.endf         name = Sn126    temperatures = 293.6 600.0 900.0
+element_n = n-051_Sb_121.endf         name = Sb121    temperatures = 293.6 600.0 900.0
+element_n = n-051_Sb_122.endf         name = Sb122    temperatures = 293.6 600.0 900.0
+element_n = n-051_Sb_123.endf         name = Sb123    temperatures = 293.6 600.0 900.0
+element_n = n-051_Sb_124.endf         name = Sb124    temperatures = 293.6 600.0 900.0
+element_n = n-051_Sb_125.endf         name = Sb125    temperatures = 293.6 600.0 900.0
+element_n = n-051_Sb_126.endf         name = Sb126    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_120.endf         name = Te120    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_121.endf         name = Te121    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_121m1.endf       name = Te121m1  temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_122.endf         name = Te122    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_123.endf         name = Te123    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_124.endf         name = Te124    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_125.endf         name = Te125    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_126.endf         name = Te126    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_127m1.endf       name = Te127m1  temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_128.endf         name = Te128    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_129m1.endf       name = Te129m1  temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_130.endf         name = Te130    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_131.endf         name = Te131    temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_131m1.endf       name = Te131m1  temperatures = 293.6 600.0 900.0
+element_n = n-052_Te_132.endf         name = Te132    temperatures = 293.6 600.0 900.0
+element_n = n-053_I_127.endf          name = I127     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_128.endf          name = I128     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_129.endf          name = I129     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_130.endf          name = I130     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_131.endf          name = I131     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_132.endf          name = I132     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_132m1.endf        name = I132m1   temperatures = 293.6 600.0 900.0
+element_n = n-053_I_133.endf          name = I133     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_134.endf          name = I134     temperatures = 293.6 600.0 900.0
+element_n = n-053_I_135.endf          name = I135     temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_123.endf         name = Xe123    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_124.endf         name = Xe124    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_125.endf         name = Xe125    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_126.endf         name = Xe126    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_127.endf         name = Xe127    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_128.endf         name = Xe128    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_129.endf         name = Xe129    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_130.endf         name = Xe130    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_131.endf         name = Xe131    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_132.endf         name = Xe132    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_133.endf         name = Xe133    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_134.endf         name = Xe134    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_135.endf         name = Xe135    temperatures = 293.6 600.0 900.0
+element_n = n-054_Xe_136.endf         name = Xe136    temperatures = 293.6 600.0 900.0
+element_n = n-055_Cs_133.endf         name = Cs133    temperatures = 293.6 600.0 900.0
+element_n = n-055_Cs_134.endf         name = Cs134    temperatures = 293.6 600.0 900.0
+element_n = n-055_Cs_135.endf         name = Cs135    temperatures = 293.6 600.0 900.0
+element_n = n-055_Cs_136.endf         name = Cs136    temperatures = 293.6 600.0 900.0
+element_n = n-055_Cs_137.endf         name = Cs137    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_130.endf         name = Ba130    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_131.endf         name = Ba131    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_132.endf         name = Ba132    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_133.endf         name = Ba133    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_134.endf         name = Ba134    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_135.endf         name = Ba135    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_136.endf         name = Ba136    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_137.endf         name = Ba137    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_138.endf         name = Ba138    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_139.endf         name = Ba139    temperatures = 293.6 600.0 900.0
+element_n = n-056_Ba_140.endf         name = Ba140    temperatures = 293.6 600.0 900.0
+element_n = n-057_La_138.endf         name = La138    temperatures = 293.6 600.0 900.0
+element_n = n-057_La_139.endf         name = La139    temperatures = 293.6 600.0 900.0
+element_n = n-057_La_140.endf         name = La140    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_136.endf         name = Ce136    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_137.endf         name = Ce137    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_137m1.endf       name = Ce137m1  temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_138.endf         name = Ce138    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_139.endf         name = Ce139    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_140.endf         name = Ce140    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_141.endf         name = Ce141    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_142.endf         name = Ce142    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_143.endf         name = Ce143    temperatures = 293.6 600.0 900.0
+element_n = n-058_Ce_144.endf         name = Ce144    temperatures = 293.6 600.0 900.0
+element_n = n-059_Pr_141.endf         name = Pr141    temperatures = 293.6 600.0 900.0
+element_n = n-059_Pr_142.endf         name = Pr142    temperatures = 293.6 600.0 900.0
+element_n = n-059_Pr_143.endf         name = Pr143    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_142.endf         name = Nd142    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_143.endf         name = Nd143    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_144.endf         name = Nd144    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_145.endf         name = Nd145    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_146.endf         name = Nd146    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_147.endf         name = Nd147    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_148.endf         name = Nd148    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_149.endf         name = Nd149    temperatures = 293.6 600.0 900.0
+element_n = n-060_Nd_150.endf         name = Nd150    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_143.endf         name = Pm143    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_144.endf         name = Pm144    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_145.endf         name = Pm145    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_146.endf         name = Pm146    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_147.endf         name = Pm147    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_148.endf         name = Pm148    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_148m1.endf       name = Pm148m1  temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_149.endf         name = Pm149    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_150.endf         name = Pm150    temperatures = 293.6 600.0 900.0
+element_n = n-061_Pm_151.endf         name = Pm151    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_144.endf         name = Sm144    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_145.endf         name = Sm145    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_146.endf         name = Sm146    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_147.endf         name = Sm147    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_148.endf         name = Sm148    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_149.endf         name = Sm149    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_150.endf         name = Sm150    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_151.endf         name = Sm151    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_152.endf         name = Sm152    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_153.endf         name = Sm153    temperatures = 293.6 600.0 900.0
+element_n = n-062_Sm_154.endf         name = Sm154    temperatures = 293.6 600.0 900.0
+element_n = n-063_Eu_151.endf         name = Eu151    temperatures = 293.6 600.0 900.0
+element_n = n-063_Eu_152.endf         name = Eu152    temperatures = 293.6 600.0 900.0
+element_n = n-063_Eu_153.endf         name = Eu153    temperatures = 293.6 600.0 900.0
+element_n = n-063_Eu_154.endf         name = Eu154    temperatures = 293.6 600.0 900.0
+element_n = n-063_Eu_155.endf         name = Eu155    temperatures = 293.6 600.0 900.0
+element_n = n-063_Eu_156.endf         name = Eu156    temperatures = 293.6 600.0 900.0
+element_n = n-063_Eu_157.endf         name = Eu157    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_152.endf         name = Gd152    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_153.endf         name = Gd153    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_154.endf         name = Gd154    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_155.endf         name = Gd155    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_156.endf         name = Gd156    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_157.endf         name = Gd157    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_158.endf         name = Gd158    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_159.endf         name = Gd159    temperatures = 293.6 600.0 900.0
+element_n = n-064_Gd_160.endf         name = Gd160    temperatures = 293.6 600.0 900.0
+element_n = n-065_Tb_158.endf         name = Tb158    temperatures = 293.6 600.0 900.0
+element_n = n-065_Tb_159.endf         name = Tb159    temperatures = 293.6 600.0 900.0
+element_n = n-065_Tb_160.endf         name = Tb160    temperatures = 293.6 600.0 900.0
+element_n = n-065_Tb_161.endf         name = Tb161    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_154.endf         name = Dy154    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_155.endf         name = Dy155    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_156.endf         name = Dy156    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_157.endf         name = Dy157    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_158.endf         name = Dy158    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_159.endf         name = Dy159    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_160.endf         name = Dy160    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_161.endf         name = Dy161    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_162.endf         name = Dy162    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_163.endf         name = Dy163    temperatures = 293.6 600.0 900.0
+element_n = n-066_Dy_164.endf         name = Dy164    temperatures = 293.6 600.0 900.0
+element_n = n-067_Ho_165.endf         name = Ho165    temperatures = 293.6 600.0 900.0
+element_n = n-067_Ho_166m1.endf       name = Ho166m1  temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_162.endf         name = Er162    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_163.endf         name = Er163    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_164.endf         name = Er164    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_165.endf         name = Er165    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_166.endf         name = Er166    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_167.endf         name = Er167    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_168.endf         name = Er168    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_169.endf         name = Er169    temperatures = 293.6 600.0 900.0
+element_n = n-068_Er_170.endf         name = Er170    temperatures = 293.6 600.0 900.0
+element_n = n-069_Tm_168.endf         name = Tm168    temperatures = 293.6 600.0 900.0
+element_n = n-069_Tm_169.endf         name = Tm169    temperatures = 293.6 600.0 900.0
+element_n = n-069_Tm_170.endf         name = Tm170    temperatures = 293.6 600.0 900.0
+element_n = n-069_Tm_171.endf         name = Tm171    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_168.endf         name = Yb168    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_169.endf         name = Yb169    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_170.endf         name = Yb170    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_171.endf         name = Yb171    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_172.endf         name = Yb172    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_173.endf         name = Yb173    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_174.endf         name = Yb174    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_175.endf         name = Yb175    temperatures = 293.6 600.0 900.0
+element_n = n-070_Yb_176.endf         name = Yb176    temperatures = 293.6 600.0 900.0
+element_n = n-071_Lu_175.endf         name = Lu175    temperatures = 293.6 600.0 900.0
+element_n = n-071_Lu_176.endf         name = Lu176    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_174.endf         name = Hf174    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_175.endf         name = Hf175    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_176.endf         name = Hf176    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_177.endf         name = Hf177    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_178.endf         name = Hf178    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_179.endf         name = Hf179    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_180.endf         name = Hf180    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_181.endf         name = Hf181    temperatures = 293.6 600.0 900.0
+element_n = n-072_Hf_182.endf         name = Hf182    temperatures = 293.6 600.0 900.0
+element_n = n-073_Ta_180.endf         name = Ta180    temperatures = 293.6 600.0 900.0
+element_n = n-073_Ta_181.endf         name = Ta181    temperatures = 293.6 600.0 900.0
+element_n = n-073_Ta_182.endf         name = Ta182    temperatures = 293.6 600.0 900.0
+element_n = n-074_W_180.endf          name = W180     temperatures = 293.6 600.0 900.0
+element_n = n-074_W_181.endf          name = W181     temperatures = 293.6 600.0 900.0
+element_n = n-074_W_182.endf          name = W182     temperatures = 293.6 600.0 900.0
+element_n = n-074_W_183.endf          name = W183     temperatures = 293.6 600.0 900.0
+element_n = n-074_W_184.endf          name = W184     temperatures = 293.6 600.0 900.0
+element_n = n-074_W_185.endf          name = W185     temperatures = 293.6 600.0 900.0
+element_n = n-074_W_186.endf          name = W186     temperatures = 293.6 600.0 900.0
+element_n = n-075_Re_185.endf         name = Re185    temperatures = 293.6 600.0 900.0
+element_n = n-075_Re_186m1.endf       name = Re186m1  temperatures = 293.6 600.0 900.0
+element_n = n-075_Re_187.endf         name = Re187    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_184.endf         name = Os184    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_185.endf         name = Os185    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_186.endf         name = Os186    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_187.endf         name = Os187    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_188.endf         name = Os188    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_189.endf         name = Os189    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_190.endf         name = Os190    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_191.endf         name = Os191    temperatures = 293.6 600.0 900.0
+element_n = n-076_Os_192.endf         name = Os192    temperatures = 293.6 600.0 900.0
+element_n = n-077_Ir_191.endf         name = Ir191    temperatures = 293.6 600.0 900.0
+element_n = n-077_Ir_192.endf         name = Ir192    temperatures = 293.6 600.0 900.0
+element_n = n-077_Ir_193.endf         name = Ir193    temperatures = 293.6 600.0 900.0
+element_n = n-077_Ir_194m1.endf       name = Ir194m1  temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_190.endf         name = Pt190    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_191.endf         name = Pt191    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_192.endf         name = Pt192    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_193.endf         name = Pt193    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_194.endf         name = Pt194    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_195.endf         name = Pt195    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_196.endf         name = Pt196    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_197.endf         name = Pt197    temperatures = 293.6 600.0 900.0
+element_n = n-078_Pt_198.endf         name = Pt198    temperatures = 293.6 600.0 900.0
+element_n = n-079_Au_197.endf         name = Au197    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_196.endf         name = Hg196    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_197.endf         name = Hg197    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_197m1.endf       name = Hg197m1  temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_198.endf         name = Hg198    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_199.endf         name = Hg199    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_200.endf         name = Hg200    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_201.endf         name = Hg201    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_202.endf         name = Hg202    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_203.endf         name = Hg203    temperatures = 293.6 600.0 900.0
+element_n = n-080_Hg_204.endf         name = Hg204    temperatures = 293.6 600.0 900.0
+element_n = n-081_Tl_203.endf         name = Tl203    temperatures = 293.6 600.0 900.0
+element_n = n-081_Tl_204.endf         name = Tl204    temperatures = 293.6 600.0 900.0
+element_n = n-081_Tl_205.endf         name = Tl205    temperatures = 293.6 600.0 900.0
+element_n = n-082_Pb_204.endf         name = Pb204    temperatures = 293.6 600.0 900.0
+element_n = n-082_Pb_205.endf         name = Pb205    temperatures = 293.6 600.0 900.0
+element_n = n-082_Pb_206.endf         name = Pb206    temperatures = 293.6 600.0 900.0
+element_n = n-082_Pb_207.endf         name = Pb207    temperatures = 293.6 600.0 900.0
+element_n = n-082_Pb_208.endf         name = Pb208    temperatures = 293.6 600.0 900.0
+element_n = n-083_Bi_209.endf         name = Bi209    temperatures = 293.6 600.0 900.0
+element_n = n-083_Bi_210m1.endf       name = Bi210m1  temperatures = 293.6 600.0 900.0
+element_n = n-084_Po_208.endf         name = Po208    temperatures = 293.6 600.0 900.0
+element_n = n-084_Po_209.endf         name = Po209    temperatures = 293.6 600.0 900.0
+element_n = n-084_Po_210.endf         name = Po210    temperatures = 293.6 600.0 900.0
+element_n = n-088_Ra_223.endf         name = Ra223    temperatures = 293.6 600.0 900.0
+element_n = n-088_Ra_224.endf         name = Ra224    temperatures = 293.6 600.0 900.0
+element_n = n-088_Ra_225.endf         name = Ra225    temperatures = 293.6 600.0 900.0
+element_n = n-088_Ra_226.endf         name = Ra226    temperatures = 293.6 600.0 900.0
+element_n = n-089_Ac_225.endf         name = Ac225    temperatures = 293.6 600.0 900.0
+element_n = n-089_Ac_226.endf         name = Ac226    temperatures = 293.6 600.0 900.0
+element_n = n-089_Ac_227.endf         name = Ac227    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_227.endf         name = Th227    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_228.endf         name = Th228    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_229.endf         name = Th229    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_230.endf         name = Th230    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_231.endf         name = Th231    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_232.endf         name = Th232    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_233.endf         name = Th233    temperatures = 293.6 600.0 900.0
+element_n = n-090_Th_234.endf         name = Th234    temperatures = 293.6 600.0 900.0
+element_n = n-091_Pa_229.endf         name = Pa229    temperatures = 293.6 600.0 900.0
+element_n = n-091_Pa_230.endf         name = Pa230    temperatures = 293.6 600.0 900.0
+element_n = n-091_Pa_231.endf         name = Pa231    temperatures = 293.6 600.0 900.0
+element_n = n-091_Pa_232.endf         name = Pa232    temperatures = 293.6 600.0 900.0
+element_n = n-091_Pa_233.endf         name = Pa233    temperatures = 293.6 600.0 900.0
+element_n = n-092_U_230.endf          name = U230     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_231.endf          name = U231     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_232.endf          name = U232     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_233.endf          name = U233     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_234.endf          name = U234     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_235.endf          name = U235     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_236.endf          name = U236     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_237.endf          name = U237     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_238.endf          name = U238     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_239.endf          name = U239     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_240.endf          name = U240     temperatures = 293.6 600.0 900.0
+element_n = n-092_U_241.endf          name = U241     temperatures = 293.6 600.0 900.0
+element_n = n-093_Np_234.endf         name = Np234    temperatures = 293.6 600.0 900.0
+element_n = n-093_Np_235.endf         name = Np235    temperatures = 293.6 600.0 900.0
+element_n = n-093_Np_236.endf         name = Np236    temperatures = 293.6 600.0 900.0
+element_n = n-093_Np_236m1.endf       name = Np236m1  temperatures = 293.6 600.0 900.0
+element_n = n-093_Np_237.endf         name = Np237    temperatures = 293.6 600.0 900.0
+element_n = n-093_Np_238.endf         name = Np238    temperatures = 293.6 600.0 900.0
+element_n = n-093_Np_239.endf         name = Np239    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_236.endf         name = Pu236    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_237.endf         name = Pu237    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_238.endf         name = Pu238    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_239.endf         name = Pu239    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_240.endf         name = Pu240    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_241.endf         name = Pu241    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_242.endf         name = Pu242    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_243.endf         name = Pu243    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_244.endf         name = Pu244    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_245.endf         name = Pu245    temperatures = 293.6 600.0 900.0
+element_n = n-094_Pu_246.endf         name = Pu246    temperatures = 293.6 600.0 900.0
+element_n = n-095_Am_240.endf         name = Am240    temperatures = 293.6 600.0 900.0
+element_n = n-095_Am_241.endf         name = Am241    temperatures = 293.6 600.0 900.0
+element_n = n-095_Am_242.endf         name = Am242    temperatures = 293.6 600.0 900.0
+element_n = n-095_Am_242m1.endf       name = Am242m1  temperatures = 293.6 600.0 900.0
+element_n = n-095_Am_243.endf         name = Am243    temperatures = 293.6 600.0 900.0
+element_n = n-095_Am_244.endf         name = Am244    temperatures = 293.6 600.0 900.0
+element_n = n-095_Am_244m1.endf       name = Am244m1  temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_240.endf         name = Cm240    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_241.endf         name = Cm241    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_242.endf         name = Cm242    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_243.endf         name = Cm243    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_244.endf         name = Cm244    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_245.endf         name = Cm245    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_246.endf         name = Cm246    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_247.endf         name = Cm247    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_248.endf         name = Cm248    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_249.endf         name = Cm249    temperatures = 293.6 600.0 900.0
+element_n = n-096_Cm_250.endf         name = Cm250    temperatures = 293.6 600.0 900.0
+element_n = n-097_Bk_245.endf         name = Bk245    temperatures = 293.6 600.0 900.0
+element_n = n-097_Bk_246.endf         name = Bk246    temperatures = 293.6 600.0 900.0
+element_n = n-097_Bk_247.endf         name = Bk247    temperatures = 293.6 600.0 900.0
+element_n = n-097_Bk_248.endf         name = Bk248    temperatures = 293.6 600.0 900.0
+element_n = n-097_Bk_249.endf         name = Bk249    temperatures = 293.6 600.0 900.0
+element_n = n-097_Bk_250.endf         name = Bk250    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_246.endf         name = Cf246    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_247.endf         name = Cf247    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_248.endf         name = Cf248    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_249.endf         name = Cf249    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_250.endf         name = Cf250    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_251.endf         name = Cf251    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_252.endf         name = Cf252    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_253.endf         name = Cf253    temperatures = 293.6 600.0 900.0
+element_n = n-098_Cf_254.endf         name = Cf254    temperatures = 293.6 600.0 900.0
+element_n = n-099_Es_251.endf         name = Es251    temperatures = 293.6 600.0 900.0
+element_n = n-099_Es_252.endf         name = Es252    temperatures = 293.6 600.0 900.0
+element_n = n-099_Es_253.endf         name = Es253    temperatures = 293.6 600.0 900.0
+element_n = n-099_Es_254.endf         name = Es254    temperatures = 293.6 600.0 900.0
+element_n = n-099_Es_254m1.endf       name = Es254m1  temperatures = 293.6 600.0 900.0
+element_n = n-099_Es_255.endf         name = Es255    temperatures = 293.6 600.0 900.0
+element_n = n-100_Fm_255.endf         name = Fm255    temperatures = 293.6 600.0 900.0

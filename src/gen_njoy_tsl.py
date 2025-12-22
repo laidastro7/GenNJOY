@@ -20,7 +20,7 @@ class Config:
     
     # Output Directories for TSL
     OUTPUT_BASE = BASE_DIR / "data"
-    OUTPUT_ACE = OUTPUT_BASE / "ace_tsl"
+    OUTPUT_ACE = OUTPUT_BASE / "thermal_scattering_ace"
     
     # Critical Files
     XSDIR_TEMPLATE = SRC_DIR / "xsdir_mcnp5"
@@ -293,8 +293,8 @@ if __name__ == "__main__":
     
     # Nuclear Data Paths (Neutron AND Thermal)
     print("-" * 50)
-    def_n = "data/neutron_eval"
-    def_t = "data/thermal_eval"
+    def_n = "data/incident_neutron_endf"
+    def_t = "data/thermal_scattering_endf"
     
     nd_n = input(f"Enter Incident Neutron data path (Default: {def_n}): ").strip() or def_n
     nd_t = input(f"Enter Thermal Scattering data path (Default: {def_t}): ").strip() or def_t

@@ -13,14 +13,13 @@ init(autoreset=True)
 
 # --- Configuration & Constants ---
 class Config:
-    # Use explicit absolute paths to avoid confusion
     BASE_DIR = Path.cwd().resolve()
     SRC_DIR = BASE_DIR / "src"
     INPUTS_DIR = BASE_DIR / "inputs"
     
-    # Output Directories
+    # [UPDATED] Output Directory
     OUTPUT_BASE = BASE_DIR / "data"
-    OUTPUT_ACE = OUTPUT_BASE / "ace_neutrons"
+    OUTPUT_ACE = OUTPUT_BASE / "incident_neutron_ace"
     
     # Critical Files
     XSDIR_TEMPLATE = SRC_DIR / "xsdir_mcnp5"
@@ -58,7 +57,6 @@ class NeutronProcessor:
         self.cpu_limit = cpu_limit
         self.lock = Lock()
         
-        # Validate Inputs
         if not self.input_file.exists():
             Logger.error(f"Input file not found at: {self.input_file}")
             sys.exit(1)
@@ -66,10 +64,8 @@ class NeutronProcessor:
         self._setup_directories()
 
     def _setup_directories(self):
-        """Prepare output directories and initialize xsdir."""
         Logger.debug(f"Output Directory set to: {Config.OUTPUT_ACE}")
         
-        # 1. Create Output Directory
         if Config.OUTPUT_ACE.exists():
             Logger.debug("Cleaning previous output directory...")
             try:
@@ -79,7 +75,6 @@ class NeutronProcessor:
         
         Config.OUTPUT_ACE.mkdir(parents=True, exist_ok=True)
         
-        # 2. Initialize Master xsdir from Template
         if Config.XSDIR_TEMPLATE.exists():
             shutil.copy(Config.XSDIR_TEMPLATE, Config.XSDIR_MASTER)
             Logger.debug(f"Initialized xsdir from template.")
@@ -88,19 +83,14 @@ class NeutronProcessor:
             Config.XSDIR_MASTER.touch()
 
     def _process_isotope(self, line_data: str):
-        """Process a single isotope."""
-        
-        # Initialize generator locally
         gen = DataGenerator.ACEGenerator(str(self.input_file))
         
-        # Parse Params
         try:
             params = gen.gen_parametre_njoy(line_data)
             element = params[0]
             name = params[1]
             temperatures = params[2]
             
-            # Simple validation
             if not element or not name:
                 Logger.error(f"Invalid line format: {line_data.strip()}")
                 return
@@ -112,16 +102,12 @@ class NeutronProcessor:
         ace_ascii = name
         input_njoy = f"{name}.njoy"
         
-        # Use strings for DataGenerator compatibility
         base_dir_str = str(Config.BASE_DIR)
-        # We pass the absolute path to output to avoid ambiguity
-        # DataGenerator now handles absolute paths in my updated version
         output_abs_path = str(Config.OUTPUT_ACE)
 
         Logger.info(f"Processing Isotope: {name} (Element: {element})")
 
         try:
-            # 1. Run NJOY
             file_ace_path = gen.run_njoy(
                 base_dir_str,
                 element,
@@ -130,14 +116,12 @@ class NeutronProcessor:
                 ace_ascii,
                 input_njoy,
                 self.njoy_cmd,
-                output_abs_path # Passing absolute path now
+                output_abs_path
             )
             
             Logger.debug(f"NJOY finished for {name}. Checking ACE file...")
 
-            # 2. Check and Merge XSDIR
             if file_ace_path and Path(file_ace_path).exists():
-                # Find line numbers
                 num_lines = []
                 for i, _ in enumerate(temperatures, 1):
                     suffix = f".{i:02}c"
@@ -147,7 +131,6 @@ class NeutronProcessor:
                     else:
                         Logger.warn(f"Suffix {suffix} not found inside ACE file {ace_ascii}")
 
-                # Merge XSDIR
                 with self.lock:
                     gen.gen_xsdir(
                         name,
@@ -163,20 +146,16 @@ class NeutronProcessor:
         except Exception as e:
             Logger.error(f"FAILED to process {name}. Error: {e}")
             Logger.warn(f"NOTE: Temporary folder '{name}' was preserved for debugging.")
-            # We do NOT delete the temp dir here so user can check logs inside it
 
     def _worker(self, lines: List[str]):
-        """Worker function."""
         for line in lines:
             self._process_isotope(line)
 
     def execute(self):
-        """Main execution engine."""
         Logger.header("STARTING NEUTRON DATA PROCESSING (DEBUG MODE)")
         
         gen = DataGenerator.ACEGenerator(str(self.input_file))
         
-        # Read input file
         Logger.debug(f"Reading input file: {self.input_file}")
         try:
             matches = gen.search_string_in_file(gen.filename, "element")
@@ -192,7 +171,6 @@ class NeutronProcessor:
 
         Logger.info(f"Found {total_isotopes} isotopes to process.")
         
-        # Single Process Mode for Debugging if cpu=1, else Multi
         procs = []
         effective_cpu = min(self.cpu_limit, total_isotopes)
         effective_cpu = max(1, effective_cpu)
@@ -226,7 +204,6 @@ def get_njoy_cmd():
     
     if not shutil.which(cmd) and not Path(cmd).exists():
         Logger.error(f"NJOY executable '{cmd}' not found! Execution will likely fail.")
-        # We allow proceeding but warn heavily
     return cmd
 
 def get_cpu_count():
@@ -251,15 +228,14 @@ if __name__ == "__main__":
     
     njoy_cmd = get_njoy_cmd()
     
-    default_nd = "data/neutron_eval"
+    # [UPDATED] Default Data Path
+    default_nd = "data/incident_neutron_endf"
     print("-" * 50)
-    nd_input = input(f"Enter path to incident nuclear data (Default: {default_nd}): ").strip()
+    nd_input = input(f"Enter path to incident neutron data (Default: {default_nd}): ").strip()
     nd_path = nd_input if nd_input else default_nd
     
-    # Resolve Data Path absolute
     abs_nd_path = Path(nd_path).resolve()
     if not abs_nd_path.exists():
-        # Fallback check relative to cwd
         if (Config.BASE_DIR / nd_path).exists():
             abs_nd_path = (Config.BASE_DIR / nd_path).resolve()
         else:
