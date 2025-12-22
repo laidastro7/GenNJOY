@@ -15,7 +15,7 @@ class Config:
     
     # Output Directory & File
     INPUTS_DIR = BASE_DIR / "inputs"
-    OUTPUT_FILE = INPUTS_DIR / "input_n_global.i"
+    OUTPUT_FILE = INPUTS_DIR / "neutron_inventory.i"
 
 def get_ace_name(filename):
     """

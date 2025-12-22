@@ -50,7 +50,7 @@ class InputGenerator:
             f"temperatures = {temper}\n"
         )
         
-        output_file = Path(working_dir) / "inputs" / "input_n_global.i"
+        output_file = Path(working_dir) / "inputs" / "neutron_inventory.i"
         output_file.parent.mkdir(parents=True, exist_ok=True)
         
         with open(output_file, "a") as fic:
@@ -64,7 +64,7 @@ class InputGenerator:
             f"temperatures = {temper}\n\n"
         )
         
-        output_file = Path(working_dir) / "inputs" / "input_tsl_global.i"
+        output_file = Path(working_dir) / "inputs" / "tsl_inventory.i"
         output_file.parent.mkdir(parents=True, exist_ok=True)
         
         with open(output_file, "a") as fic:

@@ -29,7 +29,7 @@ if __name__ == "__main__":
         input_filename = sys.argv[1]
     except IndexError:
         print("\nError:\n        No input file specified.")
-        print("        (Example: 'python3 gen_njoy.py input_n.i'.)\n")
+        print("        (Example: 'python3 gen_njoy.py neutron_process_batch.i'.)\n")
         sys.exit()
 
     run_njoy(input_filename)
@@ -42,7 +42,7 @@ try:
         pass
 except IndexError:
     print("\nError:\n        No input file specified.")
-    print("        (Example: 'python3 gen_njoy.py inputs/input_n.i'.)\n")
+    print("        (Example: 'python3 gen_njoy.py inputs/neutron_process_batch.i'.)\n")
     sys.exit()
 except FileNotFoundError:
     print("\nError:\n        No file '{}' in directory '{}'\n".format(sys.argv[1], current_directory+"/inputs"))
