@@ -10,96 +10,116 @@ init(autoreset=True)
 class Config:
     BASE_DIR = Path.cwd().resolve()
     
-    # Source Directory (Where ENDF files are)
+    # Source Directory
     NEUTRON_DIR = BASE_DIR / "data" / "incident_neutron_endf"
     
-    # Output Directory & File
+    # Default Output
     INPUTS_DIR = BASE_DIR / "inputs"
-    OUTPUT_FILE = INPUTS_DIR / "neutron_inventory.i"
+    DEFAULT_OUTPUT_FILE = INPUTS_DIR / "neutron_inventory.i"
 
-def get_ace_name(filename):
+    # Default Temperatures
+    DEFAULT_TEMPS_LIST = [293.6, 600.0, 900.0]
+
+def get_short_name(filename):
     """
-    Parses ENDF filename to generate a short ACE name.
-    Standard NNDC format: n-ZZZ_El_AAA.endf (e.g., n-001_H_001.endf -> H1)
+    Converts 'n-001_H_002.endf' -> 'H2'
+    Converts 'n-092_U_235.endf' -> 'U235'
     """
-    # Remove extension
-    stem = Path(filename).stem # n-001_H_001
+    # Regex to capture Symbol and Mass
+    match = re.search(r"n-\d+_([A-Za-z]+)_(\d+)(\w*)", filename)
+    if match:
+        sym = match.group(1)      # H
+        mass = int(match.group(2)) # 002 -> 2
+        meta = match.group(3)      # m1 (optional)
+        return f"{sym}{mass}{meta}"
     
-    # Try splitting by underscore
-    parts = stem.split('_')
+    # Fallback
+    return Path(filename).stem
+
+def get_user_temperatures():
+    """Prompts user for temperatures."""
+    print("-" * 50)
+    def_str = " ".join([str(t) for t in Config.DEFAULT_TEMPS_LIST])
+    print(f"Default Temperatures: {Fore.YELLOW}{def_str}{Style.RESET_ALL} Kelvin")
+    print("Enter temperatures (space separated) or press Enter to use defaults.")
     
-    if len(parts) >= 3:
-        # parts[1] is Element (H), parts[2] is Mass (001)
-        element = parts[1]
-        try:
-            mass = int(parts[2]) # Convert 001 to 1
-            return f"{element}{mass}"
-        except ValueError:
-            return f"{element}{parts[2]}"
-            
-    # Fallback: Return stem if pattern doesn't match
-    return stem
+    try:
+        user_input = input(f"{Fore.CYAN}>> Temperatures: {Style.RESET_ALL}").strip()
+    except:
+        user_input = ""
+
+    if not user_input:
+        print(f"{Fore.GREEN}[INFO] Using default temperatures.{Style.RESET_ALL}")
+        return Config.DEFAULT_TEMPS_LIST
+
+    try:
+        cleaned = user_input.replace(',', ' ')
+        temps = [float(t) for t in cleaned.split()]
+        return sorted(list(set(temps)))
+    except ValueError:
+        print(f"{Fore.RED}[ERROR] Invalid input. Using defaults.{Style.RESET_ALL}")
+        return Config.DEFAULT_TEMPS_LIST
 
 def main():
     print(f"\n{Fore.CYAN}{'='*60}")
-    print(f"{Fore.BLUE}{Style.BRIGHT}{'NJOY INPUT GENERATOR (AUTO-SCAN)'.center(60)}")
+    print(f"{Fore.BLUE}{Style.BRIGHT}{'NEUTRON INPUT GENERATOR (SINGLE LINE)'.center(60)}")
     print(f"{Fore.CYAN}{'='*60}{Style.RESET_ALL}")
 
-    # 1. Validate Source Directory
+    # 1. Argument Handling
+    if len(sys.argv) > 1:
+        target_file = Path(sys.argv[1]).resolve()
+        if target_file.is_dir():
+            target_file = target_file / "input_n_global.i"
+    else:
+        target_file = Config.DEFAULT_OUTPUT_FILE
+
+    # 2. Validate Source
     if not Config.NEUTRON_DIR.exists():
         print(f"{Fore.RED}[ERROR] Source directory not found: {Config.NEUTRON_DIR}")
-        print(f"       Please run the download script first (Option 1).{Style.RESET_ALL}")
         sys.exit(1)
 
-    # 2. Scan for ENDF files
-    print(f"{Fore.YELLOW}Scanning directory: {Config.NEUTRON_DIR.name}...{Style.RESET_ALL}")
-    
-    # Filter for files starting with 'n-' (Standard NNDC naming) or ending in .endf
-    endf_files = sorted([
+    # 3. Get Temperatures
+    selected_temps = get_user_temperatures()
+    temps_str = " ".join([str(t) for t in selected_temps])
+
+    # 4. Scan Files
+    print(f"\n{Fore.YELLOW}Scanning directory...{Style.RESET_ALL}")
+    files = sorted([
         f for f in Config.NEUTRON_DIR.iterdir() 
         if f.is_file() and (f.name.startswith("n-") or f.suffix == ".endf")
     ])
 
-    if not endf_files:
-        print(f"{Fore.RED}[ERROR] No ENDF files found in source directory.{Style.RESET_ALL}")
+    if not files:
+        print(f"{Fore.RED}[ERROR] No ENDF files found.{Style.RESET_ALL}")
         sys.exit(1)
 
-    print(f"{Fore.GREEN}[INFO] Found {len(endf_files)} neutron data files.{Style.RESET_ALL}")
+    print(f"{Fore.GREEN}[INFO] Found {len(files)} neutron files.{Style.RESET_ALL}")
 
-    # 3. Request Temperatures
-    print("-" * 50)
-    print("Please enter the desired temperatures in Kelvin (separated by space).")
-    print("Example: 293.6 600.0 900.0")
-    user_temps = input(f"{Fore.CYAN}>> Temperatures: {Style.RESET_ALL}").strip()
-
-    if not user_temps:
-        print(f"{Fore.RED}[ERROR] No temperatures provided. Exiting.{Style.RESET_ALL}")
-        sys.exit(1)
-
-    # 4. Generate Input File
-    Config.INPUTS_DIR.mkdir(parents=True, exist_ok=True)
+    # 5. Generate Output (Single Line Format)
+    target_file.parent.mkdir(parents=True, exist_ok=True)
     
-    print(f"\nGenerating {Config.OUTPUT_FILE.name}...")
-    
-    with open(Config.OUTPUT_FILE, 'w') as f:
-        for file_path in endf_files:
-            filename = file_path.name
-            ace_name = get_ace_name(filename)
+    count = 0
+    with open(target_file, 'w') as f:
+        for n_file in files:
+            fname = n_file.name
+            short_name = get_short_name(fname)
             
-            # Formatting as requested:
-            # element_n = <file>   name = <short_name>   temperatures = <temps>
-            line = (
-                f"element_n = {filename.ljust(25)} "
-                f"name = {ace_name.ljust(8)} "
-                f"temperatures = {user_temps}\n"
+            # Exact format requested:
+            # element_n = n-001_H_001.endf          name = H1       temperatures = 293.6 600.0
+            entry = (
+                f"element_n = {fname.ljust(25)} "
+                f"name = {short_name.ljust(8)} "
+                f"temperatures = {temps_str}\n"
             )
-            f.write(line)
-            # print(f"   Processed: {filename} -> {ace_name}")
+            f.write(entry)
+            count += 1
+            
+            if count % 50 == 0:
+                sys.stdout.write(f"\r[PROCESSING] {count} isotopes...")
+                sys.stdout.flush()
 
-    print("-" * 50)
-    print(f"{Fore.GREEN}[SUCCESS] Generated inputs for {len(endf_files)} isotopes.{Style.RESET_ALL}")
-    print(f"Output File: {Config.OUTPUT_FILE}")
-    print(f"Temperatures set to: {user_temps}")
+    print(f"\n\n{Fore.GREEN}[SUCCESS] Generated: {target_file.name}{Style.RESET_ALL}")
+    print(f"Path: {target_file}")
 
 if __name__ == "__main__":
     main()

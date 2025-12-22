@@ -102,7 +102,7 @@ def display_menu():
     """Display the operation menu."""
     print(Fore.WHITE + Style.BRIGHT + "MAIN MENU: Select an Operation")
     print("." * 42)
-    print(f" {Fore.GREEN}1.{Style.RESET_ALL} Download Raw Data (ENDF/B-VIII.0)")
+    print(f" {Fore.GREEN}1.{Style.RESET_ALL} Download Raw Nuclear Data Library (ENDF)")
     print(f" {Fore.GREEN}2.{Style.RESET_ALL} Generate NJOY Inputs (Incident Neutrons)")
     print(f" {Fore.GREEN}3.{Style.RESET_ALL} Generate NJOY Inputs (Thermal Scattering)")
     print(f" {Fore.GREEN}4.{Style.RESET_ALL} Run NJOY Processing (Incident Neutrons)")
