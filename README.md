@@ -89,22 +89,31 @@ The interactive main menu will appear:
 ## 📂 Project Structure
 
 ```text
+## 📂 Project Structure
+
+```text
 GenNJOY/
 ├── gennjoy/                 # Package Source Code
-│   ├── cli.py               # Entry Point
+│   ├── __init__.py          # Package Initialization & Versioning
+│   ├── cli.py               # Main Entry Point (CLI) and Menu System
+│   ├── compile_openmc_library.py  # Converts generated ACE files to OpenMC HDF5 format
+│   ├── fetch_endf_library.py      # Automates downloading and organizing ENDF libraries
+│   ├── generate_neutron_input.py  # Generates NJOY input decks for incident neutron data
+│   ├── generate_tsl_input.py      # Generates NJOY input decks for thermal scattering data
+│   ├── njoy_execution_engine.py   # Core engine wrapper for executing NJOY commands
+│   ├── run_neutron_processing.py  # Orchestrates incident neutron data processing
+│   ├── run_tsl_processing.py      # Orchestrates thermal scattering processing
+│   ├── temperature_index.json     # Database for TSL temperature mappings
+│   ├── xsdir_mcnp5          # MCNP5 xsdir Template used for merging
 │   ├── data/                # Data Storage (ENDF, ACE, HDF5)
-│   ├── inputs/              # Generated Input Decks
-│   ├── njoy_execution...    # NJOY Execution Engine
-│   ├── run_neutron...       # Neutron Processing Logic
-│   ├── run_tsl...           # TSL Processing Logic
-│   ├── xsdir_mcnp5          # MCNP5 xsdir Template
-│   └── temperature_index.json
+│   └── inputs/              # Generated Input Decks (Control files)
 ├── pyproject.toml           # Modern Build Configuration
-├── setup.py                 # Legacy Setup Script
-├── requirements.txt         # Dependencies
-└── README.md                # Documentation
-
-```
+├── setup.py                 # Legacy Setup Script for backward compatibility
+├── requirements.txt         # List of Python Dependencies
+├── MANIFEST.in              # Package Data Configuration (includes non-code files)
+├── .gitignore               # Git Ignore Rules
+├── LICENSE                  # Project License (MIT)
+└── README.md                # Project Documentation
 
 ---
 
