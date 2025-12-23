@@ -10,10 +10,10 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 # --- Project Configuration (Updated for Package Structure) ---
-# تحديد مسار المجلد الذي يحتوي على هذا الملف (gennjoy package directory)
+
 PACKAGE_DIR = Path(__file__).resolve().parent
 
-# افتراض أن مجلد inputs تم نقله لداخل الحزمة كما هو موضح في ملف MANIFEST.in
+
 INPUTS_DIR = PACKAGE_DIR / "inputs"
 
 # --- Header & Branding ---
@@ -63,7 +63,7 @@ def run_script(script_name: str, args: Optional[List[str]] = None):
     """
     Execute a module from the package directory.
     """
-    # البحث عن السكربت داخل نفس مجلد الحزمة
+    
     script_path = PACKAGE_DIR / script_name
     
     if not script_path.exists():
@@ -87,12 +87,12 @@ def run_script(script_name: str, args: Optional[List[str]] = None):
 
 def get_validated_input_file(prompt_text: str, default_filename: str) -> str:
     """Prompt the user for a file path with validation."""
-    # البحث عن الملف الافتراضي داخل مجلد inputs الموجود في الحزمة
+    
     default_path = INPUTS_DIR / default_filename
     
     print(Fore.YELLOW + f"   > {prompt_text}")
     
-    # تحسين العرض للمسار الافتراضي (إظهار اسم الملف فقط لعدم إرباك المستخدم بالمسار الطويل)
+    
     display_default = f"Package Default: {default_filename}"
     
     user_input = input(f"     (Press Enter for {display_default}): ").strip()

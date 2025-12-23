@@ -1,10 +1,7 @@
-Here is the **English** version of the `README.md` file, incorporating the ASCII art logo at the top for a professional look:
-
-```markdown
 <div align="center">
 <pre>
          ____            _   _     _  ___ __   __
-        / ___| ___ _ __ | \ | |   | |/ _ \\ \ / /
+        / ___| ___ _ __ | \ | |   | |/ _ \ \ / /
        | |  _ / _ \ '_ \|  \| |_  | | | | \ V / 
        | |_| |  __/ | | | |\  | |_| | |_| || |  
         \____|\___|_| |_|_| \_|\___/ \___/ |_|  
@@ -43,7 +40,7 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
     * The NJOY2016 source code must be compiled and installed.
     * Ensure the `njoy` executable is accessible in your system PATH, or be ready to provide its path during runtime.
 3.  **OpenMC:**
-    * OpenMC library and the `openmc-ace-to-hdf5` tool must be installed.
+    * OpenMC must be installed.
     * [OpenMC Installation Guide](https://docs.openmc.org/en/stable/quickinstall.html)
 
 ---
@@ -52,14 +49,14 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/yourusername/GenNJOY.git](https://github.com/yourusername/GenNJOY.git)
+    git clone https://github.com/laidastro7/GenNJOY
     cd GenNJOY
     ```
 
-2.  **Install the Package (Editable Mode):**
-    It is recommended to use a virtual environment.
+2.  **Install the Package :**
+   
     ```bash
-    pip install -e .
+    pip install .
     ```
     *This command installs the package along with all dependencies listed in `requirements.txt`.*
 
@@ -85,29 +82,38 @@ The interactive main menu will appear:
 * This step generates ACE files and updates the `xsdir`.
 
 
-4. **Option [6]:** Convert the generated ACE libraries into an HDF5 library (`cross_sections.xml`) for OpenMC.
+4. **Option [6]:** Convert the generated ACE libraries into an HDF5 library for OpenMC.
 
 ---
 
 ## 📂 Project Structure
 
 ```text
+## 📂 Project Structure
+
+```text
 GenNJOY/
 ├── gennjoy/                 # Package Source Code
-│   ├── cli.py               # Entry Point
+│   ├── __init__.py          # Package Initialization & Versioning
+│   ├── cli.py               # Main Entry Point (CLI) and Menu System
+│   ├── compile_openmc_library.py  # Converts generated ACE files to OpenMC HDF5 format
+│   ├── fetch_endf_library.py      # Automates downloading and organizing ENDF libraries
+│   ├── generate_neutron_input.py  # Generates NJOY input decks for incident neutron data
+│   ├── generate_tsl_input.py      # Generates NJOY input decks for thermal scattering data
+│   ├── njoy_execution_engine.py   # Core engine wrapper for executing NJOY commands
+│   ├── run_neutron_processing.py  # Orchestrates incident neutron data processing
+│   ├── run_tsl_processing.py      # Orchestrates thermal scattering processing
+│   ├── temperature_index.json     # Database for TSL temperature mappings
+│   ├── xsdir_mcnp5          # MCNP5 xsdir Template used for merging
 │   ├── data/                # Data Storage (ENDF, ACE, HDF5)
-│   ├── inputs/              # Generated Input Decks
-│   ├── njoy_execution...    # NJOY Execution Engine
-│   ├── run_neutron...       # Neutron Processing Logic
-│   ├── run_tsl...           # TSL Processing Logic
-│   ├── xsdir_mcnp5          # MCNP5 xsdir Template
-│   └── temperature_index.json
+│   └── inputs/              # Generated Input Decks (Control files)
 ├── pyproject.toml           # Modern Build Configuration
-├── setup.py                 # Legacy Setup Script
-├── requirements.txt         # Dependencies
-└── README.md                # Documentation
-
-```
+├── setup.py                 # Legacy Setup Script for backward compatibility
+├── requirements.txt         # List of Python Dependencies
+├── MANIFEST.in              # Package Data Configuration (includes non-code files)
+├── .gitignore               # Git Ignore Rules
+├── LICENSE                  # Project License (MIT)
+└── README.md                # Project Documentation
 
 ---
 
@@ -125,13 +131,13 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 
 ## 👨‍🔬 Authors
 
-* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://www.google.com/search?q=https://github.com/laidastro7)
+* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://github.com/laidastro7))
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](https://github.com/laidastro7/GenNJOY/blob/main/LICENSE) file for details.
 
 ```
 

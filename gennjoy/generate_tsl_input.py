@@ -9,7 +9,7 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 class Config:
-    # [UPDATED] Points to the package directory (gennjoy/)
+    # Points to the package directory (gennjoy/)
     BASE_DIR = Path(__file__).resolve().parent
     
     THERMAL_DIR = BASE_DIR / "data" / "thermal_scattering_endf"
@@ -22,6 +22,7 @@ class Config:
     
     # Target Files
     OUTPUT_FILE = INPUTS_DIR / "tsl_inventory.i"
+    BATCH_FILE = INPUTS_DIR / "tsl_process_batch.i"
     OUTPUT_JSON = SRC_DIR / "temperature_index.json"
 
 # --- 1. KNOWLEDGE BASE ---
@@ -255,6 +256,16 @@ def main():
     print(f"1. {Style.BRIGHT}{Config.OUTPUT_FILE}{Style.RESET_ALL}{Fore.YELLOW}")
     print(f"2. {Style.BRIGHT}{Config.OUTPUT_JSON}{Style.RESET_ALL}{Fore.YELLOW}")
     print(f"{'#'*60}{Style.RESET_ALL}")
+
+    # --- NEW INSTRUCTION MESSAGE ---
+    print(f"\n{Fore.YELLOW}{'='*60}")
+    print(f"{Style.BRIGHT}NEXT STEP (ACTION REQUIRED):")
+    print(f"{'='*60}{Style.RESET_ALL}")
+    print(f"1. Open the generated file: {Fore.CYAN}{Config.OUTPUT_FILE.name}{Style.RESET_ALL}")
+    print(f"2. Copy the blocks of the TSLs you want to process.")
+    print(f"3. Paste them into the batch file: {Fore.CYAN}inputs/{Config.BATCH_FILE.name}{Style.RESET_ALL}")
+    print(f"   (This batch file is what Option 5 will execute)")
+    print(f"{Fore.YELLOW}{'='*60}{Style.RESET_ALL}\n")
 
 if __name__ == "__main__":
     main()

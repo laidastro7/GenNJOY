@@ -8,7 +8,7 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 class Config:
-    # [UPDATED] Points to the package directory to locate internal data/inputs
+    # Points to the package directory to locate internal data/inputs
     BASE_DIR = Path(__file__).resolve().parent
     
     # Source Directory
@@ -17,6 +17,7 @@ class Config:
     # Default Output
     INPUTS_DIR = BASE_DIR / "inputs"
     DEFAULT_OUTPUT_FILE = INPUTS_DIR / "neutron_inventory.i"
+    BATCH_FILE = INPUTS_DIR / "neutron_process_batch.i"
 
     # Default Temperatures
     DEFAULT_TEMPS_LIST = [293.6, 600.0, 900.0]
@@ -129,6 +130,16 @@ def main():
 
         print(f"\n\n{Fore.GREEN}[SUCCESS] Generated: {target_file.name}{Style.RESET_ALL}")
         print(f"Path: {target_file}")
+
+        # --- NEW INSTRUCTION MESSAGE ---
+        print(f"\n{Fore.YELLOW}{'='*60}")
+        print(f"{Style.BRIGHT}NEXT STEP (ACTION REQUIRED):")
+        print(f"{'='*60}{Style.RESET_ALL}")
+        print(f"1. Open the generated file: {Fore.CYAN}{target_file.name}{Style.RESET_ALL}")
+        print(f"2. Copy the lines of the isotopes you want to process.")
+        print(f"3. Paste them into the batch file: {Fore.CYAN}inputs/{Config.BATCH_FILE.name}{Style.RESET_ALL}")
+        print(f"   (This batch file is what Option 4 will execute)")
+        print(f"{Fore.YELLOW}{'='*60}{Style.RESET_ALL}\n")
         
     except PermissionError:
         print(f"\n{Fore.RED}[ERROR] Permission denied writing to: {target_file}{Style.RESET_ALL}")
