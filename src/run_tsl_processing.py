@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 from multiprocessing import Process, cpu_count, Lock
 from typing import List, Tuple, Dict
-import DataGenerator
+import njoy_execution_engine
 from colorama import Fore, Style, init
 
 # Initialize colorama
@@ -25,7 +25,7 @@ class Config:
     # Critical Files
     XSDIR_TEMPLATE = SRC_DIR / "xsdir_mcnp5"
     XSDIR_MASTER = OUTPUT_ACE / "xsdir"
-    TEMP_DICT_FILE = SRC_DIR / "dict_temperature.json"
+    TEMP_DICT_FILE = SRC_DIR / "temperature_index.json"
 
 # --- Logging Helper ---
 class Logger:
@@ -123,7 +123,7 @@ class TSLProcessor:
     def _process_pair(self, pair: Tuple[str, str]):
         """Process a single (Neutron Line, Thermal Line) pair."""
         line_n, line_t = pair
-        gen = DataGenerator.ACEGenerator(str(self.input_file))
+        gen = njoy_execution_engine.ACEGenerator(str(self.input_file))
         
         try:
             # Parse Parameters
@@ -206,7 +206,7 @@ class TSLProcessor:
         """Main execution engine."""
         Logger.header("STARTING THERMAL SCATTERING PROCESSING (DEBUG MODE)")
         
-        gen = DataGenerator.ACEGenerator(str(self.input_file))
+        gen = njoy_execution_engine.ACEGenerator(str(self.input_file))
         
         # Read lines
         Logger.debug(f"Reading input file: {self.input_file}")
@@ -284,7 +284,7 @@ if __name__ == "__main__":
     start_time = time.time()
     
     if len(sys.argv) < 2:
-        Logger.error("Usage: python gen_njoy_tsl.py <input_file>")
+        Logger.error("Usage: python run_tsl_processing.py <input_file>")
         sys.exit(1)
         
     input_file_path = Path(sys.argv[1]).resolve()

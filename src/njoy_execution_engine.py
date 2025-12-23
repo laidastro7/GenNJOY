@@ -89,7 +89,7 @@ class ACEGenerator:
                     if string_to_search in line:
                         results.append((i, line.rstrip()))
         except Exception as e:
-            print(Fore.RED + f"[DataGenerator] Error reading file {file_path}: {e}")
+            print(Fore.RED + f"[njoy_execution_engine] Error reading file {file_path}: {e}")
         return results
 
     def gen_parametre_njoy(self, line_content):
