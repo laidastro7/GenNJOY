@@ -82,7 +82,7 @@ The interactive main menu will appear:
 * This step generates ACE files and updates the `xsdir`.
 
 
-4. **Option [6]:** Convert the generated ACE libraries into an HDF5 library (`cross_sections.xml`) for OpenMC.
+4. **Option [6]:** Convert the generated ACE libraries into an HDF5 library for OpenMC.
 
 ---
 
