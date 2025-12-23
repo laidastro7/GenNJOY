@@ -1,5 +1,3 @@
-Here is the **English** version of the `README.md` file, incorporating the ASCII art logo at the top for a professional look:
-
 ```markdown
 <div align="center">
 <pre>
