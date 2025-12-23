@@ -69,3 +69,67 @@ Once installed, you can run the tool from anywhere in your terminal using the co
 ```bash
 gennjoy
 
+```
+
+The interactive main menu will appear:
+
+### Typical Workflow:
+
+1. **Option [1]:** Download raw nuclear data libraries (ENDF). Data will be stored in `gennjoy/data`.
+2. **Option [2] & [3]:** Generate NJOY input decks based on the downloaded files.
+3. **Option [4] & [5]:** Execute NJOY processing.
+* You will be prompted to specify the number of CPU cores and the `njoy` path.
+* This step generates ACE files and updates the `xsdir`.
+
+
+4. **Option [6]:** Convert the generated ACE libraries into an HDF5 library (`cross_sections.xml`) for OpenMC.
+
+---
+
+## 📂 Project Structure
+
+```text
+GenNJOY/
+├── gennjoy/                 # Package Source Code
+│   ├── cli.py               # Entry Point
+│   ├── data/                # Data Storage (ENDF, ACE, HDF5)
+│   ├── inputs/              # Generated Input Decks
+│   ├── njoy_execution...    # NJOY Execution Engine
+│   ├── run_neutron...       # Neutron Processing Logic
+│   ├── run_tsl...           # TSL Processing Logic
+│   ├── xsdir_mcnp5          # MCNP5 xsdir Template
+│   └── temperature_index.json
+├── pyproject.toml           # Modern Build Configuration
+├── setup.py                 # Legacy Setup Script
+├── requirements.txt         # Dependencies
+└── README.md                # Documentation
+
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have suggestions for improvements or new features:
+
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the Branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+---
+
+## 👨‍🔬 Authors
+
+* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://www.google.com/search?q=https://github.com/laidastro7)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+
+```
+
+```
