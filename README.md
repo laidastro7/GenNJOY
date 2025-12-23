@@ -53,10 +53,10 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
     cd GenNJOY
     ```
 
-2.  **Install the Package (Editable Mode):**
-    It is recommended to use a virtual environment.
+2.  **Install the Package :**
+   
     ```bash
-    pip install -e .
+    pip install .
     ```
     *This command installs the package along with all dependencies listed in `requirements.txt`.*
 
