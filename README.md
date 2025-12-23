@@ -1,4 +1,16 @@
+Here is the **English** version of the `README.md` file, incorporating the ASCII art logo at the top for a professional look:
+
 ```markdown
+<div align="center">
+<pre>
+         ____            _   _     _  ___ __   __
+        / ___| ___ _ __ | \ | |   | |/ _ \\ \ / /
+       | |  _ / _ \ '_ \|  \| |_  | | | | \ V / 
+       | |_| |  __/ | | | |\  | |_| | |_| || |  
+        \____|\___|_| |_|_| \_|\___/ \___/ |_|  
+</pre>
+</div>
+
 # GenNJOY ⚛️
 ### Automated Nuclear Data Processing Framework (NJOY + OpenMC)
 
