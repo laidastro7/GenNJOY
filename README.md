@@ -1,7 +1,7 @@
 <div align="center">
 <pre>
          ____            _   _     _  ___ __   __
-        / ___| ___ _ __ | \ | |   | |/ _ \\ \ / /
+        / ___| ___ _ __ | \ | |   | |/ _ \ \ / /
        | |  _ / _ \ '_ \|  \| |_  | | | | \ V / 
        | |_| |  __/ | | | |\  | |_| | |_| || |  
         \____|\___|_| |_|_| \_|\___/ \___/ |_|  
@@ -40,7 +40,7 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
     * The NJOY2016 source code must be compiled and installed.
     * Ensure the `njoy` executable is accessible in your system PATH, or be ready to provide its path during runtime.
 3.  **OpenMC:**
-    * OpenMC library and the `openmc-ace-to-hdf5` tool must be installed.
+    * OpenMC must be installed.
     * [OpenMC Installation Guide](https://docs.openmc.org/en/stable/quickinstall.html)
 
 ---
@@ -49,7 +49,7 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/yourusername/GenNJOY.git](https://github.com/yourusername/GenNJOY.git)
+    git clone https://github.com/laidastro7/GenNJOY
     cd GenNJOY
     ```
 
@@ -122,13 +122,13 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 
 ## 👨‍🔬 Authors
 
-* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://www.google.com/search?q=https://github.com/laidastro7)
+* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://github.com/laidastro7))
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](https://github.com/laidastro7/GenNJOY/blob/main/LICENSE) file for details.
 
 ```
 
