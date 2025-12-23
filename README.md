@@ -89,9 +89,6 @@ The interactive main menu will appear:
 ## 📂 Project Structure
 
 ```text
-## 📂 Project Structure
-
-```text
 GenNJOY/
 ├── gennjoy/                 # Package Source Code
 │   ├── __init__.py          # Package Initialization & Versioning
@@ -114,7 +111,7 @@ GenNJOY/
 ├── .gitignore               # Git Ignore Rules
 ├── LICENSE                  # Project License (MIT)
 └── README.md                # Project Documentation
-
+```
 ---
 
 ## 🤝 Contributing
