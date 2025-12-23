@@ -1,101 +1,125 @@
 ```markdown
-# GenNJOY: Automated NJOY Processing Tool
+# GenNJOY ⚛️
+### Automated Nuclear Data Processing Framework (NJOY + OpenMC)
 
-[![License: GPL](https://img.shields.io/badge/License-GPL-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.x-yellow.svg)](https://www.python.org/)
-[![OpenMC](https://img.shields.io/badge/OpenMC-Compatible-green.svg)](https://docs.openmc.org/)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![NJOY](https://img.shields.io/badge/NJOY-2016-red)](https://github.com/njoy/NJOY2016)
+[![OpenMC](https://img.shields.io/badge/OpenMC-Compatible-green)](https://docs.openmc.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-**GenNJOY** is a comprehensive Python-based automation tool designed to simplify the interaction with **NJOY2016** for nuclear data processing. It streamlines the workflow of generating inputs, executing NJOY, and converting data for use with Monte Carlo codes like **OpenMC**.
+**GenNJOY** is an advanced software framework written in Python designed to automate complex nuclear data processing workflows. The system seamlessly bridges raw nuclear data libraries (ENDF) with the **NJOY** processing code, and subsequently converts the outputs into HDF5 format ready for **OpenMC** Monte Carlo simulations.
 
-Designed for researchers and nuclear engineers, GenNJOY automates tedious tasks and leverages multi-CPU parallel processing to significantly reduce computation time.
+---
 
 ## 🚀 Key Features
 
-* **Automated Data Retrieval**: Download Incident and Thermal Neutron Data (ENDF/B-VIII.0).
-* **Input Generation**: Automatically create NJOY input files for:
-    * Incident neutron data.
-    * Thermal neutron scattering data (TSL).
-* **Parallel Execution**: Execute NJOY on multiple CPUs to speed up processing.
-* **Format Conversion**: Convert ACE library files directly to HDF5 format for OpenMC compatibility.
-* **User-Friendly CLI**: Simple command-line interface to manage the entire workflow.
+* **📦 Library Management:** Automated fetching and organization of raw nuclear data libraries (ENDF/B-VIII.0, VIII.1) for both Incident Neutrons and Thermal Scattering Laws (TSL).
+* **⚙️ Input Generation:** Intelligent generation of NJOY input decks for isotopes and thermal scattering materials, handling complex parameter definitions automatically.
+* **⚡ Parallel Processing:** Full utilization of multi-core CPU architectures to accelerate NJOY execution batches.
+* **🔄 Automated Conversion:** Seamless conversion of generated ACE files into OpenMC-compatible HDF5 libraries.
+* **🗂️ xsdir Management:** Automatic merging and updating of `xsdir` files to ensure data consistency across the pipeline.
+* **🛠️ Interactive CLI:** A user-friendly Command Line Interface (CLI) that eliminates the need for manual script handling.
+
+---
 
 ## 📋 Prerequisites
 
-Before using GenNJOY, ensure you have the following installed:
+Before installing GenNJOY, ensure the following requirements are met on your system:
 
-1.  **Python 3.x**
-2.  **NJOY2016**: [Download from GitHub](https://github.com/njoy/NJOY2016)
-3.  **OpenMC**: [Installation Guide](https://docs.openmc.org/en/stable/)
-4.  Git
+1.  **Python 3.8+**
+2.  **NJOY2016:**
+    * The NJOY2016 source code must be compiled and installed.
+    * Ensure the `njoy` executable is accessible in your system PATH, or be ready to provide its path during runtime.
+3.  **OpenMC:**
+    * OpenMC library and the `openmc-ace-to-hdf5` tool must be installed.
+    * [OpenMC Installation Guide](https://docs.openmc.org/en/stable/quickinstall.html)
 
-## 🛠️ Installation
+---
 
-1.  **Clone the repository:**
+## 💾 Installation
+
+1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/laidastro7/GenNJOY.git](https://github.com/laidastro7/GenNJOY.git)
+    git clone [https://github.com/yourusername/GenNJOY.git](https://github.com/yourusername/GenNJOY.git)
     cd GenNJOY
     ```
 
-2.  **Install Python dependencies:**
+2.  **Install the Package (Editable Mode):**
+    It is recommended to use a virtual environment.
     ```bash
-    pip install -r requirements.txt
+    pip install -e .
     ```
+    *This command installs the package along with all dependencies listed in `requirements.txt`.*
 
-3.  **Verify NJOY path:**
-    Ensure your NJOY executable is accessible or placed in the `njoy_bin/` directory as structured in the project.
+---
 
-## 💻 Usage
+## 🖥️ Usage
 
-Run the main program from the terminal:
+Once installed, you can run the tool from anywhere in your terminal using the command:
 
 ```bash
-python GenNJOY.py
+gennjoy
 
 ```
 
-### Interactive Menu Options
+The interactive main menu will appear:
 
-Once launched, follow the on-screen prompts to select an operation:
+### Typical Workflow:
 
-* **Download Data**: Fetches ENDF-B-VIII.0 incident and thermal data.
-* **Generate Inputs (Incident)**: Creates input files for incident neutron processing.
-* **Generate Inputs (Thermal)**: Creates input files for thermal scattering logic.
-* **Execute NJOY (Incident)**: Runs NJOY processing for incident data using the generated inputs.
-* **Execute NJOY (Thermal)**: Runs NJOY processing for thermal data.
-* **Convert to HDF5**: Converts resulting ACE files into OpenMC-compatible HDF5 files.
-* **Exit**: Closes the application.
+1. **Option [1]:** Download raw nuclear data libraries (ENDF). Data will be stored in `gennjoy/data`.
+2. **Option [2] & [3]:** Generate NJOY input decks based on the downloaded files.
+3. **Option [4] & [5]:** Execute NJOY processing.
+* You will be prompted to specify the number of CPU cores and the `njoy` path.
+* This step generates ACE files and updates the `xsdir`.
+
+
+4. **Option [6]:** Convert the generated ACE libraries into an HDF5 library (`cross_sections.xml`) for OpenMC.
+
+---
 
 ## 📂 Project Structure
 
 ```text
 GenNJOY/
-├── GenNJOY.py             # Main application entry point
-├── src/                   # Source scripts for logic processing
-│   ├── fetch_endf_library.py   # Data downloader
-│   ├── generate_neutron_input.py     # Incident input generator
-│   ├── run_neutron_processing.py      # NJOY execution wrapper (Incident)
-│   ├── generate_tsl_input.py   # Thermal input generator
-│   ├── run_tsl_processing.py    # NJOY execution wrapper (Thermal)
-│   └── compile_openmc_library.py # ACE to HDF5 converter
-├── njoy_bin/              # NJOY executables and libraries
-├── data/                  # Data storage (Evaluations, ACE, HDF5)
-├── inputs/                # Configuration files for the scripts
-└── requirements.txt       # Python dependencies
+├── gennjoy/                 # Package Source Code
+│   ├── cli.py               # Entry Point
+│   ├── data/                # Data Storage (ENDF, ACE, HDF5)
+│   ├── inputs/              # Generated Input Decks
+│   ├── njoy_execution...    # NJOY Execution Engine
+│   ├── run_neutron...       # Neutron Processing Logic
+│   ├── run_tsl...           # TSL Processing Logic
+│   ├── xsdir_mcnp5          # MCNP5 xsdir Template
+│   └── temperature_index.json
+├── pyproject.toml           # Modern Build Configuration
+├── setup.py                 # Legacy Setup Script
+├── requirements.txt         # Dependencies
+└── README.md                # Documentation
 
 ```
 
+---
+
 ## 🤝 Contributing
 
-Contributions are welcome! Please fork the repository and create a pull request for any features, bug fixes, or documentation improvements.
+Contributions are welcome! If you have suggestions for improvements or new features:
+
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the Branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+---
+
+## 👨‍🔬 Authors
+
+* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://www.google.com/search?q=https://github.com/laidastro7)
+
+---
 
 ## 📄 License
 
-This project is licensed under the GPL License - see the `LICENSE` file for details.
-
-## 👥 Authors
-
-* **Mohamed Laid YAHIAOUI** - *Lead Developer* - [mohamedlaid.yahiaoui@univ-jijel.dz](mailto:mohamedlaid.yahiaoui@univ-jijel.dz)
-* **Aissa BOURENANE**
+This project is licensed under the **MIT License** - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
 
 ```
 

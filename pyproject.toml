@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gennjoy"
+version = "1.0.0"
+description = "Automated Nuclear Data Processing Framework (NJOY + OpenMC)"
+authors = [
+  { name="Dr. Mohamed Laid YAHIAOUI et al.", email="mohamedlaid.yahiaoui@univ-jijel.dz" },
+]
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "h5py",
+    "lxml",
+    "requests",
+    "beautifulsoup4",
+    "colorama",
+    "openmc" 
+]
+
+[project.scripts]
+gennjoy = "gennjoy.cli:main"

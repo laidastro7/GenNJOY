@@ -1,0 +1,44 @@
+
+reconr / %%%%%%%%%%%%%%%%%%% Reconstruct XS for neutrons %%%%%%%%%%%%%%%%%%%%%%%
+20 22
+'ENDF/B-8.0 PENDF for   6-C - 12 '/
+625 2/
+0.01/ err
+'ENDF/B-8.0:   6-C - 12 '/
+'Processed by NJOY'/
+0/
+
+broadr / %%%%%%%%%%%%%%%%%%%%%%% Doppler broaden XS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+20 22 23
+625 2 0 0 0. /
+0.01/ errthn
+300.0 400.0
+0/
+
+thermr / %%%%%%%%%%%%%%%% Add thermal scattering data (free gas) %%%%%%%%%%%%%%%
+0 23 24
+0 625 12 2 1 0 0 1 221 1/
+300.0 400.0
+0.01 5.000001
+thermr / %%%%%%%%%%%%%%%% Add thermal scattering data (bound) %%%%%%%%%%%%%%%%%%
+21 24 25
+44 625 16 2 2 1 0 1 222 1/
+300.0 400.0
+0.01 5.000001
+
+acer / %%%%%%%%%%%%%%%%%%%%%%%% Write out in ACE format %%%%%%%%%%%%%%%%%%%%%%%%
+20 25 0 26 27
+2 0 1 .01/
+'ENDF/B-8.0: C(3C-SiC) processed by NJOY'/
+625 300.0 'csic' 3 /
+6000 6012 6013 /
+222 64 223 0 1 5.000001 2/
+
+acer / %%%%%%%%%%%%%%%%%%%%%%%% Write out in ACE format %%%%%%%%%%%%%%%%%%%%%%%%
+20 25 0 28 29
+2 0 1 .02/
+'ENDF/B-8.0: C(3C-SiC) processed by NJOY'/
+625 400.0 'csic' 3 /
+6000 6012 6013 /
+222 64 223 0 1 5.000001 2/
+stop
