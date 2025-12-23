@@ -56,7 +56,7 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
 2.  **Install the Package :**
    
     ```bash
-    pip install .
+    pip install -e .
     ```
     *This command installs the package along with all dependencies listed in `requirements.txt`.*
 
