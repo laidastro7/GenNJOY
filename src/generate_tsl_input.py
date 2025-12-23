@@ -18,7 +18,7 @@ class Config:
     
     # Target Files
     OUTPUT_FILE = INPUTS_DIR / "tsl_inventory.i"
-    OUTPUT_JSON = SRC_DIR / "dict_temperature.json"
+    OUTPUT_JSON = SRC_DIR / "temperature_index.json"
 
 # --- 1. KNOWLEDGE BASE ---
 KNOWN_MAPPINGS = [
@@ -146,7 +146,7 @@ def extract_header_temperatures(file_path):
 
 # --- 3. JSON DICTIONARY GENERATOR (INTEGRATED) ---
 def generate_json_dictionary():
-    """Generates the dict_temperature.json from the just-created .i file."""
+    """Generates the temperature_index.json from the just-created .i file."""
     print(f"\n{Fore.CYAN}{'-'*20} Generating JSON Dictionary {'-'*20}{Style.RESET_ALL}")
     
     if not Config.OUTPUT_FILE.exists():

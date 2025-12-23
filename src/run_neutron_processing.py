@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from multiprocessing import Process, cpu_count, Lock
 from typing import List
-import DataGenerator
+import njoy_execution_engine
 from colorama import Fore, Style, init
 
 # Initialize colorama
@@ -83,7 +83,7 @@ class NeutronProcessor:
             Config.XSDIR_MASTER.touch()
 
     def _process_isotope(self, line_data: str):
-        gen = DataGenerator.ACEGenerator(str(self.input_file))
+        gen = njoy_execution_engine.ACEGenerator(str(self.input_file))
         
         try:
             params = gen.gen_parametre_njoy(line_data)
@@ -154,7 +154,7 @@ class NeutronProcessor:
     def execute(self):
         Logger.header("STARTING NEUTRON DATA PROCESSING (DEBUG MODE)")
         
-        gen = DataGenerator.ACEGenerator(str(self.input_file))
+        gen = njoy_execution_engine.ACEGenerator(str(self.input_file))
         
         Logger.debug(f"Reading input file: {self.input_file}")
         try:
@@ -221,7 +221,7 @@ if __name__ == "__main__":
     start_time = time.time()
     
     if len(sys.argv) < 2:
-        Logger.error("Usage: python gen_njoy_n.py <input_file>")
+        Logger.error("Usage: python run_neutron_processing.py <input_file>")
         sys.exit(1)
         
     input_file_path = Path(sys.argv[1]).resolve()

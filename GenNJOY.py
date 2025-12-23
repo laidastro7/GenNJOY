@@ -118,15 +118,15 @@ def process_choice(choice: str) -> bool:
     
     if choice == "1":
         print("\n--- Downloading ENDF/B-VIII.0 Library ---")
-        run_script("download_data.py")
+        run_script("fetch_endf_library.py")
     
     elif choice == "2":
         print("\n--- Generating NJOY Input Decks (Neutron) ---")
-        run_script("gen_input_n.py")
+        run_script("generate_neutron_input.py")
     
     elif choice == "3":
         print("\n--- Generating NJOY Input Decks (TSL) ---")
-        run_script("gen_input_tsl.py")
+        run_script("generate_tsl_input.py")
     
     elif choice == "4":
         print("\n--- Executing NJOY (Neutron Processing) ---")
@@ -137,7 +137,7 @@ def process_choice(choice: str) -> bool:
                 "neutron_process_batch.i"
             )
             if input_file:
-                run_script("gen_njoy_n.py", [input_file])
+                run_script("run_neutron_processing.py", [input_file])
     
     elif choice == "5":
         print("\n--- Executing NJOY (Thermal Scattering Processing) ---")
@@ -148,11 +148,11 @@ def process_choice(choice: str) -> bool:
                 "tsl_process_batch.i"
             )
             if input_file:
-                run_script("gen_njoy_tsl.py", [input_file])
+                run_script("run_tsl_processing.py", [input_file])
     
     elif choice == "6":
         print("\n--- Converting ACE to HDF5 ---")
-        run_script("conversion_ace_hdf5.py")
+        run_script("compile_openmc_library.py")
     
     elif choice == "7":
         print(Fore.MAGENTA + "\n   Thank you for using GenNJOY. Goodbye!\n")

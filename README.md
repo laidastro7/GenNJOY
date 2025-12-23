@@ -71,12 +71,12 @@ Once launched, follow the on-screen prompts to select an operation:
 GenNJOY/
 ├── GenNJOY.py             # Main application entry point
 ├── src/                   # Source scripts for logic processing
-│   ├── download_data.py   # Data downloader
-│   ├── gen_input_n.py     # Incident input generator
-│   ├── gen_njoy_n.py      # NJOY execution wrapper (Incident)
-│   ├── gen_input_tsl.py   # Thermal input generator
-│   ├── gen_njoy_tsl.py    # NJOY execution wrapper (Thermal)
-│   └── conversion_ace_hdf5.py # ACE to HDF5 converter
+│   ├── fetch_endf_library.py   # Data downloader
+│   ├── generate_neutron_input.py     # Incident input generator
+│   ├── run_neutron_processing.py      # NJOY execution wrapper (Incident)
+│   ├── generate_tsl_input.py   # Thermal input generator
+│   ├── run_tsl_processing.py    # NJOY execution wrapper (Thermal)
+│   └── compile_openmc_library.py # ACE to HDF5 converter
 ├── njoy_bin/              # NJOY executables and libraries
 ├── data/                  # Data storage (Evaluations, ACE, HDF5)
 ├── inputs/                # Configuration files for the scripts
