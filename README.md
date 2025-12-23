@@ -128,7 +128,8 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 
 ## 👨‍🔬 Authors
 
-* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://github.com/laidastro7))
+* **Dr. Mohamed Laid YAHIAOUI** - *Lead Developer* - [GitHub Profile](https://github.com/laidastro7)
+  * 📧 Email: mohamedlaid.yahiaoui@univ-jijel.dz
 
 ---
 
