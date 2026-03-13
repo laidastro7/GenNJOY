@@ -1,0 +1,48 @@
+#######################################################
+##                                                   ##
+## README File for generation of file 7 for CH2,     ##
+## polyethylene using LEAPR module of NJOY processing##
+## package. Included content is for the generation   ##
+## of the inelastic part of the S(a,b) published in  ##
+## ENDF/B-VIII beta5.                                ##
+##                                                   ##
+## Compared to beta4 release, The alpha, beta grid   ##
+## for S(a,b) is updated. Temperature 5 K and 293 K  ##
+## are removed.                                      ##
+##                                                   ##
+#######################################################
+##                                                   ##
+## LEIP Laboratories (Sep 17 2017)                   ##
+##                                                   ##
+#######################################################
+
+Folder Content
+--------------
+tsl-HinCH2.endf = File 7 in ENDF-6 format
+         submitted to CSWEG for publication in
+         ENDF/B-VIII (MT = 2, MT = 4)
+
+NOTES: 
+1) Execution of NJOY for HinCH2_input results in printing 
+   of free atom cross-section with incorrect ENDF format, 
+   which can be change manually in header of MT = 2.
+2) The published ENDF-BVIII library tabulates the
+   incoherent elastic cross section on MT = 2 generated
+   by the provided input file.
+3) The incoherent elastic data exceeds the current
+   storage capacity of the NJOY99 ACER module. To
+   generate ACE files with NJOY99 the storage capacity
+   must be increased in the source code.
+
+File 7 Library Parameters
+-------------------------
+MAT = 37
+ZA = 137
+Temperatures = 77 196 233 293.6 300 303 313 323 333 343 350 K
+
+NJOY Compilation
+----------------
+The NJOY99 package used in the processing of these
+libraries was compiled with ifort from the intel-2015 
+composer suite. The upn was version 396.
+

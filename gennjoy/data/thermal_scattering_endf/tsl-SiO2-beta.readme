@@ -1,0 +1,50 @@
+#######################################################
+##                                                   ##
+## README File for generation of file 7 for the beta ##
+## phase of SiO2 using LEAPR module of NJOY          ##
+## processing package. Included content is for the   ##
+## generation of the inelastic part of the S(a,b)    ##
+## published in ENDF/B-VIII.beta. The coherent       ##
+## elastic xsec (MT = 2) was generated using an      ##
+## 'in-house' routine specific to this material [1]. ##
+##                                                   ##
+##  1. J. C. Holmes, Development of ENDF Thermal     ##
+##  Neutron Scattering Libraries for Silicon Dioxide ##
+##  and MCNP Criticality Testing with an ICSBEP      ##
+##  Benchmark, North Carolina State University       ##
+##  (2011).                                          ##
+##                                                   ##
+#######################################################
+##                                                   ##
+## LEIP Laboratories (Apr 28 2017)                   ##
+##                                                   ##
+#######################################################
+
+  NOTES: 
+  1) The published ENDF-BVIII library tabulates the
+     coherent elastic cross section on MT = 2; therefore,
+     the provided leapr input may reproduce MT = 4 only!
+  2) SiO2-beta was processed as a single material, such
+     that the TSL contains contributions from both Si
+     and O.
+  3) NJOY99 currently does not properly account for
+     stoichiometry of binary systems which differ from a
+     1:1 ratio; therefore, the cross section of the
+     secondary scatterer (oxygen) was doubled in the
+     LEAPR input.
+  4) To reproduce the published ENDF/B-VIII library
+     the cross section and number of secondary scatterers
+     must be changed to 3.74875 and 2 in the File 7 
+     generated from the provided input file.
+
+
+File 7 Library Parameters
+-------------------------
+MAT = 49
+ZA = 149
+Temperatures = 1000 1100 K
+
+NJOY Compilation
+----------------
+The NJOY99 package used in the processing of this
+library was compiled with gfortran. The upn was version 0.

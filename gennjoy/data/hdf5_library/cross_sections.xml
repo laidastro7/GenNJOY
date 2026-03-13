@@ -1,8 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <cross_sections>
-  <library materials="H3" path="H3.h5" type="neutron"/>
+  <library materials="B10" path="B10.h5" type="neutron"/>
+  <library materials="B11" path="B11.h5" type="neutron"/>
   <library materials="c_H_in_H2O" path="c_H_in_H2O.h5" type="thermal"/>
-  <library materials="c_D_in_D2O" path="c_D_in_D2O.h5" type="thermal"/>
   <library materials="H1" path="H1.h5" type="neutron"/>
-  <library materials="H2" path="H2.h5" type="neutron"/>
+  <library materials="O16" path="O16.h5" type="neutron"/>
+  <library materials="U235" path="U235.h5" type="neutron"/>
+  <library materials="U238" path="U238.h5" type="neutron"/>
+  <library materials="Zr90" path="Zr90.h5" type="neutron"/>
+  <library materials="Zr91" path="Zr91.h5" type="neutron"/>
+  <library materials="Zr92" path="Zr92.h5" type="neutron"/>
+  <library materials="Zr94" path="Zr94.h5" type="neutron"/>
+  <library materials="Zr96" path="Zr96.h5" type="neutron"/>
 </cross_sections>

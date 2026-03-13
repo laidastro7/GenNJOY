@@ -1,0 +1,24 @@
+RELEASE NOTES
+
+==============
+
+These are the input files used to generate the thermal scattering libraries for H-1 in bound liquid light water, and H-2 and O-16 bound in liquid heavy water as submitted to ENDF/B-VIII.beta5. The ENDF-6 files were produced using NJOY99 + up396 + upcab, compiled with g95 in Linux 64 bits with double precision.
+
+The inputs can be used in the liquid range: from the freezing point to the critical point. For backwards compatibility with ENDF/B-VII, extrapolated temperature points were included at 650 K and 800 K (for H in H2O) and 650 K (for D and O in D2O). It is important to note that neither the ENDF/B-VII evaluations nor the ENDF/B-VIII evaluations are valid for supercritical water.
+
+The following files are included:
+
+* tsl-HinH2O.njoy: LEAPR input file to generate tsl-HinH2O.endf.
+* tsl-DinD2O.njoy: LEAPR input file to generate tsl-DinD2O.endf.
+* tsl-OinD2O.njoy: LEAPR input file to generate tsl-OinD2O.endf.
+* up397_cab_dec2015_lin: update to NJOY99.396 used to generate the files in Linux.
+* up397_cab_dec2015_win: update for NJOY99.396 adapted by D. Roubtsov to run in Windows.
+* up51_cab_may2016_v2: update to NJOY2012.50 prepared by D. Roubtsov to run the input files with NJOY2012.
+
+NJOY2012 produces slightly different files for high alpha and beta values due to differences in the convolution algorithm. To keep consistency with the files prepared for ENDF/B-VIII.beta1, we used the same version of the code (99.396 + upcab) for the new release. 
+
+These inputs produce a region of zeros in the generated files, because the evaluations extend beyond the minimum reliable value of S(alpha, beta) in LEAPR, and the smin cut off is applied. In that region, the short collision time approximation should be applied.
+
+The evaluations contain a quasielastic peak caused by the use of the diffusion model, which might be difficult to process with reconstruction codes. For THERMR, the patch files contain the necessary changes. GRUCON process these files without errors, but further testing is encouraged.
+
+Please send comments or questions to Ignacio Marquez (marquezj@cab.cnea.gov.ar) and Danila Roubtsov (dan.roubtsov@cnl.ca).

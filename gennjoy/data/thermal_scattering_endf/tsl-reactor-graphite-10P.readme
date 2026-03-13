@@ -1,0 +1,41 @@
+#######################################################
+##                                                   ##
+## README File for generation of file 7 for 10%      ##
+## porosity reactor graphite using LEAPR module of   ##
+## NJOY2016.20 processing package. For coherent      ##
+## elastic scattering (MT=2), the cubic approximation##
+## approach was used based on the same phonon        ##
+## spectrum implemented in the calculation of the    ##
+## inelastic cross section (MT=4).                   ##
+##                                                   ##
+## Compare to beta4 release, the coherent elastic    ##
+## cross section is updated. The alpha, beta grid    ##
+## for S(a,b) is updated.                            ##
+##                                                   ##
+#######################################################
+##                                                   ##
+## LEIP Laboratories (Oct 17 2017)                   ##
+##                                                   ##
+#######################################################
+
+NOTES:
+	
+1) The 10P-reactor-graphite library corresponds to the
+   graphite molecular dynamics model with 10% porosity.
+	
+Folder Content
+--------------
+tsl-reactor-graphite-10P.endf = File 7 in ENDF-6 format 
+         published in ENDF/B-VIII (MT = 2, MT = 4)
+
+File 7 Library Parameters
+-------------------------
+MAT = 31
+ZA = 131
+Temperatures = 296 400 500 600 700 800 1000 1200 1600 2000 K
+
+NJOY Compilation
+----------------
+The NJOY2016.20 package used in the processing of these
+libraries was compiled with ifort from the intel-2017 
+composer suite.

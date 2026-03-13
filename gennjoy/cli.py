@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 from typing import List, Optional
 from colorama import Fore, Style, init
+from gennjoy.perturb_hdf5 import create_perturbed_library
 
 # Initialize colorama for colored output
 init(autoreset=True)
@@ -118,7 +119,8 @@ def display_menu():
     print(f" {Fore.GREEN}4.{Style.RESET_ALL} Run NJOY Processing (Incident Neutrons)")
     print(f" {Fore.GREEN}5.{Style.RESET_ALL} Run NJOY Processing (Thermal Scattering)")
     print(f" {Fore.GREEN}6.{Style.RESET_ALL} Convert ACE Libraries to HDF5 (OpenMC)")
-    print(f" {Fore.RED}7.{Style.RESET_ALL} Exit")
+    print(f" {Fore.GREEN}7.{Style.RESET_ALL} Create Perturbed HDF5 Library (Sensitivity Analysis)")
+    print(f" {Fore.RED}8.{Style.RESET_ALL} Exit")
     print("." * 42 + "\n")
 
 # --- Core Logic ---
@@ -161,13 +163,17 @@ def process_choice(choice: str) -> bool:
     elif choice == "6":
         print("\n--- Converting ACE to HDF5 ---")
         run_script("compile_openmc_library.py")
-    
+
     elif choice == "7":
+        print("\n--- Creating Perturbed HDF5 Library ---")
+        create_perturbed_library()
+
+    elif choice == "8":
         print(Fore.MAGENTA + "\n   Thank you for using GenNJOY. Goodbye!\n")
         return False
     
     else:
-        print(Fore.RED + "\n[!] Invalid selection. Please enter a number between 1 and 7.")
+        print(Fore.RED + "\n[!] Invalid selection. Please enter a number between 1 and 8.")
     
     return True
 
@@ -180,7 +186,7 @@ def main():
         running = True
         while running:
             display_menu()
-            choice = input(Fore.YELLOW + "Select option [1-7]: " + Style.RESET_ALL).strip()
+            choice = input(Fore.YELLOW + "Select option [1-8]: " + Style.RESET_ALL).strip()
             running = process_choice(choice)
             if running:
                 print("\n" + "-"*42 + "\n")
