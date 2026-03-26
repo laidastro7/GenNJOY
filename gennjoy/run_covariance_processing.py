@@ -297,7 +297,7 @@ class CovarianceProcessor:
             with open(njoy_inp, "r", encoding="utf-8") as stdin_f, \
                  open(njoy_out, "w", encoding="utf-8") as stdout_f:
                 subprocess.run([self.njoy_cmd], stdin=stdin_f, stdout=stdout_f,
-                               stderr=subprocess.STDOUT, check=True, cwd=work_dir, timeout=600)
+                               stderr=subprocess.STDOUT, check=True, cwd=work_dir, timeout=3600)
 
             shutil.copy(njoy_out, cov_dir / f"{iso}_cov.out")
             shutil.copy(njoy_inp, cov_dir / f"{iso}_cov.in")
