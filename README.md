@@ -40,7 +40,7 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
     * The NJOY2016 source code must be compiled and installed.
     * Ensure the `njoy` executable is accessible in your system PATH, or be ready to provide its path during runtime.
 3.  **OpenMC:**
-    * OpenMC must be installed.
+    * OpenMC must be installed just for converting ACE to HDF5.
     * [OpenMC Installation Guide](https://docs.openmc.org/en/stable/quickinstall.html)
 
 ---
