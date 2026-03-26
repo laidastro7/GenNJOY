@@ -65,10 +65,11 @@ class Logger:
 
 # --- Core Processor Class ---
 class TSLProcessor:
-    def __init__(self, input_file: Path, njoy_cmd: str, cpu_limit: int):
+    def __init__(self, input_file: Path, njoy_cmd: str, cpu_limit: int, err: float):
         self.input_file = input_file
         self.njoy_cmd = njoy_cmd
         self.cpu_limit = cpu_limit
+        self.err = err
         self.lock = Lock()
         self.temp_dict = self._load_temp_dict()
         
@@ -184,7 +185,8 @@ class TSLProcessor:
                 ace_ascii,
                 input_njoy,
                 self.njoy_cmd,
-                output_abs_path
+                output_abs_path,
+                self.err
             )
             
             # 2. Check and Merge XSDIR
@@ -297,6 +299,15 @@ def get_cpu_count():
     except:
         return 1
 
+def get_tolerance():
+    print("-" * 50)
+    user_input = input("Enter tolerance (err) value [Default: 0.001]: ").strip()
+    try:
+        return float(user_input) if user_input else 0.001
+    except ValueError:
+        Logger.warn("Invalid input. Using default tolerance: 0.001")
+        return 0.001
+
 # --- Entry Point ---
 if __name__ == "__main__":
     start_time = time.time()
@@ -338,14 +349,15 @@ if __name__ == "__main__":
         Logger.error("Tip: Run Option 1 to download data.")
         sys.exit(1)
             
-    os.environ["OPENMC_ENDF_DATA_Neutron"] = str(abs_n)
-    os.environ["OPENMC_ENDF_DATA_Thermal"] = str(abs_t)
+    os.environ["GENNJOY_ENDF_DATA_NEUTRON"] = str(abs_n)
+    os.environ["GENNJOY_ENDF_DATA_THERMAL"] = str(abs_t)
     
-    Logger.debug("Environment variables set for OpenMC.")
+    Logger.debug("Environment variables set for GenNJOY.")
 
     cpu_limit = get_cpu_count()
+    err_val = get_tolerance()
     
-    processor = TSLProcessor(input_file_path, njoy_cmd, cpu_limit)
+    processor = TSLProcessor(input_file_path, njoy_cmd, cpu_limit, err_val)
     processor.execute()
     
     elapsed = time.time() - start_time

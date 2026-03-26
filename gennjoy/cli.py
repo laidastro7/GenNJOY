@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List, Optional
 from colorama import Fore, Style, init
 from gennjoy.perturb_hdf5 import create_perturbed_library
+from gennjoy.covariance_module import process_covariance_batch
 
 # Initialize colorama for colored output
 init(autoreset=True)
@@ -120,7 +121,8 @@ def display_menu():
     print(f" {Fore.GREEN}5.{Style.RESET_ALL} Run NJOY Processing (Thermal Scattering)")
     print(f" {Fore.GREEN}6.{Style.RESET_ALL} Convert ACE Libraries to HDF5 (OpenMC)")
     print(f" {Fore.GREEN}7.{Style.RESET_ALL} Create Perturbed HDF5 Library (Sensitivity Analysis)")
-    print(f" {Fore.RED}8.{Style.RESET_ALL} Exit")
+    print(f" {Fore.GREEN}8.{Style.RESET_ALL} Generate Covariance Matrices (ERRORR & COVR)")
+    print(f" {Fore.RED}9.{Style.RESET_ALL} Exit")
     print("." * 42 + "\n")
 
 # --- Core Logic ---
@@ -169,11 +171,24 @@ def process_choice(choice: str) -> bool:
         create_perturbed_library()
 
     elif choice == "8":
+            print("\n--- Generating Covariance Matrices (COVERX & Plots) ---")
+            if verify_system_njoy():
+                njoy_executable = shutil.which("njoy")
+                if njoy_executable:                    
+                    # Request the input file from the user
+                    input_file = get_validated_input_file(
+                        "Please specify the Covariance batch input file path:", 
+                        "covariance_process_batch.i"
+                    )
+                    if input_file:
+                        process_covariance_batch(PACKAGE_DIR, njoy_executable, input_file)
+
+    elif choice == "9":
         print(Fore.MAGENTA + "\n   Thank you for using GenNJOY. Goodbye!\n")
         return False
     
     else:
-        print(Fore.RED + "\n[!] Invalid selection. Please enter a number between 1 and 8.")
+        print(Fore.RED + "\n[!] Invalid selection. Please enter a number between 1 and 9.")
     
     return True
 
@@ -186,7 +201,7 @@ def main():
         running = True
         while running:
             display_menu()
-            choice = input(Fore.YELLOW + "Select option [1-8]: " + Style.RESET_ALL).strip()
+            choice = input(Fore.YELLOW + "Select option [1-9]: " + Style.RESET_ALL).strip()
             running = process_choice(choice)
             if running:
                 print("\n" + "-"*42 + "\n")

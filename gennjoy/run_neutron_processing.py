@@ -63,10 +63,11 @@ class Logger:
 
 # --- Core Processor Class ---
 class NeutronProcessor:
-    def __init__(self, input_file: Path, njoy_cmd: str, cpu_limit: int):
+    def __init__(self, input_file: Path, njoy_cmd: str, cpu_limit: int, err: float):
         self.input_file = input_file
         self.njoy_cmd = njoy_cmd
         self.cpu_limit = cpu_limit
+        self.err = err
         self.lock = Lock()
         
         if not self.input_file.exists():
@@ -133,7 +134,8 @@ class NeutronProcessor:
                 ace_ascii,
                 input_njoy,
                 self.njoy_cmd,
-                output_abs_path
+                output_abs_path,
+                self.err
             )
             
             Logger.debug(f"NJOY finished for {name}. Checking ACE file...")
@@ -236,6 +238,15 @@ def get_cpu_count():
     except:
         return 1
 
+def get_tolerance():
+    print("-" * 50)
+    user_input = input("Enter tolerance (err) value [Default: 0.001]: ").strip()
+    try:
+        return float(user_input) if user_input else 0.001
+    except ValueError:
+        Logger.warn("Invalid input. Using default tolerance: 0.001")
+        return 0.001
+
 # --- Entry Point ---
 if __name__ == "__main__":
     start_time = time.time()
@@ -272,12 +283,13 @@ if __name__ == "__main__":
         Logger.error("Please run Option 1 to download data first.")
         sys.exit(1)
             
-    os.environ["OPENMC_ENDF_DATA"] = str(abs_nd_path)
-    Logger.debug(f"OPENMC_ENDF_DATA set to: {os.environ['OPENMC_ENDF_DATA']}")
+    os.environ["GENNJOY_ENDF_DATA"] = str(abs_nd_path)
+    Logger.debug(f"GENNJOY_ENDF_DATA set to: {os.environ['GENNJOY_ENDF_DATA']}")
 
     cpu_limit = get_cpu_count()
+    err_val = get_tolerance()
     
-    processor = NeutronProcessor(input_file_path, njoy_cmd, cpu_limit)
+    processor = NeutronProcessor(input_file_path, njoy_cmd, cpu_limit, err_val)
     processor.execute()
     
     elapsed = time.time() - start_time

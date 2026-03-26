@@ -1,0 +1,1969 @@
+ENDF/B-VIII.0 Beta Release Change Log
+=====================================
+
+Author: D.A. Brown, NNDC, BNL
+Affiliation: NNDC, Brookhaven National Laboratory
+
+
+ENDF/B-VIII.0 Final (2 Feb 2018)
+--------------------------------
+There were a lot of changes in this release, but they were mostly all cosmetic!
+
+CIELO Files:
+
+    * n-008_O_016.endf: Make 1/v portion of capture cross section log-log
+      interpolatable, then use LINEAR and FIXUP to ensure the total cross
+      section is the sum of partial cross sections
+
+    * n-026_Fe_056.endf: Final CIELO documentation for 56Fe, including
+      lists of experiments used
+
+    * n-094_Pu_239.endf: Corrected covariance (MF32 not overlapping with MF33
+      anymore) and correct zeros in distribution for (n,4n)
+
+
+Other Standards 2017 Files:
+
+    * n-003_Li_007.endf
+        - ensure total == sum of parts by running LINEAR and FIXUP
+        - Fix several MF=4 and MF=5 files so that the tabulated energy range
+          *exactly* matches that of the corresponding cross sections
+
+    * n-006_C_013.endf, n-006_C_012.endf: Ensure total cross section is
+      consistent with sum of partials using LINEAR and FIXUP
+
+    * n-079_Au_197.endf: correct URR redundant cross sections for consistency,
+      minor change to capture, elastic and total to bring into *exact*
+      agreement with Standards evaluation
+
+
+Other Evaluations:
+
+    * n-004_Be_009.endf
+        - Adjust MT=1 interpolation for first 10 points to eliminate
+          mismatch between total cross section and sum of partials
+        - Fix first energy point mismatch between cross section and
+          outgoing distributions in MT=16
+
+    * n-024_Cr_051.endf, n-078_Pt_190.endf: attempt to correct BR in (n,n')
+      levels so probabilites sum to 1
+
+    * n-026_Fe_054.endf: Final documentation and covariances
+
+    * n-026_Fe_057.endf, n-026_Fe_057.endf: Final documentation
+
+    * n-050_Sn_126.endf: remove fission width flag
+
+    * n-092_U_241.endf: Ensure that the total cross section equals the sum of
+      partial cross sections using LINEAR and FIXUP, this fixes a major flaw in
+      the total cross section -- a large bump near 1e-5 eV, the result of a
+      mis-application of log-log interpolation
+
+    * n-093_Np_236m1.endf: Fix the evaluation date -- I'm pretty sure the
+      evaluation was not performed in 2027
+
+    * n-008_O_017.endf, n-011_Na_023.endf, n-018_Ar_038.endf, n-020_Ca_046.endf,
+      n-024_Cr_051.endf, n-024_Cr_054.endf, n-027_Co_058m1.endf, n-044_Ru_105.endf,
+      n-050_Sn_126.endf, n-092_U_230.endf, n-092_U_232.endf, n-093_Np_236m1.endf,
+      n-081_Tl_203.endf, n-069_Tm_168.endf, n-069_Tm_169.endf, n-060_Nd_143.endf,
+      n-069_Tm_170.endf, n-064_Gd_160.endf, n-082_Pb_204.endf, n-082_Pb_206.endf,
+      n-033_As_074.endf, n-040_Zr_095.endf: Run LINEAR and FIXUP to ensure total
+      cross section is sum of partials
+
+    * n-010_Ne_020.endf, n-010_Ne_021.endf, n-010_Ne_022.endf, n-013_Al_026m1.endf,
+      n-014_Si_031.endf, n-014_Si_032.endf, n-016_S_035.endf, n-017_Cl_036.endf,
+      n-018_Ar_037.endf, n-018_Ar_039.endf, n-018_Ar_041.endf, n-020_Ca_041.endf,
+      n-020_Ca_045.endf, n-020_Ca_047.endf, n-023_V_049.endf, n-024_Cr_051.endf,
+      n-025_Mn_054.endf, n-026_Fe_055.endf, n-028_Ni_063.endf, n-029_Cu_064.endf,
+      n-030_Zn_069.endf, n-031_Ga_070.endf, n-032_Ge_071.endf, n-032_Ge_075.endf,
+      n-034_Se_075.endf, n-034_Se_081.endf, n-035_Br_080.endf, n-036_Kr_079.endf,
+      n-036_Kr_081.endf, n-038_Sr_085.endf, n-042_Mo_093.endf, n-043_Tc_098.endf,
+      n-044_Ru_097.endf, n-045_Rh_104.endf, n-046_Pd_103.endf, n-046_Pd_109.endf,
+      n-047_Ag_108.endf, n-047_Ag_112.endf, n-047_Ag_113.endf, n-047_Ag_114.endf,
+      n-047_Ag_115.endf, n-047_Ag_116.endf, n-047_Ag_117.endf, n-047_Ag_118m1.endf,
+      n-048_Cd_107.endf, n-048_Cd_109.endf, n-049_In_114.endf, n-050_Sn_121m1.endf,
+      n-051_Sb_122.endf, n-052_Te_121.endf, n-052_Te_121m1.endf, n-052_Te_131.endf,
+      n-052_Te_131m1.endf, n-053_I_128.endf, n-053_I_132.endf, n-053_I_132m1.endf,
+      n-053_I_133.endf, n-053_I_134.endf, n-054_Xe_125.endf, n-054_Xe_127.endf,
+      n-056_Ba_131.endf, n-056_Ba_139.endf, n-058_Ce_137.endf, n-058_Ce_137m1.endf,
+      n-060_Nd_149.endf, n-061_Pm_143.endf, n-061_Pm_144.endf, n-061_Pm_145.endf,
+      n-061_Pm_146.endf, n-061_Pm_150.endf, n-062_Sm_145.endf, n-062_Sm_146.endf,
+      n-064_Gd_159.endf, n-065_Tb_158.endf, n-065_Tb_161.endf, n-066_Dy_155.endf,
+      n-066_Dy_157.endf, n-068_Er_163.endf, n-068_Er_165.endf, n-068_Er_169.endf,
+      n-069_Tm_171.endf, n-070_Yb_169.endf, n-070_Yb_175.endf, n-072_Hf_175.endf,
+      n-074_W_181.endf, n-074_W_185.endf, n-075_Re_186m1.endf, n-076_Os_185.endf,
+      n-076_Os_191.endf, n-077_Ir_192.endf, n-077_Ir_194m1.endf, n-078_Pt_193.endf,
+      n-080_Hg_197.endf, n-080_Hg_197m1.endf, n-080_Hg_203.endf, n-081_Tl_204.endf,
+      n-082_Pb_205.endf, n-083_Bi_210m1.endf, n-084_Po_208.endf, n-084_Po_209.endf,
+      n-084_Po_210.endf, n-094_Pu_245.endf, n-098_Cf_247.endf
+        - Update documentation to include information about source of resonances
+        - Ensure total cross section equals sum of partials using LINEAR and FIXUP
+
+
+ENDF/B-VIII.0beta7 (16 Jan 2018)
+--------------------------------
+
+CIELO Files:
+    * n-026_Fe_056.endf: Correct the resonance region covariances, adding fully
+      correlated "background" covariance of 2% uncertainty in the Fe window region in
+      capture and otherwise properly treating the uncertainties given in Atlas
+
+    * n-092_U_235.endf, n-092_U_238.endf: Extended fission energy release energy ranges
+      to match the cross section energy range (Thanks Wim!)
+
+    * n-094_Pu_239.endf: Final version of 239Pu from LANL, with improved covariances and
+      documentation.  Additionally, the following two fixes were made:
+        - Extended fission energy release energy ranges to match the cross section energy
+          range (Thanks Wim!),
+        - Fix date format in the EDATE field of MF=1 MT=451
+
+
+Other Standards 2017 Files:
+
+    * n-005_B_010.endf: Fix documentation for B10 changes made in Sept. 2017
+
+    * n-006_C_013.endf: Fix date format in the EDATE field of MF=1 MT=451
+
+Other Evaluations:
+
+    * n-028_Ni_058.endf  Ni58 MT=103 MF=33 contained 3 sub-sections, using LB=5, 4 and 1.
+      The LB=4 subsection appeared to contain negative variances, although after combining
+      with other subsections the resulting matrix is fine. To avoid confusion, replace
+      with a single LB=5 subsection containing the union grid of the three old subsections.
+
+    * n-025_Mn_054.endf  Remove duplicate points from outgoing energy distribution for
+      V49 in MF6 MT5
+
+
+ENDF/B-VIII.0beta6 (15 Dec 2017)
+--------------------------------
+
+CIELO files:
+
+    * n-008_O_016.endf: Add covariance for many channels.  We suspect format problems
+      remain.
+
+    * n-026_Fe_056.endf, Three fixes:
+        - Restore MF12 files and tweak energy ranges of MF4 files
+        - Add covariance sections to indicate what reactions are included in lumped-sum
+          covariance MT851
+        - Fix previous commit: per discussion with Gustavo and others, MT851 should be
+          the sum of MTs 800-818 rather than 52-91
+
+    * n-092_U_235.endf:  Add P(nu) data, fission energy release and covariances,
+      including a correction to the nubar and PFNS covariance.  In addition,
+       - The PFNS energy mesh was densified to avoid "ripples" in the ratio to Maxwellian.
+       - The high-energy tail (>10 MeV) was slightly modified (~3% at 14 MeV) to be more
+         consistent with the description in the papers.
+       - The PFNS thermal covariance matrix was wrong (=e71). The GMA fit with extensions
+         was cast into a form that produces reasonable covariance matrices in different
+         energy structures.
+      There should be no impact on the benchmarking.
+
+    * n-092_U_238.endf: Add P(nu) data, fission energy release and covariances,
+      including a correction to the nubar and PFNS covariance.
+
+    * n-094_Pu_239.endf, Two changes:
+        - Updated covariances: capture uncertainties at higher energy and nubar
+          uncertainty at fission spectrum energies
+        - Added P1(mu) covariance for MT=2
+
+    * The MT 458 sections for U235 and U238 have been updated:
+
+        The IFC == 1 EFR Energy of fission fragments
+        TAB1 record contains the new total kinetic energy (TKE) evaluation from
+        Bates and Lestone.
+
+        The following values are computed to correspond to the primary evaluated
+        data corresponding to the previous committed version.
+
+        IFC == 2 ENP Energy of prompt neutrons
+        Computed as <En> from PFNS (MF5/MT18) * prompt nubar (MF1/MT456)
+
+        IFC == 3 END Energy of delayed neutrons
+        Computed as <En> from DFNS (MF5/MT455) * delayed nubar (MF1/MT455)
+
+        IFC == 4 ENP Energy of prompt neutrons
+        Computed as <En> from PFGS (MF15/MT18) * gamma multiplicity (MF12/MT18)
+
+        Corresponding entries in LIST record for thermal values have also been
+        updated. Note that uncertainties on thermal values still need to have
+        reasonable values agreed upon and entered (based on ongoing covariance
+        work).
+
+
+Other Standards 2017 Files:
+
+    * n-003_Li_006.endf: Supposed to be the beta5 version, with covariances, but was
+      misplaced.
+
+    * n-005_B_010.endf: Fix gap in (n,el) covariance
+
+    * n-006_C_012.endf: Revised from Hale & Paris: natC evaluation restored from 20-150 MeV.
+      Also, correct energy range of capture cross section so matches outgoing gamma line
+      energy range
+
+    * n-006_C_013.endf: Corrected covariance data (was previously in 12C, not here)
+
+
+Other Evaluations:
+
+    * n-000_n_001.endf:  Extend evaluation to 50 MeV
+
+    * n-026_Fe_054.endf: Tweak starting energies of tables to be consistent with
+      multiplicities and cross sections for several reactions
+
+    * n-026_Fe_057.endf, Two fixes:
+        - Restore MF12 energies to correct values
+        - Correct the channel L values so that parity is conserved
+
+    * n-026_Fe_058.endf: Restore MF12 energies to correct values from beta4.1
+
+    * n-029_Cu_063.endf, Three fixes:
+        - Fix MF32 MT151 spin group headers
+        - Fix MT63 sum of gamma branchings in MF12
+        - Correct covariance matrix CONT records in MF32 for LRF=7 resonances
+
+    * n-029_Cu_065.endf: Correct covariance matrix CONT records in MF32 for LRF=7 resonances
+
+    * n-076_Os_191.endf: Fix first section of MF=40 MT=4 in Os191. It should refer to
+      production of the ground state rather than 1st excited
+
+    * Correct covariance matrix CONT records in MF32 for LRF=7 resonances for
+      n-074_W_182.endf, n-074_W_183.endf, n-074_W_184.endf, n-074_W_186.endf
+
+    * Update ZAP and IZAP in MF=8, 10 and 40 for sub-actinide fission. Per recent ENDF format
+      update, ZAP = -1 indicates the total fission cross section.  Impacts n-074_W_182.endf,
+      n-074_W_183.endf, n-074_W_184.endf, n-074_W_186.endf, n-076_Os_191.endf,
+      n-077_Ir_192.endf, n-078_Pt_190.endf, n-078_Pt_191.endf, n-078_Pt_192.endf,
+      n-078_Pt_193.endf, n-078_Pt_194.endf, n-078_Pt_195.endf, n-078_Pt_196.endf,
+      n-078_Pt_197.endf, n-078_Pt_198.endf, n-080_Hg_203.endf, n-081_Tl_204.endf,
+      n-082_Pb_205.endf, n-084_Po_208.endf, and n-084_Po_210.endf
+
+    * Making changes to a handful of isotopes that failed to process through NJOY's
+      GROUPR module.  Each of these files has an inconsistency in the MF/MT=6/5 LIP data.
+      When there is more than 1 excited state, the LIP value must be incremented. For each of
+      these, the LIP value was 0,2,3,.... The LIP=1 value was skipped over, thus causing NJOY
+      to fail because it couldn't find the correct nuclide.  Additionally, fix MF=8 MT=4
+      sections for several isotopes, removing an incorrectly identified isomeric
+      state. MF=8 MT=5 had the correct set of isomers, causing a mismatch between MT=4 and 5.
+      Impacted: n-036_Kr_081.endf, n-042_Mo_093.endf, n-077_Ir_192.endf, n-078_Pt_193.endf,
+      n-078_Pt_195.endf, and n-078_Pt_197.endf
+
+
+
+ENDF/B-VIII.0beta5 (2 Oct 2017)
+-------------------------------
+
+CIELO files:
+
+    * n-001_H_001.endf: Covariances added
+
+    * n-008_O_016.endf: Covariances added
+
+    * n-026_Fe_056.endf: Covariances added
+
+    * n-092_U_235.endf (Corresponds to IAEA u235ib46o28t6DNcnu5ef0STz5):
+        Corrected PFNS covariance from D. Neudecker
+
+    * n-092_U_238.endf (orresponds to IAEA version u238ib58lrlFsfaST4n):
+        ** Covariances added
+        ** Latest U238 multiplicity and PFGS spectra from Ionel Stetcu.
+           These correspond to the plots and tables in the ENDF/B-VIII.0
+           'big paper' revision 272.
+
+    * n-094_Pu_239.endf
+        ** Marco Pigni took the  covariance file (MF=32) from the JEFF-3.2 library and
+           modified by minor corrections such as the last digits of the resonance energy
+           parameters that did not match those ones in file 2.  The covariance file is
+           coupled to the resonance evaluation extracted in the frame of the WPEC/SG34
+           working group NEA/NSC/WPEC/DOC(2014)447. The file 32 also contains the
+           uncertainty on the scattering radius (about 1.8%) that is almost double than
+           one estimated in the ATLAS. Although this uncertainty seems overestimated, the
+           file 32 was kept as originally released in the JEFF-3.2 for consistency.
+        ** Latest U238 multiplicity and PFGS spectra from Ionel Stetcu.
+           These correspond to the plots and tables in the ENDF/B-VIII.0
+           'big paper' revision 272.
+
+    * The U235, U238 and Pu239 components of fission energy release (MT458) have been updated.
+
+        The total average fission fragment kinetic energy [EFR] is given as tabular data
+        using IFC 1. These are evaluated data by Bates and Lestone as described in the
+        ENDF/B-VIII.0 'big paper'.
+
+        The total average prompt fission neutron energy [ENP], total average
+        delayed fission neutron energy, [END] and total average prompt fission
+        gamma energy [EGP] are given as tabular data using IFC 2, 3 and 4,
+        respectively, where the values are computed to be self-consistent with the
+        corresponding emission distribution data.
+
+        More specifically, the tabular data are:
+        LDRV == 2, IFC == 1    evaluated TKE data
+        LDRV == 1, IFC == 2    <En> from PFNS (MF5/MT18 or equivalent) * prompt nubar (MF1/MT456)
+        LDRV == 1, IFC == 3    <En> from DFNS (MF5/MT455) * delayed nubar (MF1/MT455)
+        LDRV == 1, IFC == 4    <En> from PFGS (MF15/MT18) * gamma multiplicity (MF12/MT18)
+
+        The computed data correspond to the last revision of the evaluations before this
+        update, that is
+
+        U235  MF1 MT458 IFC 2,3,4 are computed from r1333
+        U238  MF1 MT458 IFC 2,3,4 are computed from r1333
+        Pu239 MF1 MT458 IFC 2,3,4 are computed from r1329
+
+Other Standards 2017 Files:
+
+    * n-005_B_010.endf
+        ** Added covariances, including first pass at high energy extension to the
+           covariance, based on the ENDF/B-VII.1
+        ** For n + B10 -> t + (Be8 -> 2a), MF=6 gives an explicit distribution for the
+           triton, then uses LAW=4 (recoil) for the two alphas. Recoil doesn't make sense
+           in a breakup reaction (unless a distribution was assigned to one alpha and the
+           other one treated as recoiling from that). For now use LAW=0 (unknown) instead.
+
+    * n-006_C_012.endf: Added covariances
+
+Other Evaluations:
+
+    * n-001_H_002.endf:
+        Modified MF33, MT2 in the lowest energy bin to have a solid physical limit for
+        (n,tot) and (n,n).  In the new version submitted to beta5, the uncertainty of
+        total and elastic cross sections are the same, = +/- 1.5%,
+        at 1.0e-5 eV < E < 1.0e+5 eV (lowest energy bin), because
+        sig(n,g) <<< sig(n,tot) for H-2 ;  the correlation matrix based on MF33, MT2 is
+        kept unchanged (so the non-diagonal elements cov(1,i), i >= 2, are re-scaled).
+
+    * n-002_He_004.endf: Adjust documentation
+
+    * n-025_Mn_055.endf: Adjust documentation
+
+    * n-026_Fe_054.endf
+        ** Extend file to 150 MeV
+        ** Add dosimetry reactions
+
+    * n-026_Fe_057.endf: Extend file to 150 MeV
+
+    * n-026_Fe_058.endf
+        ** Tweak energy range of inelastic angular distributions to match cross section data
+        ** Extend file to 150 MeV
+
+    * n-045_Rh_103.endf
+        ** In the thermal range the uncertainty for capture was given as 0.034.
+           The Atlas value is 143.5 +/- 1.5, or an uncertainty of 0.01045.
+           The covariance matrix was changed  accordingly.
+        ** Fix bound level total width so that it equals the sum of partials
+
+    * n-061_Pm_147.endf
+        For Pm147 the relative uncertainty for capture in the RI range was 0.25.
+        The Atlas value is: 2064 +/- 100, or 0.048 relative. The value in the covariance
+        matrix was changed to give this result.
+
+    * n-062_Sm_149.endf
+        In the thermal range the uncertainty for capture was given as 0.05. The Atlas value
+        is 4014 +/- 600, or an uncertainty of 0.0149. The covariance matrix was changed accordingly.
+
+    * n-062_Sm_151.endf
+        In the thermal range the uncertainty for capture was given as 0.07. The Atlas value
+        is 15170 +/- 300, or an uncertainty of 0.0197. The covariance matrix was changed accordingly.
+
+    * n-063_Eu_155.endf
+        In the thermal range the uncertainty for capture was given as 0.05. The Atlas value
+        is 3950 +/- 125, or an uncertainty of 0.0316. The covariance matrix was changed accordingly.
+
+    * n-065_Tb_161.endf
+        Change the name of the nuclide in the endf file to be consistent with the nuclide.
+
+    * n-072_Hf_174.endf
+        RQ Wright's tweak to bound level to get better agreement with experimental data
+
+    * Remove problematic distributions for heavy residuals, replace with unknown distributions (MF=6 LAW=6).
+        ** In Mn54, problem distribution was for outgoing V49 in MT=24
+        ** In Pm145, problem was for Nd145 in MT=103
+        ** In Os191, problem was for W186 in MT=24
+
+    * Fix various format issues in new evaluations.
+        ** C13: format date
+        ** Ar37 & 40: MF2/MF32 mismatch, fix NM in MF4
+        ** Ca45 & 47: MF2/MF32 mismatch, fix NM
+        ** V49: Incorrect LFS in MF8/10, MF2/32 mismatch
+        ** Cr51, Mn54, Fe55: NM, MF2/32 mismatch
+        ** Ni63, Ge71: MF2/32 mismatch
+        ** Ge75: Incorrect LFS in MF8/10
+        ** Se75: Fix MF4 NM
+        ** Br80: Incorrect LFS in MF8/10
+        ** Kr81: NM, MF2/32 mismatch, incorrect LFS and XLFS1 in MF40
+        ** Sr85: Incorrect LFS in MF8/10
+        ** Mo93: NM, MF2/32 mismatch, incorrect LFS and XLFS1 in MF40
+        ** Tc98: NM, MF3/MF12 energy level mismatch for MT75, MF2/32 mismatch
+        ** Ru97: NM, MF2/32 mismatch
+        ** Rh104, Pd108, Ag108: Incorrect LFS in MF8/10
+        ** Cd109: NM, MF2/32 mismatch
+        ** Sn121m1: MF2/32 mismatch
+        ** Sb122, I133, Xe125, Xe127, Ba131, Ce137: fix LFS in MF 8/10
+        ** Pm144, Pm145, Pm146, Sm145: Fix NM in MF4, MF2/32 mismatch
+        ** Tb158: Fix NM, fix LFS in MF 8/10, MF2/32 mismatch
+        ** Tb161: Wrong ZA in several places (65160.99 instead of 65161), MF2/32 mismatch
+        ** Er163: fix LFS in MF 8/10
+        ** Tm171, Yb175: MF2/32 mismatch
+        ** W181: fix LFS in MF 8/10, MF2/32 mismatch
+        ** W185: mass inconsistency in MF2,  MF2/32 mismatch, fix LFS in MF 8/10
+        ** Os185: MF2/32 mismatch
+        ** Os191: MF2/32 mismatch, missing NM in MF4, incorrect LFS in MF40
+        ** Ir192: masses inconsistent in MF2, MF2/32 mismatch, missing NM, MF40 LFS
+        ** Ir194m1: MF2/32 mismatch
+        ** Pt190, Pt191, Pt192: missing NM, MF2/32 mismatch
+        ** Pt193: missing NM, MF2/32 mismatch, incorrect LFS MF40
+        ** Pt194, Pt195: masses inconsistent in MF2, MF2/32 mismatch
+        ** Pt196, Pt197: NM, MF2/32 mismatch
+        ** Pt198: MF2 masses inconsistent, missing NM, MF2/32 mismatch
+        ** Hg197m1: fix NM
+        ** Hg203: NM, MF2/32 mismatch
+        ** Tl204: NM, MF2/32 mismatch
+        ** Pb205: MF2 masses inconsistent, NM, MF2/32 mismatch
+        ** Bi210m1: MF2/32 mismatch
+        ** Po208: NM, MF2/32 mismatch
+        ** Po209: MF2 masses inconsistent, MF2/32 mismatch
+        ** Po210: NM, MF2/32 mismatch
+        ** Pu245, Cf247: Fix AWR in MF4 MT18
+
+
+ENDF/B-VIII.0beta4.1 (2 Sep 2017)
+---------------------------------
+
+CIELO fixes:
+
+    * n-008_O_016.endf:
+        ** Remove line numbers, and remove duplicate points near the start of MF3 MT1
+        ** MF33 MT800 contains a section claiming to be a cross-term with MT107. However,
+           the matrix is symmetric and the file contains no MT107 covariance, leading me
+           to assume that this section is purely for MT800
+
+    * n-026_Fe_056.endf: "final" CIELO mean values, not including IRDFF cross section merge
+
+    * n-092_U_235.endf: Revised CIELO 235U with modified fission cross section and nubar.
+      Corresponds to IAEA version u235ib46o28t6DNcnu5ef0STz.
+
+    * n-092_U_238.endf: Final version of CIELO 238U sans covariance data and PFGS.
+      Corresponds to IAEA version u238ib58lrlFsfaST4h.
+
+    * n-094_Pu_239.endf: update header; make fission Q values agree with fission energy release
+
+Big, non-CIELO changes:
+
+    * Remove elemental Carbon (n-006_C_000.endf) now that we have 12C and 13C evaluations
+
+    * n-001_H_002.endf: IAEA/CNL change to 2H: replace elastic scattering angular
+      distribution with that from JEFF-3.3T
+
+Many fixes made during the 2017 Hackathon:
+
+    * Americium:
+        ** n-095_Am_242m1.endf make two nearly degenerate levels slightly less degenerate
+        ** n-095_Am_244m1.endf, n-095_Am_244.endf: ensure angular distribution is positive
+
+    * Arsenic:
+        ** n-033_As_073.endf, n-033_As_074.endf: Fix interpolation of MT 1,2,102 background
+           cross sections in transition from RRR to URR & fast also fix NMOD &  the MT107
+           Q value in 73As
+
+    * Copper:
+        ** n-029_Cu_065.endf: Added one space to Cu-65 TPID. This fixes issue #1086.
+        ** n-029_Cu_065.endf: remove extra character on the first line
+
+    * Curium:
+        ** n-096_Cm_248.endf: remove duplicate point in angular distribution and tweak
+           energy value of MT57 level
+        ** n-096_Cm_243.endf: nudge one (n,n') energy level so it's no longer a duplicate
+           level (MT=54) nudge one incident energy in the (n,el) angular distribution so
+           that it's no longer a duplicate
+
+    * Erbium:
+        ** n-068_Er_167.endf, n-068_Er_168.endf, n-068_Er_170.endf, n-068_Er_166.endf:
+           Use LEGEND to convert MT=51-54 angular distributions to pointwise, then make
+           them positive definite
+        ** n-068_Er_162.endf, n-068_Er_170.endf: Fix various evaluations so that cross
+           sections and distributions begin/end at same point
+
+    * Gadolinium:
+        ** n-064_Gd_152.endf: negative elastic scattering at low energies fixed by moving
+           the low-energy (n,alpha) cross section to the total.
+        ** n-064_Gd_154.endf: Nudge the energy of one of the resonance slightly to avoid
+           having two resonances with identical resonance parameters. This makes it
+           impossible to find the correct resonance for the covariance data.
+
+    * Halfnium:
+        ** n-072_Hf_174.endf: comment section added
+        ** n-072_Hf_174.endf, n-072_Hf_176.endf, n-072_Hf_177.endf, n-072_Hf_178.endf,
+           n-072_Hf_179.endf, n-072_Hf_180.endf: comment section modified
+
+    * Iron:
+        ** n-026_Fe_054.endf: turn off resonance shift factor, RECENT & FUDGE ignore it
+        ** n-026_Fe_057.endf: Several small fixes to resonances:
+            *** Fix Q value of MT 51 particle pairs to match MT 51 cross section
+            *** Correct all channel parities, they were all multiplied by -1 (parity isn't
+                used in cross section of angular distribution calcs, so this does nothing)
+            *** Correct the SHF parameter to match the ENDF manual
+            *** Correct the JPi=1+ spin group's potential scattering contribution by
+                adding MT=2,51 channels
+            *** Correct the JPi=2+ spin group's potential scattering contribution by
+                adding an MT=51 channel
+        ** n-026_Fe_054.endf, n-026_Fe_056.endf, n-026_Fe_058.endf: Fixed MF12/MF3 gamma
+           energies in favor of MF3. Some now have 8 sig. digits in MF12
+
+    * Tin:
+        ** n-050_Sn_122.endf: fix interpolation in MT=1,2,102
+        ** n-050_Sn_124.endf:  add back bound resonance at -176 eV (it was lost in
+           revision 685) set interpolation flag to lin-lin (INT=2) for MT=1,2,102 cross
+           sections to eliminate log(0) error spotted by FIZCON
+
+    * Tungsten:
+        ** n-074_W_180.endf, n-074_W_182.endf, n-074_W_183.endf: Fix incorrect excited
+           state indices in MF 8/10 for W isotopes.  Closes tracker #788
+        ** n-074_W_183.endf: Fix the channel spin parity flag in File 32 for W183.
+           This was already fixed in File 2
+        ** n-074_W_180.endf: Additional fix to W180 (MF=8 vs MF=10 level mismatch)
+
+    * n-002_He_003.endf: Change interpolation on total cross section to log-log. Closes
+      tracker #1082
+
+    * n-004_Be_009.endf: change TPID on first line
+
+    * n-005_B_010.endf:
+        ** make angular distribution positive definate
+        ** n-005_B_010.endf uses LR=22 in MT 700 to indicate the breakup of
+           Be8 into two alphas.  According to the ENDF manual  (page 19 of the 2012
+           edition), LRs 22-36 are provided for compatibility with ENDF/B-V.  LR=1 is
+           preferred for new evaluations.  Since all products are explicitly listed in
+           MF 6, this simply changes the LR flag to LR=1.
+
+    * n-006_C_013.endf: eliminate degenerate energies in angular distributions and cross sections
+
+    * n-017_Cl_035.endf: Close tracker 1066: Fix the SHF value from -1 to 0 for Cl35
+
+    * n-018_Ar_040.endf: negative cross section at 978 keV fixed by increasing BG slightly
+
+    * n-028_Ni_060.endf: double value at end of resonance region in (n,el) were not
+      actually double, leading to negative cross section once resonances were reconstructed
+
+    * n-041_Nb_093.endf: Fixed outgoing ZA error in 93Nb and AWR incorrect in resonance file
+
+    * n-043_Tc_098.endf: Fix the j values for File 32 in the URR to be the same as given
+      in File 2 for 98Tc
+
+    * n-058_Ce_136.endf:  back-ground problem in the elastic and (n,alpha) cross sections fixed.
+
+    * n-066_Dy_160.endf: MF3 MT3 removed and Fix negative elastic cross section
+
+    * n-067_Ho_166m1.endf: tweak energy of level in MF12, MT811 to match level energy in MF3 MT811
+
+    * n-092_U_241.endf: Change MT=3 gammas in U241. Previously the gamma production cross
+      section increased linearly from 0 at 1e-5 eV to non-zero 100 keV, replacing that
+      with a step function at 100 keV. Low-energy capture and fission gammas are given
+      elsewhere, so it seems that MT=3 was double-counting.
+
+    * n-098_Cf_249.endf: Fix degenerate 8th level in MT58, the level energy should have
+      been 2.1 keV higher.  This fix applied to MF3, 6, and 33
+
+    * Fixed MF12/MF3 gamma energies in favor of MF3. Some now have 8 sig. digits in MF12:
+      n-013_Al_026m1.endf, n-018_Ar_037.endf, n-018_Ar_041.endf, n-020_Ca_047.endf,
+      n-022_Ti_049.endf, n-023_V_049.endf, n-025_Mn_054.endf, n-028_Ni_063.endf,
+      n-032_Ge_075.endf, n-034_Se_075.endf, n-040_Zr_094.endf, n-044_Ru_097.endf,
+      n-045_Rh_104.endf, n-047_Ag_116.endf, n-049_In_114.endf, n-051_Sb_122.endf,
+      n-054_Xe_127.endf, n-055_Cs_133.endf, n-061_Pm_143.endf, n-062_Sm_145.endf,
+      n-062_Sm_152.endf, n-063_Eu_153.endf, n-064_Gd_156.endf, n-066_Dy_156.endf,
+      n-066_Dy_163.endf, n-066_Dy_164.endf, n-068_Er_163.endf, n-072_Hf_175.endf,
+      n-074_W_181.endf, n-078_Pt_193.endf, n-078_Pt_197.endf, n-080_Hg_196.endf,
+      n-080_Hg_202.endf, n-081_Tl_204.endf, n-092_U_235.endf, n-092_U_238.endf,
+      n-058_Ce_137.endf, n-028_Ni_063.endf, n-032_Ge_071.endf, n-033_As_075.endf,
+      n-046_Pd_103.endf, n-047_Ag_108.endf, n-047_Ag_118m1.endf, n-048_Cd_107.endf,
+      n-052_Te_121.endf, n-058_Ce_137m1.endf, n-066_Dy_155.endf, n-068_Er_169.endf,
+      n-070_Yb_175.endf, n-072_Hf_175.endf, n-048_Cd_107.endf, n-052_Te_121m1.endf,
+      n-052_Te_131m1.endf, n-083_Bi_210m1.endf,  n-016_S_035.endf, n-061_Pm_146.endf,
+      n-065_Tb_158.endf, n-069_Tm_171.endf, n-070_Yb_169.endf, n-074_W_185.endf,
+      n-075_Re_186m1.endf, n-076_Os_185.endf, n-077_Ir_194m1.endf, n-084_Po_209.endf,
+      n-032_Ge_072.endf, n-032_Ge_073.endf
+
+    * URR covariance fixes: n-017_Cl_036.endf, n-025_Mn_054.endf, n-047_Ag_118m1.endf,
+      n-061_Pm_144.endf, n-061_Pm_146.endf, n-077_Ir_192.endf, n-077_Ir_194m1.endf,
+      n-083_Bi_210m1.endf, n-084_Po_208.endf, n-065_Tb_158.endf, n-075_Re_186m1.endf,
+      n-081_Tl_204.endf, n-084_Po_210.endf, n-017_Cl_036.endf, n-018_Ar_037.endf,
+      n-069_Tm_171.endf, n-081_Tl_204.endf.  If URR has non-zero values for all l and j in
+      the covariance data, update the j to be in line with the values in file 2.  Otherwise
+      delete the URR covariance data.
+
+    * Fix NMOD, NLIB, NVER on many files, prepare headers for ENDF/B-VIII.0
+
+Add evaluations as part of project to adopt TENDL evaluation & supplement those with
+EMPIRE calculations:
+
+    * New files: n-084_Po_209.endf, n-014_Si_031.endf, n-014_Si_032.endf,
+      n-016_S_035.endf, n-017_Cl_036.endf, n-018_Ar_039.endf, n-020_Ca_041.endf,
+      n-013_Al_026m1.endf, n-023_V_049.endf, n-028_Ni_063.endf, n-029_Cu_064.endf,
+      n-030_Zn_069.endf, n-031_Ga_070.endf, n-032_Ge_071.endf, n-032_Ge_075.endf,
+      n-034_Se_081.endf, n-035_Br_080.endf, n-036_Kr_079.endf, n-038_Sr_085.endf,
+      n-045_Rh_104.endf, n-046_Pd_103.endf, n-046_Pd_109.endf, n-047_Ag_108.endf,
+      n-047_Ag_112.endf, n-047_Ag_113.endf, n-047_Ag_114.endf, n-047_Ag_115.endf,
+      n-047_Ag_116.endf, n-047_Ag_117.endf, n-047_Ag_118m1.endf, n-048_Cd_107.endf,
+      n-049_In_114.endf, n-050_Sn_121m1.endf, n-051_Sb_122.endf, n-052_Te_121.endf,
+      n-052_Te_121m1.endf, n-052_Te_131.endf, n-052_Te_131m1.endf, n-053_I_128.endf,
+      n-053_I_132.endf, n-053_I_132m1.endf, n-053_I_133.endf, n-053_I_134.endf,
+      n-054_Xe_125.endf, n-054_Xe_127.endf, n-056_Ba_131.endf, n-056_Ba_139.endf,
+      n-058_Ce_137.endf, n-058_Ce_137m1.endf, n-060_Nd_149.endf, n-061_Pm_146.endf,
+      n-061_Pm_150.endf, n-062_Sm_146.endf, n-064_Gd_159.endf, n-065_Tb_158.endf,
+      n-065_Tb_161.endf, n-066_Dy_155.endf, n-066_Dy_157.endf, n-068_Er_163.endf,
+      n-068_Er_165.endf, n-068_Er_169.endf, n-069_Tm_171.endf, n-070_Yb_169.endf,
+      n-070_Yb_175.endf, n-072_Hf_175.endf, n-074_W_181.endf, n-074_W_185.endf,
+      n-075_Re_186m1.endf, n-076_Os_185.endf, n-077_Ir_194m1.endf, n-080_Hg_197.endf
+      n-080_Hg_197m1.endf, n-083_Bi_210m1.endf, n-094_Pu_245.endf, n-098_Cf_247.endf,
+      n-010_Ne_020.endf, n-010_Ne_021.endf, n-010_Ne_022.endf, n-018_Ar_037.endf,
+      n-018_Ar_041.endf, n-020_Ca_045.endf, n-020_Ca_047.endf, n-024_Cr_051.endf,
+      n-025_Mn_054.endf, n-026_Fe_055.endf, n-034_Se_075.endf, n-036_Kr_081.endf,
+      n-042_Mo_093.endf, n-043_Tc_098.endf, n-044_Ru_097.endf, n-048_Cd_109.endf,
+      n-061_Pm_143.endf, n-061_Pm_144.endf, n-061_Pm_145.endf, n-062_Sm_145.endf,
+      n-076_Os_191.endf, n-077_Ir_192.endf, n-080_Hg_203.endf, n-084_Po_208.endf,
+      n-081_Tl_204.endf, n-082_Pb_205.endf, n-084_Po_210.endf
+
+    * n-098_Cf_247.endf: Add fission nubars, PFNS and fission neutron angular
+      distributions from nearest even-odd nucleus (249Cf)
+
+    * n-094_Pu_245.endf: Add fission nubar, PFNS and angular distribution from 243Pu,
+      nearest odd-even nucleus
+
+    * n-080_Hg_197.endf, n-080_Hg_197m1.endf: Fix issues with new Hg197 evaluations:
+      assign MAT numbers, set LDRV=0, fix level index issues in MF 8/10, fix ELIS and
+      LIS for the m1 evaluation
+
+    * Fix mismatches between MF=8 / MF=10 in several new evaluations:
+      n-036_Kr_081.endf, n-042_Mo_093.endf, n-076_Os_191.endf, n-077_Ir_192.endf,
+      n-078_Pt_193.endf, n-052_Te_121m1.endf, n-053_I_132.endf, n-053_I_132m1.endf,
+      n-052_Te_131.endf, n-052_Te_131m1.endf, n-052_Te_121.endf, n-052_Te_121m1.endf,
+      n-047_Ag_118m1.endf, n-050_Sn_121m1.endf, n-058_Ce_137m1.endf, n-075_Re_186m1.endf,
+      n-077_Ir_194m1.endf, n-083_Bi_210m1.endf
+
+    * n-013_Al_026m1.endf: Fix issues with new Al26_m1 evaluation:
+      MF=1 needs excited state energy, plus should indicate unstable nucleus
+        - Remove non-zero values from reserved field in MF=4
+        - ensure level indices are right in MF=8 and 10
+
+    * Add correct MAT numbers to many new evaluations
+
+    * Fix LDRV flag in many new evaluations (LDRV should be 0 unless the file is derived,
+      application-specific data)
+
+Added & corrected Pt evaluations from TENDL:
+
+    * New files: n-078_Pt_190.endf, n-078_Pt_191.endf, n-078_Pt_192.endf,
+      n-078_Pt_194.endf, n-078_Pt_195.endf, n-078_Pt_196.endf, n-078_Pt_197.endf,
+      n-078_Pt_198.endf, n-078_Pt_193.endf
+
+    * n-078_Pt_194.endf, n-078_Pt_198.endf: Fix mismatch between width in File 2 and
+      File32 to allow to get covariance data in RR.  The uncertainty for the widht has
+      been adjusted to keep the same relative value.
+
+    * n-078_Pt_192.endf New File 2 and File 32 evaluations from Dimitri Rochman for Pt192
+      to makes sure that File 2 and File 32 resonances are in sync.
+
+    * n-078_Pt_195.endf: Fix metastable indices in Pt195. MF6 lists the 7th excited state
+      (259 keV, t1/2 = 4 days) as metastable. MF8 has that state but also lists the 1st
+      excited state (98 keV, t1/2 = 170ps), incorrectly labeled as the ground state.
+
+    * n-078_Pt_197.endf: Like Pt195, 197 includes two metastables in MF8 but only one in
+      MF6. Fix up LIP and LIS flags
+
+    * n-078_Pt_190.endf, n-078_Pt_192.endf, n-078_Pt_194.endf, n-078_Pt_196.endf, n-078_Pt_198.endf
+      Remove the URR covariance data from some of the Pt isotopes as the J valuse between
+      File 32 and File 2 do not agree and the average resonance
+      parameeters for one of the J value in File 32 are 0.
+
+Added & corrected Ne evaluations from TENDL:
+
+    * New files: n-010_Ne_020.endf, n-010_Ne_021.endf, n-010_Ne_022.endf
+
+    * n-010_Ne_022.endf: Update the File 32 width for some resonances to the one given in
+      File 2. The uncertainty for those width is recalculated to give the same relative
+      uncertainty. For Ne22 URR covariance was removed.
+
+    * n-010_Ne_020.endf: make MF32 resonance parameters match MF2; toss out off-diagonal
+      terms in Ne20: they try to assign to matrix elements out of range!
+
+Other assorted fixes:
+
+    * n-094_Pu_240.endf: Several fixes:
+        ** Fix resonance energies in MF=32 to match MF=2.
+        ** Change the engy range of the incident energies for the chi covariance matrix
+           (File 35) in Pu240 as per Denise Neudecker's recommendation.
+        ** Change MF10 energy from 4.298000+4 to 4.297984+4 for consistency with MF3/MT51
+
+    * n-022_Ti_048.endf: adjust the Q values of the MT=58 cross section to be
+      consistent with ENSDF and the MF=12 data.
+
+    * n-073_Ta_180.endf, n-073_Ta_181.endf, n-075_Re_185.endf, n-075_Re_187.endf
+      Fix minor format issues in LLNL Ta and Re evaluations: MF=12 used LP=0 meaning
+      'origin of photons not designated', but the origin is given in field ES on the same line.
+
+
+ENDF/B-VIII.0beta4 (28 Feb 2017)
+--------------------------------
+
+CIELO evaluations:
+
+    * n-001_H_001.endf: New version with standards cross section, tested in-house at LANL.
+      Documentation and file-33 not updated yet
+
+    * n-026_Fe_056.endf (IAEA file fe56ib20w.endf): Slightly revised version from
+      previous, capture backround around 25 keV slightly reduced, but not zeroed.
+      MACS(30 keV) = 13.97 mb, somewhat higher than KaDoNiS recommendation, but
+      consistent with several MACS(30 keV) data sets.  This file also includes a few minor
+      fixes in the fast region:
+        - Fixed missing branching ratios for 56Fe and 57Fe levels in discrete-level file
+          for Fe56. This should not affect any cross sections, only gammas.
+        - Main changes were in order to improve agreement of high-energy (between ~ 50
+          and 150 MeV) alpha production with exp. data. This was done by identifying which
+          nuclei contribute the most to alpha emissions at 150 MeV and then fitted the
+          level-density and alpha-emission tuning parameters for those nuclei. This fit
+          was done through senstivity matrix calculations and Kalman.
+        - Calculations were done with Rev. 4825 of EMPIRE.
+
+    * n-092_U_235.endf: 3 Changes
+      1 revision r1060: (IAEA u235ib36o28p6DNcnu5ef0STi) nu-bar below 75 eV increased by
+        0.05% to compensate the loss of reactivity due to the new LANL hydrogen (STD 2016).
+        U-235 resonance parameters were changed (ORNL RP file 28p) to decrease the slope
+        of HST benchmarks vs ATLF.  Comments need updating
+      2 revision r1071: (IAEA u235ib36o28t6DNcnu5ef0STm) (comments need update)
+        Small changes to resonance parameters for consistency with Standards_2016 resonance
+        fission integrals from 100 eV up to 1 keV, and a small change to nu-bar (from
+        1-27 eV) to compensate the change in gradient with ATLF in HST benchmarks.
+      3 revision r1071: (IAEA u235ib36o28t6DNcnu5ef0STs)
+        The Standards were modified slightly and they affected benchmark performance.
+        The U-238(n,f) cross section below the Standards region was defined on a finer
+        mesh, so it was decided to adopt it (previously the ENDF/B-VI.8 was taken). The
+        cross sections were made consistent with the new Standards in the "Standards"
+        region, as well as in the region of "recommended" cross sections (pointwise or
+        group-wise). This meant that U-235 and U-238 evaluations needed additional tuning.
+        Small changes to nu-bar were made. The new PFNS of U-235 by D. Neudecker are
+        included, as well as the fission gamma data from Stetcu (LANL).
+
+    * n-092_U_238.endf; new version of U-238: (IAEA u238ib54lrlFsfaST4d)
+      The Standards were modified slightly and they affected benchmark performance.
+      The U-238(n,f) cross section below the Standards region was defined on a finer
+      mesh, so it was decided to adopt it (previously the ENDF/B-VI.8 was taken). The
+      cross sections were made consistent with the new Standards in the "Standards"
+      region, as well as in the region of "recommended" cross sections (pointwise or
+      group-wise). This meant that U-235 and U-238 evaluations needed additional tuning.
+      Small changes to nu-bar were made. The new PFNS of U-235 by D. Neudecker are
+      included, as well as the fission gamma data from Stetcu (LANL).
+
+    * n-094_Pu_239.endf (IAEA File pu239e80b4_5_corDN (as submitted by D. Neudecker on 22
+      February)) The file was made consistent with Standards_2017, including a correction
+      to the PFNS for Einc = 17.5, 20 and 30 MeV (were missing).  In addition, the prompt
+      nu-bar from 0.9 MeV to 6 MeV was adjusted.  Use a 1.002 factor
+      at 1.0 MeV, with a linear ramp down to a 1.000 factor a 6.0 Mev.
+      Make a corresponding change to total nu-bar.
+        - This seemingly arbitrary change is easily accommodated by the
+          spread in experimental data and yields better calculated PMF
+          eigenvalues.
+        - A more rigorous re-analysis of the existing experimental
+          database remains a future task.
+
+
+Other evaluations using Standards 2017 data:
+
+    * n-003_Li_006.endf: New R-matrix analysis from G. Hale.  Results from a new R-matrix
+      analysis of the 7Li system, done up to 4 MeV neutron energy, were included in this
+      evaluation for MF=3, MT=1,2,105.  The results were obtained by fitting the (n,t)
+      cross section that resulted from the 2016 GMA standards evaluation, along with data
+      from other reactions in the 7Li sytem.
+
+    * n-005_B_010.endf: New R-matrix analysis from G. Hale:
+    1.  Standard (n,a) cross sections were fitted with R-matrix analy-
+        sis at energies up to 1 MeV.
+    2.  (n,a) cross sections were modified at higher energies to agree
+        with data of Schrack (n,a1) and Gioginis (n,a).
+    3.  Total cross section was modified at higher energies to better
+        agree with data of Wasson (200 m) and of Abfalterer.
+    4.  Capture cross section (3-102) was modified to agree with
+        recent data from Firestone (thermal) and of Igashira (keVs).
+    5.  Kornilov data for the (n,t) reaction were used in the R-
+        matrix fit below 1 MeV; cross section (3-700) was unchanged
+        at energies above 1 MeV.
+    6.  Elastic neutron scattering angular distributions (4-2) changed
+        below 1 MeV.  Angular distributions were also changed at
+        energies below 1 MeV for the (n,a0) (6-800) and (n,a1) (6-801)
+        reactions, and added for the (n,t) (6-700) reaction.
+    7.  MT 605 (n,p') from the 5th excited state at 6263.3 keV does
+        not decay by pair production.  The LR flag, previously set
+        to 40 was changed to 0.
+
+    * n-079_Au_197.endf (IAEA filename: au197STD-2017-final-11Feb17-vp.endf):
+      New version of JEFF-3.3's Au-197 file with the Standards_2017 implemented, including
+      - Extended the URR up to 2 keV and agreement with the LSD benchmark was additionally
+        improved through an alternative use of the statistical and standard infinitely
+        dilute capture cross section in the three regions 2-3.75 keV, 3.75-11.75 keV, and
+        11.75-100 keV, by keeping continuity.
+      - Below 2 keV all resolved resonance parameters were reevaluated based on
+        measurements at n_TOF and GELINA.
+      - This file is essentually ENDF/B-VII.1 above the resonance region but includes
+        updated covariances.
+
+
+Other notable changes:
+
+    * n-017_Cl_035.endf:  This commit is motivated by the incorrect mass of the (n,p)
+      particle-pair for which the mass of 35Cl was reported instead of the
+      correct mass of 35S. The mass of the elastic particle-pair was also made
+      consistent to that one reported in file 3.
+      - Changes on the masses are based on the atomic mass evaluation 2012.
+          1) correction of the mass for elastic particle-pair 35Cl (MT=2):
+          2) correction of the mass for the (n,g) particle-pair 36Cl (MT=102)
+          3) correction of the mass for the (n,p) particle-pair 35S (MT=600)
+      - Additional correction on the charge number for the elastic
+        particle-pair: the charge number was set to zero instead of Z=17.
+        Luckily, this had no impact on the cross sections because for the
+        elastic particle-pair the penetrability factors are independent from the
+        charge number Z.
+      - Changes 1),2) and 3) generated negligible changes on the cross sections
+        when the cross sections for all reaction channels were reconstructed
+        from file 2.
+      - Note: the Q-value calculated with the masses of Atomic Mass Evaluation
+        2012 is Q=615.0234 keV. This is slightly different from that reported in
+        the current file Q= 615.2200 keV.
+
+    * n-017_Cl_037.endf; MF=3, MT=102 #had 2 interpolation regions.  There was only 1
+      interpolation region in MF=3, MT=1.  MF=3 MT=1 has been corrected to have 2
+      interpolation regions.  We believe that this did not change any of the transport
+      calculations because in AMPX  and NJOY the total cross section is calculated from
+      the sum of the partials and therefore the error in MF=3 MT=1 should never have
+      entered transport calculations.
+
+    * n-026_Fe_054.endf: Merged fast file from CIELO Iron project rev. 412
+      (Fast/fe54-CIELO.endf) with resonances from CIELO Iron project rev. 379 of
+      Full/fe54-CIELO.endf.  This merged file has (n,p) and (n,2n) replaced by IRDFF.
+      Added fluctuations in fast region by replacing (n,total) by JENDL-4.0 between
+      1.036 MeV and 7.25 MeV. Reconstructed elastic for consistency.
+
+    * n-026_Fe_057.endf; Merged fast file from CIELO Iron project rev. 397
+      (Fast/fe57-CIELO.endf) with resonances from CIELO Iron project rev. 311 of
+      Full/fe57-CIELO.endf.
+
+    * n-026_Fe_058.endf: Merged fast file from CIELO Iron project rev. 396
+      (Fast/fe58-CIELO.endf) with resonances from CIELO Iron project rev.244 of
+      Full/fe58-CIELO.endf.  Rebuild with URR set for self-shielding only
+
+    * n-029_Cu_063.endf: Resonance Parameter Covariance Matrix (file 32) has been added
+      for the resonance parameters from the beta2 version.  RPCM has been calculated
+      using the retroactive covariance matrix methodology of SAMMY and the unrealistically
+      small uncertainties on the resonance parameters have been increased to calculate
+      cross section uncertainties on the order of several percent for a 44 group cross
+      section covariance matrix using a constant flux.
+
+    * n-029_Cu_065.endf: Resonance Parameter Covariance Matrix (file 32) has been added
+      for the resonance parameters from the beta2 version.  RPCM has been calculated
+      using the retroactive covariance matrix methodology of SAMMY and the unrealistically
+      small uncertainties on the resonance parameters have been increased to calculate
+      cross section uncertainties on the order of several percent for a 44 group cross
+      section covariance matrix using a constant flux.
+
+    * n-033_As_074.endf: Set the URR use for self-shielding calculations only to
+      avoid double counting of average cross section
+
+    * n-094_Pu_240.endf (IAEA pu240e80b31c): Changed to improve MCF benchmarks and
+      measured reaction rates (PROFIL).
+        - Fission cross section updated: Replaced by Tovesson 2009 data from 5.7keV to 40
+          keV (URR), Weston 40keV - 190keV.
+        - Capture cross section taken from ENDF/B-VII.0 (=ENDF-B/VI.8), with an
+          additional 2% reduction above 42 keV to improve Pu240ng measured reaction
+          rates (PROFIL).  Also replaced Pu-240(n,g) above URR with ENDF/B-Vi.8, which is
+          Weston’s evaluation, who also made the only measurement in this energy range.
+        - Elastic cross section taken from ENDF/B-VII.0 (=ENDF-B/VI.8).
+
+    * n-095_Am_241.endf: add an isotropic MF4/MT18 section to go with the PFNS
+
+
+ENDF/B-VIII.0beta3.1 (19 Jan 2017)
+----------------------------------
+
+CIELO evaluations:
+
+    * n-008_O_016.endf: new evaluation of capture cross section based on the R-matrix (up to
+      2 MeV) and the DSD model in CoH3 (2 - 30 MeV).  Also 2 minor bugs were also fixed:
+        - MF4 MT2, odd number of Legendre coefficient at 0.1 eV
+        - different threshold energy of (n,alpha) in MF14
+
+    * n-026_Fe_054.endf: Several changes:
+        - Add in roughly 64 resonances from G. Giubrone’s thesis “Neutron capture
+          measurement of 54Fe and 57Fe at CERN n_TOF”, University of Valencia (2014),
+          noted in Atlas evaluation but missing from IRSN evaluation
+        - Add high energy capture background to the RRR to account for missing p- & d-wave
+          resonances
+
+    * n-026_Fe_056.endf: New CIELO revision for Fe56, corresponding to IAEA version
+      fe56ib19v.  Major change: The elastic angular distributions in the resolved
+      resonance range are taken from resolution-broadened Perey data.  Above the resonance
+      range up to 2.5 MeV the angular distributions correspond to re-fitted Kinney data
+      with some adjustments based on the comparison with Perey data in the overlapping
+      region. In the range 2.5-4.0 MeV the angular distributions are taken from Smith
+      (1973). Above 2.5 MeV the angular distributions are from the Empire calculation.
+
+    * n-092_U_235.endf: CIELO evaluations for 235,238U including new standards evaluation
+      and PFNS
+
+    * n-092_U_238.endf: CIELO evaluations for 235,238U including new standards evaluation
+      and PFNS
+
+    * n-094_Pu_239.endf: New CIELO evaluation.   It contains:
+        - The final prompt fission gamma rays from I. Stetcu
+        - T. Kawano’s results for  gamma-ray production from all channels other than fission
+        - (n,2n) tweak near the threshold and below 8 MeV
+        - (n,f) cross section adjusted to the final standards released on Dec. 14, 2016
+      It does NOT contain the P(nu;Einc) evaluation yet, as LANL decided it is better to
+      keep those for beta5 instead.
+
+
+New or mostly new evaluations:
+
+    * n-004_Be_009.endf: New LANL 9Be evaluation
+
+    * n-006_C_013.endf: New 13C evaluation from LANL
+
+    * n-079_Au_197.endf: Proposed evaluation: based on ENDF/B-VII.1 cross sections in
+      the fast energy range and resonance parameters evaluated at IRMM
+
+    * n-092_U_233.endf: Replace with CIELO project version: JENDL-4.0 + updated resonances
+      to get thermal cross sections + LANL PFNS
+
+
+Other notable changes:
+
+    * Reverted n-029_Cu_063.endf and n-029_Cu_065.endf to their beta2 versions due to
+      poor performance of the beta3 version in critical assembly benchmarks
+
+    * n-094_Pu_240.endf:
+        - Adjusted the negative (bound) levels of the Resolved Resonance
+          Region (RRR) evaluation (File 2) with evaluation code SAMMY
+          (Larson) to better match the thermal cross section values
+          found in the Atlas of Neutron Resonances (Mughabghab).
+        - The Resonance parameter covariance matrix (File 32) was adjusted
+          accordingly to preserve the relative uncertainty on the cross
+          section of the original evaluation of Derrien et. al.  In File
+          32, non-zero uncertainty is reported for zero fission widths of
+          the 2 spin groups associated with p-wave resonances.  12 of
+          those variances were negative and were changed to be the
+          corresponding positive value.
+
+    * n-095_Am_241.endf: The (n,n'), (n,2n), (n,3n), (n,4n), and capture cross sections
+      updated based on a new CoH3 calculation.  The MF=6 sections corresponding to the new
+      cross sections are also provided including complete photon production information.
+
+    * n-095_Am_243.endf:
+        - The prompt fission spectrum replaced by JENDL-4.
+        - Stop the RRR at 50 keV rather than 250 keV and extend the URR down to 50 keV.
+          There were no resonances above 250 keV to provide a background for the
+          resonances from 80-250 keV, so we had a strange dip in the reconstructed cross
+          section.  The URR extension does a reasonable job matching the average cross
+          section.  This resolves tracker item #1043.
+
+    * n-099_Es_254m1.endf: Correct the ZA in MF=31 data, was set to 9.925410+4
+
+    * Remove sign from channel spin in new LRF=7 evaluations (per CSEWG 2016 format
+      discussion): n-020_Ca_040.endf, n-029_Cu_063.endf, n-029_Cu_065.endf,
+      n-074_W_183.endf
+
+
+
+ENDF/B-VIII.0beta3 (1 Nov 2016)
+-------------------------------
+
+CIELO evaluations:
+
+    * n-026_Fe_054.endf: New Fe54 evaluation with the following:
+        1) IRSN resonances up to 1.036 MeV
+        2) New EMPIRE calculation from 1.036 MeV - 150 MeV
+        3) (n,2n), (n,p) and (n,a) cross sections taken from IRDFF, partial reactions
+           scaled to match these totals
+
+    * n-026_Fe_056.endf: IAEA file fe56ib18b, IAEA-BNL Collaboration for CIELO:
+        - Resolved resonance range up to 850 keV basically from JENDL-4.0
+        - The resonance energy at 766.7 kev was corrected.
+        - The background near 800 keV was reduced by 50 percent.
+        - Artificial "background" was added to capture around 24.5 keV,
+          since capture in the hole of the elastic seems to be low and is
+          HIGHLY SENSITIVE to many benchmarks. It was stipulated thet the
+          broad dip in this energy region is caused by inappropriately
+          placed bound states. The adjusted capture cross section now
+          follows the 1/v behaviour.
+        - The total cross section above the resonance range was taken
+          from JEFF-3.2 because it is consistent with the Berthold
+          measurements on Fe-nat. The contribution of the minor isotopes
+          is taken into account.
+        - The capture cross sections above 860 keV were taken from the
+          RPI data presented by Y. Danon at the ND2016 Conference.
+        - JEFF-3.2 contains inelastic cross sections measured by Dupont
+          et al., but the authors discovered normalisation problems and
+          the results were never published. New measurements were
+          performed by Negret, but with a lower resolution. The Dupont
+          and Negret data were binned over a suitable energy mesh.
+          A piecewise linear scaling parameter was constructed to adjust
+          Dupont data such that they agree on average with the Negret
+          data. It was also found that the energy calibration of Negret
+          data did not match the resonances of the total cross section.
+          A correction was made to the energy scale which amounted to
+          2.5 keV at 1.8 MeV. Inelastic cross sections between 0.85e6
+          and 3.5e6 eV are taken from JEFF-3.2.
+        - The elastic cross section is defined as the difference between
+          the total and the remaining partial cross sections. By
+          resolution-broadening of the elastic cross section to
+          0.3 percent, good agreement is observed with the measured
+          Kinney data.
+        - The elastic angular distributions in the resolved resonance
+          range were reconstructed from the resonance parameters.
+          The Legendre moments were resolution-broadened with a
+          resolution function of constant width of 1 keV. For most
+          applications the resolution-broadened Legendre coefficients
+          are sufficient, but the user still has the option to
+          reconstruct detailed distributions from the resonance
+          parameters.
+          Above the resonance range up to 4 MeV the angular distributions
+          were taken from JEFF-3.2 because they accurately follow the
+          Kinney data (with a correction for the minor isotopes).
+        - The P2 Legendre coefficients of elastic scattering were
+          increased linearl, starting with 0 at 0.3 MeV,
+          peaking to 0.7 at 0.85 MeV and ending with 0 at 1.5 MeV.
+        - Similarly, the P4 Legendre coefficients of elastic scattering
+          were increased linearly, starting with 0 at 0.5 MeV,
+          peaking to 0.2 at 0.85 MeV and ending with 0 at 1.5 MeV.
+        - At higher energies all cross sections, angular distributions
+          and spectra are taken from EMPIRE calculation, which was tuned
+          to reproduce the important reaction channels and radionuclide
+          production data.
+
+    * n-026_Fe_057.endf:  Fe57 revised with new EMPIRE calculation for fast region
+
+    * n-094_Pu_239.endf: October 31, 2016 Major update...
+
+        *** MF1, MT456/452: Prompt and total neutron multiplicities are replaced by the
+            original results from the statistical analysis of experimental data by P.G.
+            Young using the GLUCS code. The modification introduced in the fast energy
+            range for the average prompt neutron multiplicity in the ENDF/B-VII library
+            is removed. The average total neutron multiplicity is adjusted accordingly.
+
+        *** MF3, MT18: The fission cross section evaluated as part of the 2016 standard
+            evaluation is adopted here above 40 keV and up to 20 MeV.
+
+        *** MF3, MT102: The capture cross section follows the recent modification of
+            ENDF/B-VII.1 above 30 keV to better match recent DANCE data by Mosby et al.
+            [Mo16] up to 0.7 MeV, where it switches to Kawano's CoH3 calculations [Ka16]
+            up to 3.7 MeV. For now (to be replaced), from 3.7 to 20 MeV, it then matches
+            the previous ENDF/B-VII.1 evaluation.
+
+        *** MF5, MT18: The PFNS was obtained from an evaluation by Neudecker et al. [Ne16]
+            extending the original Los Alamos model to include the effects of emission
+            anisotropy and different fragment temperatures, as well as to properly account
+            for multi-chance fission evaporation and pre-equilibrium neutron spectra. The
+            thermal PFNS was obtained by averaging the ENDF/B-VII.1 PFNS with a slightly
+            modified PFNS by Romano.
+
+        [Mo16] S. Mosby et al, private communication, publication for Phys. Rev. C in
+               preparation.
+
+        [Ka16] T. Kawano, private communication.
+
+        [Ne16] D. Neudecker, P. Talou, T. Kawano, A.C. Kahler, M.E. Rising and M.C. White,
+               EPJ Web of Conferences 111, 05004 (2016).
+
+
+New or mostly new evaluations:
+
+    * n-017_Cl_035.endf capture cross sections above 1.2 MeV recalculated with CoH3, and
+      the total and elastic scattering cross sections were re-adjusted.
+
+    * n-017_Cl_037.endf capture cross sections above 1.2 MeV recalculated with CoH3, and
+      the total and elastic scattering cross sections were re-adjusted.
+
+    * n-027_Co_059.endf: T. Kawano's re-evaluation of fast region, using CoH3
+
+    * n-029_Cu_063.endf: ORNL + LANL Evaluation merged at 300 keV.  Resonance parameter
+      covariance matrix has been added.
+
+    * n-029_Cu_065.endf: ORNL + LANL Evaluation merged at 300 keV.  Resonance parameter
+      covariance matrix has been added.
+
+    * n-033_As_073.endf: T. Kawano's revised 73As evaluation using outgoing distributions
+      generated by CoH3
+
+    * n-033_As_074.endf; New evaluation using CoH.  Cross sections were matched to old
+      evaluation so now new distributions and cross sections are internally consistant
+
+    * n-036_Kr_078.endf high energy part replaced by CoH3 calculations; (n,3n) section removed
+
+    * n-052_Te_132.endf Cross sections above resonance range updated by CoH3 calculations.
+
+    * n-054_Xe_124.endf update high energy part with CoH3
+
+    * n-072_Hf_174.endf new evaluation above the unresolved resonance range
+
+    * n-072_Hf_176.endf new evaluation based on CoH3 calculation above resonance region
+
+    * n-072_Hf_177.endf new evaluation above resonance range
+
+    * n-072_Hf_178.endf new evaluation above resonance range
+
+    * n-072_Hf_179.endf Cross sections and energy spectra above the resonance range updated
+
+    * n-072_Hf_180.endf final commit of Hf isotopes
+
+
+Other notable changes:
+
+    * n-004_Be_007.endf:
+      EXTENSION FROM 8.1 to 20 MeV maximum neutron energy:
+      Cross sections for total, elastic, (n,p) and (n,a) extended to 20
+      MeV by rescaling the results of a defaults TALYS 1.6 calculation
+      (without pre-equilibrium) to match the previous curves at 14 MeV.
+      Ian Thompson. Jun 8, 2016
+
+    * n-021_Sc_045.endf:  The resonance energy boundary fixed to match the pointwise cross
+      sections.  Set (n,p) cross sections zero below 96.94 keV.  Reconstruct the total
+      cross sections.
+
+    * n-038_Sr_088.endf: Minor resonance region fix related to tracker #1025.
+
+    * n-039_Y_089.endf Changed Q value for MF=3, MT=107 in order to fix discrepancy
+      pointed out by PSYCHE.
+
+    * n-040_Zr_090.endf: Minor resonance region fix related to tracker #1025.
+
+    * n-040_Zr_091.endf: Minor resonance region fix related to tracker #1025; Restore
+      ENDF/B-VII.1 cross sections for capture, elastic and total in the URR, set the URR
+      data for self-shielding calculations only
+
+    * n-040_Zr_094.endf Fix "hole" in the elastic, total and capture cross sections by
+      extending the fast region cross sections down to the top of the RRR, resolving
+      tracker item [#1014]; Minor resonance region fix related to tracker #1025.
+
+    * n-040_Zr_096.endf extend the capture, total and elastic cross section down to the
+      top of the RRR, resolving tracker item [#1013]
+
+    * n-041_Nb_093.endf resonance parameters updated
+
+    * n-042_Mo_095.endf: (n,el) Legendre angular moments were reconstructed from angular
+      distributions and then matched onto EMPIRE calculations at higher energies
+
+    * n-045_Rh_105.endf Convert to MLBW
+
+    * n-050_Sn_120.endf: 50 keV data points in total, elastic, and capture removed
+
+    * n-054_Xe_123.endf total, elastic, and capture cross sections at 10^-5 eV given by
+      considering the 1/v shape in capture.
+
+    * n-054_Xe_135.endf Convert 135Xe's sole SLBW resonance to MLBW; Fix minor formatting
+      problems
+
+    * n-061_Pm_148m1.endf; Fix J of lone resonance; Convert the sole resonance to MLBW;
+      Fix minor formatting problems
+
+    * n-062_Sm_144.endf URR energies fixed to make sure all points are inside URR (not
+      required).  Total cross sections reconstructed from all partial cross sections.
+
+    * n-063_Eu_154.endf The first resonance energy changed into 0.188 eV.
+
+    * n-073_Ta_180.endf Pointwise values for MF=3 at 1e-5 eV fixed by Ian Thompson, LLNL
+
+    * n-092_U_239.endf: Resonance and URR regions now include 3+ resonance spins as well
+      as the 2+ previous spins. Points above 10 keV patched to merge on these.
+      Specifications adjusted at URR lower boundary. I.J. Thompson, LLNL, Oct 2016
+
+    * n-092_U_240.endf Changing the resonance flag for the U-240 file from Single-Level
+      Breit-Wigner to Multi-Level Breit Wigner (LRF=1 to LRF=2).
+
+    * n-092_U_241.endf Change resonance spins in U-241 from 0.5 to 1.0.; add
+      documentation, make MLBW
+
+    * n-094_Pu_243.endf Changed resonance spins from 3.5 and 2.5 to 4.0 and 3.0
+      respectively. Also changed to LRF=2 (MLBW).
+
+    * n-095_Am_243.endf: Minor resonance region fix related to tracker #1025.
+
+    * Adopted the prompt nubar proposed by R.Q.Wright added, and recalculated the total
+      nubar in following evaluations: n-093_Np_236.endf, n-093_Np_238.endf,
+      n-094_Pu_243.endf, n-094_Pu_244.endf, n-094_Pu_246.endf, n-096_Cm_241.endf,
+      n-096_Cm_242.endf, n-096_Cm_244.endf, n-096_Cm_246.endf, n-096_Cm_247.endf,
+      n-096_Cm_248.endf, n-096_Cm_249.endf, n-096_Cm_250.endf, n-097_Bk_245.endf,
+      n-097_Bk_246.endf, n-097_Bk_247.endf, n-097_Bk_248.endf, n-097_Bk_249.endf,
+      n-097_Bk_250.endf, n-098_Cf_246.endf, n-098_Cf_248.endf, n-098_Cf_249.endf,
+      n-098_Cf_250.endf, n-098_Cf_251.endf, n-098_Cf_252.endf, n-098_Cf_253.endf,
+      n-098_Cf_254.endf, n-099_Es_251.endf, n-099_Es_252.endf, n-099_Es_253.endf,
+      n-099_Es_254.endf, n-099_Es_255.endf, n-100_Fm_255.endf
+
+
+
+ENDF/B-VIII.0beta2 (19 Aug 2016)
+--------------------------------
+
+CIELO evaluations:
+
+    * n-026_Fe_054.endf: Revised 54Fe from the CIELO project.  This evaluation includes
+      revised resonance region from IRSN up to 1.2 MeV in the LRF=7 format, EMPIRE
+      calculation for fast region and capture cross section tuned to match average
+      resonance cross section.  DSD capture was added above the resonance region.
+
+    * n-026_Fe_056.endf: Revised 56Fe from the CIELO project.  This evaluation includes
+      revised resonance region from IRSN up to 850 keV in the LRF=7 format, elastic and
+      inelastic cross sections and angular distributions from beta1 and EMPIRE
+      calculation for the remainder of the fast region.
+
+    * n-092_U_235.endf: CIELO 235U file u235ib18o23g6cnu5ef1 from
+      `https://www-nds.iaea.org/CIELO/`, product of an ORNL, LANL and IAEA collaboration.
+      Major components of evaluation:
+         - Empire calculation 'ib18' (capture at upper limit of Jandel)
+
+         - Improved fit of Kammerdiener ddx at 14 MeV
+
+         - Resonance parameters ORNL version 'o23'
+
+         - PFNS - GMA fit at thermal, Talou above
+
+         - Prompt nu-bar evaluated by V. Pronyaev,
+           based on Reed data from C00-3058-39, normalized to thermal
+           value of 2,41161. Simon data were measured rel.to 252Cf(sf)
+           normalized at 10-27 eV on Reed's data (10-Jan-2016)
+           The dip in the data around 30 eV was suppressed.
+           Thermal value was increased to 2.414 below 0.2 eV (g6cnu5e)
+
+         - Fission data (except PFNS) from ENDF/B-VII.1
+
+         - Delayed nu-bar and spectra from ENDF/B-VII.1
+
+    * n-092_U_238.endf: CIELO 238U file ib46rlFs from
+      `https://www-nds.iaea.org/CIELO/`, product of an IRMM, LANL and IAEA collaboration.
+      General information:
+         - Empire ib46 calculation.
+
+         - Resonance file IRMM URR from 'u8GelinaRR.end'
+           New resolved/unresolved resonance evaluation from IRMM
+
+         - Major cross sections in the UR range conform to Standards joint
+           fit.
+
+         - PFNS by Talou.
+
+      Note: 'ib46'='ib45' with (n,3n) exclusive and cleaner formatting.  This
+      revision includes a fix to unit conversion problem on 2nd-order coefficients
+      from MT458 fission energy release.
+
+    * n-094_Pu_239.endf: CIELO file pu239lanlmbc2v from `https://www-nds.iaea.org/CIELO/`,
+      product of an IRMM, LANL and IAEA collaboration.  General information:
+
+        - Fix unit conversion problem on 2nd-order coefficients from MT458 fission energy
+          release.
+
+        - Changed to LSSF=1 in URR
+
+        - Replace capture (mf3,mt102) above 30 keV with new modification
+          from Chadwick to follow Mosby data. Modify elastic (mf3,mt2)
+          to preserve total x/s.
+
+        - Replace "Romano" thermal pfns tweak with an alternate tweak
+          that is the average of the Romano+original e71 thermal pfns.
+
+Other notable changes:
+
+    * n-004_Be_007.endf: Fix outgoing alpha multiplicities for n+Be7->a+a
+      (two alpha products are listed, so each should have multiplicity=1)
+
+    * n-006_C_012.endf: 2 fixes:
+        1. ZAI in the first isotope in the resonance region was set to 6000, not 6012
+
+        2. For the (n,n') levels, QM should have been all set to 0.0 MeV, QI should
+           have been set to the -(level energy)
+
+    * n-006_C_013.endf: Revised 13C evaluation from M. Paris and G. Hale.  This new
+      evaluation of the n+13C reactions is based on a six-channel R-matrix analysis of
+      reactions in the 14C system at energies up to 20 MeV.  Data included were total
+      cross sections and angular distributions up to 5 MeV. A fair fit is obtained to
+      the 3676 data points included.
+
+    * n-020_Ca_040.endf: Ca-40  resolved resonance evaluation, performed in energy range
+      from 1e-5 eV to 1.5 MeV with the SAMMY code in ORNL.  Resonance parameter covariance
+      matrices were also obtained in the SAMMY evaluation process in the energy region up
+      to 1.5 MeV.  The RML formalism (LRF=7) was used for the resonance parameters
+      and the formalism (LCOMP=1) for the covariance matrix.  Thermal cross sections (for
+      reconstructed cross sections at T=293.6 K) are: Total 3.075396 b, (n,g) 2.662938 b,
+      (n,el) 0.409977 b, and (n,a) 0.002481 b.
+
+    * n-029_Cu_063.endf, n-029_Cu_065.endf from ORNL, LANL collaboration:
+        - Updated resolved resonance region evaluation for cu63 and cu65.
+          The high energy capture data normalization has been corrected and the
+          resonance parameters refitted to eliminate the dip of the
+          capture cross section at the end of the resolved resonance region.
+
+          Angular distribution data for elastic scattering for incident neutron
+          energies between 1e-5 eV and 300 keV should be calculated directly
+          from the resonance parameters in File 2 using the Blatt and Biedenharn
+          formalism, if the capabilities of the processing code permit.  Otherwise, the
+          coefficients of the expansion of the angular distribution in the Legendre
+          moments have been provided in File 4 on a reduced energy grid sufficient
+          to maintain comparable performance in neutron transport calculations.
+
+        - Collaboration work is on going with LANL to smooth the transition from the
+          resolved resonance region (File 2) to the high energy region (File 3)
+          in both angle integrated cross sections and distributions of elastic
+          scattering with a schedule completion date of Nov, 2016.  The upper resonance
+          boundary was temporally changed to 100keV, and LANL evaluation concatenated
+
+        - The covariance part of the evaluation has been removed just for the beta2 testing
+          version.  New resonance parameter covariance matrices will be added once the
+          synchronization of the resonance region with the high energy region is complete.
+
+
+    * n-033_As_073.endf: New evaluation from T.Kawano, including some fixes:
+        - Make sure the number of gammas is equal in corresponding MF12 and MF14 files
+          Get BR's of some MF12 levels to sum up to 1.0
+
+        - First (n,p) excited state in MF=3 had wrong energy.  Note: this file is missing
+          the second (n,p) state in MF=3, but has it in MF=12 so MF=3 & MF=12 are out of
+          sync
+
+        - Fix mismatches between excited state energies for As73 (n,p*) reactions.
+
+    * n-093_Np_236m1.endf: Fix unit conversion problem on 2nd-order coefficients
+      from MT458 fission energy release.
+
+
+ENDF/B-VIII.0beta1 (25 Apr 2016)
+--------------------------------
+
+* Replacing Be-7 with evaluation that goes up to 20 MeV.
+
+* Improved documentation in n-092_U_238.endf
+
+* Hale & Paris's (LANL) isotopic C evaluations (12C, 13C)
+
+* CIELO 235U file from IAEA
+
+* Final 57Fe from CIELO iron project (rev. 246 of CIELO Iron project)
+
+* Final 54Fe from CIELO Iron project (rev. 246 of CIELO Iron project)
+
+* Final CIELO 56Fe before WPEC meetings (rev. 246 of CIELO Iron project)
+
+* Revert prompt and total nu-bar (MF1 MT456, 452) to ENDF/B-VII.1 values for
+  ENDF/B-VIII beta1 release.  This allows for establishing a baseline for future
+  improvements.
+
+* Bug fixes in several files (n-008_O_016.endf, n-006_C_013.endf, n-092_U_235.endf,
+  n-007_N_015.endf, n-026_Fe_054.endf)
+
+
+
+ENDF/B-VIII.0beta0 (8 Apr 2016)
+-------------------------------
+
+CIELO evaluations:
+
+    * n-001_H_001.endf:
+
+        ** Comment section modified slightly to avoid confusions (T. Kawano).
+
+        ** Covariance data replaced by Hale's high fidelity evaluation (T. Kawano).
+
+    * n-008_O_016.endf: CIELO 16O file from G. Hale, et al. (LANL)
+
+    * n-026_Fe_056.endf: CIELO 56Fe file from BNL, IAEA and CNDC
+
+    * n-092_U_235.endf: CIELO 235U file. From IAEA, LANL, ...
+
+        ** Added a delayed neutron multiplicity covariance matrix (MF=31,MT=455) using a
+           least-square fit of available data. The total neutron multiplicity covariance
+           matrix (MF=31,MT=452) is now inferred from the prompt (MT=456) and delayed
+           (MT=455). It fixes a problem observed with very large uncertainties in the total
+           neutron multiplicity in the thermal and URR regions.  (P. Talou)
+
+    * n-092_U_238.endf: CIELO 238U file.  Documentation needs updating.  From IAEA, LANL, ...
+
+    * n-094_Pu_239.endf: CIELO 239Pu evaluation.  From IAEA, LANL, ORNL, IRSN, ...
+
+        ** Fixed a small error in prompt fission neutron spectrum (MF5,MT18), where the
+           16.0 MeV incident neutron energy is replaced by 17.5 MeV. (P. Talou)
+
+        ** Fixed zero uncertainty in prompt nu-bar covariance matrix (MF31,MT456) at first
+           energy point. The same fix was applied to the covariance matrix for the total
+           nu-bar (MF31,MT452). (P. Talou)
+
+        ** Updated evaluation in the resolved range for 239-Pu (L. Luiz et al., ORNL)
+           Features of the evaluation:
+
+             1. One single set of resonances parameters covering the energy
+                range from 0.00001 eV to 2.5 keV.
+
+             2. SAMMY (Reich-Moore) analysis of the experimental data led to
+                a set of resonance parameters that fit well the experimental
+                data and improves benchmark calculations in the thermal
+                region.
+
+             3. Integral quantities such as K1 and eta (nu*capture/fission)
+                were the two major indicators on how to fix the problem with
+                thermal benchmark results.
+
+             4. Experimental data used in the previous Pu-239 resonance
+                were used. The experimental data were well represented
+                with the new resonance evaluation.
+
+
+New full evaluations:
+
+    * Add neutron evaluation (yes, that's neutron as a target)
+
+    * Add 18O evaluation from ROSFUND library, fix total width of 4.09 MeV resonance
+      (was off by factor of 10 from sum of GN and GG), adjust lower limit of MT102 (capture)
+      to eliminate a whole in the reconstructed capture cross section and adjust the total
+      cross section to account for this modification
+
+    * Add minor Fe isotopes from the CIELO collaboration (54Fe, 57Fe and 58Fe).   New
+      fast regions in all from EMPIRE calculations.  New (currently undocumented)
+      resonance regions in all:
+
+        ** 54Fe, new Atlas values, in Reich-Moore format
+
+        ** 57Fe, new Atlas values, in LRF=7 format, Reich-Moore approximation
+
+        ** 58Fe, new evaluation from Moxon
+
+    * Add Dy isotopes from JENDL-4.0+, filling in holes in ENDF (n-066_Dy_154.endf, n-066_Dy_159.endf)
+
+    * Add Yb isotopes from JENDL-4.0+, Yb was not present in ENDF before (n-070_Yb_168.endf,
+      n-070_Yb_170.endf, n-070_Yb_171.endf, n-070_Yb_172.endf, n-070_Yb_173.endf,
+      n-070_Yb_174.endf, n-070_Yb_176.endf)
+
+    * Add Hf isotopes from JENDL-4.0+, filling in holes in ENDF (n-072_Hf_181.endf, n-072_Hf_182.endf)
+
+    * Adding Os isotopes from JENDL-4.0+, there was no Os in ENDF before (n-076_Os_184.endf,
+      n-076_Os_186.endf, n-076_Os_187.endf, n-076_Os_188.endf, n-076_Os_189.endf,
+      n-076_Os_190.endf, n-076_Os_192.endf)
+
+    * New Np236 metastable evaluation, performed at LANL in Jan. 2012.
+
+
+New resonance region evaluations:
+
+    * n-029_Cu_063.endf
+
+        29-Cu- 63 ORNL, MIT Resonance Evaluation Including Covariance and
+        Angular Distribution of Elastic Scattering
+
+        V. Sobes, L. C. Leal, K. Guber, G. Arbanas, D. Wiarda, B. Forget
+
+        Resolved resonance parameter evaluation for Cu-63 was done with the computer code SAMMY.
+        The following data were used in the SAMMY analysis.
+
+              Reference   |   Energy (eV)     | Facility | Measurement
+            --------------|-------------------|----------|------------
+            Pandey et al. |    32 - 185 000   | ORELA    | Trans.  78m
+            Pandey et al. | 1 000 - 1 400 000 | ORELA    | Trans.  78m
+            Guber et al.  |   100 - 90 000    | GELINA   | Capt.   58m
+            Guber et al.  |   100 - 300 000   | GELINA   | Capt.   58m
+            Sobes et al.  |  0.01 - 0.1       | MITR     | Trans.  1.2m
+
+        The MITR transmission measurements were important for determining the shape and
+        the uncertainty of the thermal cross section.
+
+        A set of resonance parameter describing the experimental data was obtained.
+        Resonance parameter covariance matrices were also obtained in the SAMMY evaluation process.
+        The upper energy boundary of the resonance region of Cu-63 was extended from 99.5 keV to 300 keV.
+
+        Angular distribution data for elastic scattering for incident neutron energies
+        between 1e-5 eV and 300 keV were generated directely from the new resonance parameters
+        in File 2 on a fine energy grid. The new elastic scattering angular distribution data gives
+        a much more detailed treatment of the angular distribution than previous evaluations.
+
+    * n-029_Cu_065.endf
+
+        29-Cu- 65 ORNL, MIT Resonance Evaluation Including Covariance and
+        Angular Distribution of Elastic Scattering
+
+        V. Sobes, L. C. Leal, K. Guber, G. Arbanas, D. Wiarda, B. Forget
+
+        Resolved resonance parameter evaluation for Cu-65 was done with the computer code SAMMY.
+        The following data were used in the SAMMY analysis.
+
+              Reference   |   Energy (eV)     | Facility | Measurement
+            --------------|-------------------|----------|------------
+            Pandey et al. |    32 - 185 000   | ORELA    | Trans.  78m
+            Pandey et al. | 1 000 - 1 400 000 | ORELA    | Trans.  78m
+            Guber et al.  |   100 - 90 000    | GELINA   | Capt.   58m
+            Guber et al.  |   100 - 300 000   | GELINA   | Capt.   58m
+            Sobes et al.  |  0.01 - 0.1       | MITR     | Trans.  1.2m
+
+        The MITR transmission measurements were important for determining the shape and the
+        uncertainty of the thermal cross section.
+
+        A set of resonance parameter describing the experimental data was obtained.
+        Resonance parameter covariance matrices were also obtained in the SAMMY evaluation process.
+        The upper energy boundary of the resonance region of Cu-65 was extended from 99.5 keV to 300 keV.
+
+        Angular distribution data for elastic scattering for incident neutron energies between
+        1e-5 eV and 300 keV were generated directely from the new resonance parameters in File 2
+        on a fine energy grid. The new elastic scattering angular distribution data gives a much
+        more detailed treatment of the angular distribution than previous evaluations.
+
+    * n-074_W_182.endf
+
+         74-W- 182 ORNL Resonance Evaluation Including Covariance
+         (ORNL AUG 2014)
+
+         L. Leal, M. Pigni, K. Guber, D. Wiarda, and G. Arbanas
+
+         W-182 resolved resonance parameter evaluation was done in the energy
+         range form 1e-5 eV to 10 keV with the SAMMY code[ref1]. Capture and
+         transmission measurements for enriched W-182 and natural tungsten
+         were used in the evaluation. The measurements were done at the Oak
+         Ridge Linear Accelerator (ORELA)[ref2] and at the Geel Linear
+         Accelerator (GELINA), Belgium[ref3]. Neutron transmission and capture
+         data were measured in the energy range from 20 eV to 10 keV. Thermal
+         cross section[ref4] data available in the EXFOR library were also
+         used in the evaluation.
+
+         Resonance parameter covariance matrices were also obtained in the
+         SAMMY evaluation process in the energy region 1e-5 eV-10 keV. The RML
+         formalist (LRF=7) was used for the resonance parameters and the
+         compact formalism (LCOMP=2) for the covariance matrix.
+         Thermal cross section and uncertainty calculated with SAMMY and the
+         PUFF codes are compared with the values listed in the ATLAS of
+         Neutron Resoances in the table below. Also shown is the capture
+         resonance integral, Coherent scattering length and the effective
+         radius R'.
+
+            Cross Section        ORNL (b)           Atlas (b)
+            -------------        --------           ---------
+               Total         29.18 +/- 0.40             -
+               Capt          20.31 +/- 0.64        19.90 +/-  0.30
+               Scat           8.87 +/- 0.28         8.84 +/-  0.30
+
+         Capture Res. Int.  618.41 +/- 0.17       600.00 +/- 60.0
+
+                R'            7.64 fm               8.3  +/-  0.2  fm
+
+                b_coher       7.11 fm              7.04  +/-  0.04 fm
+
+
+         Average cross section and related uncertainties calculated in energy
+         group 0.0253 eV - 0.3 eV are listed in the table below.
+
+                    Cross Section                Average Value (b)
+                    -------------                -----------------
+                        Total                 29.54 +/- 0.38 (1.3%)
+                        Capt                  20.70 +/- 0.61 (2.9%)
+                        Scat                   8.84 +/- 0.28 (3.2%)
+
+         [ref 1] N. M. Larson,"Updated Users' Guide for SAMMY," Oak Ridge
+                 National Laboratory report  ORNL/TM-9179/R6 (2003).
+         [ref 2] K. Guber, private communication (2012).
+         [ref 3] C. Lampoudis, K. Guber, S. Kopecky, et al., J. Korean
+                 Phys. Soc. 59, 1860 (2010).
+         [ref 4] S. J. Friesenhahn, E. Haddad, F.H. Froehner, et al.,
+                 Nucl. Sci. Eng. 26, 487 (1966).
+
+    * n-074_W_183.endf:
+
+         74-W- 183 ORNL Resonance Evaluation Including Covariance
+         (ORNL AUG 2014)
+
+         M. Pigni, L. Leal, K. Guber, D. Wiarda, and G. Arbanas
+
+         W-183 resolved resonance parameter evaluation was done in the energy
+         range form 1e-5 eV to 5 keV with the SAMMY code[ref1]. Capture and
+         transmission measurements for enriched W-183 and natural tungsten
+         were used in the evaluation. The measurements were done at the Oak
+         Ridge Linear Accelerator (ORELA)[ref2] and at the Geel Linear
+         Accelerator (GELINA), Belgium[ref3]. Neutron transmission and capture
+         data were measured in the energy range from 20 eV to 5 keV. Thermal
+         cross section[ref4] data available in the EXFOR library were also
+         used in the evaluation.
+
+         Resonance parameter covariance matrices were also obtained in the
+         SAMMY evaluation process in the energy region 1e-5 eV-5 keV. The RML
+         formalist (LRF=7) was used for the resonance parameters and the
+         compact formalism (LCOMP=2) for the covariance matrix. Thermal cross
+         section and uncertainty calculated with SAMMY and the PUFF codes are
+         compared with the values listed in the ATLAS of Neutron Resoances in
+         the table below. Also shown is the capture resonance integral,
+         Coherent scattering length and the effective radius R'.
+
+            Cross Section        ORNL (b)           Atlas (b)
+            -------------        --------           ---------
+               Total         15.56 +/-  0.50            -
+               Capt           9.87 +/-  0.53       10.4  +/-  0.2
+               Scat           5.69 +/-  0.11        2.4  +/-  0.6
+
+         Capture Res. Int.  360.82 +/- 19.30      355.0  +/- 30.0
+
+                R'            7.9789 fm             8.1  +/-  0.1  fm
+
+                b_coher       6.4702 fm            6.59  +/-  0.04 fm
+
+                b_incoh      -0.4330 fm                   -
+
+         Average cross section and related uncertainties calculated in energy
+         group 0.0253 eV - 0.3 eV are listed in the table below.
+
+                    Cross Section                Average Value (b)
+                    -------------                -----------------
+                        Total                 15.13 +/- 0.48 (3.2%)
+                        Capt                   9.45 +/- 0.51 (5.4%)
+                        Scat                   5.67 +/- 0.11 (2.0%)
+
+         [ref 1] N. M. Larson,"Updated Users' Guide for SAMMY," Oak Ridge
+                 National Laboratory report  ORNL/TM-9179/R6 (2003).
+         [ref 2] K. Guber, private communication (2012).
+         [ref 3] C. Lampoudis, K. Guber, S. Kopecky, et al.,
+                 J. Korean Phys. Soc. 59, 1860 (2010).
+         [ref 4] S. J. Friesenhahn, E. Haddad, F.H. Froehner, et al.,
+                 Nucl. Sci. Eng. 26, 487 (1966).
+
+    * n-074_W_184.endf:
+
+         74-W- 184 ORNL Resonance Evaluation Including Covariance
+         (ORNL AUG 2014)
+
+         L. Leal, M. Pigni, K. Guber, D. Wiarda, and G. Arbanas
+
+         W-184 resolved resonance parameter evaluation was done in the energy
+         range form 1e-5 eV to 10 keV with the SAMMY code[ref1]. Capture and
+         transmission measurements for enriched W-184 and natural tungsten
+         were used in the evaluation. The measurements were done at the Oak
+         Ridge Linear Accelerator (ORELA)[ref2] and at the Geel Linear
+         Accelerator (GELINA), Belgium[ref3]. Neutron transmission and capture
+         data were measured in the energy range from 20 eV to 10 keV. Thermal
+         cross section[ref4] data available in the EXFOR library were also
+         used in the evaluation.
+
+         Resonance parameter covariance matrices were also obtained in the
+         SAMMY evaluation process in the energy region 1e-5 eV-10 keV. The RML
+         formalist (LRF=7) was used for the resonance parameters and the
+         compact formalism (LCOMP=2) for the covariance matrix.
+         Thermal cross section and uncertainty calculated with SAMMY and the
+         PUFF codes are compared with the values listed in the ATLAS of
+         Neutron Resoances in the table below. Also shown is the capture
+         resonance integral, Coherent scattering length and the effective
+         radius R'.
+
+            Cross Section        ORNL (b)           Atlas (b)
+            -------------        --------           ---------
+               Total          8.98 +/- 0.12             -
+               Capt           1.63 +/- 0.13         1.70 +/-  0.10
+               Scat           7.35 +/- 0.10         7.35 +/-  0.10
+
+         Capture Res. Int.   16.01 +/- 0.17        14.7  +/-  1.5
+
+                R'            7.62 fm               8.0  +/-  0.2  fm
+
+                b_coher       7.41 fm              7.55e +/-  0.06 fm
+
+
+         Average cross section and related uncertainties calculated in energy
+         group 0.0253 eV - 0.3 eV are listed in the table below.
+
+                    Cross Section                Average Value (b)
+                    -------------                -----------------
+                        Total                  8.89 +/- 0.12 (1.3%)
+                        Capt                   1.56 +/- 0.11 (7.0%)
+                        Scat                   7.33 +/- 0.11 (1.5%)
+
+         [ref 1] N. M. Larson,"Updated Users' Guide for SAMMY," Oak Ridge
+                    National Laboratory report  ORNL/TM-9179/R6 (2003).
+         [ref 2] K. Guber, private communication (2012).
+         [ref 3] C. Lampoudis, K. Guber, S. Kopecky, et al.,
+                 J. Korean Phys. Soc. 59, 1860 (2010).
+         [ref 4] S. J. Friesenhahn, E. Haddad, F.H. Froehner, et al.,
+                 Nucl. Sci. Eng. 26, 487 (1966).
+
+    * n-074_W_186.endf:
+
+         74-W- 186 ORNL Resonance Evaluation Including Covariance
+         (ORNL AUG 2014)
+
+         L. Leal, M. Pigni, K. Guber, D. Wiarda, and G. Arbanas
+
+         W-186 resolved resonance parameter evaluation was done in the energy
+         range form 1e-5 eV to 10 keV with the SAMMY code[ref1]. Capture and
+         transmission measurements for enriched W-186 and natural tungsten
+         were used in the evaluation. The measurements were done at the Oak
+         Ridge Linear Accelerator (ORELA)[ref2] and at the Geel Linear
+         Accelerator (GELINA), Belgium[ref3]. Neutron transmission and capture
+         data were measured in the energy range from 20 eV to 10 keV. Thermal
+         cross section[ref4] data available in the EXFOR library were also
+         used in the evaluation.
+
+         Resonance parameter covariance matrices were also obtained in the
+         SAMMY evaluation process in the energy region 1e-5 eV-10 keV. The RML
+         formalist (LRF=7) was used for the resonance parameters and the
+         compact formalism (LCOMP=2) for the covariance matrix. Thermal cross
+         section and uncertainty calculated with SAMMY and the PUFF codes are
+         compared with the values listed in the ATLAS of Neutron Resoances in
+         the table below. Also shown is the capture resonance integral,
+         Coherent scattering length and the effective radius R'.
+
+            Cross Section        ORNL (b)           Atlas (b)
+            -------------        --------           ---------
+               Total         37.97 +/- 0.59             -
+               Capt          37.88 +/- 0.59        38.1  +/-  0.5
+               Scat           0.09 +/- 0.02         0.07 +/-  0.01
+
+         Capture Res. Int.  476.01 +/- 7.43       480.0  +/- 15.0
+
+                R'            7.75 fm               7.64 +/-  0.05 fm
+
+                b_coher      -0.76 fm              -0.73 +/-  0.06 fm
+
+
+         Average cross section and related uncertainties calculated in energy
+         group 0.0253 eV - 0.3 eV are listed in the table below.
+
+                    Cross Section                Average Value (b)
+                    -------------                -----------------
+                        Total                 36.37 +/- 0.57 ( 1.6%)
+                        Capt                  36.28 +/- 0.57 ( 1.6%)
+                        Scat                   0.09 +/- 0.02 (28.2%)
+
+         [ref 1] N. M. Larson,"Updated Users' Guide for SAMMY," Oak Ridge
+                    National Laboratory report  ORNL/TM-9179/R6 (2003).
+         [ref 2] K. Guber, private communication (2012).
+         [ref 3] C. Lampoudis, K. Guber, S. Kopecky, et al.,
+                 J. Korean Phys. Soc. 59, 1860 (2010).
+         [ref 4] S. J. Friesenhahn, E. Haddad, F.H. Froehner, et al.,
+                 Nucl. Sci. Eng. 26, 487 (1966).
+
+
+New fast region evaluations:
+
+    * n-018_Ar_040.endf: New evaluation above the resonance region,
+      which fixes the EPMAX problem reported at CSEWG in 2011.
+
+
+Other notable changes:
+
+    * Add thermal neutron primary gammas from EGAF library (B. Sleaford, LLNL & R. Firestone,
+      LBNL) to: n-003_Li_006.endf, n-003_Li_007.endf, n-005_B_011.endf, n-011_Na_023.endf,
+      n-013_Al_027.endf, n-014_Si_028.endf, n-017_Cl_035.endf, n-017_Cl_037.endf
+
+    * Convert MeV^-1 -> eV^-1 in energy release from fission (MT458) resolving issue #696
+      (Patch from C. Mattoon).  Affects many minor actinides: n-089_Ac_225.endf,
+      n-089_Ac_226.endf, n-089_Ac_227.endf, n-090_Th_228.endf, n-090_Th_230.endf,
+      n-090_Th_231.endf, n-090_Th_233.endf, n-090_Th_234.endf, n-091_Pa_229.endf,
+      n-091_Pa_230.endf, n-091_Pa_231.endf, n-091_Pa_232.endf, n-091_Pa_233.endf,
+      n-092_U_230.endf, n-092_U_231.endf, n-092_U_237.endf, n-092_U_239.endf,
+      n-092_U_241.endf, n-093_Np_234.endf, n-093_Np_235.endf, n-093_Np_236.endf,
+      n-093_Np_239.endf, n-094_Pu_236.endf, n-094_Pu_237.endf, n-094_Pu_238.endf,
+      n-094_Pu_243.endf, /n-094_Pu_244.endf, n-094_Pu_246.endf, n-095_Am_240.endf,
+      n-095_Am_242.endf, n-095_Am_242m1.endf, n-096_Cm_240.endf, n-096_Cm_241.endf,
+      n-096_Cm_247.endf, n-096_Cm_249.endf, n-096_Cm_250.endf, n-097_Bk_245.endf,
+      n-097_Bk_246.endf, n-097_Bk_247.endf, n-097_Bk_248.endf, n-097_Bk_249.endf,
+      n-097_Bk_250.endf, n-098_Cf_246.endf, n-098_Cf_248.endf, n-098_Cf_250.endf,
+      n-098_Cf_252.endf, n-098_Cf_253.endf, n-098_Cf_254.endf
+
+
+Fixes:
+
+    * n-001_H_003.endf: Fixing incorrect reference #3 (wrong journal/page numbers) (C. Mattoon)
+
+    * n-006_C_000.endf: Since the MT=5 cross section is zero at and below 2e7, set the
+      neutron multiplicity to zero as well. (B. Beck)
+
+    * n-005_B_011.endf: Several fixes:
+
+        ** T. Kawano recomputed the elastic angular distribution with the same
+           optical model, but with higher Lmax. This resolves tracker #925
+
+        ** For MT=102, the number of g's in MF=14 was 5.  It should have been 9 like in MF=12.
+
+    * n-009_F_019.endf: Fix count of gammas in MT=102
+
+    * n-011_Na_023.endf: Update NK in MF=14 MT=102 to agree with MF=12 MT=102
+
+    * n-017_Cl_035.endf: Several fixes:
+
+        ** Tweaked the (n,p) background cross section by one point to remove a
+           discontinuity and resolve tracker item #845 (T. Kawano)
+
+        ** Fix top end of MF=12 MT=102 gamma multiplicities: incorrectly entered as
+           2.000000+0 instead of 2.000000+7 (C. Mattoon)
+
+    * n-017_Cl_037.endf: Several fixes:
+
+        ** Fix top end of MF=12 MT=102 gamma multiplicities: incorrectly entered as
+           2.000000+0 instead of 2.000000+7 (C. Mattoon)
+
+    * n-020_Ca_040.endf: Fix the gap in the transition from the RR to the
+      high energy region.  This resolves the second half of tracker item #709 (C. Mattoon)
+
+    * n-027_Co_058.endf: Resolve the Co58 half of issue #709 with Caleb Mattoon's patch --
+      it appears that the transition between RR and high energy region was goofed up,
+      so Caleb patched the transition.
+
+    * n-028_Ni_058.endf: All cross sections above the resonance regions were upgraded (T. Kawano)
+
+    * n-028_Ni_059.endf: All cross sections above the resonance regions were upgraded (T. Kawano)
+
+    * n-028_Ni_060.endf: All cross sections above the resonance regions were upgraded (T. Kawano)
+
+    * n-028_Ni_061.endf: All cross sections above the resonance regions were upgraded (T. Kawano)
+
+    * n-028_Ni_062.endf: All cross sections above the resonance regions were upgraded (T. Kawano)
+
+    * n-028_Ni_064.endf: All cross sections above the resonance regions were upgraded (T. Kawano)
+
+    * n-036_Kr_078.endf: Fix background cross sections in resonance region (C. Mattoon)
+
+    * n-029_Cu_065.endf:  The range of the resolved range in 65-Cu was erraneously set
+      to 1.3e6 eV instead of 3e5 eV.  This update fixes this error. We also eliminated
+      repeated zeros in file 3 for the RR range (D. Wiarda)
+
+    * n-030_Zn_068.endf: MF9 weights were incorrect in that they should have extended up to
+      the first excited state (2.1 MeV) rather than the upper end of the MF=3 domain (2.0 MeV)
+      (C. Mattoon)
+
+    * n-038_Sr_088.endf: Revised 7 resonance widths that appear to have been mistranscribed
+      when translating from the Atlas of Neutron Resonance into END/B-VII:
+
+            26.98 keV Gn, three orders smaller than what it should be.
+            73.77 keV Gn, three orders smaller than what it should be.
+            75.5 keV  Gg, three orders smaller than what it should be.
+            181.1 keV Gg, three orders smaller than what it should be.
+            214.3 keV Gn, three orders smaller than what it should be.
+            268 keV Gn, three orders smaller than what it should be.
+            297.8 keV Gg, three orders smaller than what it should be.
+
+        This problem was noted by Tatsuya Katabuchi (JAEA)
+
+    * n-039_Y_089.endf: Applied & checked a patch
+
+    * n-040_Zr_090.endf: Several fixes:
+
+        ** Revised resonance parameters (ref. S. Mughabghab, March 2012)
+
+        ** Change to LSSF=1
+
+    * n-040_Zr_091.endf:  Revised resonance parameters (ref. S. Mughabghab, March 2012)
+
+    * n-040_Zr_092.endf: Several fixes:
+
+        ** Revised resonance parameters (ref. S. Mughabghab, March 2012)
+
+        ** Change to LSSF=1
+
+    * n-040_Zr_094.endf: Several fixes:
+
+        ** Revised resonance parameters (ref. S. Mughabghab, March 2012)
+
+        ** Change to LSSF=1
+
+    * n-040_Zr_096.endf: Several fixes:
+
+        ** Revised resonance parameters (ref. S. Mughabghab, March 2012)
+
+        ** Change to LSSF=1
+
+    * n-041_Nb_093.endf:  applied patch from Caleb Mattoon, resolving issue #693:
+      The MT51, MF3 level energy didn't agree with those in MFs 8. 10 and 40.  We picked the
+      level recommended by ENSDF
+
+    * n-045_Rh_105.endf: Adopt 105Rh from JENDL-4.0.  The JENDL-3.2 evaluation and the
+      ENDF/B-VII.1 evaluation were identical and both a result of the WPEC/SG-23 project.
+      The JENDL-4.0 update revised the resonance region, fixing a long standing bug with the
+      resonance spin assignments
+
+    * n-050_Sn_120.endf: Adjust the gamma branching ratios out of level 18 (MT=68) so they
+      sum to 1, high energy part replaced by new CoH3 calculations to fix the reported energy
+      balance problem.
+
+    * n-050_Sn_122.endf: Fix typo in original formatting of resonances during translation
+      from the Atlas to ENDF.  This eliminates several warnings from PSYCHE and partly
+      resolves ENDF tracker #220
+
+    * n-050_Sn_124.endf: Fix typo in original formatting of resonances during translation
+      from the Atlas to ENDF
+
+    * n-051_Sb_124.endf: Fixes to outgoing spectra (T. Kawano)
+
+    * n-053_I_127.endf: Fix the MF8 MT107 QI, This cleared up a warning on ADVANCE.
+
+    * n-054_Xe_123.endf: recalculate the (n,tot) cross section with the correct energy grid
+      that avoids interpolations troubles (I. Thompson)
+
+    * n-054_Xe_124.endf: recalculate the (n,tot) cross section with the correct energy grid
+      that avoids interpolations troubles (I. Thompson)
+
+    * n-054_Xe_124.endf: Fix background cross sections in resonance region (C. Mattoon)
+
+    * n-062_Sm_151.endf: Fixes to outgoing spectra (T. Kawano)
+
+    * n-062_Sm_154.endf: Fix error in evaluation documentation
+
+    * n-063_Eu_153.endf: Many fixes:
+
+        ** (n,g)'s gamma multiplicity table (MT102, MF6, very top of MF) had
+           zero gamma multiplicity at Ein=10e-5 eV.
+
+        ** Copied down Ein=1 keV multiplicity (4.12535) and resolved a tracker item.
+
+        ** Energy spectra and angular distributions recalculated using CoH
+
+    * n-069_Tm_168.endf: Fix MF=6 MT=102, first energy point was replaced by an actual
+      distribution, which is the same of the next incident energy (30eV), but with 30eV
+      subtracted in the last two outgoing energies (G. Nobre).
+
+    * n-073_Ta_180.endf: Recalculate the (n,tot) cross section with the correct energy grid
+      that avoids interpolations troubles (I. Thompson)
+
+    * n-073_Ta_181.endf: Several fixes:
+
+        ** Recalculate the (n,tot) cross section with the correct energy grid
+           that avoids interpolations troubles (I. Thompson)
+
+        ** Fixes to cross sections & distributions to get energy ranges to match
+           (I. Thompson)
+
+    * n-075_Re_185.endf: Several fixes:
+
+        ** Modified R', the potential scattering radius,
+           to match the latest fits from S. Mughabghab:  R' = 8.25+/-0.19 fm, S0 = 1.93+/-0.06,
+           and S2 = 2.08+/-0.33.  S1 is too small to determine.  For details, see S.F. Mughabghab,
+           Nuclear Data Sheets, 118, 287, 2014
+
+        ** Fix background cross sections in resonance region (C. Mattoon)
+
+        ** Recalculate the (n,tot) cross section with the correct energy grid that avoids
+           interpolations troubles (I. Thompson)
+
+        ** Fixes to cross sections & distributions to get energy ranges to match (I. Thompson)
+
+    * n-075_Re_187.endf: Several fixes:
+
+        ** Modified R', the potential scattering radius,
+           to match the latest fits from S. Mughabghab:  R' = 8.25+/-0.19 fm, S0 = 1.93+/-0.06,
+           and S2 = 2.08+/-0.33.  S1 is too small to determine.  For details, see S.F. Mughabghab,
+           Nuclear Data Sheets, 118, 287, 2014
+
+        ** Fix background cross sections in resonance region (C. Mattoon)
+
+        ** Recalculate the (n,tot) cross section with the correct energy grid that avoids
+           interpolations troubles (I. Thompson)
+
+    * n-082_Pb_208.endf: Fix QM & QI for several levels in the 600-range
+
+    * n-090_Th_232.endf: Several fixes:
+
+        ** Resonance enenrgy 8.358395 eV in MF32 corrected to 8.358396 eV (A. Trkov)
+
+        ** Densified energy grid at low energy tail of the fission spectra (A. Trkov)
+
+    * n-095_Am_242m1.endf: Fix level index (LIS) for the target. The metastable level in
+      Am244 is the 2nd excited level, not the first
+
+    * LFS indicates final level index (not metastable number) in the residual. Several files
+      had LFS=1 for metastables that are actually higher states: (n-025_Mn_055.endf,
+      n-040_Zr_090.endf, n-040_Zr_091.endf, n-069_Tm_168.endf, n-069_Tm_169.endf,
+      n-069_Tm_170.endf).  This fixes NNDCforge tracker item #823
+
+    * Bug fixes in many evaluations (n-000_n_001.endf, n-003_Li_006.endf, n-003_Li_007.endf,
+      n-005_B_011.endf, n-009_F_019.endf, n-008_O_018.endf)
+
+    * Fixed NLIB designator in many many files.
