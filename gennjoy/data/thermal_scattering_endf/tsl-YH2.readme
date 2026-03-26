@@ -1,0 +1,16 @@
+README for hyh2_leapr.in and yyh2_leapr.in
+==========================================
+
+(M. L. Zerkle and J. C. Holmes - Jan 2017)
+
+Both the H in YH2 and Y in YH2 TSL evaluations were generated with NJOY 2012.8
+using the supplied LEAPR input decks.  The following changes to the TSL files
+produced by LEAPR are required to generate the TSL evaluations.
+
+In File 1, MT = 451 change NMOD from 0 to 1 to identify the libraries as
+new evaluations and change NVER from 6 to 8 to identify the libraries as 
+evaluations for ENDF/B-VIII.
+
+In File 7, MT = 4 change B(4) from 4.999988+0 to 5.000000+0 to correct a
+roundoff issue in the LEAPR calculation and set Emax to 5 eV per the current
+ENDF convention.  

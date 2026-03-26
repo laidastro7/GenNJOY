@@ -1,0 +1,43 @@
+
+ njoy 2016.78  03Feb25                                       03/26/26 23:38:29
+ *****************************************************************************
+
+ reconr...                                                                0.0s
+
+ broadr...                                                                0.0s
+
+ heatr...                                                                 0.1s
+
+ ---message from hinit---mf6, mt102 has recoil with no spectrum
+                          photon momentum recoil used.
+
+ heatr...                                                                 0.2s
+
+ ---message from hinit---mf6, mt102 has recoil with no spectrum
+                          photon momentum recoil used.
+
+ gaspr...                                                                 0.2s
+
+ groupr...                                                                0.2s
+
+ errorr...                                                                0.3s
+
+ processing mat   125
+ ---------------------
+   1-H -  1 LANL       EVAL-JUL16 G.M.Hale                           
+
+ covariances calculated for  3 reactions and  222 groups                  0.3s
+
+ covr...                                                                  0.4s
+
+ ---message from corr---epmin reset to  8.0000E-04, xcycle=  4.0873E-01
+
+ ---message from matshd---processing of mat/mt  125/102 vs. mat1/mt1  125/102
+                          largest coefficient=  1.00000E+00 at index  11  29
+
+ ---message from matshd---  50 coefficients > 1
+                          reset and continue.
+
+ viewr...                                                                 0.4s
+                                                                          0.4s
+ *****************************************************************************

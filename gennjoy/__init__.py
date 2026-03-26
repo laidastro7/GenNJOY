@@ -9,3 +9,4 @@ DATA_DIR = BASE_DIR / "data"
 os.environ.setdefault("GENNJOY_ENDF_DATA", str(DATA_DIR / "incident_neutron_endf"))
 os.environ.setdefault("GENNJOY_ENDF_DATA_NEUTRON", str(DATA_DIR / "incident_neutron_endf"))
 os.environ.setdefault("GENNJOY_ENDF_DATA_THERMAL", str(DATA_DIR / "thermal_scattering_endf"))
+

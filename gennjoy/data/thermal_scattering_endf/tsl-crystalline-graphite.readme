@@ -1,0 +1,36 @@
+#######################################################
+##                                                   ##
+## README File for generation of file 7 for          ##
+## crystalline graphite using LEAPR module of        ##
+## NJOY2016.20 processing package. For coherent      ##
+## elastic scattering (MT=2), the cubic approximation##
+## approach was used based on the same phonon        ##
+## spectrum implemented in the calculation of the    ##
+## inelastic cross section (MT=4).                   ##
+##                                                   ##
+## Compare to beta4 the coherent elastic xsec is     ##
+## updated.                                          ##
+##                                                   ##
+#######################################################
+##                                                   ##
+## LEIP Laboratories (Oct 17 2017)                   ##
+##                                                   ##
+#######################################################
+
+	
+Folder Content
+--------------
+tsl-crystalline-graphite.endf = File 7 in ENDF-6 format published
+         in ENDF/B-VIII (MT = 2, MT = 4)
+
+File 7 Library Parameters
+-------------------------
+MAT = 30
+ZA = 130
+Temperatures = 296 400 500 600 700 800 1000 1200 1600 2000 K
+
+NJOY Compilation
+----------------
+The NJOY2016.20 package used in the processing of these
+libraries was compiled with ifort from the intel-2017 
+composer suite.

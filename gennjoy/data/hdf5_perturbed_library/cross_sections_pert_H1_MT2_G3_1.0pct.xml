@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<cross_sections>
+  <directory>/mnt/d/work_ubuntu/GenNJOY/gennjoy/data</directory>
+  <library materials="B10" path="hdf5_library/B10.h5" type="neutron"/>
+  <library materials="B11" path="hdf5_library/B11.h5" type="neutron"/>
+  <library materials="c_H_in_H2O" path="hdf5_library/c_H_in_H2O.h5" type="thermal"/>
+  <library materials="H1" path="hdf5_perturbed_library/H1_pert_MT2_G3_1.0pct.h5" type="neutron"/>
+  <library materials="O16" path="hdf5_library/O16.h5" type="neutron"/>
+  <library materials="U235" path="hdf5_library/U235.h5" type="neutron"/>
+  <library materials="U238" path="hdf5_library/U238.h5" type="neutron"/>
+  <library materials="Zr90" path="hdf5_library/Zr90.h5" type="neutron"/>
+  <library materials="Zr91" path="hdf5_library/Zr91.h5" type="neutron"/>
+  <library materials="Zr92" path="hdf5_library/Zr92.h5" type="neutron"/>
+  <library materials="Zr94" path="hdf5_library/Zr94.h5" type="neutron"/>
+  <library materials="Zr96" path="hdf5_library/Zr96.h5" type="neutron"/>
+</cross_sections>

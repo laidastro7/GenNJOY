@@ -1,0 +1,124 @@
+
+ njoy 2016.78  03Feb25                                       03/26/26 23:38:30
+ *****************************************************************************
+
+ reconr...                                                                0.0s
+
+ ---message from lunion---xsec nonzero at threshold for mt=600
+                          adjusted using jump in xsec
+
+ broadr...                                                                0.8s
+
+ heatr...                                                                 1.0s
+
+ heatr...                                                                 4.0s
+
+ gaspr...                                                                 7.3s
+
+ groupr...                                                                7.5s
+
+ errorr...                                                                9.3s
+
+ processing mat   825
+ ---------------------
+   8-O - 16 LANL       EVAL-DEC16 Hale,Paris,Young,Chadwick          
+
+ ---message from rdgout---mf 3 mt  5 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 32 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 41 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 44 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 45 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt112 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt659 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt703 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt704 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt705 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt706 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt707 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt708 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt709 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt749 not found.
+                          calculation continued with sigma=0
+
+ covariances calculated for 48 reactions and 1689 groups                 17.8s
+
+ ---message from rdgout---mf 3 mt  5 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 32 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 41 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 44 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt 45 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt112 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt659 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt703 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt704 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt705 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt706 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt707 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt708 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt709 not found.
+                          calculation continued with sigma=0
+
+ ---message from rdgout---mf 3 mt749 not found.
+                          calculation continued with sigma=0
+
+ covr...                                                                 37.1s
+
+ ---message from corr---epmin reset to  8.0000E-04, xcycle=  4.0873E-01
+
+ viewr...                                                                37.2s
+                                                                         37.2s
+ *****************************************************************************

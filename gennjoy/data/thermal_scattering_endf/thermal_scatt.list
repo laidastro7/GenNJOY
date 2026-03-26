@@ -1,0 +1,38 @@
+----------------------------------------------------------------------------
+  #     Material Lab.       Date       Authors                           MAT
+----------------------------------------------------------------------------
+   1)  13-Al- 27 LANL       EVAL-OCT05 MacFarlane                         53
+   2)  26-Fe- 56 LANL       EVAL-OCT05 MacFarlane                         56
+   3)  Be-metal  LEIP LAB   EVAL-SEP17 J.L. Wormald, Y. Zhu, A.I. Hawari  26
+   4)  Be(BeO)   LEIP LAB   EVAL-SEP17 Y. Zhu, A.I. Hawari                27
+   5)  C(3C-SiC) LEIP LAB   EVAL-SEP17 Y. Zhu, J.L. Wormald, A.I. Hawari  44
+   6)  D(D2O)     ARCAB     EVAL-JUN17 Marquez Damian                     11
+   7)  H(Lucite) LEIP LAB   EVAL-SEP17 Petersen, Zhu, Wormald, Hawari     39
+   8)  H(CH2)    LEIP LAB   EVAL-SEP17 Y. Zhu, A.I. Hawari                37
+   9)  H(H2O)     ARCAB     EVAL-JUN17 Marquez Damian                      1
+  10)  H(ice-Ih) BAPL       EVAL-OCT16 Holmes, Zerkle                     10
+  11)  H(YH2)    BAPL       EVAL-OCT16 ZERKLE, HOLMES                      5
+  12)  H(ZrH)    LANL       EVAL-APR93 MacFarlane                          7
+  13)  N(UN)    LEIP LAB    EVAL-SEP17 J.L. Wormald, A.I. Hawari          71
+  14)  O(BeO)    LEIP LAB   EVAL-SEP17 Y. Zhu, A.I. Hawari                46
+  15)  O(D2O)     ARCAB     EVAL-JUN17 Marquez Damian                     51
+  16)  O(ice-Ih) BAPL       EVAL-OCT16 Holmes, Zerkle                     50
+  17)  O(UO2)    LEIP LAB   EVAL-SEP17 J.L. Wormald, A.I. Hawari          75
+  18)  SiO2alpha NCSU       EVAL-MAY11 Holmes, Al-Qasir, Hehr, Hawari     47
+  19)  SiO2beta  NCSU       EVAL-MAY11 Holmes, Al-Qasir, Hehr, Hawari     49
+  20)  Si(3C-SiC) LEIP LAB  EVAL-SEP17 Y. Zhu, J.L. Wormald, A.I. Hawari  43
+  21)  U(UN)    LEIP LAB    EVAL-SEP17 J.L. Wormald, A.I. Hawari          72
+  22)  U(UO2)    LEIP LAB   EVAL-SEP17 J.L. Wormald, A.I. Hawari          48
+  23)  Y(YH2)    BAPL       EVAL-OCT16 ZERKLE, HOLMES                     55
+  24)  Zr(ZrH)   LANL       EVAL-APR93 MacFarlane                         58
+  25)  BENZINE   GA         EVAL-DEC69 Koppel,Houston,Borgonovi           40
+  26)  Graphite  LEIP LAB   EVAL-SEP17 A.I. Hawari, Y. Zhu, J.L. Wormald  30
+  27)  l-ch4     LANL       EVAL-APR93 MacFarlane                         33
+  28)  ortho-d   LANL       EVAL-APR93 MacFarlane                         13
+  29)  ortho-H   LANL       EVAL-APR93 MacFarlane                          3
+  30)  para-d    LANL       EVAL-APR93 MacFarlane                         12
+  31)  para-H    LANL       EVAL-APR93 MacFarlane                          2
+  32) 10P Graphite LEIP LAB EVAL-SEP17 A.I. Hawari, Y. Zhu, J.L. Wormald  31
+  33) 30P Graphite LEIP LAB EVAL-SEP17 A.I. Hawari, Y. Zhu, J.L. Wormald  32
+  34)  s-ch4     LANL       EVAL-APR93 MacFarlane                         34
+----------------------------------------------------------------------------

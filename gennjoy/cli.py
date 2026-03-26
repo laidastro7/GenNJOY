@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import List, Optional
 from colorama import Fore, Style, init
 from gennjoy.perturb_hdf5 import create_perturbed_library
-from gennjoy.covariance_module import process_covariance_batch
+from gennjoy.run_covariance_processing import run_interactive_covariance
 
 # Initialize colorama for colored output
 init(autoreset=True)
@@ -170,18 +170,10 @@ def process_choice(choice: str) -> bool:
         print("\n--- Creating Perturbed HDF5 Library ---")
         create_perturbed_library()
 
-    elif choice == "8":
-            print("\n--- Generating Covariance Matrices (COVERX & Plots) ---")
-            if verify_system_njoy():
-                njoy_executable = shutil.which("njoy")
-                if njoy_executable:                    
-                    # Request the input file from the user
-                    input_file = get_validated_input_file(
-                        "Please specify the Covariance batch input file path:", 
-                        "covariance_process_batch.i"
-                    )
-                    if input_file:
-                        process_covariance_batch(PACKAGE_DIR, njoy_executable, input_file)
+
+    elif choice == '8':
+        print("\nStarting Covariance Processing...")
+        run_interactive_covariance()
 
     elif choice == "9":
         print(Fore.MAGENTA + "\n   Thank you for using GenNJOY. Goodbye!\n")
