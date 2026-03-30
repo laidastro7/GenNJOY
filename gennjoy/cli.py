@@ -34,7 +34,7 @@ def display_header():
     print(Fore.CYAN + "="*62)
     print(Style.BRIGHT + "   Automated Nuclear Data Processing Framework (NJOY + OpenMC)")
     print("   Author: Dr. Mohamed Laid YAHIAOUI et al.")
-    print("\n" + Fore.CYAN + "="*62)
+    print(Fore.CYAN + "="*62)
 # --- System Validation Module ---
 
 def verify_system_njoy():
