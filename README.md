@@ -55,7 +55,7 @@ Before installing GenNJOY, ensure the following requirements are met on your sys
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/laidastro7/GenNJOY](https://github.com/laidastro7/GenNJOY)
+    git clone https://github.com/laidastro7/GenNJOY
     cd GenNJOY
     ```
 
