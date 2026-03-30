@@ -73,17 +73,17 @@ Once installed, you can run the tool from anywhere in your terminal using the co
 
 ```bash
 gennjoy
+ ```
+**Typical Workflow:**
+* Option [1]: Download raw nuclear data libraries (ENDF). Data will be stored in the internal data/ directory.
+* Option [2] & [3]: Generate NJOY input decks based on the downloaded files.
+* Option [4] & [5]: Execute NJOY processing (Generates ACE files and updates xsdir).
+* Option [6]: Convert the generated ACE libraries into an HDF5 library for OpenMC.
+* Option [7]: Create Perturbed HDF5 Libraries by manually specifying isotopes, reaction MTs, and perturbation percentages.
+* Option [8]: Generate Covariance Matrices and cross-section correlation plots.
 
-Typical Workflow:
-Option [1]: Download raw nuclear data libraries (ENDF). Data will be stored in the internal data/ directory.
-Option [2] & [3]: Generate NJOY input decks based on the downloaded files.
-Option [4] & [5]: Execute NJOY processing (Generates ACE files and updates xsdir).
-Option [6]: Convert the generated ACE libraries into an HDF5 library for OpenMC.
-Option [7]: Create Perturbed HDF5 Libraries by manually specifying isotopes, reaction MTs, and perturbation percentages.
-Option [8]: Generate Covariance Matrices and cross-section correlation plots.
-
-📂 Project Structure
-
+## 📂 Project Structure
+```bash
 GenNJOY/
 ├── gennjoy/                         # Package Source Code
 │   ├── __init__.py                  # Package Initialization & Versioning
@@ -117,20 +117,20 @@ GenNJOY/
 ├── .gitignore                       # Git Ignore Rules
 ├── LICENSE                          # Project License (MIT)
 └── README.md                        # Project Documentation
-
-🤝 Contributing
+```
+## 🤝 Contributing
 Contributions are welcome! If you have suggestions for improvements or new features:
 
-Fork the Project.
-Create your Feature Branch (git checkout -b feature/AmazingFeature).
-Commit your Changes (git commit -m 'Add some AmazingFeature').
-Push to the Branch (git push origin feature/AmazingFeature).
-Open a Pull Request.
+* Fork the Project.
+* Create your Feature Branch (git checkout -b feature/AmazingFeature).
+* Commit your Changes (git commit -m 'Add some AmazingFeature').
+* Push to the Branch (git push origin feature/AmazingFeature).
+* Open a Pull Request.
 
-👨‍🔬 Authors
+## 👨‍🔬 Authors
 Dr. Mohamed Laid YAHIAOUI - Lead Developer - GitHub Profile
 
 📧 Email: mohamedlaid.yahiaoui@univ-jijel.dz
 
-📄 License
+## 📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
