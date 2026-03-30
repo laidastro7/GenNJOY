@@ -1,0 +1,158 @@
+
+ njoy 2016.78  03Feb25                                       03/27/26 00:04:55
+ *****************************************************************************
+
+ reconr...                                                                0.0s
+
+ broadr...                                                               49.5s
+
+ heatr...                                                                70.8s
+
+ ---message from hinit---mf6, mt102 does not give recoil za= 92239
+                          photon momentum recoil used.
+
+ ---message from nheat---changed q from   1.965354E+08 to   1.797825E+08
+                          for mt  18 by taking out delayed components
+
+ heatr...                                                               110.1s
+
+ ---message from hinit---mf6, mt102 does not give recoil za= 92239
+                          photon momentum recoil used.
+
+ ---message from nheat---changed q from   1.965354E+08 to   1.797825E+08
+                          for mt  18 by taking out delayed components
+
+ gaspr...                                                               159.0s
+
+ unresr...                                                              164.3s
+
+ purr...                                                                166.1s
+
+ mat = 9237                                                             166.1s
+
+ ---message from purr---no partial heating xsecs found on pendf
+                          ur heating will not selfshield
+      1 of    83 loops done for all temps & sig0s.                      170.2s
+      2 of    83 loops done for all temps & sig0s.                      173.3s
+      3 of    83 loops done for all temps & sig0s.                      176.5s
+      4 of    83 loops done for all temps & sig0s.                      179.7s
+      5 of    83 loops done for all temps & sig0s.                      182.9s
+      6 of    83 loops done for all temps & sig0s.                      186.0s
+      7 of    83 loops done for all temps & sig0s.                      189.2s
+      8 of    83 loops done for all temps & sig0s.                      192.5s
+      9 of    83 loops done for all temps & sig0s.                      195.6s
+     10 of    83 loops done for all temps & sig0s.                      198.8s
+     11 of    83 loops done for all temps & sig0s.                      202.1s
+     12 of    83 loops done for all temps & sig0s.                      205.3s
+     13 of    83 loops done for all temps & sig0s.                      208.5s
+     14 of    83 loops done for all temps & sig0s.                      211.7s
+     15 of    83 loops done for all temps & sig0s.                      214.8s
+     16 of    83 loops done for all temps & sig0s.                      218.0s
+     17 of    83 loops done for all temps & sig0s.                      221.1s
+     18 of    83 loops done for all temps & sig0s.                      224.3s
+     19 of    83 loops done for all temps & sig0s.                      227.6s
+     20 of    83 loops done for all temps & sig0s.                      230.7s
+     21 of    83 loops done for all temps & sig0s.                      233.9s
+     22 of    83 loops done for all temps & sig0s.                      237.1s
+     23 of    83 loops done for all temps & sig0s.                      240.3s
+     24 of    83 loops done for all temps & sig0s.                      243.8s
+     25 of    83 loops done for all temps & sig0s.                      247.6s
+     26 of    83 loops done for all temps & sig0s.                      251.0s
+     27 of    83 loops done for all temps & sig0s.                      254.7s
+     28 of    83 loops done for all temps & sig0s.                      258.2s
+     29 of    83 loops done for all temps & sig0s.                      261.9s
+     30 of    83 loops done for all temps & sig0s.                      265.7s
+     31 of    83 loops done for all temps & sig0s.                      269.6s
+     32 of    83 loops done for all temps & sig0s.                      273.3s
+     33 of    83 loops done for all temps & sig0s.                      276.9s
+     34 of    83 loops done for all temps & sig0s.                      280.5s
+     35 of    83 loops done for all temps & sig0s.                      284.1s
+     36 of    83 loops done for all temps & sig0s.                      288.0s
+     37 of    83 loops done for all temps & sig0s.                      291.8s
+     38 of    83 loops done for all temps & sig0s.                      295.5s
+     39 of    83 loops done for all temps & sig0s.                      299.2s
+     40 of    83 loops done for all temps & sig0s.                      302.9s
+     41 of    83 loops done for all temps & sig0s.                      306.6s
+     42 of    83 loops done for all temps & sig0s.                      310.1s
+     43 of    83 loops done for all temps & sig0s.                      313.7s
+     44 of    83 loops done for all temps & sig0s.                      317.5s
+     45 of    83 loops done for all temps & sig0s.                      321.5s
+     46 of    83 loops done for all temps & sig0s.                      325.3s
+     47 of    83 loops done for all temps & sig0s.                      328.9s
+     48 of    83 loops done for all temps & sig0s.                      332.5s
+     49 of    83 loops done for all temps & sig0s.                      336.2s
+     50 of    83 loops done for all temps & sig0s.                      339.8s
+     51 of    83 loops done for all temps & sig0s.                      343.5s
+     52 of    83 loops done for all temps & sig0s.                      347.2s
+     53 of    83 loops done for all temps & sig0s.                      350.9s
+     54 of    83 loops done for all temps & sig0s.                      354.7s
+     55 of    83 loops done for all temps & sig0s.                      358.5s
+     56 of    83 loops done for all temps & sig0s.                      362.4s
+     57 of    83 loops done for all temps & sig0s.                      366.4s
+     58 of    83 loops done for all temps & sig0s.                      370.1s
+     59 of    83 loops done for all temps & sig0s.                      374.0s
+     60 of    83 loops done for all temps & sig0s.                      377.9s
+     61 of    83 loops done for all temps & sig0s.                      382.1s
+     62 of    83 loops done for all temps & sig0s.                      385.9s
+     63 of    83 loops done for all temps & sig0s.                      389.6s
+     64 of    83 loops done for all temps & sig0s.                      393.1s
+     65 of    83 loops done for all temps & sig0s.                      396.6s
+     66 of    83 loops done for all temps & sig0s.                      400.2s
+     67 of    83 loops done for all temps & sig0s.                      403.8s
+     68 of    83 loops done for all temps & sig0s.                      407.5s
+     69 of    83 loops done for all temps & sig0s.                      411.1s
+     70 of    83 loops done for all temps & sig0s.                      414.7s
+     71 of    83 loops done for all temps & sig0s.                      418.3s
+     72 of    83 loops done for all temps & sig0s.                      422.0s
+     73 of    83 loops done for all temps & sig0s.                      425.7s
+     74 of    83 loops done for all temps & sig0s.                      429.4s
+     75 of    83 loops done for all temps & sig0s.                      433.1s
+     76 of    83 loops done for all temps & sig0s.                      436.8s
+     77 of    83 loops done for all temps & sig0s.                      440.6s
+     78 of    83 loops done for all temps & sig0s.                      444.4s
+     79 of    83 loops done for all temps & sig0s.                      448.1s
+     80 of    83 loops done for all temps & sig0s.                      451.9s
+     81 of    83 loops done for all temps & sig0s.                      455.6s
+     82 of    83 loops done for all temps & sig0s.                      459.4s
+     83 of    83 loops done for all temps & sig0s.                      463.1s
+
+ groupr...                                                              465.1s
+
+ ---message from conver---skipping new mf6/mt18 multiplicity section
+
+ errorr...                                                              469.3s
+
+ processing mat  9237
+ ---------------------
+  92-U -238 IAEA       EVAL-DEC14 IAEA Consortium                    
+
+ covariances calculated for 11 reactions and  177 groups                471.9s
+
+ covr...                                                                472.5s
+
+ ---message from corr---epmin reset to  8.0000E-04, xcycle=  4.0873E-01
+
+ ---message from matshd---processing of mat/mt 9237/  1 vs. mat1/mt1 9237/  1
+                          largest coefficient=  2.38095E+00 at index  57  67
+
+ ---message from matshd---  52 coefficients > 1
+                          reset and continue.
+
+ ---message from matshd---   8 coefficients > 2
+                          reset and continue
+
+ ---message from matshd---processing of mat/mt 9237/  2 vs. mat1/mt1 9237/  2
+                          largest coefficient=  1.00001E+00 at index  20  22
+
+ ---message from matshd---   6 coefficients > 1
+                          reset and continue.
+
+ ---message from matshd---processing of mat/mt 9237/102 vs. mat1/mt1 9237/102
+                          largest coefficient=  1.00001E+00 at index  21  22
+
+ ---message from matshd---   6 coefficients > 1
+                          reset and continue.
+
+ viewr...                                                               472.9s
+                                                                        472.9s
+ *****************************************************************************

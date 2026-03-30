@@ -1,0 +1,84 @@
+
+ njoy 2016.78  03Feb25                                       03/27/26 00:04:55
+ *****************************************************************************
+
+ reconr...                                                                0.0s
+
+ ---message from rdf2bw---calculation of angular distribution not installed.
+
+ broadr...                                                               68.6s
+
+ heatr...                                                               105.9s
+
+ ---message from hinit---mf6, mt102 does not give recoil za= 92236
+                          photon momentum recoil used.
+
+ ---message from nheat---changed q from   1.940770E+08 to   1.812389E+08
+                          for mt  18 by taking out delayed components
+
+ heatr...                                                               149.6s
+
+ ---message from hinit---mf6, mt102 does not give recoil za= 92236
+                          photon momentum recoil used.
+
+ ---message from nheat---changed q from   1.940770E+08 to   1.812389E+08
+                          for mt  18 by taking out delayed components
+
+ gaspr...                                                               273.9s
+
+ unresr...                                                              281.1s
+
+ purr...                                                                283.8s
+
+ mat = 9228                                                             283.8s
+
+ ---message from purr---no partial heating xsecs found on pendf
+                          ur heating will not selfshield
+      1 of    19 loops done for all temps & sig0s.                      289.4s
+      2 of    19 loops done for all temps & sig0s.                      293.6s
+      3 of    19 loops done for all temps & sig0s.                      297.9s
+      4 of    19 loops done for all temps & sig0s.                      302.2s
+      5 of    19 loops done for all temps & sig0s.                      306.6s
+      6 of    19 loops done for all temps & sig0s.                      311.2s
+      7 of    19 loops done for all temps & sig0s.                      315.9s
+      8 of    19 loops done for all temps & sig0s.                      320.5s
+      9 of    19 loops done for all temps & sig0s.                      325.2s
+     10 of    19 loops done for all temps & sig0s.                      330.0s
+     11 of    19 loops done for all temps & sig0s.                      335.0s
+     12 of    19 loops done for all temps & sig0s.                      340.4s
+     13 of    19 loops done for all temps & sig0s.                      345.7s
+     14 of    19 loops done for all temps & sig0s.                      351.1s
+     15 of    19 loops done for all temps & sig0s.                      356.7s
+     16 of    19 loops done for all temps & sig0s.                      362.8s
+     17 of    19 loops done for all temps & sig0s.                      368.7s
+     18 of    19 loops done for all temps & sig0s.                      375.0s
+     19 of    19 loops done for all temps & sig0s.                      381.6s
+
+ groupr...                                                              384.4s
+
+ ---message from conver---skipping new mf6/mt18 multiplicity section
+
+ errorr...                                                              391.1s
+
+ processing mat  9228
+ ---------------------
+  92-U -235 IAEA       EVAL-NOV17 IAEA CIELO Collaboration           
+
+ covariances calculated for 11 reactions and  619 groups                405.4s
+
+ covr...                                                                410.3s
+
+ ---message from corr---epmin reset to  8.0000E-04, xcycle=  4.0873E-01
+
+ ---message from matshd---processing of mat/mt 9228/  1 vs. mat1/mt1 9228/  1
+                          largest coefficient=  1.03209E+01 at index  19  66
+
+ ---message from matshd---  82 coefficients > 1
+                          reset and continue.
+
+ ---message from matshd--- 198 coefficients > 2
+                          reset and continue
+
+ viewr...                                                               410.7s
+                                                                        410.8s
+ *****************************************************************************

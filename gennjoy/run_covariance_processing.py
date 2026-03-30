@@ -12,7 +12,7 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 # ==========================================
-# 1. إعدادات المسارات (Config & Logger)
+# 1. Path Settings (Config & Logger)
 # ==========================================
 class Config:
     BASE_DIR = Path(__file__).resolve().parent
@@ -26,22 +26,48 @@ class Config:
     FLUX_FILE = INPUTS_DIR / "flux.i"
 
 class Logger:
+    # Define the path and filename for the log file
+    LOG_FILE = Config.BASE_DIR / "execution_njoy.log"
+
+    @classmethod
+    def _write_to_file(cls, msg):
+        """Internal helper: write clean text (without color codes) to the file."""
+        try:
+            with open(cls.LOG_FILE, "a", encoding="utf-8") as f:
+                f.write(msg + "\n")
+        except Exception:
+            pass
+
     @staticmethod
-    def info(msg):  print(f"{Fore.GREEN}[INFO] {msg}{Style.RESET_ALL}")
+    def info(msg):  
+        print(f"{Fore.GREEN}[INFO] {msg}{Style.RESET_ALL}")
+        Logger._write_to_file(f"[INFO] {msg}")
+        
     @staticmethod
-    def debug(msg): print(f"{Fore.CYAN}[DEBUG] {msg}{Style.RESET_ALL}")
+    def debug(msg): 
+        print(f"{Fore.CYAN}[DEBUG] {msg}{Style.RESET_ALL}")
+        Logger._write_to_file(f"[DEBUG] {msg}")
+        
     @staticmethod
-    def warn(msg):  print(f"{Fore.YELLOW}[WARN] {msg}{Style.RESET_ALL}")
+    def warn(msg):  
+        print(f"{Fore.YELLOW}[WARN] {msg}{Style.RESET_ALL}")
+        Logger._write_to_file(f"[WARN] {msg}")
+        
     @staticmethod
-    def error(msg): print(f"{Fore.RED}[ERROR] {msg}{Style.RESET_ALL}")
+    def error(msg): 
+        print(f"{Fore.RED}[ERROR] {msg}{Style.RESET_ALL}")
+        Logger._write_to_file(f"[ERROR] {msg}")
+        
     @staticmethod
     def header(msg):
         print(f"\n{Fore.MAGENTA}{'='*60}")
         print(f"{Fore.BLUE}{Style.BRIGHT}{msg.center(60)}")
         print(f"{Fore.MAGENTA}{'='*60}{Style.RESET_ALL}")
+        # Write the header into the log file
+        Logger._write_to_file(f"\n{'='*60}\n{msg.center(60)}\n{'='*60}")
 
 # ==========================================
-# 2. دوال معالجة البيانات والبحث الآلي
+# 2. Data processing and parsing helper functions
 # ==========================================
 def get_mat_number(endf_file_path):
     try:
@@ -105,7 +131,7 @@ def parse_covariance_batch(filepath):
     return jobs
 
 # ==========================================
-# 3. التنسيق الآلي وبناء مدخلات NJOY
+# 3. Automatic formatting and NJOY input construction
 # ==========================================
 def format_groups_for_njoy(groups_text):
     if '/' in groups_text: return groups_text.strip() + "\n"
@@ -209,11 +235,11 @@ def build_covariance_input(mat_number, temp, ign_val, iwt_val, groups_text, flux
     elif iwt_val == 4: content += " 0.1 0.025 820.3e3 1.4e6 /\n"
 
     if not cov_mts: cov_mts = [2, 102]
-   # --- الإعداد الديناميكي لـ COVR ---
+   # --- Dynamic COVR setup ---
     if not cov_mts: cov_mts = [2, 102]
     num_mts = len(cov_mts)
     
-    # توليد الأسطر بحيث يكون كل تفاعل في سطر مستقل مع نفسه 
+    # Generate lines so each reaction is listed on its own line
     mts_lines = "".join([f" {mat_number} {mt} {mat_number} {mt} /\n" for mt in cov_mts])
 
     content += (
@@ -237,7 +263,7 @@ def build_covariance_input(mat_number, temp, ign_val, iwt_val, groups_text, flux
     return content
 
 # ==========================================
-# 4. المعالج الأساسي (المحرك)
+# 4. Main processor (engine)
 # ==========================================
 class CovarianceProcessor:
     def __init__(self, input_file, njoy_cmd, cpu_limit, ign_val, iwt_val, groups_text, flux_text, generate_plots, job_mts_dict):
@@ -297,7 +323,7 @@ class CovarianceProcessor:
             with open(njoy_inp, "r", encoding="utf-8") as stdin_f, \
                  open(njoy_out, "w", encoding="utf-8") as stdout_f:
                 subprocess.run([self.njoy_cmd], stdin=stdin_f, stdout=stdout_f,
-                               stderr=subprocess.STDOUT, check=True, cwd=work_dir, timeout=600)
+                               stderr=subprocess.STDOUT, check=True, cwd=work_dir, timeout=3600)
 
             shutil.copy(njoy_out, cov_dir / f"{iso}_cov.out")
             shutil.copy(njoy_inp, cov_dir / f"{iso}_cov.in")
@@ -360,7 +386,7 @@ class CovarianceProcessor:
         print(f"Check matrices at: {Config.OUTPUT_COV}")
 
 # ==========================================
-# 5. الواجهة التفاعلية (CLI)
+# 5. Interactive interface (CLI)
 # ==========================================
 def run_interactive_covariance():
     start_time = time.time()
@@ -430,7 +456,7 @@ def run_interactive_covariance():
         sys.exit(1)
     Config.ENDF_DIR = abs_nd_path 
 
-    # --- استخراج التفاعلات ---
+    # --- Extract reactions ---
     jobs = parse_covariance_batch(input_file_path)
     print("-" * 50)
     print("[*] Select Reactions (MT) for COVR plots:")
@@ -449,9 +475,9 @@ def run_interactive_covariance():
             job_mts_dict[iso_name] = [m for m in [1, 2, 4, 16, 18, 102] if m in avail_mts] or [2, 102]
         elif mt_option == '3':
             print(f"\n[*] {iso_name} | Available MTs: {avail_mts}")
-            # تغيير النص ليطلب الفاصلة
+            # Change the prompt to request comma-separated input
             user_mts = input("    Enter MTs separated by comma (Enter for all): ").strip()
-            # استخدام replace(',', ' ') لكي يقبل الفاصلة بمرونة تامة
+            # Use replace(',', ' ') so commas are accepted flexibly
             job_mts_dict[iso_name] = [int(x) for x in user_mts.replace(',', ' ').split() if x.isdigit()] if user_mts else avail_mts
         else:
             job_mts_dict[iso_name] = avail_mts if avail_mts else [2, 102]

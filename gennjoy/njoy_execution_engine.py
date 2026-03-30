@@ -306,7 +306,7 @@ class ACEGenerator:
                 if result.returncode != 0:
                     raise RuntimeError(f"NJOY execution failed. Check {temp_dir}/njoy.out")
             
-            # تجميع أشرطة ACE المستقلة في ملف واحد نهائي
+            # Merge separate ACE tapes into one final ACE file
             dst_ace = dest_dir / ace_ascii
             with open(dst_ace, 'wb') as fout_ace:
                 for i in range(1, len(temperatures) + 1):
@@ -318,7 +318,7 @@ class ACEGenerator:
             if not dst_ace.exists() or dst_ace.stat().st_size == 0:
                 raise FileNotFoundError(f"ACE files not generated. Found: {[f.name for f in list(temp_dir.glob('*'))]}")
 
-            # تجميع أشرطة XSDIR المستقلة في ملف واحد نهائي
+            # Merge separate XSDIR tapes into one final XSDIR file
             dst_xsdir = dest_dir / f"{name}.xsdir"
             with open(dst_xsdir, 'wb') as fout_xsdir:
                 for i in range(1, len(temperatures) + 1):
@@ -394,7 +394,7 @@ class ACEGenerator:
                 if result.returncode != 0:
                     raise RuntimeError(f"TSL Processing failed. Check {temp_dir}/njoy.out")
 
-            # تجميع أشرطة ACE المستقلة للحراريات
+            # Merge separate ACE tapes for thermal scattering into one final ACE file
             dst_ace = dest_dir / ace_ascii
             with open(dst_ace, 'wb') as fout_ace:
                 for i in range(1, len(temperatures) + 1):
@@ -403,7 +403,7 @@ class ACEGenerator:
                         with open(tape_ace, 'rb') as fin:
                             shutil.copyfileobj(fin, fout_ace)
 
-            # تجميع أشرطة XSDIR المستقلة للحراريات
+            # Merge separate XSDIR tapes for thermal scattering into one final XSDIR file
             dst_xsdir = dest_dir / f"{name}.xsdir"
             with open(dst_xsdir, 'wb') as fout_xsdir:
                 for i in range(1, len(temperatures) + 1):

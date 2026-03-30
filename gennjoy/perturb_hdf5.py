@@ -176,8 +176,8 @@ def create_perturbed_library():
                 E_low = energy_bounds[g-1]
                 E_high = energy_bounds[g]
                 print(f"\n  -> Processing Group {g} (Energy Range: {E_low:.3e} to {E_high:.3e} eV)")
-                
-                # تحميل نسخة أصلية ونظيفة من النظير لكل مجموعة طاقة
+                                    
+                    # Load a fresh copy of the isotope for each energy group
                 nuc = openmc.data.IncidentNeutron.from_hdf5(orig_h5)
                 
                 if mt not in nuc.reactions:
@@ -189,8 +189,8 @@ def create_perturbed_library():
                 xml_filename = f"cross_sections_pert_{isotope}_MT{mt}_G{g}_{pert_percent}pct.xml"
                 
                 changed = False
-                
-                # 1. إحداث الاضطراب
+                               
+                # Apply perturbation to the cross-section data
                 for temp in rx.xs:
                     xs_obj = rx.xs[temp]
                     if not hasattr(xs_obj, 'x') or not hasattr(xs_obj, 'y'): 
@@ -207,7 +207,7 @@ def create_perturbed_library():
                     delta_y = y_vals[mask] * fractional_change
                     y_vals[mask] += delta_y
                     
-                    # 2. تعديل المقاطع العرضية الإجمالية المرتبطة (MT=1, MT=27) لضمان الدقة الفيزيائية
+                    # 2. Adjust associated total cross sections (MT=1, MT=27) to preserve physical consistency
                     redundant_mts = [1] 
                     if mt in [18, 102, 103, 104, 105, 107]:
                         redundant_mts.append(27)
@@ -225,12 +225,12 @@ def create_perturbed_library():
                                     delta_interp = np.interp(r_x, x_vals[mask], delta_y, left=0.0, right=0.0)
                                     r_y += delta_interp
                 
-                # التحقق الذكي: إذا لم يتم تعديل أي بيانات (المجموعة فارغة)، لا تقم بإنشاء ملفات
+                # Smart check: if no data was modified (empty group), do not create files
                 if not changed:
                     print(f"     [!] Warning: No cross section data in this energy group. Skipped generation.")
                     continue
 
-                # 3. حفظ ملف HDF5 للمجموعة
+                # 3. Save the perturbed HDF5 file for this group
                 pert_h5_path = os.path.join(pert_dir, pert_filename)
                 if os.path.exists(pert_h5_path):
                     os.remove(pert_h5_path)
@@ -240,7 +240,7 @@ def create_perturbed_library():
                 except TypeError:
                     nuc.export_to_hdf5(pert_h5_path)
 
-                # 4. حفظ ملف XML المخصص للمجموعة
+                # 4. Save the custom XML file for this group
                 if os.path.exists(orig_xml):
                     pert_xml_path = os.path.join(pert_dir, xml_filename)
                     lib = openmc.data.DataLibrary.from_xml(orig_xml)
