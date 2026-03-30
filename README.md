@@ -128,7 +128,7 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 * Open a Pull Request.
 
 ## 👨‍🔬 Authors
-Dr. Mohamed Laid YAHIAOUI - Lead Developer - GitHub Profile
+Dr. Mohamed Laid YAHIAOUI - Lead Developer - [GitHub Profile](https://github.com/laidastro7)
 
 📧 Email: mohamedlaid.yahiaoui@univ-jijel.dz
 
