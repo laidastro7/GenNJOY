@@ -34,9 +34,6 @@ def display_header():
     print(Fore.CYAN + "="*62)
     print(Style.BRIGHT + "   Automated Nuclear Data Processing Framework (NJOY + OpenMC)")
     print("   Author: Dr. Mohamed Laid YAHIAOUI et al.")
-    print("-" * 62)
-    print("   System Mode: [Package Installed]")
-    print("-" * 62 + "\n")
 
 # --- System Validation Module ---
 
