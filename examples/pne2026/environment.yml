@@ -1,0 +1,21 @@
+# Software environment used for the results reported in
+# Yahiaoui et al., Progress in Nuclear Energy (2026).
+# Create with:  conda env create -f environment.yml
+name: gennjoy-pne2026
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - openmc=0.15.0        # transport code and Python API (ACE->HDF5, perturbations)
+  - njoy2016=2016.78     # NJOY2016 executable
+  - ghostscript=10.02.1  # ps2pdf for VIEWR plots
+  - numpy
+  - scipy
+  - pandas
+  - h5py
+  - lxml
+  - requests
+  - beautifulsoup4
+  - colorama
+  - matplotlib
+  - pip

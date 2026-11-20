@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use GenNJOY, please cite the software release and the accompanying article."
+title: "GenNJOY: Automated NJOY2016-based nuclear data processing for OpenMC with sensitivity and uncertainty tools"
+version: "X.Y.Z"            # updated at each release
+doi: "10.5281/zenodo.XXXXXXX"   # concept DOI assigned by Zenodo
+date-released: "2026-MM-DD"
+license: GPL-3.0-only
+repository-code: "https://github.com/laidastro7/GenNJOY"
+type: software
+authors:
+  - family-names: Yahiaoui
+    given-names: Mohamed Laid
+    affiliation: "University of Jijel, Algeria"
+    orcid: "https://orcid.org/0000-0002-6968-2551"
+    email: mohamedlaid.yahiaoui@univ-jijel.dz
+  - family-names: Bourenane
+    given-names: Aissa
+    affiliation: "Nuclear Research Center of Birine, Algeria"
+keywords:
+  - NJOY2016
+  - OpenMC
+  - nuclear data processing
+  - covariance
+  - sensitivity and uncertainty analysis

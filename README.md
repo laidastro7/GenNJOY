@@ -14,7 +14,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![NJOY](https://img.shields.io/badge/NJOY-2016-red)](https://github.com/njoy/NJOY2016)
 [![OpenMC](https://img.shields.io/badge/OpenMC-Compatible-green)](https://docs.openmc.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 **GenNJOY** is an advanced software framework written in Python designed to automate complex nuclear data processing workflows. The system seamlessly bridges raw nuclear data libraries (ENDF) with the **NJOY** processing code, and subsequently converts the outputs into HDF5 format ready for **OpenMC** Monte Carlo simulations. It also supports exact perturbations and covariance matrix generation for sensitivity and uncertainty analysis.
 
@@ -26,8 +26,8 @@
 * **⚙️ Input Generation:** Intelligent generation of NJOY input decks for isotopes and thermal scattering materials, handling complex parameter definitions automatically.
 * **⚡ Parallel Processing:** Full utilization of multi-core CPU architectures to accelerate NJOY execution batches.
 * **🔄 Automated Conversion:** Seamless conversion of generated ACE files into OpenMC-compatible HDF5 libraries.
-* **🎯 Exact Perturbation [NEW]:** Create exact perturbed HDF5 cross-section libraries for sensitivity analysis.
-* **📊 Covariance Processing [NEW]:** Automated generation of multi-group covariance matrices (`.coverx`) and visual correlation plots (PDF/PS) using ERRORR and COVR modules.
+* **🎯 Group-wise Perturbation:** Create perturbed HDF5 libraries for sensitivity analysis: reaction cross sections, fission neutron multiplicities (total, prompt, delayed nu; MT 452/456/455) and the prompt fission spectrum (MT 1018, renormalised).
+* **📊 Covariance Processing:** Multigroup covariance matrices for cross sections (MF33), nu (MF31) and fission spectra (MF35) with ERRORR, CSV export, and correlation plots (PDF/PS) with COVR/VIEWR.
 * **🗂️ xsdir Management:** Automatic merging and updating of `xsdir` files to ensure data consistency across the pipeline.
 * **🛠️ Interactive CLI:** A user-friendly Command Line Interface (CLI) that eliminates the need for manual script handling.
 
@@ -93,7 +93,9 @@ GenNJOY/
 │   ├── generate_neutron_input.py    # Generates NJOY input decks for incident neutron data
 │   ├── generate_tsl_input.py        # Generates NJOY input decks for thermal scattering data
 │   ├── njoy_execution_engine.py     # Core engine wrapper for executing NJOY commands
-│   ├── perturb_hdf5.py              # Exact HDF5 cross-section perturbation module
+│   ├── perturb_hdf5.py              # HDF5 perturbation module (cross sections, nu, chi)
+│   ├── fission_perturbation.py      # Group-wise perturbation of nu (MT 452/455/456) and chi (MT 1018)
+│   ├── errorr_reader.py             # Reader/CSV export of ERRORR covariance output (MF31/33/35)
 │   ├── run_covariance_processing.py # Multi-core covariance matrix processing & plotting
 │   ├── run_neutron_processing.py    # Orchestrates incident neutron data processing
 │   ├── run_tsl_processing.py        # Orchestrates thermal scattering processing
@@ -115,7 +117,9 @@ GenNJOY/
 ├── requirements.txt                 # List of Python Dependencies
 ├── MANIFEST.in                      # Package Data Configuration
 ├── .gitignore                       # Git Ignore Rules
-├── LICENSE                          # Project License (MIT)
+├── CITATION.cff                     # Citation metadata (software release and DOI)
+├── examples/pne2026/                # Inputs and scripts for the results of the PNE article
+├── LICENSE                          # GNU General Public License v3.0
 └── README.md                        # Project Documentation
 ```
 ## 🤝 Contributing
@@ -127,10 +131,16 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 * Push to the Branch (git push origin feature/AmazingFeature).
 * Open a Pull Request.
 
+## 📌 Versions and reproducibility
+The results of Yahiaoui et al., *Progress in Nuclear Energy* (2026), were obtained with GenNJOY **vX.Y.Z**
+(archived on Zenodo: https://doi.org/10.5281/zenodo.XXXXXXX), NJOY2016.78, OpenMC 0.15.0, Python 3.10
+and ENDF/B-VIII.0. The inputs and scripts are in [`examples/pne2026`](examples/pne2026).
+Every release is tagged (`git tag`) and archived on Zenodo; please cite the release you used (see `CITATION.cff`).
+
 ## 👨‍🔬 Authors
 Dr. Mohamed Laid YAHIAOUI - Lead Developer - [GitHub Profile](https://github.com/laidastro7)
 
 📧 Email: mohamedlaid.yahiaoui@univ-jijel.dz
 
 ## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+GenNJOY is distributed under the GNU General Public License, version 3 (GPL-3.0-only); see the LICENSE file for the full text.

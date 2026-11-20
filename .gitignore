@@ -3,3 +3,6 @@ build/
 dist/
 __pycache__/
 *.pyc
+
+# Processed and downloaded nuclear data (produced by GenNJOY, not versioned)
+gennjoy/data/

@@ -5,6 +5,7 @@ setup(
     version="1.0.1",
     description="Automated Nuclear Data Processing Framework (NJOY + OpenMC)",
     author="Dr. Mohamed Laid YAHIAOUI et al.",
+    license="GPL-3.0-only",
     packages=find_packages(),
     include_package_data=True,
     python_requires=">=3.8",
@@ -26,6 +27,7 @@ setup(
     },
     classifiers=[
         "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering :: Physics",
     ],
