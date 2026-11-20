@@ -18,6 +18,11 @@ except ImportError:
     # Fallback if running from parent directory
     from gennjoy import njoy_execution_engine
 
+try:
+    import scheduling
+except ImportError:
+    from gennjoy import scheduling
+
 # Initialize colorama
 init(autoreset=True)
 
@@ -190,25 +195,17 @@ class NeutronProcessor:
 
         Logger.info(f"Found {total_isotopes} isotopes to process.")
         
-        procs = []
-        effective_cpu = min(self.cpu_limit, total_isotopes)
-        effective_cpu = max(1, effective_cpu)
-        
-        chunk_size = total_isotopes // effective_cpu + (1 if total_isotopes % effective_cpu else 0)
-        
-        for i in range(effective_cpu):
-            start = i * chunk_size
-            end = start + chunk_size
-            chunk = lines[start:end]
-            if not chunk: continue
-            
-            p = Process(target=self._worker, args=(chunk,))
-            procs.append(p)
-            p.start()
-        
-        for p in procs:
-            p.join()
-            
+        # Longest jobs first, dynamic distribution over the workers (see scheduling.py)
+        endf_dir = Path(os.environ.get("GENNJOY_ENDF_DATA", str(Config.BASE_DIR / "data" / "incident_neutron_endf")))
+
+        def cost_and_key(line, history):
+            element, name, temps = gen.gen_parametre_njoy(line)
+            key = f"neutron|{element}|{' '.join(str(t) for t in temps)}"
+            fallback = scheduling.endf_cost(endf_dir / element, len(temps))
+            return scheduling.estimate(key, fallback, history), key
+
+        scheduling.run_dynamic(lines, self._process_isotope, self.cpu_limit, cost_and_key, Logger.info)
+
         Logger.header("PROCESSING FINISHED")
         print(f"Check output at: {Config.OUTPUT_ACE}")
         print(f"Check xsdir at:  {Config.XSDIR_MASTER}")

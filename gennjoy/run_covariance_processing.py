@@ -13,6 +13,10 @@ try:
     from gennjoy import errorr_reader
 except ImportError:  # running as a script from the package folder
     import errorr_reader
+try:
+    from gennjoy import scheduling
+except ImportError:
+    import scheduling
 
 init(autoreset=True)
 
@@ -466,19 +470,15 @@ class CovarianceProcessor:
         total_isotopes = len(jobs)
         Logger.info(f"Found {total_isotopes} isotopes to process.")
         
-        procs = []
-        effective_cpu = max(1, min(self.cpu_limit, total_isotopes))
-        chunk_size = total_isotopes // effective_cpu + (1 if total_isotopes % effective_cpu else 0)
-        
-        for i in range(effective_cpu):
-            start = i * chunk_size
-            chunk = jobs[start : start + chunk_size]
-            if not chunk: continue
-            p = Process(target=self._worker, args=(chunk,))
-            procs.append(p)
-            p.start()
-        
-        for p in procs: p.join()
+        # Longest jobs first, dynamic distribution over the workers (see scheduling.py)
+        def cost_and_key(job, history):
+            path = Config.ENDF_DIR / job["element_n"]
+            key = f"covariance|{job['element_n']}|{job['temperatures']}|nuchi={int(self.do_nu_chi)}"
+            fallback = 1.5 * scheduling.endf_cost(path, 1)   # + GROUPR/ERRORR
+            return scheduling.estimate(key, fallback, history), key
+
+        scheduling.run_dynamic(jobs, self._process_isotope, self.cpu_limit, cost_and_key,
+                               lambda m: Logger.info(m))
         Logger.header("PROCESSING FINISHED")
         print(f"Check matrices at: {Config.OUTPUT_COV}")
 

@@ -19,6 +19,11 @@ except ImportError:
     # Fallback if running from parent directory
     from gennjoy import njoy_execution_engine
 
+try:
+    import scheduling
+except ImportError:
+    from gennjoy import scheduling
+
 # Initialize colorama
 init(autoreset=True)
 
@@ -254,25 +259,19 @@ class TSLProcessor:
 
         Logger.info(f"Found {total_jobs} TSL jobs to process.")
         
-        # Distribute Work
-        procs = []
-        effective_cpu = max(1, min(self.cpu_limit, total_jobs))
-        
-        chunk_size = total_jobs // effective_cpu + (1 if total_jobs % effective_cpu else 0)
-        
-        for i in range(effective_cpu):
-            start = i * chunk_size
-            end = start + chunk_size
-            chunk = pairs[start:end]
-            if not chunk: continue
-            
-            p = Process(target=self._worker, args=(chunk,))
-            procs.append(p)
-            p.start()
-        
-        for p in procs:
-            p.join()
-            
+        # Longest jobs first, dynamic distribution over the workers (see scheduling.py)
+        n_dir = Path(os.environ.get("GENNJOY_ENDF_DATA_NEUTRON", str(Config.BASE_DIR / "data" / "incident_neutron_endf")))
+        t_dir = Path(os.environ.get("GENNJOY_ENDF_DATA_THERMAL", str(Config.BASE_DIR / "data" / "thermal_scattering_endf")))
+
+        def cost_and_key(pair, history):
+            pn = gen.gen_parametre_njoy(pair[0]); pt = gen.gen_parametre_njoy(pair[1])
+            temps = pt[2]
+            key = f"tsl|{pt[0]}|{pn[0]}|{' '.join(str(t) for t in temps)}"
+            fallback = (scheduling.file_size(t_dir / str(pt[0])) / 2.0e5 + scheduling.endf_cost(n_dir / str(pn[0]), 1)) * max(1, len(temps))
+            return scheduling.estimate(key, fallback, history), key
+
+        scheduling.run_dynamic(pairs, self._process_pair, self.cpu_limit, cost_and_key, Logger.info)
+
         Logger.header("PROCESSING FINISHED")
         print(f"Check output at: {Config.OUTPUT_ACE}")
         print(f"Check xsdir at:  {Config.XSDIR_MASTER}")
