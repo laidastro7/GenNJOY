@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# Timed processing of the ENDF/B-VIII.0 library used for the 324 ICSBEP cases
+# Timed processing of the ENDF/B-VIII.1 library used for the 324 ICSBEP cases
 #
 #     cd examples/pne2026/icsbep
 #     bash process_icsbep_library.sh
@@ -10,7 +10,7 @@
 # Results: timing_report_<date>.txt and logs_<date>/ in this folder.
 # =============================================================================
 
-# ---------------- Nuclear data (ENDF/B-VIII.0) ----------------
+# ---------------- Nuclear data (ENDF/B-VIII.1) ----------------
 # Default: the package data folders filled by GenNJOY option 1.
 # Override with:  NEUTRON_DATA=/path THERMAL_DATA=/path bash process_icsbep_library.sh
 
@@ -43,6 +43,7 @@ log ""
 log "--- Hardware ---"
 lscpu | grep -E "Model name|^CPU\(s\)|Thread\(s\) per core|Core\(s\) per socket|Socket\(s\)|CPU max MHz" | tee -a "$REPORT"
 log "Logical CPUs available (nproc): $(nproc)"
+log "CPUs used by GenNJOY: ${CPUS:-all (default)}"
 free -h | head -2 | tee -a "$REPORT"
 log ""
 log "--- Software ---"
@@ -84,11 +85,11 @@ run_step () {   # $1 label, $2 answers (one per line), $3... command
 }
 
 # Prompt order — neutron: NJOY cmd, neutron data path, CPUs, tolerance
-run_step "neutron (option 4)" $'\n'"$NEUTRON_DATA"$'\n\n\n' \
+run_step "neutron (option 4)" $'\n'"$NEUTRON_DATA"$'\n'"${CPUS:-}"$'\n\n' \
   python3 "$PKG/run_neutron_processing.py" "$NEUTRON_BATCH"
 
 # Prompt order — TSL: NJOY cmd, neutron data path, thermal data path, CPUs, tolerance
-run_step "tsl (option 5)" $'\n'"$NEUTRON_DATA"$'\n'"$THERMAL_DATA"$'\n\n\n' \
+run_step "tsl (option 5)" $'\n'"$NEUTRON_DATA"$'\n'"$THERMAL_DATA"$'\n'"${CPUS:-}"$'\n\n' \
   python3 "$PKG/run_tsl_processing.py" "$TSL_BATCH"
 
 # Prompt order — HDF5 conversion: neutron ACE path, thermal ACE path (package defaults)

@@ -22,7 +22,7 @@
 
 ## 🚀 Key Features
 
-* **📦 Library Management:** Automated fetching and organization of raw nuclear data libraries (ENDF/B-VIII.0) for both Incident Neutrons and Thermal Scattering Laws (TSL).
+* **📦 Library Management:** Automated fetching and organization of raw nuclear data libraries (ENDF/B-VII.1, VIII.0 and VIII.1) for both Incident Neutrons and Thermal Scattering Laws (TSL).
 * **⚙️ Input Generation:** Intelligent generation of NJOY input decks for isotopes and thermal scattering materials, handling complex parameter definitions automatically.
 * **⚡ Parallel Processing:** Full utilization of multi-core CPU architectures to accelerate NJOY execution batches.
 * **🔄 Automated Conversion:** Seamless conversion of generated ACE files into OpenMC-compatible HDF5 libraries.
@@ -134,7 +134,7 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 ## 📌 Versions and reproducibility
 The results of Yahiaoui et al., *Progress in Nuclear Energy* (2026), were obtained with GenNJOY **vX.Y.Z**
 (archived on Zenodo: https://doi.org/10.5281/zenodo.XXXXXXX), NJOY2016.78, OpenMC 0.15.0, Python 3.10
-and ENDF/B-VIII.0. The inputs and scripts are in [`examples/pne2026`](examples/pne2026).
+and ENDF/B-VIII.1. The inputs and scripts are in [`examples/pne2026`](examples/pne2026).
 Every release is tagged (`git tag`) and archived on Zenodo; please cite the release you used (see `CITATION.cff`).
 
 ## 👨‍🔬 Authors

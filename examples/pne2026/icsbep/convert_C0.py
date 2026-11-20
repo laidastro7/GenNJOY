@@ -3,10 +3,10 @@
 Replace natural carbon (C0) by C12 + C13 in the OpenMC ICSBEP models
 of the mit-crpg/benchmarks repository.
 
-ENDF/B-VIII.0 no longer provides an elemental carbon evaluation (C0);
+ENDF/B-VIII.0 and VIII.1 provide no elemental carbon evaluation (C0);
 it provides C12 and C13 instead. The OpenMC models in mit-crpg/benchmarks
 still use C0 (all as atom fractions, ao=...), so they cannot run with an
-ENDF/B-VIII.0 library without this conversion.
+ENDF/B-VIII.x library without this conversion.
 
 Atom fractions (IUPAC natural abundance): C12 = 0.9893, C13 = 0.0107.
 
