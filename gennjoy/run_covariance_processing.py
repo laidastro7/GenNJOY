@@ -9,6 +9,11 @@ from multiprocessing import Process, cpu_count, Lock
 from typing import List
 from colorama import Fore, Style, init
 
+try:
+    from gennjoy import errorr_reader
+except ImportError:  # running as a script from the package folder
+    import errorr_reader
+
 init(autoreset=True)
 
 # ==========================================
@@ -113,6 +118,32 @@ def get_covariance_mts(endf_file_path):
     except Exception: pass
     return sorted(list(mts))
 
+def get_mf_mts(endf_file_path, mf_wanted):
+    """MT numbers present in a given MF of an ENDF file."""
+    mts = set()
+    try:
+        with open(endf_file_path, 'r', encoding="utf-8", errors='ignore') as f:
+            for line in f:
+                if len(line) >= 75 and line[70:72].strip() == str(mf_wanted):
+                    mt_str = line[72:75].strip()
+                    if mt_str.isdigit() and int(mt_str) > 0:
+                        mts.add(int(mt_str))
+    except Exception: pass
+    return sorted(mts)
+
+def get_nu_chi_info(endf_file_path):
+    """nu-bar MTs with MF31 covariances, and the MF (5 or 6) holding the MT=18 spectrum if MF35 exists."""
+    mf1 = set(get_mf_mts(endf_file_path, 1))
+    mf31 = set(get_mf_mts(endf_file_path, 31))
+    nu_mts = [mt for mt in (452, 455, 456) if mt in mf1 and mt in mf31]
+    chi_mf = None
+    if 18 in get_mf_mts(endf_file_path, 35):
+        if 18 in get_mf_mts(endf_file_path, 6):
+            chi_mf = 6
+        elif 18 in get_mf_mts(endf_file_path, 5):
+            chi_mf = 5
+    return nu_mts, chi_mf
+
 def parse_covariance_batch(filepath):
     jobs = []
     filepath = Path(filepath)
@@ -148,7 +179,8 @@ def format_flux_for_njoy(flux_text):
     if np == 0: return ""
     return f" 0.0 0.0 0 0 1 {np}\n {np} 2\n" + "\n".join(pairs) + "\n /\n"
 
-def build_covariance_input(mat_number, temp, ign_val, iwt_val, groups_text, flux_text, cov_mts, generate_plots=False, has_urr=False):
+def build_covariance_input(mat_number, temp, ign_val, iwt_val, groups_text, flux_text, cov_mts, generate_plots=False, has_urr=False,
+                           nu_mts=None, chi_mf=None, efmean=2.0e6):
     content = (
         "-- RECONR : Pointwise cross section reconstruction\n"
         "reconr\n"
@@ -219,7 +251,25 @@ def build_covariance_input(mat_number, temp, ign_val, iwt_val, groups_text, flux
     if iwt_val == 1 and flux_text: content += format_flux_for_njoy(flux_text)
     elif iwt_val == 4: content += " 0.1 0.025 820.3e3 1.4e6 /\n"
         
-    content += " 3 /\n 0 /\n 0 /\n"
+    # MF3 reactions, plus nu-bar (MF31) and the fission spectrum (MF35) when requested
+    content += " 3 /\n"
+    for mt in (nu_mts or []):
+        content += f" 3 {mt} 'nu' /\n"
+    if chi_mf:
+        content += f" {chi_mf} 18 'chi' /\n"
+    content += " 0 /\n 0 /\n"
+
+    def _errorr_block(nout, mfcov_card, title):
+        blk = (f"\n-- ERRORR : {title}\n"
+               "errorr\n"
+               f" 20 {current_tape} {gendf_tape} {nout} 0 0 /\n"
+               f" {mat_number} {ign_val} {iwt_val} 1 1 /\n"
+               f" 1 {temp} /\n"
+               f" {mfcov_card} /\n")
+        if ign_val == 1 and groups_text: blk += format_groups_for_njoy(groups_text)
+        if iwt_val == 1 and flux_text: blk += format_flux_for_njoy(flux_text)
+        elif iwt_val == 4: blk += " 0.1 0.025 820.3e3 1.4e6 /\n"
+        return blk
 
     content += (
         "\n-- ERRORR : Covariance matrix generation\n"
@@ -259,6 +309,19 @@ def build_covariance_input(mat_number, temp, ign_val, iwt_val, groups_text, flux
             " 43 53 /\n"
         )
 
+    if nu_mts:
+        content += _errorr_block(61, "0 31 1 1 -1", "MF31 nu-bar covariance (MT " + ", ".join(map(str, nu_mts)) + ")")
+    if chi_mf:
+        content += _errorr_block(62, f"0 35 1 1 -1 {efmean:.4e}", f"MF35 prompt fission spectrum covariance (efmean = {efmean:.4e} eV)")
+    if generate_plots and nu_mts:
+        content += ("\n-- COVR/VIEWR : MF31 plots\n"
+                    f"covr\n 61 0 71 /\n 1 /\n /\n /\n {mat_number} /\n"
+                    "viewr\n 71 81 /\n")
+    if generate_plots and chi_mf:
+        content += ("\n-- COVR/VIEWR : MF35 plots\n"
+                    f"covr\n 62 0 72 /\n 1 /\n 1.e3 /\n /\n {mat_number} /\n"
+                    "viewr\n 72 82 /\n")
+
     content += "\nstop\n"
     return content
 
@@ -266,7 +329,8 @@ def build_covariance_input(mat_number, temp, ign_val, iwt_val, groups_text, flux
 # 4. Main processor (engine)
 # ==========================================
 class CovarianceProcessor:
-    def __init__(self, input_file, njoy_cmd, cpu_limit, ign_val, iwt_val, groups_text, flux_text, generate_plots, job_mts_dict):
+    def __init__(self, input_file, njoy_cmd, cpu_limit, ign_val, iwt_val, groups_text, flux_text, generate_plots, job_mts_dict,
+                 do_nu_chi=True, efmean=2.0e6):
         self.input_file = input_file
         self.njoy_cmd = njoy_cmd
         self.cpu_limit = cpu_limit
@@ -276,6 +340,8 @@ class CovarianceProcessor:
         self.flux_text = flux_text
         self.generate_plots = generate_plots
         self.job_mts_dict = job_mts_dict
+        self.do_nu_chi = do_nu_chi
+        self.efmean = efmean
         self.lock = Lock()
         self._setup_directories()
 
@@ -308,9 +374,14 @@ class CovarianceProcessor:
         work_dir = cov_dir / f"{iso}_work"
         work_dir.mkdir(parents=True, exist_ok=True)
 
+        nu_mts, chi_mf = get_nu_chi_info(endf_file) if self.do_nu_chi else ([], None)
+        if nu_mts or chi_mf:
+            with self.lock: Logger.info(f"[{iso}] MF31 nu MTs: {nu_mts or 'none'} | MF35 chi: {'MF%d/MT18' % chi_mf if chi_mf else 'none'}")
+
         input_content = build_covariance_input(
             mat_number, temperature, self.ign_val, self.iwt_val, 
-            self.groups_text, self.flux_text, cov_mts, plot_active, has_urr_val
+            self.groups_text, self.flux_text, cov_mts, plot_active, has_urr_val,
+            nu_mts=nu_mts, chi_mf=chi_mf, efmean=self.efmean
         )
         
         try:
@@ -331,6 +402,32 @@ class CovarianceProcessor:
             if (work_dir / "tape33").exists():
                 shutil.copy(work_dir / "tape33", cov_dir / f"{iso}.coverx")
                 with self.lock: Logger.info(f"SUCCESS: {iso} COVERX Matrix generated.")
+            for tape, tag in (("tape61", "mf31"), ("tape62", "mf35")):
+                if (work_dir / tape).exists():
+                    shutil.copy(work_dir / tape, cov_dir / f"{iso}_{tag}.errorr")
+                    with self.lock: Logger.info(f"SUCCESS: {iso} {tag.upper()} covariance generated.")
+
+            # Relative covariance matrices as CSV (one file per MF/MT/MT1 block)
+            try:
+                csv_dir = cov_dir / "csv"
+                csv_dir.mkdir(parents=True, exist_ok=True)
+                for src in [cov_dir / f"{iso}.coverx", cov_dir / f"{iso}_mf31.errorr", cov_dir / f"{iso}_mf35.errorr"]:
+                    if src.exists():
+                        errorr_reader.export_csv(str(src), str(csv_dir / iso))
+            except Exception as e:
+                with self.lock: Logger.warn(f"[{iso}] CSV export failed: {e}")
+
+            for tape, tag in (("tape81", "mf31"), ("tape82", "mf35")):
+                if plot_active and (work_dir / tape).exists():
+                    plots_dir.mkdir(parents=True, exist_ok=True)
+                    ps_t = plots_dir / f"{iso}_{tag}_plot.ps"
+                    shutil.copy(work_dir / tape, ps_t)
+                    try:
+                        subprocess.run(["ps2pdf", str(ps_t), str(ps_t.with_suffix('.pdf'))], check=True,
+                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                        os.remove(ps_t)
+                    except Exception:
+                        pass
 
             if plot_active and (work_dir / "tape53").exists():
                 plots_dir.mkdir(parents=True, exist_ok=True)
@@ -491,9 +588,23 @@ def run_interactive_covariance():
     plot_input = input("Generate Viewr plots? (y/n) [Default: y]: ").strip().lower()
     generate_plots = False if plot_input == 'n' else True
     
+    print("-" * 50)
+    nc_input = input("Also process nu-bar (MF31) and prompt fission spectrum (MF35) covariances when available? (y/n) [Default: y]: ").strip().lower()
+    do_nu_chi = nc_input != 'n'
+    efmean = 2.0e6
+    if do_nu_chi:
+        print("    MF35 matrices are given for ranges of incident-neutron energy; ERRORR uses the")
+        print("    sub-block containing 'efmean' (e.g. 0.0253 for a thermal system, 2.0e6 for a fast one).")
+        ef_input = input("    Incident energy efmean in eV [Default: 2.0e6]: ").strip()
+        try:
+            efmean = float(ef_input) if ef_input else 2.0e6
+        except ValueError:
+            Logger.warn("Invalid efmean. Using 2.0e6 eV.")
+
     processor = CovarianceProcessor(
         input_file_path, njoy_cmd, cpu_limit, 
-        ign_val, iwt_val, groups_text, flux_text, generate_plots, job_mts_dict
+        ign_val, iwt_val, groups_text, flux_text, generate_plots, job_mts_dict,
+        do_nu_chi=do_nu_chi, efmean=efmean
     )
     processor.execute()
     

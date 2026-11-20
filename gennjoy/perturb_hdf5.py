@@ -1,6 +1,11 @@
 import os
 import numpy as np
 
+try:
+    from gennjoy import fission_perturbation as fp
+except ImportError:  # running as a script from the package folder
+    import fission_perturbation as fp
+
 def create_perturbed_library():
     print("\n" + "="*60)
     print(" 🛠️  GenNJOY Exact Perturbation Module (Feature 7)")
@@ -97,6 +102,17 @@ def create_perturbed_library():
             valid_mts.append(mt)
             name = mt_names.get(mt, "Other Specific Reaction")
             print(f"    👉 MT = {mt:<4} | {name}")
+
+    # Fission neutron multiplicities and prompt fission spectrum (fissionable nuclides)
+    fission_mts = fp.available_fission_mts(nuc_test)
+    if fission_mts:
+        print("    --- fission neutron data ---")
+        for mt in fission_mts:
+            name = fp.NU_MTS.get(mt, fp.CHI_NAME)
+            basis = "outgoing energy, renormalised" if mt == fp.CHI_MT else "incident energy"
+            print(f"    👉 MT = {mt:<4} | {name} ({basis})")
+            mt_names[mt] = name
+        valid_mts.extend(fission_mts)
     print("-" * 50)
 
     # =========================================================
@@ -180,18 +196,24 @@ def create_perturbed_library():
                     # Load a fresh copy of the isotope for each energy group
                 nuc = openmc.data.IncidentNeutron.from_hdf5(orig_h5)
                 
-                if mt not in nuc.reactions:
-                    print(f"     [-] Error: MT={mt} not found. Skipping.")
-                    break
-                    
-                rx = nuc.reactions[mt]
                 pert_filename = f"{isotope}_pert_MT{mt}_G{g}_{pert_percent}pct.h5"
                 xml_filename = f"cross_sections_pert_{isotope}_MT{mt}_G{g}_{pert_percent}pct.xml"
                 
                 changed = False
-                               
+
+                if mt in fp.NU_MTS or mt == fp.CHI_MT:
+                    # nu (incident-energy group) or chi (outgoing-energy group, renormalised)
+                    changed = fp.perturb_fission_quantity(nuc, mt, E_low, E_high, fractional_change)
+                    xs_temps = []
+                else:
+                    if mt not in nuc.reactions:
+                        print(f"     [-] Error: MT={mt} not found. Skipping.")
+                        break
+                    rx = nuc.reactions[mt]
+                    xs_temps = list(rx.xs)
+
                 # Apply perturbation to the cross-section data
-                for temp in rx.xs:
+                for temp in xs_temps:
                     xs_obj = rx.xs[temp]
                     if not hasattr(xs_obj, 'x') or not hasattr(xs_obj, 'y'): 
                         continue 

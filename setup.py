@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="gennjoy",
-    version="1.0.0",
+    version="1.0.1",
     description="Automated Nuclear Data Processing Framework (NJOY + OpenMC)",
     author="Dr. Mohamed Laid YAHIAOUI et al.",
     packages=find_packages(),

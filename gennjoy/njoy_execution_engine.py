@@ -204,8 +204,42 @@ class ACEGenerator:
             
         return iin, icoh
 
+    def _get_tsl_metadata(self, file_path):
+        """Read thermal-scattering metadata needed by THERMR and ACER.
+
+        From MF7/MT4 (LIST record B array): B(4) = maximum energy for the
+        thermal treatment (eV) and B(6) = number of principal atoms (M0).
+        From MF7/MT2: LTHR (1 = coherent, 2 = incoherent, 3 = mixed elastic;
+        0 if no elastic data are given).
+        """
+        def _to_float(field):
+            field = field.strip()
+            if not field:
+                return 0.0
+            field = re.sub(r'([0-9.])([+-])(\d+)$', r'\1e\2\3', field)
+            return float(field)
+
+        mt4, mt2 = [], []
+        with open(file_path, 'r', errors='ignore') as f:
+            for line in f:
+                if len(line) >= 75 and line[70:72].strip() == '7':
+                    mt = line[72:75].strip()
+                    if mt == '4':
+                        mt4.append(line)
+                    elif mt == '2' and not mt2:
+                        mt2.append(line)
+        if len(mt4) < 4:
+            raise ValueError(f"MF7/MT4 data not found in {file_path}")
+        b = []
+        for line in mt4[2:4]:
+            b += [_to_float(line[i:i + 11]) for i in range(0, 66, 11)]
+        emax = b[3]
+        natom = max(1, int(round(b[5])))
+        lthr = int(mt2[0][22:33]) if mt2 else 0
+        return emax, natom, lthr
+
     # --- NJOY DECK GENERATORS ---
-    def _build_neutron_deck(self, endf_file, mat, temperatures, ace_ascii, err=0.001):
+    def _build_neutron_deck(self, endf_file, mat, temperatures, ace_ascii, err=0.001, newfor=1):
         has_urr = self._has_urr(endf_file)
         temps_str = " ".join(str(t) for t in temperatures)
         ntemp = len(temperatures)
@@ -242,19 +276,26 @@ class ACEGenerator:
             tape_ace = 50 + i * 2
             tape_xsdir = 51 + i * 2
             suffix = f".{i:02}"
-            deck += f"acer\n-21 -{current_tape} 0 {tape_ace} {tape_xsdir} /\n1 1 1 {suffix} /\n'{ace_ascii}' /\n{mat} {temp} /\n1 /\n/\n"
+            deck += f"acer\n-21 -{current_tape} 0 {tape_ace} {tape_xsdir} /\n1 1 1 {suffix} /\n'{ace_ascii}' /\n{mat} {temp} /\n{newfor} /\n/\n"
             
         deck += "stop\n"
         return deck
 
-    def _build_tsl_deck(self, mat_n, mat_t, temperatures, ace_ascii, iin, icoh, za, err=0.001):
+    def _build_tsl_deck(self, mat_n, mat_t, temperatures, ace_ascii, iin, icoh, za, err=0.001,
+                        natom=1, emax=10.0, lthr=0):
         temps_str = " ".join(str(t) for t in temperatures)
         ntemp = len(temperatures)
         
         deck = f"moder\n20 -21 /\nmoder\n22 -23 /\n"
         deck += f"reconr\n-21 -24 /\n'pendf' /\n{mat_n} 0 0 /\n{err} 0. /\n0 /\n"
         deck += f"broadr\n-21 -24 -25 /\n{mat_n} {ntemp} 0 0 0. /\n{err} /\n{temps_str} /\n0 /\n"
-        deck += f"thermr\n-23 -25 -26 /\n{mat_t} {mat_n} 20 {ntemp} {iin} {icoh} 0 1 221 0 /\n{temps_str} /\n{err} /\n"
+        # THERMR card 2 uses the number of principal atoms read from MF7/MT4;
+        # card 4 must give the maximum energy of the thermal treatment.
+        deck += f"thermr\n-23 -25 -26 /\n{mat_t} {mat_n} 20 {ntemp} {iin} {icoh} 0 {natom} 221 0 /\n{temps_str} /\n{err} {emax} /\n"
+        # ACER card 9: elastic data (MT=222 = mtref+1) and elastic type
+        # ielas = 0/1/2 for coherent/incoherent/mixed elastic (= LTHR - 1).
+        mte = 222 if icoh else 0
+        ielas = (lthr - 1) if (icoh and lthr > 0) else 0
         
         for i, temp in enumerate(temperatures, 1):
             tape_ace = 50 + i * 2
@@ -263,7 +304,7 @@ class ACEGenerator:
             deck += f"acer\n-23 -26 0 {tape_ace} {tape_xsdir} /\n2 1 1 {suffix} /\n'{ace_ascii}' /\n"
             deck += f"{mat_n} {temp} '{ace_ascii}' 1 /\n"
             deck += f"{za} /\n"
-            deck += f"221 64 0 0 1 0.0 2 /\n"
+            deck += f"221 64 {mte} {ielas} 1 {emax} 2 /\n"
             
         deck += "stop\n"
         return deck
@@ -303,8 +344,21 @@ class ACEGenerator:
             # RUN NJOY directly via subprocess
             with open(input_njoy, "r") as fin, open("njoy.out", "w") as fout:
                 result = subprocess.run([njoy_exec], stdin=fin, stdout=fout, stderr=subprocess.STDOUT)
-                if result.returncode != 0:
-                    raise RuntimeError(f"NJOY execution failed. Check {temp_dir}/njoy.out")
+
+            # Known NJOY2016 ACER limitation: charged-particle production blocks with an
+            # undefined law (e.g. ENDF/B-VIII.0 B-10) abort ACER. Retry once without the
+            # new-format particle-production data (ACER card 6, newfor = 0).
+            if result.returncode != 0 and "Undefined law for dlwh block" in Path("njoy.out").read_text(errors="ignore"):
+                print(Fore.YELLOW + f"   -> {name}: ACER failed on particle-production data; retrying with newfor=0")
+                shutil.copy("njoy.out", "njoy_newfor1_failed.out")
+                deck = self._build_neutron_deck("tape20", mat, temperatures, ace_ascii, err, newfor=0)
+                with open(input_njoy, "w") as f:
+                    f.write(deck)
+                with open(input_njoy, "r") as fin, open("njoy.out", "w") as fout:
+                    result = subprocess.run([njoy_exec], stdin=fin, stdout=fout, stderr=subprocess.STDOUT)
+
+            if result.returncode != 0:
+                raise RuntimeError(f"NJOY execution failed. Check {temp_dir}/njoy.out")
             
             # Merge separate ACE tapes into one final ACE file
             dst_ace = dest_dir / ace_ascii
@@ -382,8 +436,11 @@ class ACEGenerator:
             za = self._get_za_number("tape20")
             
             iin, icoh = self._get_thermr_flags("tape22")
+            emax, natom, lthr = self._get_tsl_metadata("tape22")
+            icoh = 1 if lthr > 0 else 0
             
-            deck = self._build_tsl_deck(mat_n, mat_t, temperatures, ace_ascii, iin, icoh, za, err)
+            deck = self._build_tsl_deck(mat_n, mat_t, temperatures, ace_ascii, iin, icoh, za, err,
+                                        natom=natom, emax=emax, lthr=lthr)
             
             with open(input_njoy, "w") as f:
                 f.write(deck)
