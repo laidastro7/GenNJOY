@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# Timed processing of the ENDF/B-VIII.1 library used for the 324 ICSBEP cases
+# Timed processing of the ENDF/B-VIII.1 library used for the 394 ICSBEP models
 #
 #     cd examples/pne2026/icsbep
 #     bash process_icsbep_library.sh
@@ -16,8 +16,8 @@
 
 # ---------------- Batch files (in this folder) ----------------
 HERE="$(cd "$(dirname "$0")" && pwd)"
-NEUTRON_BATCH="$HERE/neutron_process_batch_324.i"
-TSL_BATCH="$HERE/tsl_process_batch_324.i"
+NEUTRON_BATCH="${NEUTRON_BATCH:-$HERE/neutron_process_batch_394.i}"
+TSL_BATCH="${TSL_BATCH:-$HERE/tsl_process_batch_394.i}"
 
 set -u
 STAMP="$(date +%Y%m%d_%H%M)"

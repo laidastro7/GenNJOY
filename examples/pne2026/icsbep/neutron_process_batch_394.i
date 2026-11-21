@@ -156,3 +156,6 @@ element_n = n-094_Pu_240.endf         name = Pu240    temperatures = 293.6
 element_n = n-094_Pu_241.endf         name = Pu241    temperatures = 293.6
 element_n = n-094_Pu_242.endf         name = Pu242    temperatures = 293.6
 element_n = n-095_Am_241.endf         name = Am241    temperatures = 293.6
+element_n = n-023_V_050.endf         name = V50      temperatures = 293.6
+element_n = n-023_V_051.endf         name = V51      temperatures = 293.6
+element_n = n-093_Np_237.endf        name = Np237    temperatures = 293.6

@@ -16,3 +16,6 @@ element_t = tsl-BeinBeO.endf               name = bebeo  temperatures = 293.6
 element_n = n-008_O_016.endf
 element_t = tsl-OinBeO.endf                name = obeo   temperatures = 293.6
 
+
+element_n = n-001_H_002.endf
+element_t = tsl-DinD2O.endf               name = hwtr   temperatures = 293.6

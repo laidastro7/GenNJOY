@@ -19,15 +19,27 @@ GenNJOY from the archived release with `pip install -e .` at the repository root
 ENDF/B-VIII.1 with option 1 of the `gennjoy` command.
 
 ## 1. ICSBEP validation (`icsbep/`)
-* `neutron_process_batch_324.i`, `tsl_process_batch_324.i`: the 158 nuclides (293.6 K) and six
-  thermal-scattering evaluations needed by the 324 cases (ENDF/B-VIII.1 file names).
+* `neutron_process_batch_394.i`, `tsl_process_batch_394.i`: the 161 nuclides (293.6 K) and seven
+  thermal-scattering evaluations needed by the 394 OpenMC models of mit-crpg/benchmarks (ENDF/B-VIII.1
+  file names).
 * `process_icsbep_library.sh`: runs GenNJOY options 4, 5, and 6 non-interactively with these batch
   files and records the hardware, software versions, and wall-clock times.
-* `case_list_324_openmc.txt`: the 324 cases used (paths in mit-crpg/benchmarks/icsbep);
-  `excluded_70.txt`: the 70 cases of that repository that were not used.
+* `build_reference_library.py`: builds the independent reference library from the same ENDF files with
+  the NJOY interface of OpenMC (`openmc.data.njoy`), without any GenNJOY code. `--tsl-elastic ace` keeps
+  the NJOY incoherent elastic data (used for hydrogen in polyethylene, see the article).
+* `run_icsbep_suite.py`: runs a list of models with a given `cross_sections.xml` and identical run
+  settings (particles, batches, seed); restartable.
+* `analyze_icsbep.py`: per-model results and statistics (Supplementary Tables S1–S4).
+* `plot_fig9.py`, `plot_fig10_11.py`: Figures 9, 10, and 11 of the article (TIFF and PNG, 600 dpi).
+* `run_icsbep_validation.sh`: runs the complete chain (clone of the models at commit `ba41bee`,
+  C0 conversion, both libraries, OpenMC runs, analysis); `bash run_icsbep_validation.sh pilot` runs
+  12 representative models first to estimate the computing time.
+* `case_catalog_394.csv`: the 394 models with their status, benchmark value and its source;
+  `case_list_394.txt`, `pilot_cases.txt`, `ch2_cases.txt` (models that contain polyethylene).
 * `convert_C0.py`: ENDF/B-VIII.1 has no natural-carbon evaluation; this script replaces `C0` in the
-  OpenMC models by C12 (0.9893) and C13 (0.0107) atom fractions. Apply it to a copy of the models.
+  OpenMC models by C12 (0.9893) and C13 (0.0107) atom fractions.
 * `check_endf_files.py`: checks that all ENDF files listed in the batch files are present.
+* `compare_manual_workflow.py`: comparison of the GenNJOY processing time with a sequential workflow.
 
 ## 2. Doppler coefficient (`doppler/`)
 * `neutron_process_batch_doppler.i`, `tsl_process_batch_doppler.i`: fuel nuclides at 22 temperatures
