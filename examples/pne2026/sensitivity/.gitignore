@@ -1,0 +1,9 @@
+library_600K/
+covariance_600K/
+_gennjoy_600K/
+results/
+work/
+tasks.csv
+*.log
+*.out
+SU_Mosteller_package_*.tar.gz

@@ -1,0 +1,13 @@
+# Software needed to run the S/U calculations (no NJOY, no GenNJOY installation).
+# Create with:  conda env create -f environment.yml
+name: gennjoy-pne2026
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - openmc=0.15.0        # executable (OpenMP) and Python API
+  - numpy
+  - h5py
+  - pandas
+  - matplotlib
+  - openpyxl

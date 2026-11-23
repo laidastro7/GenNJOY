@@ -63,10 +63,17 @@ def read_errorr(path):
                 ng = int(_f(c[5]))
                 i += 1
                 m = np.zeros((ng, ng))
-                ig = 0
-                while ig < ng:
+                # Row records LIST [0, 0, NG2, IG2LO, NG2, IG]; ERRORR omits the rows
+                # that are zero, so the number of rows is not known in advance: read
+                # rows while the record has N1 = L1 > 0 (a CONT record of the next
+                # sub-section has N1 = 0) and belongs to the same MF/MT.
+                while i < n:
+                    if _ctrl(lines[i]) != (mf, mt):
+                        break
                     l = _fields(lines[i])
-                    ng2 = int(_f(l[2]))
+                    ng2, n1 = int(_f(l[2])), int(_f(l[4]))
+                    if n1 == 0 or n1 != ng2:
+                        break
                     ig2lo = int(_f(l[3]))
                     ig = int(_f(l[5]))
                     i += 1

@@ -3,8 +3,10 @@ import numpy as np
 
 try:
     from gennjoy import fission_perturbation as fp
+    from gennjoy import perturbation as P
 except ImportError:  # running as a script from the package folder
     import fission_perturbation as fp
+    import perturbation as P
 
 def create_perturbed_library():
     print("\n" + "="*60)
@@ -69,7 +71,7 @@ def create_perturbed_library():
         return
 
     # =========================================================
-    # 3. Load isotope and extract available reactions
+    # 3. Load isotope and list the reactions that can be perturbed
     # =========================================================
     print(f"\n[*] Scanning {isotope} for available neutron reactions via OpenMC Engine...")
     try:
@@ -78,42 +80,20 @@ def create_perturbed_library():
         print(f"[-] Failed to load {orig_h5}: {e}")
         return
 
-    mt_names = {
-        2: "Elastic Scattering",
-        4: "Inelastic Scattering (Total)",
-        16: "(n,2n) Reaction",
-        18: "Fission (Total)",
-        27: "Absorption (Total)",
-        102: "Radiative Capture (n,gamma)",
-        103: "(n,p) Reaction",
-        104: "(n,d) Reaction",
-        105: "(n,t) Reaction",
-        107: "(n,alpha) Reaction"
-    }
-
-    print("-" * 50)
-    print(f" Available Reactions for {isotope}:")
-    print("-" * 50)
-    
-    valid_mts = []
-    for mt in sorted(nuc_test.reactions.keys()):
-        rx = nuc_test.reactions[mt]
-        if hasattr(rx, 'xs') and rx.xs: 
-            valid_mts.append(mt)
-            name = mt_names.get(mt, "Other Specific Reaction")
-            print(f"    👉 MT = {mt:<4} | {name}")
-
-    # Fission neutron multiplicities and prompt fission spectrum (fissionable nuclides)
-    fission_mts = fp.available_fission_mts(nuc_test)
-    if fission_mts:
-        print("    --- fission neutron data ---")
-        for mt in fission_mts:
-            name = fp.NU_MTS.get(mt, fp.CHI_NAME)
-            basis = "outgoing energy, renormalised" if mt == fp.CHI_MT else "incident energy"
-            print(f"    👉 MT = {mt:<4} | {name} ({basis})")
-            mt_names[mt] = name
-        valid_mts.extend(fission_mts)
-    print("-" * 50)
+    options = P.perturbable_mts(nuc_test)
+    print("-" * 70)
+    print(f" Reactions of {isotope} that can be perturbed (data used by OpenMC in transport):")
+    print("-" * 70)
+    for mt, comps in options.items():
+        name = P.REACTION_LABELS.get(mt, fp.NU_MTS.get(mt, "reaction"))
+        if comps == [mt]:
+            acts = "" if mt not in (fp.CHI_MT,) else " (outgoing energy, renormalised)"
+        else:
+            acts = f" -> applied to MT {_compact(comps)}"
+        red = " [redundant sum]" if mt in nuc_test.reactions and nuc_test.reactions[mt].redundant else ""
+        print(f"    MT = {mt:<5} | {name}{red}{acts}")
+    print("-" * 70)
+    valid_mts = list(options)
 
     # =========================================================
     # 4. Multiple MT Input & Perturbation Percentage
@@ -122,16 +102,13 @@ def create_perturbed_library():
         try:
             mt_input = input("\n[?] Enter the MT numbers separated by commas (e.g., 2, 4, 18, 102): ").strip()
             mt_numbers = [int(x.strip()) for x in mt_input.split(',') if x.strip()]
-            
             if not mt_numbers:
                 print("[-] Please enter at least one MT number.")
                 continue
-
             invalid_mts = [mt for mt in mt_numbers if mt not in valid_mts]
             if invalid_mts:
-                print(f"[-] Error: The following MT numbers are invalid or have no cross-section data: {invalid_mts}")
+                print(f"[-] Error: The following MT numbers cannot be perturbed: {invalid_mts}")
                 continue
-                
             break
         except ValueError:
             print("[-] Invalid format. Please enter valid integers separated by commas.")
@@ -143,148 +120,82 @@ def create_perturbed_library():
         except ValueError:
             print("[-] Please enter a valid number.")
 
+    couple = True
+    if 2 in mt_numbers:
+        ans = input("[?] Also scale the S(alpha,beta) cross sections of this nuclide below their upper "
+                    "energy when MT=2 is perturbed? (y/n) [Default: y]: ").strip().lower()
+        couple = ans != 'n'
+
     # =========================================================
     # 5. Read Energy Groups Directly from inputs/groups.i
     # =========================================================
-    inputs_dir = os.path.join(base_dir, 'inputs')
-    os.makedirs(inputs_dir, exist_ok=True)
-    group_path = os.path.join(inputs_dir, 'groups.i')
-    
+    group_path = os.path.join(base_dir, 'inputs', 'groups.i')
     print("\n[*] Energy Group Structure")
     if not os.path.exists(group_path):
         print(f"[-] Error: File '{group_path}' not found!")
-        print("    Please make sure 'groups.i' is created inside the 'inputs' folder.")
         return
-        
-    try:
-        with open(group_path, 'r') as f:
-            content = f.read().replace(',', ' ').split()
-            energy_bounds = sorted([float(val) for val in content])
-            
-        if len(energy_bounds) < 2:
-            print("[-] Error: 'groups.i' must contain at least two energy boundaries.")
-            return
-            
-        num_groups = len(energy_bounds) - 1
-        print(f"    [+] Automatically loaded {num_groups} energy groups from 'groups.i':")
-        for i in range(num_groups):
-            print(f"        Group {i+1}: {energy_bounds[i]:.5e} eV  to  {energy_bounds[i+1]:.5e} eV")
-            
-        target_groups = list(range(1, num_groups + 1))
-    except Exception as e:
-        print(f"[-] Error reading groups: {e}")
+    energy_bounds = list(P.group_bounds_from_file(group_path))
+    num_groups = len(energy_bounds) - 1
+    if num_groups < 1:
+        print("[-] Error: 'groups.i' must contain at least two energy boundaries.")
         return
+    print(f"    [+] {num_groups} energy groups loaded from 'groups.i' "
+          f"({energy_bounds[0]:.3e} - {energy_bounds[-1]:.3e} eV)")
 
     # =========================================================
-    # 6. Sequential Isolated Generation
+    # 6. One perturbed library per (MT, group)
     # =========================================================
     fractional_change = pert_percent / 100.0
-    print(f"\n[*] Processing perturbations...")
-
+    n_ok = n_fail = n_empty = 0
     for mt in mt_numbers:
-        rx_name = mt_names.get(mt, "Reaction")
-        print(f"\n" + "="*60)
-        print(f" 🚀 Starting MT = {mt} ({rx_name})")
-        print("="*60)
-        
-        for g in target_groups:
+        print("\n" + "=" * 60)
+        print(f" Starting MT = {mt} ({P.REACTION_LABELS.get(mt, 'reaction')})")
+        print("=" * 60)
+        for g in range(1, num_groups + 1):
+            e_low, e_high = energy_bounds[g - 1], energy_bounds[g]
+            out = os.path.join(pert_dir, f"{isotope}_MT{mt}_G{g}_{pert_percent}pct")
             try:
-                E_low = energy_bounds[g-1]
-                E_high = energy_bounds[g]
-                print(f"\n  -> Processing Group {g} (Energy Range: {E_low:.3e} to {E_high:.3e} eV)")
-                                    
-                    # Load a fresh copy of the isotope for each energy group
-                nuc = openmc.data.IncidentNeutron.from_hdf5(orig_h5)
-                
-                pert_filename = f"{isotope}_pert_MT{mt}_G{g}_{pert_percent}pct.h5"
-                xml_filename = f"cross_sections_pert_{isotope}_MT{mt}_G{g}_{pert_percent}pct.xml"
-                
-                changed = False
-
-                if mt in fp.NU_MTS or mt == fp.CHI_MT:
-                    # nu (incident-energy group) or chi (outgoing-energy group, renormalised)
-                    changed = fp.perturb_fission_quantity(nuc, mt, E_low, E_high, fractional_change)
-                    xs_temps = []
-                else:
-                    if mt not in nuc.reactions:
-                        print(f"     [-] Error: MT={mt} not found. Skipping.")
-                        break
-                    rx = nuc.reactions[mt]
-                    xs_temps = list(rx.xs)
-
-                # Apply perturbation to the cross-section data
-                for temp in xs_temps:
-                    xs_obj = rx.xs[temp]
-                    if not hasattr(xs_obj, 'x') or not hasattr(xs_obj, 'y'): 
-                        continue 
-                    
-                    x_vals = xs_obj.x
-                    y_vals = xs_obj.y
-                    mask = (x_vals >= E_low) & (x_vals <= E_high)
-                    
-                    if not np.any(mask):
-                        continue
-                        
-                    changed = True
-                    delta_y = y_vals[mask] * fractional_change
-                    y_vals[mask] += delta_y
-                    
-                    # 2. Adjust associated total cross sections (MT=1, MT=27) to preserve physical consistency
-                    redundant_mts = [1] 
-                    if mt in [18, 102, 103, 104, 105, 107]:
-                        redundant_mts.append(27)
-                        
-                    for r_mt in redundant_mts:
-                        if r_mt in nuc.reactions:
-                            r_rx = nuc.reactions[r_mt]
-                            if temp in r_rx.xs and hasattr(r_rx.xs[temp], 'x') and hasattr(r_rx.xs[temp], 'y'):
-                                r_x = r_rx.xs[temp].x
-                                r_y = r_rx.xs[temp].y
-                                
-                                if np.array_equal(r_x, x_vals):
-                                    r_y[mask] += delta_y
-                                else:
-                                    delta_interp = np.interp(r_x, x_vals[mask], delta_y, left=0.0, right=0.0)
-                                    r_y += delta_interp
-                
-                # Smart check: if no data was modified (empty group), do not create files
-                if not changed:
-                    print(f"     [!] Warning: No cross section data in this energy group. Skipped generation.")
-                    continue
-
-                # 3. Save the perturbed HDF5 file for this group
-                pert_h5_path = os.path.join(pert_dir, pert_filename)
-                if os.path.exists(pert_h5_path):
-                    os.remove(pert_h5_path)
-                    
-                try:
-                    nuc.export_to_hdf5(pert_h5_path, mode='w')
-                except TypeError:
-                    nuc.export_to_hdf5(pert_h5_path)
-
-                # 4. Save the custom XML file for this group
-                if os.path.exists(orig_xml):
-                    pert_xml_path = os.path.join(pert_dir, xml_filename)
-                    lib = openmc.data.DataLibrary.from_xml(orig_xml)
-                    for lib_entry in lib.libraries:
-                        if isotope in lib_entry['materials']:
-                            lib_entry['path'] = pert_h5_path 
-                        else:
-                            old_path = lib_entry['path']
-                            if not os.path.isabs(old_path):
-                                lib_entry['path'] = os.path.abspath(os.path.join(hdf5_dir, old_path))
-                    lib.export_to_xml(pert_xml_path)
-                    
-                    print(f"     [+] Saved HDF5: {pert_filename}")
-                    print(f"     [+] Saved XML : {xml_filename}")
-                    
+                rep = P.write_perturbed_library(orig_xml, out, isotope, mt, e_low, e_high,
+                                                fractional_change, couple_thermal=couple, verify=True)
             except Exception as e:
-                print(f"  [-] Failed to process Group {g} for MT={mt}. Error: {e}")
+                print(f"  [-] Group {g}: failed ({e})")
+                n_fail += 1
+                continue
+            if not rep.get("changed", True):
+                print(f"  [!] Group {g} ({e_low:.3e}-{e_high:.3e} eV): no data in this group, nothing written")
+                import shutil
+                shutil.rmtree(out, ignore_errors=True)
+                n_empty += 1
+                continue
+            ok = rep["verification"]["ok"] and all(t["verification"]["ok"] for t in rep["thermal"])
+            n_ok += ok
+            n_fail += not ok
+            extra = f", S(a,b): {', '.join(t['name'] for t in rep['thermal'])}" if rep["thermal"] else ""
+            print(f"  [{'+' if ok else '-'}] Group {g} ({e_low:.3e}-{e_high:.3e} eV): "
+                  f"{'verified' if ok else 'VERIFICATION FAILED'}{extra} -> {os.path.basename(out)}/")
+            for w in rep.get("warnings", []):
+                print(f"      [!] {w}")
 
-    print("\n" + "="*60)
-    print(f"[+] SUCCESS: Perturbation libraries generated successfully in:")
-    print(f"    📁 {pert_dir}")
-    print("="*60)
+    print("\n" + "=" * 60)
+    print(f"[+] {n_ok} perturbed libraries written and verified, {n_empty} empty groups, {n_fail} failures")
+    print(f"    Folder: {pert_dir}")
+    print("    Each sub-folder holds the perturbed HDF5 file(s), a cross_sections.xml and")
+    print("    perturbation_report.json (targets, inserted grid points, verification).")
+    print("=" * 60)
+
+
+def _compact(mts):
+    mts = sorted(mts)
+    out, start, prev = [], mts[0], mts[0]
+    for m in mts[1:] + [None]:
+        if m is not None and m == prev + 1:
+            prev = m
+            continue
+        out.append(f"{start}-{prev}" if prev > start else f"{start}")
+        if m is not None:
+            start = prev = m
+    return ", ".join(out)
+
 
 if __name__ == "__main__":
     create_perturbed_library()

@@ -49,8 +49,26 @@ ENDF/B-VIII.1 with option 1 of the `gennjoy` command.
 
 ## 3. Covariance processing (`covariance/`)
 * `covariance_process_batch.i`, `groups.i` (70 groups), `flux.i` (OpenMC pin-cell spectrum used as
-  weighting function): inputs of GenNJOY option 8 (MF33, MF31, and MF35; efmean = 0.0253 eV).
+  weighting function): inputs of GenNJOY option 8 (MF33, MF31, and MF35; efmean = 0.0253 eV) used in
+  the first version of the article. The revised sensitivity/uncertainty study uses the inputs of
+  `sensitivity/` (SCALE 44-group structure).
 
 ## 4. Sensitivity and uncertainty (`sensitivity/`)
-* Scripts that run the OpenMC calculations with the perturbed libraries produced by GenNJOY
-  option 7 and combine the sensitivities with the covariance matrices (sandwich rule).
+Mosteller pin cell at 600 K, ENDF/B-VIII.1, direct perturbations of the HDF5 data with
+`gennjoy/perturbation.py` (GenNJOY option 7), central differences, sandwich rule.
+* `prepare_600K.sh`: processes the library at 600 K (GenNJOY options 4, 5, 6, in a temporary copy of the
+  package so that the library already in `gennjoy/data/` is not touched) and the covariance matrices
+  (`process_covariances.py`, option 8: SCALE-44 groups, pin-cell spectrum as weighting function, MF33
+  with all cross-reaction blocks, MF31, MF35).
+* `su_common.py`: model, groups, nuclide-reaction pairs, perturbation sizes, run settings.
+* `su_tasks.py`: list of the 1057 OpenMC calculations (10 references with independent seeds, 3
+  zero-perturbation tests, whole-range perturbations, linearity study, group-wise perturbations of
+  +/-10 %); groups with no data or negligible reaction rates are not computed.
+* `su_run.py`: one calculation (perturbed files written and verified, OpenMC run, k recorded).
+* `campaign.py`, `run_campaign.sh`, `START_HERE.sh`: the complete campaign in one command
+  (OpenMC version check, machine record, restartable runs with progress and remaining time,
+  archive of the raw results); `make_package.sh` builds a self-contained package for another machine.
+* `su_analyze.py`: sensitivities and their Monte Carlo uncertainties, linearity and sum checks,
+  uncertainty of k (sandwich rule with cross-reaction covariances, noise-bias correction), tables
+  and figures.
+* `plot_covariances.py`: NJOY COVR/VIEWR plots of the covariance matrices.
