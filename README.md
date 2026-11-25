@@ -160,7 +160,7 @@ Every release is tagged (`git tag`) and archived on Zenodo; please cite the rele
 ## 👨‍🔬 Authors
 Dr. Mohamed Laid YAHIAOUI - Lead Developer - [GitHub Profile](https://github.com/laidastro7)
 
-📧 Email: mohamedlaid.yahiaoui@univ-jijel.dz
+📧 Email: m.yahiaoui@univ-batna2.dz
 
 ## 📄 License
 GenNJOY is distributed under the GNU General Public License, version 3 (GPL-3.0-only); see the LICENSE file for the full text.

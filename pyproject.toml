@@ -7,7 +7,7 @@ name = "gennjoy"
 version = "1.0.1"
 description = "Automated Nuclear Data Processing Framework (NJOY + OpenMC)"
 authors = [
-  { name="Dr. Mohamed Laid YAHIAOUI et al.", email="mohamedlaid.yahiaoui@univ-jijel.dz" },
+  { name="Dr. Mohamed Laid YAHIAOUI et al.", email="m.yahiaoui@univ-batna2.dz" },
 ]
 readme = "README.md"
 license = {text = "GPL-3.0-only"}
