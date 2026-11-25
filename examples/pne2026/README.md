@@ -55,7 +55,9 @@ ENDF/B-VIII.1 with option 1 of the `gennjoy` command.
 
 ## 4. Sensitivity and uncertainty (`sensitivity/`)
 Mosteller pin cell at 600 K, ENDF/B-VIII.1, direct perturbations of the HDF5 data with
-`gennjoy/perturbation.py` (GenNJOY option 7), central differences, sandwich rule.
+`gennjoy/perturbation.py` (GenNJOY option 7), central differences with independent seeds,
+sandwich rule. Results: `python3 su_analyze.py --preset full` after the campaign
+(tables and figures in `results/analysis_full/`).
 * `prepare_600K.sh`: processes the library at 600 K (GenNJOY options 4, 5, 6, in a temporary copy of the
   package so that the library already in `gennjoy/data/` is not touched) and the covariance matrices
   (`process_covariances.py`, option 8: SCALE-44 groups, pin-cell spectrum as weighting function, MF33
@@ -67,7 +69,12 @@ Mosteller pin cell at 600 K, ENDF/B-VIII.1, direct perturbations of the HDF5 dat
 * `su_run.py`: one calculation (perturbed files written and verified, OpenMC run, k recorded).
 * `campaign.py`, `run_campaign.sh`, `START_HERE.sh`: the complete campaign in one command
   (OpenMC version check, machine record, restartable runs with progress and remaining time,
-  archive of the raw results); `make_package.sh` builds a self-contained package for another machine.
+  archive of the raw results); `bash START_HERE.sh test` runs a sample of every kind of
+  calculation with very few particles. By default all logical CPUs are used, one OpenMC
+  calculation per 10 threads (`JOBS`, `THREADS` to change it). `START_HERE.sh` also uses an
+  OpenMC 0.15.0 installed without internet in `~/openmc-0.15.0` (or `$OPENMC_ENV`).
+* `make_package.sh` builds a self-contained package (library, covariances, scripts) for another
+  machine; `README_PACKAGE.md` is its README and `environment_su.yml` its conda environment.
 * `su_analyze.py`: sensitivities and their Monte Carlo uncertainties, linearity and sum checks,
   uncertainty of k (sandwich rule with cross-reaction covariances, noise-bias correction), tables
   and figures.

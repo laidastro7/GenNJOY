@@ -26,7 +26,7 @@
 * **⚙️ Input Generation:** Intelligent generation of NJOY input decks for isotopes and thermal scattering materials, handling complex parameter definitions automatically.
 * **⚡ Parallel Processing:** Full utilization of multi-core CPU architectures to accelerate NJOY execution batches.
 * **🔄 Automated Conversion:** Seamless conversion of generated ACE files into OpenMC-compatible HDF5 libraries.
-* **🎯 Group-wise Perturbation:** Create perturbed HDF5 libraries for sensitivity analysis: reaction cross sections, fission neutron multiplicities (total, prompt, delayed nu; MT 452/456/455) and the prompt fission spectrum (MT 1018, renormalised).
+* **🎯 Exact Group-wise Perturbation:** Create perturbed HDF5 libraries for sensitivity analysis: reaction cross sections, fission neutron multiplicities (total, prompt, delayed nu; MT 452/456/455) and the prompt fission spectrum (MT 1018, renormalised). The perturbation acts on the data that OpenMC uses in transport: redundant reactions are expanded into their non-redundant components (e.g. MT=4 → MT=51–91) and the redundant sums kept consistent, points are inserted at the group boundaries so that the change is an exact step at every temperature, the total nu used to create fission sites is kept equal to prompt + delayed, unresolved-resonance probability tables are handled, and a perturbation of MT=2 is also applied to the S(alpha,beta) data of the bound nuclide. Every perturbed file is checked against the original one (JSON report).
 * **📊 Covariance Processing:** Multigroup covariance matrices for cross sections (MF33), nu (MF31) and fission spectra (MF35) with ERRORR, CSV export, and correlation plots (PDF/PS) with COVR/VIEWR.
 * **🗂️ xsdir Management:** Automatic merging and updating of `xsdir` files to ensure data consistency across the pipeline.
 * **🛠️ Interactive CLI:** A user-friendly Command Line Interface (CLI) that eliminates the need for manual script handling.
@@ -79,8 +79,26 @@ gennjoy
 * Option [2] & [3]: Generate NJOY input decks based on the downloaded files.
 * Option [4] & [5]: Execute NJOY processing (Generates ACE files and updates xsdir).
 * Option [6]: Convert the generated ACE libraries into an HDF5 library for OpenMC.
-* Option [7]: Create Perturbed HDF5 Libraries by manually specifying isotopes, reaction MTs, and perturbation percentages.
+* Option [7]: Create Perturbed HDF5 Libraries by specifying the isotope, the reaction MTs and the perturbation percentage; one perturbed library is written per energy group of `inputs/groups.i` (sub-folder with the perturbed HDF5 file(s), a `cross_sections.xml` and the verification report).
 * Option [8]: Generate Covariance Matrices and cross-section correlation plots.
+
+### Perturbations from Python (no prompts)
+The perturbation used by option 7 is also available as a function, e.g. for scripted
+sensitivity studies:
+
+```python
+from gennjoy.perturbation import write_perturbed_library
+
+# U-238 radiative capture +10 % between 6 and 10 eV
+report = write_perturbed_library("hdf5_library/cross_sections.xml", "pert_U238_102",
+                                 "U238", 102, 6.0, 10.0, 0.10)
+print(report["verification"]["ok"])   # every reaction checked against the original file
+# then run OpenMC with pert_U238_102/cross_sections.xml
+```
+
+A complete sensitivity/uncertainty study built on it (Mosteller pin cell, central differences,
+sandwich rule with the covariance matrices of option 8) is in
+[`examples/pne2026/sensitivity`](examples/pne2026/sensitivity).
 
 ## 📂 Project Structure
 ```bash
@@ -93,12 +111,14 @@ GenNJOY/
 │   ├── generate_neutron_input.py    # Generates NJOY input decks for incident neutron data
 │   ├── generate_tsl_input.py        # Generates NJOY input decks for thermal scattering data
 │   ├── njoy_execution_engine.py     # Core engine wrapper for executing NJOY commands
-│   ├── perturb_hdf5.py              # HDF5 perturbation module (cross sections, nu, chi)
+│   ├── perturb_hdf5.py              # Option 7: interactive creation of perturbed HDF5 libraries
+│   ├── perturbation.py              # Exact group-wise perturbation of HDF5 data and its verification
 │   ├── fission_perturbation.py      # Group-wise perturbation of nu (MT 452/455/456) and chi (MT 1018)
 │   ├── errorr_reader.py             # Reader/CSV export of ERRORR covariance output (MF31/33/35)
 │   ├── run_covariance_processing.py # Multi-core covariance matrix processing & plotting
 │   ├── run_neutron_processing.py    # Orchestrates incident neutron data processing
 │   ├── run_tsl_processing.py        # Orchestrates thermal scattering processing
+│   ├── scheduling.py                # Longest-first dynamic scheduling of the NJOY jobs
 │   ├── temperature_index.json       # Database for TSL temperature mappings
 │   ├── xsdir_mcnp5                  # MCNP5 xsdir Template used for merging
 │   ├── data/                        # Processed Data Storage
@@ -107,7 +127,7 @@ GenNJOY/
 │   │   ├── thermal_scattering_ace/
 │   │   ├── thermal_scattering_endf/
 │   │   ├── hdf5_library/
-│   │   ├── hdf5_perturbed_library/  # Output for exact perturbations
+│   │   ├── hdf5_perturbed_library/  # Output of option 7 (one sub-folder per MT and group)
 │   │   ├── covariance_matrices/     # Generated .coverx files
 │   │   ├── covariance_plots/        # Generated PDF/PS correlation plots
 │   │   └── njoy_input_decks/
