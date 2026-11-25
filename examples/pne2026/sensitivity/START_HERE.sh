@@ -7,8 +7,9 @@
 #     bash START_HERE.sh status     show the progress of a running campaign
 #     bash START_HERE.sh stop       stop the campaign (continue later with: bash START_HERE.sh)
 #
-#  1. uses the OpenMC already installed if its version is 0.15.0 or newer (newer:
-#     warning); otherwise creates the conda environment "gennjoy-pne2026"
+#  1. uses OpenMC 0.15.0 if available; otherwise the one installed without internet
+#     by install_openmc_offline.sh (in ~/openmc-0.15.0 or $OPENMC_ENV); otherwise an
+#     installed newer OpenMC (with a warning); otherwise creates the conda environment "gennjoy-pne2026"
 #     from environment.yml (and installs Miniforge in ~/miniforge3 if conda is absent)
 #  2. starts the campaign in the background (it continues if you close the terminal
 #     or log out) and shows its progress; Ctrl-C only stops the display
@@ -94,21 +95,40 @@ if running; then
 fi
 
 # ---------------------------------------------------------------- software
-if openmc_ok; then
+# OpenMC 0.15.0 installed without internet with install_openmc_offline.sh
+# (separate package OpenMC_0.15.0_offline); default folder ~/openmc-0.15.0
+OFFLINE_DIR=""
+for d in "${OPENMC_ENV:-}" "$HOME/openmc-0.15.0" "$ROOT/openmc-0.15.0-env"; do
+  [ -n "$d" ] && [ -f "$d/bin/activate" ] && [ -x "$d/bin/openmc" ] && { OFFLINE_DIR="$d"; break; }
+done
+
+exact_0150() { [ "$(openmc --version 2>/dev/null | sed -n 's/OpenMC version *//p')" = "0.15.0" ]; }
+
+use_offline_env() {
+  [ -n "$OFFLINE_DIR" ] || return 1
+  set +u     # activation scripts use unset variables
+  # shellcheck disable=SC1091
+  source "$OFFLINE_DIR/bin/activate"
+  openmc_ok
+}
+
+if openmc_ok && exact_0150; then
+  say "OpenMC 0.15.0 found in the current environment."
+elif use_offline_env; then
+  say "using OpenMC installed in $OFFLINE_DIR: $(openmc --version | head -1)"
+elif openmc_ok; then
   v="$(openmc --version | sed -n 's/OpenMC version *//p')"
-  if [ "$v" = "0.15.0" ]; then
-    say "OpenMC 0.15.0 found in the current environment."
-  else
-    say "WARNING: OpenMC $v found (newer than 0.15.0, the version used for the article)."
-    say "         The campaign will run with it; the version is recorded with the results."
-  fi
+  say "WARNING: OpenMC $v found (newer than 0.15.0, the version used for the article)."
+  say "         The campaign will run with it; the version is recorded with the results."
 else
+  set +u     # conda activation scripts use unset variables
   if ! find_conda; then
     say "conda not found: installing Miniforge in $HOME/miniforge3 (no administrator rights needed)"
     inst="/tmp/Miniforge3-$$.sh"
     url="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-$(uname -m).sh"
     if command -v curl >/dev/null; then curl -fsSL -o "$inst" "$url"; else wget -q -O "$inst" "$url"; fi \
-      || { say "download of Miniforge failed; install conda by hand and run this script again"; exit 1; }
+      || { say "download of Miniforge failed (no internet?). Install OpenMC 0.15.0 without internet with"
+           say "install_openmc_offline.sh (package OpenMC_0.15.0_offline), then run this script again."; exit 1; }
     bash "$inst" -b -p "$HOME/miniforge3" >/dev/null && rm -f "$inst"
     source "$HOME/miniforge3/etc/profile.d/conda.sh"
   fi

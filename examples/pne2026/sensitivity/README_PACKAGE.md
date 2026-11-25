@@ -24,18 +24,24 @@ That is all. The script
   remaining time and expected end date. Ctrl-C only stops the display;
 * at the end analyses the results and writes `SU_results_<host>_<date>.tar.gz`.
 
+**Without internet.** Install OpenMC 0.15.0 first with the separate package
+`OpenMC_0.15.0_offline` (`bash install_openmc_offline.sh`, installs in `~/openmc-0.15.0`);
+`START_HERE.sh` then finds and uses that installation by itself.
+
 Other commands:
 
     bash START_HERE.sh status     # show the progress again
     bash START_HERE.sh stop       # stop the calculations
-    bash START_HERE.sh test       # optional 5-15 min check of the installation
+    bash START_HERE.sh test       # optional: ~25 calculations of every kind with very few particles
+                                  # (a few minutes), results in results_test/, nothing to send
 
 **Interruptions.** After any stop (reboot, power cut, `stop`), run `bash START_HERE.sh` again:
 the finished calculations are kept, the run continues from there, and the wall time of all
 sessions is added up.
 
-By default one calculation runs per 10 physical cores (8 x 10 threads on 80 cores); to
-change it: `JOBS=4 THREADS=20 bash START_HERE.sh`. Disk space: about 1-2 GB.
+By default all logical CPUs are used, one calculation per 10 of them (8 calculations x 10
+threads on a machine with 40 cores / 80 threads); to change it:
+`JOBS=4 THREADS=20 bash START_HERE.sh`. Disk space: about 1-2 GB.
 
 ## What to send back
 

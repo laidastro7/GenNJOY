@@ -283,6 +283,60 @@ def smoke_test(threads):
     return k, s, rate, dtm
 
 
+def test_sample(todo):
+    """Calculations of every kind for the test mode: references, zero-perturbation tests,
+    whole-range perturbations (nu, H1 elastic with S(a,b), U238 capture), one linearity pair
+    and group pairs covering fission, inelastic levels, (n,alpha), thermal H1, chi and nu."""
+    by = {}
+    for t in todo:
+        by.setdefault(t["kind"], []).append(t)
+    pick = by.get("ref", [])[:2] + by.get("zero", [])
+    pick += [t for t in by.get("integral", [])
+             if (t["nuclide"], t["mt"]) in {("U235", "452"), ("H1", "2"), ("U238", "102")}]
+    pick += by.get("linearity", [])[:2]
+    wanted = {("U235", "18"), ("U238", "4"), ("O16", "107"), ("H1", "2"), ("U235", "1018"), ("U238", "452")}
+    first = {}
+    for t in by.get("group", []):
+        key = (t["nuclide"], t["mt"])
+        if key in wanted and first.setdefault(key, t["group"]) == t["group"]:
+            pick.append(t)
+    return pick
+
+
+PERTURBATION_VERSION = 2
+# Version 2 (2026-11-25): a group that starts at the first energy of a table (all groups
+# starting at 1e-5 eV: whole-range perturbations and group 1) now also scales the first
+# point. Before, the first point was left unchanged and a point 1e-6 above it was scaled;
+# OpenMC extrapolates nuclide cross sections linearly below the first grid point, which
+# gave very large (or negative) values below 1e-5 eV. Results of these calculations
+# obtained with version 1 are discarded and computed again.
+
+
+def invalidate_old_results(preset, tasks):
+    vfile = RES / "perturbation_version.txt"
+    old = int(vfile.read_text().split()[0]) if vfile.exists() else 1
+    out = results_file(preset)
+    if old >= PERTURBATION_VERSION or not out.exists():
+        RES.mkdir(parents=True, exist_ok=True)
+        vfile.write_text(f"{PERTURBATION_VERSION}\n")
+        return
+    import numpy as np
+    e0 = float(C.group_bounds()[0])
+    redo = {t["task_id"] for t in tasks if t["kind"] not in ("ref", "zero")
+            and float(t["e_low"]) <= e0 * (1 + 1e-9)}
+    rows = list(csv.DictReader(open(out)))
+    keep = [r for r in rows if r["task_id"] not in redo]
+    n = sum(1 for r in rows if r["task_id"] in redo and r["status"] == "ok")
+    shutil.copy(out, out.with_name(out.name + f".before_v{PERTURBATION_VERSION}"))
+    with open(out, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=rows[0].keys() if rows else [])
+        w.writeheader()
+        w.writerows(keep)
+    vfile.write_text(f"{PERTURBATION_VERSION}\n")
+    log(f"  correction of the perturbation code (version {PERTURBATION_VERSION}): {n} finished calculations "
+        f"whose group starts at {e0:g} eV are computed again (backup: {out.name}.before_v{PERTURBATION_VERSION})")
+
+
 def _worker_init():
     # Ctrl-C and kill are handled by the main process, which stops the workers
     signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -313,12 +367,15 @@ def main():
     info = machine_info(oinfo)
     save_machine_info(info, session_id)
     pc = info["physical_cores"]
-    jobs = int(os.environ.get("JOBS", 0)) or max(1, round(pc / 10))
-    threads = int(os.environ.get("THREADS", 0)) or max(1, pc // jobs)
+    lc = info["logical_cpus"]
+    # default: all logical CPUs (hyper-threading helps Monte Carlo transport),
+    # one OpenMC calculation per 10 of them, e.g. 8 x 10 on 40 cores / 80 threads
+    jobs = int(os.environ.get("JOBS", 0)) or max(1, round(lc / 10))
+    threads = int(os.environ.get("THREADS", 0)) or max(1, lc // jobs)
     log(f"  {info['cpu_model']} | {pc} physical cores ({info['logical_cpus']} logical) | "
         f"{info['memory_total_gb']} GB RAM | {info['os']}")
-    log(f"  parallelism: {jobs} OpenMC calculations at a time x {threads} threads "
-        f"(change with JOBS=.. THREADS=..)")
+    log(f"  parallelism: {jobs} OpenMC calculations at a time x {threads} threads = {jobs * threads} "
+        f"of {lc} logical CPUs (change with JOBS=.. THREADS=..)")
     log(f"  saved in {MACHINE.relative_to(HERE)}/")
 
     log("[3/6] Smoke test")
@@ -362,15 +419,25 @@ def main():
     tasks = list(csv.DictReader(open(HERE / "tasks.csv")))
 
     log("[5/6] OpenMC calculations")
+    invalidate_old_results(preset, tasks)
     done, rows = done_tasks(preset)
     order = {"ref": 0, "zero": 1, "integral": 2, "linearity": 3, "group": 4}
     todo = sorted([t for t in tasks if t["task_id"] not in done], key=lambda t: order[t["kind"]])
+    if os.environ.get("TEST_SAMPLE") == "1":
+        todo = test_sample(todo)
+        tasks = [t for t in tasks if t["task_id"] in done or t in todo]
+        log(f"  TEST: a sample of {len(todo)} calculations of every kind, with very few particles")
     if int(os.environ.get("LIMIT", 0)):
         todo = todo[:int(os.environ["LIMIT"])]
         tasks = [t for t in tasks if t["task_id"] in done or t in todo]
     ntot = len(tasks)
     p = C.PRESETS[preset]
     per_task_est = p["particles"] * p["batches"] / (rate * threads) + 6.0
+    # better first estimate: duration of the calculations already finished with the same threads
+    prev = sorted(float(r["t_openmc_s"]) + float(r["t_library_s"] or 0) for r in rows
+                  if r["status"] == "ok" and r.get("t_openmc_s") and str(r.get("threads")) == str(threads))
+    if prev:
+        per_task_est = prev[len(prev) // 2]
     prev_wall = sum(x["wall_s"] for x in sessions[:-1])
     log(f"  {ntot} calculations: {len(done)} done in previous sessions, {len(todo)} to run")
     log(f"  first estimate: {hms(per_task_est)} per calculation -> about "
@@ -503,6 +570,11 @@ def main():
           "   لا حاجة لأي شيء آخر، ويمكن حذف المجلد بعد إرسال الملف.",
           "=" * 78, ""]
     if preset != "full":
+        ra = subprocess.run([sys.executable, str(HERE / "su_analyze.py"), "--preset", preset, "--no-figures"],
+                            capture_output=True, text=True)
+        log(f"  analysis of the test results: {'OK' if ra.returncode == 0 else 'FAILED'}")
+        if ra.returncode != 0:
+            log(ra.stdout[-1500:] + ra.stderr[-1500:])
         L = ["", "=" * 78,
              "   TEST FINISHED: the installation works.        انتهى الاختبار: التثبيت سليم",
              "", "   Now start the real campaign with:      bash START_HERE.sh",

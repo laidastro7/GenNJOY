@@ -175,8 +175,34 @@ def refine_energy_grid(nuc, temperature, pts):
     return int(new.size)
 
 
-def _inside(x, e_low, e_high):
-    return (x > e_low * (1.0 + 0.5 * EPS)) & (x < e_high * (1.0 - 0.5 * EPS))
+def _inside(x, e_low, e_high, x_first=None, x_last=None):
+    """Points strictly inside the group. A group that starts at (or below) the first
+    point of the table, or ends at (or above) the last one, is open on that side: the
+    end point is included, so that the perturbation also applies below/above the
+    table (OpenMC extrapolates nuclide cross sections linearly from the first two
+    grid points, and returns the end values of Tabulated1D functions)."""
+    lo = x > e_low * (1.0 + 0.5 * EPS)
+    hi = x < e_high * (1.0 - 0.5 * EPS)
+    if x_first is not None and e_low <= x_first * (1.0 + 1e-12):
+        lo = np.ones_like(lo, dtype=bool)
+    if x_last is not None and e_high >= x_last * (1.0 - 1e-12):
+        hi = np.ones_like(hi, dtype=bool)
+    return lo & hi
+
+
+def open_ends(x_first, x_last, e_low, e_high):
+    return e_low <= x_first * (1.0 + 1e-12), e_high >= x_last * (1.0 - 1e-12)
+
+
+def group_points(x_first, x_last, e_low, e_high):
+    """Boundary points to insert: none on an open side (no ramp at the ends of the table)."""
+    lo_open, hi_open = open_ends(x_first, x_last, e_low, e_high)
+    pts = []
+    if not lo_open:
+        pts += [e_low, e_low * (1.0 + EPS)]
+    if not hi_open:
+        pts += [e_high * (1.0 - EPS), e_high]
+    return np.array(pts)
 
 
 # ---------------------------------------------------------------------------
@@ -203,15 +229,17 @@ def perturb_nuclide(nuc, mt, e_low, e_high, fraction):
         raise ValueError(f"MT={mt} does not affect neutron transport")
     report["targets"] = comps
 
-    pts = boundary_points(e_low, e_high)
     temps = [T for T in nuc.energy]
-    report["inserted_points"] = {T: refine_energy_grid(nuc, T, pts) for T in temps}
+    report["inserted_points"] = {}
+    for T in temps:
+        g0 = np.asarray(nuc.energy[T], dtype=float)
+        report["inserted_points"][T] = refine_energy_grid(nuc, T, group_points(g0[0], g0[-1], e_low, e_high))
 
     changed = False
     deltas = {}
     for T in temps:
         grid = nuc.energy[T]
-        mask_grid = _inside(grid, e_low, e_high)
+        mask_grid = _inside(grid, e_low, e_high, grid[0], grid[-1])
         deltas[T] = {}
         for c in comps:
             xs = nuc.reactions[c].xs.get(T)
@@ -279,7 +307,6 @@ def perturb_thermal(tsl, e_low, e_high, fraction):
     report = {"name": tsl.name, "e_low": float(e_low), "e_high": float(e_hi), "parts": [], "warnings": []}
     if e_low >= tsl.energy_max:
         return report
-    pts = boundary_points(e_low, e_hi) if e_hi < tsl.energy_max else boundary_points(e_low, e_hi)[:2]
     for kind in ("elastic", "inelastic"):
         reac = getattr(tsl, kind, None)
         if reac is None:
@@ -288,7 +315,9 @@ def perturb_thermal(tsl, e_low, e_high, fraction):
             if isinstance(xs, openmc.data.Tabulated1D):
                 x = np.asarray(xs.x, dtype=float)
                 y = np.asarray(xs.y, dtype=float)
-                new = _new_points(x, pts)
+                # the group ends at energy_max when it extends beyond the table
+                e_top = e_hi if e_hi < tsl.energy_max else max(e_hi, x[-1])
+                new = _new_points(x, group_points(x[0], x[-1], e_low, e_top))
                 if new.size:
                     p_loc = np.searchsorted(x, new, side="right")
                     if np.all(np.diff(x) > 0):
@@ -297,8 +326,7 @@ def perturb_thermal(tsl, e_low, e_high, fraction):
                         j = np.clip(p_loc - 1, 0, len(x) - 2)
                         yv = y[j] + (new - x[j]) / (x[j + 1] - x[j]) * (y[j + 1] - y[j])
                     x, y = np.insert(x, p_loc, new), np.insert(y, p_loc, yv)
-                hi = e_hi if e_hi < tsl.energy_max else np.inf
-                m = (x > e_low * (1.0 + 0.5 * EPS)) & (x < hi * (1.0 - 0.5 * EPS))
+                m = _inside(x, e_low, e_top, x[0], x[-1])
                 y = y.copy()
                 y[m] *= (1.0 + fraction)
                 reac.xs[T] = openmc.data.Tabulated1D(x, y)
@@ -433,8 +461,10 @@ def verify_perturbation(orig_path, pert_path, report, rtol=1e-9):
     red = set(report.get("redundant_updated", []))
     for T in o.energy:
         grid = np.union1d(o.energy[T], p.energy[T])
-        inside = _inside(grid, e_low, e_high)
-        outside = (grid <= e_low) | (grid >= e_high)
+        g0 = np.asarray(o.energy[T], dtype=float)
+        lo_open, hi_open = open_ends(g0[0], g0[-1], e_low, e_high)
+        inside = _inside(grid, e_low, e_high, g0[0], g0[-1])
+        outside = ((grid <= e_low) & ~lo_open) | ((grid >= e_high) & ~hi_open)
         for r in sorted(set(o.reactions) | set(p.reactions)):
             if r not in o.reactions or r not in p.reactions:
                 fail(f"{T} MT={r} missing in one file")
@@ -500,9 +530,11 @@ def verify_thermal(orig_path, pert_path, e_low, e_high, fraction, rtol=1e-9):
                 continue
             grid = np.union1d(xo.x, xp.x)
             yo, yp = _eval(xo, grid), _eval(xp, grid)
-            hi = e_high if e_high < o.energy_max else np.inf
-            inside = (grid > e_low * (1 + 0.5 * EPS)) & (grid < hi * (1 - 0.5 * EPS)) & (yo > 0)
-            outside = (grid <= e_low) | (grid >= hi)
+            x0 = np.asarray(xo.x, dtype=float)
+            e_top = e_high if e_high < o.energy_max else max(e_high, x0[-1])
+            lo_open, hi_open = open_ends(x0[0], x0[-1], e_low, e_top)
+            inside = _inside(grid, e_low, e_top, x0[0], x0[-1]) & (yo > 0)
+            outside = ((grid <= e_low) & ~lo_open) | ((grid >= e_top) & ~hi_open)
             ei = np.max(np.abs(yp[inside] / yo[inside] - (1 + fraction))) if inside.any() else 0.0
             eo = np.max(np.abs(yp[outside] - yo[outside])) if outside.any() else 0.0
             if ei > rtol or eo != 0.0:

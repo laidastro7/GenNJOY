@@ -136,7 +136,12 @@ def _scale_tabulated1d(f, e_low, e_high, factor):
     if not isinstance(f, openmc.data.Tabulated1D):
         raise TypeError(f"Unsupported yield type: {type(f).__name__}")
     g = _refine_tabulated1d(f, _boundary_points(e_low, e_high))
-    mask = (g.x > e_low) & (g.x < e_high)
+    # a group that starts/ends at the end of the table also covers the energies
+    # beyond it (OpenMC returns the end value there): the end point is scaled too
+    gx = np.asarray(g.x, dtype=float)
+    lo = (gx > e_low) | (e_low <= gx[0] * (1 + 1e-12))
+    hi = (gx < e_high) | (e_high >= gx[-1] * (1 - 1e-12))
+    mask = lo & hi
     if not np.any(mask):
         return f, False
     y = np.asarray(g.y, dtype=float)
@@ -180,6 +185,10 @@ def _perturb_tabular_spectrum(t, e_low, e_high, factor):
         pn[idx] = p
         x, p = xn, pn
     mask = (x > e_low) & (x < e_high) if interp == 2 else (x >= e_low) & (x < e_high)
+    if e_low <= x[0] * (1 + 1e-12):
+        mask[0] = True
+    if e_high >= x[-1] * (1 - 1e-12) and interp == 2:
+        mask[-1] = True
     if not np.any(mask):
         return t, False
     p = p.copy()
@@ -341,8 +350,13 @@ def verify_fission_quantity(o, p, mt, e_low, e_high, f, rtol=1e-9):
     po, do_, to = _nu_functions(o)
     pp, dp_, tp = _nu_functions(p)
     g = _nu_grid(po, to, pp, tp, *do_, *dp_, e_low=e_low, e_high=e_high)
-    inside = (g > e_low * (1 + 0.5 * _EPS)) & (g < e_high * (1 - 0.5 * _EPS))
-    outside = (g <= e_low) | (g >= e_high)
+    xs0 = [np.asarray(f.x, dtype=float) for f in (po, *do_) if hasattr(f, "x")]
+    x_first = min(x[0] for x in xs0) if xs0 else -np.inf
+    x_last = max(x[-1] for x in xs0) if xs0 else np.inf
+    lo_open = e_low <= x_first * (1 + 1e-12)
+    hi_open = e_high >= x_last * (1 - 1e-12)
+    inside = ((g > e_low * (1 + 0.5 * _EPS)) | lo_open) & ((g < e_high * (1 - 0.5 * _EPS)) | hi_open)
+    outside = ((g <= e_low) & ~lo_open) | ((g >= e_high) & ~hi_open)
     sel = {452: ("prompt", "delayed"), 455: ("delayed",), 456: ("prompt",)}[mt]
 
     def ratio_check(name, a, b, perturbed):

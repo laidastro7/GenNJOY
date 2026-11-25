@@ -3,7 +3,7 @@
 # S/U campaign of the GenNJOY article — the only command to run.
 #
 #   bash run_campaign.sh          production run (100 000 particles x 2000 batches)
-#   bash run_campaign.sh test     quick check of the installation (~5-15 min)
+#   bash run_campaign.sh test     quick check of the whole chain (a few minutes)
 #
 # Recommended for the production run (keeps running after logging out):
 #   nohup bash run_campaign.sh > campaign.out 2>&1 &
@@ -25,8 +25,9 @@ if ! command -v openmc >/dev/null 2>&1; then
 fi
 
 if [ "${1:-}" = "test" ]; then
-  export PRESET=pilot SU_RESULTS="$HERE/results_test" SU_WORK="$HERE/work_test" LIMIT="${LIMIT:-60}"
-  echo "TEST MODE: $LIMIT short calculations in results_test/ (the values are not meaningful)"
+  export PRESET=pilot SU_RESULTS="$HERE/results_test" SU_WORK="$HERE/work_test" TEST_SAMPLE=1
+  echo "TEST MODE: ~25 calculations of every kind with 2000 particles x 60 batches, in results_test/"
+  echo "           (checks the whole chain in a few minutes; the values are not meaningful)"
 else
   export PRESET="${PRESET:-full}"
 fi
