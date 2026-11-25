@@ -1,0 +1,3 @@
+# GenNJOY input files (*.i: NJOY batch lists, energy groups, weighting spectra) are plain
+# text, not Assembly or SWIG: exclude them from the GitHub language statistics.
+*.i linguist-detectable=false
